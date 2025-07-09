@@ -12,7 +12,9 @@ const Modal: React.FC<PropsType> = ({
     <>
       <button
         type='button'
-        onClick={() => document.getElementById(id)?.showModal()}
+        onClick={() =>
+          (document.getElementById(id) as HTMLDialogElement)?.showModal()
+        }
         className={className}
       >
         {buttonText}

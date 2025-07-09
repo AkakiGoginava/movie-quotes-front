@@ -72,8 +72,11 @@ export default function Home() {
         </section>
 
         <div className='relative'>
-          {quotes.map((item) => (
-            <section className='sticky top-0 w-full aspect-[9/20] md:aspect-[8/5]'>
+          {quotes.map((item, idx) => (
+            <section
+              key={idx}
+              className='sticky top-0 w-full aspect-[9/20] md:aspect-[8/5]'
+            >
               <div className='absolute inset-0 size-full bg-linear-to-r from-black/75 to-black/0 z-10' />
 
               <div className='relative top-1/2 -translate-y-1/2 mx-15 md:mx-60 w-82 md:w-207.5 flex flex-col gap-2.5 font-bold z-10'>

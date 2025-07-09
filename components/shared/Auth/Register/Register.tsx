@@ -7,7 +7,7 @@ import { Modal, AuthFormLayout } from '@/components';
 import { useRegister } from './useRegister';
 
 const Register = () => {
-  const { inputs } = useRegister();
+  const { register, handleSubmit, onSubmit, errors, inputs } = useRegister();
 
   return (
     <Modal
@@ -21,6 +21,10 @@ const Register = () => {
         inputs={inputs}
         submitText='Get started'
         hasGoogleAuth
+        register={register}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
       >
         <p className='text-gray-500 text-center mt-8'>
           Already have an account?{' '}
@@ -28,8 +32,12 @@ const Register = () => {
             type='button'
             className='link text-blue-500 underline hover:opacity-80 hover:cursor-pointer'
             onClick={() => {
-              document.getElementById('login-modal')?.showModal();
-              document.getElementById('register-modal')?.close();
+              (
+                document.getElementById('login-modal') as HTMLDialogElement
+              )?.showModal();
+              (
+                document.getElementById('register-modal') as HTMLDialogElement
+              )?.close();
             }}
           >
             Log in
