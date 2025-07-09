@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { CaretIcon } from '@/components';
+import { CaretIcon, Modal } from '@/components';
 
 type Quote = {
   quote: string;
@@ -55,13 +55,17 @@ export default function Home() {
           </ul>
         </div>
 
-        <button type='button' className='btn btn-secondary text-sm h-8'>
-          Log in
-        </button>
+        <Modal
+          className='btn btn-secondary text-sm h-8'
+          buttonText='Log in'
+          id='login-modal'
+        />
 
-        <button type='button' className='btn btn-primary text-sm h-8'>
-          Sign up
-        </button>
+        <Modal
+          className='btn btn-primary text-sm h-8'
+          buttonText='Sign up'
+          id='register-modal'
+        />
       </header>
 
       <main className='flex-1 h-full'>
