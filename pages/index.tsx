@@ -37,7 +37,7 @@ export default function Home() {
           <div
             tabIndex={0}
             role='button'
-            className='btn bg-transparent border-none h-8'
+            className='btn bg-transparent border-none h-8 shadow-none'
           >
             <span>Eng</span>
             <CaretIcon />
@@ -75,25 +75,28 @@ export default function Home() {
           </button>
         </section>
 
-        {quotes.map((item) => (
-          <section className='relative w-full aspect-square md:aspect-[8/5]'>
-            <div className='absolute inset-0 size-full bg-linear-to-r from-black/75 to-black/0 z-10' />
+        <div className='relative'>
+          {quotes.map((item) => (
+            <section className='sticky top-0 w-full aspect-[9/20] md:aspect-[8/5]'>
+              <div className='absolute inset-0 size-full bg-linear-to-r from-black/75 to-black/0 z-10' />
 
-            <div className='absolute top-1/2 left-8 -translate-y-1/2 w-82 md:w-207.5 flex flex-col gap-2.5 pl-6 font-bold z-10'>
-              <span className='absolute left-0'>—</span>
-              <p className='text-xl md:text-5xl'>“{item.quote}”</p>
-              <p className='md:text-3xl'>{item.movie}</p>
-            </div>
+              <div className='relative top-1/2 -translate-y-1/2 mx-15 md:mx-60 w-82 md:w-207.5 flex flex-col gap-2.5 font-bold z-10'>
+                <span className='absolute -left-6 md:-left-10 text-lg md:text-3xl'>
+                  —
+                </span>
+                <p className='text-xl md:text-5xl'>“{item.quote}”</p>
+                <p className='md:text-3xl'>{item.movie}</p>
+              </div>
 
-            <Image
-              src={`/assets/${item.img}`}
-              alt='cover'
-              fill
-              className='object-cover object-center md:object-contain bg-linear-to-r from-black to-black/0'
-            />
-          </section>
-        ))}
-
+              <Image
+                src={`/assets/${item.img}`}
+                alt='cover'
+                fill
+                className='object-cover object-center md:object-contain'
+              />
+            </section>
+          ))}
+        </div>
         <footer className='w-full bg-[#181623] text-2xs md:text-xs py-2.5 md:py-4 px-8.5 md:px-17.5 text-light-yellow font-medium p'>
           © 2022 movie quotes. All rights reserved.
         </footer>
