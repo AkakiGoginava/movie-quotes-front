@@ -1,4 +1,4 @@
-import { GoogleIcon } from '@/components/icons';
+import { GoogleIcon } from '@/components';
 import { PropsType } from './types';
 
 const AuthFormLayout: React.FC<PropsType> = ({
@@ -6,6 +6,8 @@ const AuthFormLayout: React.FC<PropsType> = ({
   subTitle,
   submitText,
   inputs,
+  hasGoogleAuth = false,
+  children,
 }) => {
   return (
     <form className='flex flex-col gap-6' noValidate>
@@ -32,14 +34,18 @@ const AuthFormLayout: React.FC<PropsType> = ({
           </div>
         ))}
 
-        <button type='submit' className='btn btn-primary w-full text-base'>
+        <button type='submit' className='btn btn-primary w-full text-base mt-3'>
           {submitText}
         </button>
 
-        <button type='button' className='btn btn-secondary text-base'>
-          <GoogleIcon />
-          <span>Sign up with Google</span>
-        </button>
+        {hasGoogleAuth && (
+          <button type='button' className='btn btn-secondary text-base'>
+            <GoogleIcon />
+            <span>Sign up with Google</span>
+          </button>
+        )}
+
+        {children}
       </main>
 
       <footer className='mt-8'></footer>

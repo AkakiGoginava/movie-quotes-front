@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { CaretIcon, Register } from '@/components';
+import { CaretIcon, Login, Register } from '@/components';
 
 type Quote = {
   quote: string;
@@ -55,13 +55,7 @@ export default function Home() {
           </ul>
         </div>
 
-        {/* <Modal
-          className='btn btn-secondary text-sm h-8'
-          buttonText='Log in'
-          id='login-modal'
-        >
-          <AuthFormLayout />
-        </Modal> */}
+        <Login />
 
         <Register />
       </header>

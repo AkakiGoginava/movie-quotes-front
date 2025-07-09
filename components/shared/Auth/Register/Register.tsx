@@ -20,7 +20,22 @@ const Register = () => {
         subTitle='Start your journey!'
         inputs={inputs}
         submitText='Get started'
-      />
+        hasGoogleAuth
+      >
+        <p className='text-gray-500 text-center mt-8'>
+          Already have an account?{' '}
+          <button
+            type='button'
+            className='link text-blue-500 underline hover:opacity-80 hover:cursor-pointer'
+            onClick={() => {
+              document.getElementById('login-modal')?.showModal();
+              document.getElementById('register-modal')?.close();
+            }}
+          >
+            Log in
+          </button>
+        </p>
+      </AuthFormLayout>
     </Modal>
   );
 };

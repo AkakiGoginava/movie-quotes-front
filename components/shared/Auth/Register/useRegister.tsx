@@ -1,6 +1,12 @@
+import { useForm } from 'react-hook-form';
+
 import { AuthInputType } from '@/types';
 
+import { RegisterInput } from './types';
+
 export const useRegister = () => {
+  const { register, handleSubmit } = useForm<RegisterInput>();
+
   const inputs: AuthInputType[] = [
     {
       label: 'Name',
