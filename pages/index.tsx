@@ -66,7 +66,15 @@ export default function Home() {
             Find any quote in millions of movie lines
           </p>
 
-          <button type='button' className='btn btn-primary'>
+          <button
+            type='button'
+            className='btn btn-primary'
+            onClick={() =>
+              (
+                document.getElementById('register-modal') as HTMLDialogElement
+              )?.showModal()
+            }
+          >
             Get started
           </button>
         </section>

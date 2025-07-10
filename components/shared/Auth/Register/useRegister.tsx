@@ -9,6 +9,7 @@ export const useRegister = () => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm<RegisterInput>({
     mode: 'onChange',
   });
@@ -21,24 +22,54 @@ export const useRegister = () => {
       name: 'name',
       type: 'text',
       placeholder: 'At least 3 & max.15 lower case characters',
+      rules: {
+        required: true,
+        minLength: { value: 3, message: 'Minimum length is 3' },
+        maxLength: { value: 15, message: 'Maximum length is 15' },
+        pattern: {
+          value: /^[a-z0-9]+$/,
+          message: 'Only lowercase letters and numbers allowed',
+        },
+      },
     },
     {
       label: 'Email',
       name: 'email',
       type: 'email',
       placeholder: 'Enter your email',
+      rules: {
+        required: true,
+        pattern: {
+          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          message: 'Enter a valid email address',
+        },
+      },
     },
     {
       label: 'Password',
       name: 'password',
       type: 'password',
-      placeholder: 'At least 3 & max.15 lower case characters',
+      placeholder: 'At least 8 & max.15 lower case characters',
+      rules: {
+        required: true,
+        minLength: { value: 8, message: 'Minimum length is 8' },
+        maxLength: { value: 15, message: 'Maximum length is 15' },
+        pattern: {
+          value: /^[a-z0-9]+$/,
+          message: 'Only lowercase letters and numbers allowed',
+        },
+      },
     },
     {
       label: 'Password',
       name: 'password_confirmation',
       type: 'password',
       placeholder: 'Confirm password',
+      rules: {
+        required: true,
+        validate: (value) =>
+          value === getValues('password') || 'Passwords do not match',
+      },
     },
   ];
 
