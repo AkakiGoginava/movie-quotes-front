@@ -5,6 +5,7 @@ import {
   FieldNamesMarkedBoolean,
   FieldValues,
   SubmitHandler,
+  UseFormGetValues,
   UseFormHandleSubmit,
   UseFormRegister,
 } from 'react-hook-form';
@@ -22,5 +23,6 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   onSubmit: SubmitHandler<FormValues>;
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
+  getValues: UseFormGetValues<FormValues>;
   children?: JSX.Element;
 };

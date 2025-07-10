@@ -7,14 +7,23 @@ import { Modal, AuthFormLayout } from '@/components';
 import { useRegister } from './useRegister';
 
 const Register = () => {
-  const { register, handleSubmit, onSubmit, errors, touchedFields, inputs } =
-    useRegister();
+  const {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    touchedFields,
+    getValues,
+    reset,
+    inputs,
+  } = useRegister();
 
   return (
     <Modal
       className='btn btn-primary text-sm h-8'
       buttonText='Sign up'
       id='register-modal'
+      reset={reset}
     >
       <AuthFormLayout
         title='Create an account'
@@ -27,6 +36,7 @@ const Register = () => {
         onSubmit={onSubmit}
         errors={errors}
         touchedFields={touchedFields}
+        getValues={getValues}
       >
         <p className='text-gray-500 text-center mt-8'>
           Already have an account?{' '}

@@ -10,10 +10,13 @@ const InputField = <FormValues extends FieldValues>({
   errors,
   register,
   touchedFields,
+  getValues,
 }: PropsType<FormValues>) => {
-  const isInvalid = !!errors[input.name];
-  const isValid =
-    !errors[input.name] && get(touchedFields, input.name as string);
+  const hasEnteredInput: boolean =
+    get(touchedFields, input.name as string) && getValues(input.name);
+
+  const isInvalid: boolean = !!errors[input.name];
+  const isValid: boolean = !errors[input.name];
 
   return (
     <div
@@ -36,14 +39,11 @@ const InputField = <FormValues extends FieldValues>({
         id={input.name}
         type={input.type}
         className={cn(
-          'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-8.5 px-2 focus:ring-2 ',
+          'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-9.5 px-2 focus:ring-2 ',
           {
-            'border-transparent focus:ring-gray-500': !get(
-              touchedFields,
-              input.name as string,
-            ),
+            'border-transparent focus:ring-gray-500': !hasEnteredInput,
             'border-red-500 focus:ring-red-500': isInvalid,
-            'border-green-500 focus:ring-green-500': isValid,
+            'border-green-500 focus:ring-green-500': hasEnteredInput && isValid,
             'w-4 h-4.5 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer':
               input.type === 'checkbox',
           },
@@ -52,9 +52,9 @@ const InputField = <FormValues extends FieldValues>({
         {...register(input.name, input?.rules)}
       />
 
-      <div className='absolute right-2 bottom-1.5'>
+      <div className='absolute right-2 bottom-2 flex gap-1.5'>
         {isInvalid && <InvalidIcon />}
-        {isValid && <ValidIcon />}
+        {hasEnteredInput && isValid && <ValidIcon />}
       </div>
 
       <p className='absolute -bottom-6 text-red-500 text-sm'>

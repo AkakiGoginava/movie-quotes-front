@@ -16,6 +16,7 @@ const AuthFormLayout = <FormValues extends FieldValues>({
   onSubmit,
   errors,
   touchedFields,
+  getValues,
   children,
 }: PropsType<FormValues>) => {
   return (
@@ -38,6 +39,7 @@ const AuthFormLayout = <FormValues extends FieldValues>({
             errors={errors}
             register={register}
             touchedFields={touchedFields}
+            getValues={getValues}
           />
         ))}
 

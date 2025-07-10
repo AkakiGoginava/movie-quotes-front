@@ -10,6 +10,7 @@ export const useRegister = () => {
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
+    reset,
   } = useForm<RegisterInput>({
     mode: 'onChange',
   });
@@ -73,5 +74,14 @@ export const useRegister = () => {
     },
   ];
 
-  return { register, handleSubmit, onSubmit, errors, touchedFields, inputs };
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    touchedFields,
+    getValues,
+    reset,
+    inputs,
+  };
 };

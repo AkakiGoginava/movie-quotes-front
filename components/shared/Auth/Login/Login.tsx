@@ -6,14 +6,23 @@ import { AuthFormLayout, Modal } from '@/components';
 import { useLogin } from './useLogin';
 
 const Login = () => {
-  const { register, handleSubmit, onSubmit, errors, touchedFields, inputs } =
-    useLogin();
+  const {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    touchedFields,
+    getValues,
+    reset,
+    inputs,
+  } = useLogin();
 
   return (
     <Modal
       className='btn btn-secondary text-sm h-8'
       buttonText='Log in'
       id='login-modal'
+      reset={reset}
     >
       <AuthFormLayout
         title='Log in to your account'
@@ -25,6 +34,7 @@ const Login = () => {
         onSubmit={onSubmit}
         errors={errors}
         touchedFields={touchedFields}
+        getValues={getValues}
       >
         <p className='text-gray-500 text-center mt-8'>
           Don't have an account?{' '}

@@ -1,13 +1,16 @@
 import React from 'react';
 
+import { FieldValues } from 'react-hook-form';
+
 import { PropsType } from './types';
 
-const Modal: React.FC<PropsType> = ({
+const Modal = <FormValues extends FieldValues>({
   className,
   buttonText,
   id,
+  reset,
   children,
-}) => {
+}: PropsType<FormValues>) => {
   return (
     <>
       <button
@@ -23,7 +26,12 @@ const Modal: React.FC<PropsType> = ({
       <dialog id={id} className='modal'>
         <div className='modal-box max-w-full size-full md:size-auto px-8.5 md:px-30 pt-12 pb-0 bg-primary'>
           <form method='dialog'>
-            <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
+            <button
+              className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
+              onClick={() => {
+                reset();
+              }}
+            >
               ✕
             </button>
           </form>
@@ -32,7 +40,13 @@ const Modal: React.FC<PropsType> = ({
         </div>
 
         <form method='dialog' className='modal-backdrop'>
-          <button>close</button>
+          <button
+            onClick={() => {
+              reset();
+            }}
+          >
+            close
+          </button>
         </form>
       </dialog>
     </>

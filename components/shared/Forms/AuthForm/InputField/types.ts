@@ -2,6 +2,7 @@ import {
   FieldErrors,
   FieldNamesMarkedBoolean,
   FieldValues,
+  UseFormGetValues,
   UseFormRegister,
 } from 'react-hook-form';
 
@@ -12,4 +13,5 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   register: UseFormRegister<FormValues>;
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
+  getValues: UseFormGetValues<FormValues>;
 };
