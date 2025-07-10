@@ -3,7 +3,13 @@ import { FieldValues, get } from 'react-hook-form';
 import { cn } from '@/helpers';
 
 import { PropsType } from './types';
-import { InvalidIcon, ValidIcon } from '@/components/icons';
+import {
+  CrossedEyeIcon,
+  EyeIcon,
+  InvalidIcon,
+  ValidIcon,
+} from '@/components/icons';
+import { useState } from 'react';
 
 const InputField = <FormValues extends FieldValues>({
   input,
@@ -12,6 +18,8 @@ const InputField = <FormValues extends FieldValues>({
   touchedFields,
   getValues,
 }: PropsType<FormValues>) => {
+  const [show, setShow] = useState(false);
+
   const hasEnteredInput: boolean =
     get(touchedFields, input.name as string) && getValues(input.name);
 
@@ -37,7 +45,9 @@ const InputField = <FormValues extends FieldValues>({
 
       <input
         id={input.name}
-        type={input.type}
+        type={
+          input.type === 'password' ? (show ? 'text' : 'password') : input.type
+        }
         className={cn(
           'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-9.5 px-2 focus:ring-2 ',
           {
@@ -52,9 +62,22 @@ const InputField = <FormValues extends FieldValues>({
         {...register(input.name, input?.rules)}
       />
 
-      <div className='absolute right-2 bottom-2 flex gap-1.5'>
+      <div className='absolute right-2 bottom-2 flex gap-1.5 text-gray-500'>
         {isInvalid && <InvalidIcon />}
         {hasEnteredInput && isValid && <ValidIcon />}
+
+        {input.type === 'password' && (
+          <div
+            className='hover:cursor-pointer'
+            onClick={() => setShow((prev) => !prev)}
+          >
+            {show ? (
+              <EyeIcon className='min-h-5 min-w-5' />
+            ) : (
+              <CrossedEyeIcon className='min-h-5 min-w-5' />
+            )}
+          </div>
+        )}
       </div>
 
       <p className='absolute -bottom-6 text-red-500 text-sm'>
