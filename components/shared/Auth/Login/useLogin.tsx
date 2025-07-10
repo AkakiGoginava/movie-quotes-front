@@ -8,7 +8,7 @@ export const useLogin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
   } = useForm<LoginInput>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => console.log(data);
@@ -20,7 +20,7 @@ export const useLogin = () => {
       type: 'email',
       placeholder: 'Enter your email',
       rules: {
-        required: true,
+        required: { value: true, message: 'Please enter your email' },
         pattern: {
           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
           message: 'Enter a valid email address',
@@ -33,7 +33,7 @@ export const useLogin = () => {
       type: 'password',
       placeholder: 'Password',
       rules: {
-        required: true,
+        required: { value: true, message: 'Please enter your password' },
       },
     },
     {
@@ -43,5 +43,5 @@ export const useLogin = () => {
     },
   ];
 
-  return { register, handleSubmit, onSubmit, errors, inputs };
+  return { register, handleSubmit, onSubmit, errors, touchedFields, inputs };
 };

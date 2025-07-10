@@ -8,7 +8,7 @@ export const useRegister = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
     getValues,
   } = useForm<RegisterInput>({
     mode: 'onChange',
@@ -23,7 +23,7 @@ export const useRegister = () => {
       type: 'text',
       placeholder: 'At least 3 & max.15 lower case characters',
       rules: {
-        required: true,
+        required: { value: true, message: 'Please enter your name' },
         minLength: { value: 3, message: 'Minimum length is 3' },
         maxLength: { value: 15, message: 'Maximum length is 15' },
         pattern: {
@@ -38,7 +38,7 @@ export const useRegister = () => {
       type: 'email',
       placeholder: 'Enter your email',
       rules: {
-        required: true,
+        required: { value: true, message: 'Please enter your email' },
         pattern: {
           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
           message: 'Enter a valid email address',
@@ -51,7 +51,7 @@ export const useRegister = () => {
       type: 'password',
       placeholder: 'At least 8 & max.15 lower case characters',
       rules: {
-        required: true,
+        required: { value: true, message: 'Please enter your password' },
         minLength: { value: 8, message: 'Minimum length is 8' },
         maxLength: { value: 15, message: 'Maximum length is 15' },
         pattern: {
@@ -66,12 +66,12 @@ export const useRegister = () => {
       type: 'password',
       placeholder: 'Confirm password',
       rules: {
-        required: true,
+        required: { value: true, message: 'Please confirm your password' },
         validate: (value) =>
           value === getValues('password') || 'Passwords do not match',
       },
     },
   ];
 
-  return { register, handleSubmit, onSubmit, errors, inputs };
+  return { register, handleSubmit, onSubmit, errors, touchedFields, inputs };
 };

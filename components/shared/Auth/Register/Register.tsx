@@ -7,7 +7,8 @@ import { Modal, AuthFormLayout } from '@/components';
 import { useRegister } from './useRegister';
 
 const Register = () => {
-  const { register, handleSubmit, onSubmit, errors, inputs } = useRegister();
+  const { register, handleSubmit, onSubmit, errors, touchedFields, inputs } =
+    useRegister();
 
   return (
     <Modal
@@ -25,6 +26,7 @@ const Register = () => {
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
+        touchedFields={touchedFields}
       >
         <p className='text-gray-500 text-center mt-8'>
           Already have an account?{' '}

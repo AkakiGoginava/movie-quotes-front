@@ -1,14 +1,20 @@
-import { FieldValues } from 'react-hook-form';
+import { FieldValues, get } from 'react-hook-form';
 
 import { cn } from '@/helpers';
 
 import { PropsType } from './types';
+import { InvalidIcon, ValidIcon } from '@/components/icons';
 
 const InputField = <FormValues extends FieldValues>({
   input,
   errors,
   register,
+  touchedFields,
 }: PropsType<FormValues>) => {
+  const isInvalid = !!errors[input.name];
+  const isValid =
+    !errors[input.name] && get(touchedFields, input.name as string);
+
   return (
     <div
       className={cn('relative flex flex-col gap-1', {
@@ -30,8 +36,14 @@ const InputField = <FormValues extends FieldValues>({
         id={input.name}
         type={input.type}
         className={cn(
-          'text-black bg-gray-300 outline-none rounded-sm w-90 h-9.5 px-2 focus:ring-4 focus:ring-gray-500',
+          'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-8.5 px-2 focus:ring-2 ',
           {
+            'border-transparent focus:ring-gray-500': !get(
+              touchedFields,
+              input.name as string,
+            ),
+            'border-red-500 focus:ring-red-500': isInvalid,
+            'border-green-500 focus:ring-green-500': isValid,
             'w-4 h-4.5 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer':
               input.type === 'checkbox',
           },
@@ -39,6 +51,11 @@ const InputField = <FormValues extends FieldValues>({
         placeholder={input.placeholder}
         {...register(input.name, input?.rules)}
       />
+
+      <div className='absolute right-2 bottom-1.5'>
+        {isInvalid && <InvalidIcon />}
+        {isValid && <ValidIcon />}
+      </div>
 
       <p className='absolute -bottom-6 text-red-500 text-sm'>
         {(errors?.[input.name] as { message?: string })?.message}

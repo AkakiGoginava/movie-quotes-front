@@ -104,6 +104,7 @@ export default function Home() {
             </section>
           ))}
         </div>
+
         <footer className='w-full bg-[#181623] text-2xs md:text-xs py-2.5 md:py-4 px-8.5 md:px-17.5 text-light-yellow font-medium p'>
           © 2022 movie quotes. All rights reserved.
         </footer>

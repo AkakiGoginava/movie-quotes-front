@@ -10,11 +10,12 @@ const AuthFormLayout = <FormValues extends FieldValues>({
   subTitle,
   submitText,
   inputs,
-  hasGoogleAuth = false,
+  hasGoogleAuth: hasGoogleSignUp = false,
   register,
   handleSubmit,
   onSubmit,
   errors,
+  touchedFields,
   children,
 }: PropsType<FormValues>) => {
   return (
@@ -32,19 +33,22 @@ const AuthFormLayout = <FormValues extends FieldValues>({
 
       <main className='flex flex-col gap-7'>
         {inputs.map((input) => (
-          <InputField input={input} errors={errors} register={register} />
+          <InputField
+            input={input}
+            errors={errors}
+            register={register}
+            touchedFields={touchedFields}
+          />
         ))}
 
-        <button type='submit' className='btn btn-primary w-full text-base mt-3'>
+        <button type='submit' className='btn btn-primary w-full text-base'>
           {submitText}
         </button>
 
-        {hasGoogleAuth && (
-          <button type='button' className='btn btn-secondary text-base'>
-            <GoogleIcon />
-            <span>Sign up with Google</span>
-          </button>
-        )}
+        <button type='button' className='btn btn-secondary text-base'>
+          <GoogleIcon />
+          <span>Sign {hasGoogleSignUp ? 'up' : 'in'} with Google</span>
+        </button>
 
         {children}
       </main>

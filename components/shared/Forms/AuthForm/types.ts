@@ -2,6 +2,7 @@ import { JSX } from 'react';
 
 import {
   FieldErrors,
+  FieldNamesMarkedBoolean,
   FieldValues,
   SubmitHandler,
   UseFormHandleSubmit,
@@ -10,7 +11,7 @@ import {
 
 import { AuthInputFieldType } from '@/types';
 
-export type PropsType<FormValues extends FieldValues> = {
+export type PropsType<FormValues extends FieldValues = FieldValues> = {
   title: string;
   subTitle: string;
   submitText: string;
@@ -20,5 +21,6 @@ export type PropsType<FormValues extends FieldValues> = {
   handleSubmit: UseFormHandleSubmit<FormValues, FormValues>;
   onSubmit: SubmitHandler<FormValues>;
   errors: FieldErrors<FormValues>;
+  touchedFields: FieldNamesMarkedBoolean<FormValues>;
   children?: JSX.Element;
 };

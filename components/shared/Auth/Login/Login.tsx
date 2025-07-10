@@ -6,7 +6,8 @@ import { AuthFormLayout, Modal } from '@/components';
 import { useLogin } from './useLogin';
 
 const Login = () => {
-  const { register, handleSubmit, onSubmit, errors, inputs } = useLogin();
+  const { register, handleSubmit, onSubmit, errors, touchedFields, inputs } =
+    useLogin();
 
   return (
     <Modal
@@ -23,6 +24,7 @@ const Login = () => {
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
+        touchedFields={touchedFields}
       >
         <p className='text-gray-500 text-center mt-8'>
           Don't have an account?{' '}
