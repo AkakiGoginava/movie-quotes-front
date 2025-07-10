@@ -36,6 +36,11 @@ export const useLogin = () => {
         required: true,
       },
     },
+    {
+      label: 'Remember me',
+      name: 'remember',
+      type: 'checkbox',
+    },
   ];
 
   return { register, handleSubmit, onSubmit, errors, inputs };
