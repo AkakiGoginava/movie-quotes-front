@@ -3,6 +3,7 @@ import { FieldValues } from 'react-hook-form';
 import { GoogleIcon } from '@/components';
 
 import { PropsType } from './types';
+import { InputField } from './InputField';
 
 const AuthFormLayout = <FormValues extends FieldValues>({
   title,
@@ -31,23 +32,7 @@ const AuthFormLayout = <FormValues extends FieldValues>({
 
       <main className='flex flex-col gap-7'>
         {inputs.map((input) => (
-          <div className='relative flex flex-col gap-1' key={input.name}>
-            <label className='text-white' htmlFor={input.name}>
-              {input.label}
-            </label>
-
-            <input
-              id={input.name}
-              type={input.type}
-              className='text-black bg-gray-300 outline-none rounded-sm w-90 h-9.5 px-2 focus:ring-4 focus:ring-gray-500'
-              placeholder={input.placeholder}
-              {...register(input.name, input?.rules)}
-            />
-
-            <p className='absolute -bottom-6 text-red-500 text-sm'>
-              {(errors?.[input.name] as { message?: string })?.message}
-            </p>
-          </div>
+          <InputField input={input} errors={errors} register={register} />
         ))}
 
         <button type='submit' className='btn btn-primary w-full text-base mt-3'>
