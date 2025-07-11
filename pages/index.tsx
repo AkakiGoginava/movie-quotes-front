@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import Image from 'next/image';
 
-import { CaretIcon, Login, Register } from '@/components';
+import { Button, Header } from '@/components';
 
 type Quote = {
   quote: string;
@@ -9,6 +10,8 @@ type Quote = {
 };
 
 export default function Home() {
+  const [registerOpen, setRegisterOpen] = useState(false);
+
   const quotes: Quote[] = [
     {
       quote: 'You have to leave somethig behind to go forward',
@@ -30,35 +33,7 @@ export default function Home() {
 
   return (
     <div className='relative flex flex-col w-screen h-screen bg-black'>
-      <header className='fixed z-20 w-full flex gap-2 items-center px-4 md:px-17.5 py-7 bg-transparent'>
-        <h3 className='font-medium text-light-yellow'>MOVIE QUOTES</h3>
-
-        <div className='dropdown ml-auto'>
-          <div
-            tabIndex={0}
-            role='button'
-            className='btn bg-transparent border-none h-8 shadow-none'
-          >
-            <span>Eng</span>
-            <CaretIcon />
-          </div>
-          <ul
-            tabIndex={0}
-            className='dropdown-content menu bg-obsidian rounded-box z-1 p-2 shadow-sm'
-          >
-            <li>
-              <a>Eng</a>
-            </li>
-            <li>
-              <a>Geo</a>
-            </li>
-          </ul>
-        </div>
-
-        <Login />
-
-        <Register />
-      </header>
+      <Header registerOpen={registerOpen} setRegisterOpen={setRegisterOpen} />
 
       <main className='flex-1 h-full'>
         <section className='h-full flex flex-col gap-8 items-center justify-center '>
@@ -66,17 +41,13 @@ export default function Home() {
             Find any quote in millions of movie lines
           </p>
 
-          <button
+          <Button
             type='button'
-            className='btn btn-primary'
-            onClick={() =>
-              (
-                document.getElementById('register-modal') as HTMLDialogElement
-              )?.showModal()
-            }
+            variant='primary'
+            handleClick={() => setRegisterOpen(true)}
           >
             Get started
-          </button>
+          </Button>
         </section>
 
         <div className='relative'>

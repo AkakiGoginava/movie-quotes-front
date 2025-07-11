@@ -2,52 +2,56 @@ import React from 'react';
 
 import { FieldValues } from 'react-hook-form';
 
+import { Button } from '@/components';
+
 import { PropsType } from './types';
 
 const Modal = <FormValues extends FieldValues>({
   className,
+  buttonVariant,
   buttonText,
+  open,
+  setOpen,
   id,
   reset,
   children,
 }: PropsType<FormValues>) => {
   return (
     <>
-      <button
+      <Button
         type='button'
-        onClick={() =>
-          (document.getElementById(id) as HTMLDialogElement)?.showModal()
-        }
+        variant={buttonVariant}
+        handleClick={() => setOpen(true)}
         className={className}
       >
         {buttonText}
-      </button>
+      </Button>
 
-      <dialog id={id} className='modal'>
+      <dialog id={id} className='modal' open={open}>
         <div className='modal-box max-w-full size-full md:size-auto px-8.5 md:px-30 pt-12 pb-0 bg-primary'>
-          <form method='dialog'>
-            <button
-              className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
-              onClick={() => {
-                reset();
-              }}
-            >
-              ✕
-            </button>
-          </form>
+          <button
+            className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
+            onClick={() => {
+              reset();
+              setOpen(false);
+            }}
+          >
+            ✕
+          </button>
 
           {children}
         </div>
 
-        <form method='dialog' className='modal-backdrop'>
+        <div className='modal-backdrop'>
           <button
             onClick={() => {
               reset();
+              setOpen(false);
             }}
           >
             close
           </button>
-        </form>
+        </div>
       </dialog>
     </>
   );

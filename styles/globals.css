@@ -56,29 +56,6 @@
   unicode-range: U+10A0-10FF;
 }
 
-@utility btn {
-  @apply px-4;
-  @apply py-0;
-  @apply font-normal;
-  @apply rounded-sm;
-  @apply hover:opacity-85;
-  @apply transition;
-}
-
-@utility btn-primary {
-  @apply text-white;
-  @apply bg-red-500;
-  @apply border-red-500;
-  @apply shadow-none;
-}
-
-@utility btn-secondary {
-  @apply text-white;
-  @apply bg-transparent;
-  @apply border-white;
-  @apply shadow-none;
-}
-
 @theme {
   --color-light-yellow: #ddccaa;
   --color-obsidian: #222030;

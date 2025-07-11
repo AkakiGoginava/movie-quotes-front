@@ -29,7 +29,8 @@ const InputField = <FormValues extends FieldValues>({
   return (
     <div
       className={cn('relative flex flex-col gap-1', {
-        'flex-row-reverse gap-3 w-full items-center': input.type === 'checkbox',
+        'flex-row-reverse gap-3 w-full justify-center items-center':
+          input.type === 'checkbox',
       })}
       key={input.name}
     >
@@ -49,12 +50,12 @@ const InputField = <FormValues extends FieldValues>({
           input.type === 'password' ? (show ? 'text' : 'password') : input.type
         }
         className={cn(
-          'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-9.5 px-2 focus:ring-2 ',
+          'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-9.5 pl-2 pr-13 focus:ring-2 ',
           {
             'border-transparent focus:ring-gray-500': !hasEnteredInput,
             'border-red-500 focus:ring-red-500': isInvalid,
             'border-green-500 focus:ring-green-500': hasEnteredInput && isValid,
-            'w-4 h-4.5 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer':
+            'w-4 h-4 p-0 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer':
               input.type === 'checkbox',
           },
         )}
@@ -62,13 +63,13 @@ const InputField = <FormValues extends FieldValues>({
         {...register(input.name, input?.rules)}
       />
 
-      <div className='absolute right-2 bottom-2 flex gap-1.5 text-gray-500'>
+      <div className='absolute right-3 md:right-2 bottom-2 flex gap-1.5 text-gray-600'>
         {isInvalid && <InvalidIcon />}
         {hasEnteredInput && isValid && <ValidIcon />}
 
         {input.type === 'password' && (
           <div
-            className='hover:cursor-pointer'
+            className='hover:cursor-pointe'
             onClick={() => setShow((prev) => !prev)}
           >
             {show ? (

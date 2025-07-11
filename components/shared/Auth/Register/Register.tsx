@@ -1,12 +1,15 @@
-'use client';
-
 import React from 'react';
 
-import { Modal, AuthFormLayout } from '@/components';
+import { Modal, AuthForm } from '@/components';
 
 import { useRegister } from './useRegister';
+import { PropsType } from './types';
 
-const Register = () => {
+const Register: React.FC<PropsType> = ({
+  registerOpen,
+  setRegisterOpen,
+  setLoginOpen,
+}) => {
   const {
     register,
     handleSubmit,
@@ -20,12 +23,15 @@ const Register = () => {
 
   return (
     <Modal
-      className='btn btn-primary text-sm h-8'
+      className='text-sm h-8'
+      buttonVariant='primary'
       buttonText='Sign up'
+      open={registerOpen}
+      setOpen={setRegisterOpen}
       id='register-modal'
       reset={reset}
     >
-      <AuthFormLayout
+      <AuthForm
         title='Create an account'
         subTitle='Start your journey!'
         inputs={inputs}
@@ -44,18 +50,14 @@ const Register = () => {
             type='button'
             className='link text-blue-500 underline hover:opacity-80 hover:cursor-pointer'
             onClick={() => {
-              (
-                document.getElementById('login-modal') as HTMLDialogElement
-              )?.showModal();
-              (
-                document.getElementById('register-modal') as HTMLDialogElement
-              )?.close();
+              setRegisterOpen(false);
+              setLoginOpen(true);
             }}
           >
             Log in
           </button>
         </p>
-      </AuthFormLayout>
+      </AuthForm>
     </Modal>
   );
 };

@@ -1,11 +1,11 @@
 import { FieldValues } from 'react-hook-form';
 
-import { GoogleIcon } from '@/components';
+import { Button, GoogleIcon } from '@/components';
 
 import { PropsType } from './types';
-import { InputField } from './InputField';
+import { InputField } from './components';
 
-const AuthFormLayout = <FormValues extends FieldValues>({
+const AuthForm = <FormValues extends FieldValues>({
   title,
   subTitle,
   submitText,
@@ -33,8 +33,9 @@ const AuthFormLayout = <FormValues extends FieldValues>({
       </header>
 
       <main className='flex flex-col gap-7'>
-        {inputs.map((input) => (
+        {inputs.map((input, idx) => (
           <InputField
+            key={idx}
             input={input}
             errors={errors}
             register={register}
@@ -43,14 +44,24 @@ const AuthFormLayout = <FormValues extends FieldValues>({
           />
         ))}
 
-        <button type='submit' className='btn btn-primary w-full text-base'>
+        <Button
+          type='submit'
+          variant='primary'
+          handleClick={() => {}}
+          className='w-full text-base'
+        >
           {submitText}
-        </button>
+        </Button>
 
-        <button type='button' className='btn btn-secondary text-base'>
+        <Button
+          type='button'
+          variant='secondary'
+          handleClick={() => {}}
+          className='text-base'
+        >
           <GoogleIcon />
           <span>Sign {hasGoogleSignUp ? 'up' : 'in'} with Google</span>
-        </button>
+        </Button>
 
         {children}
       </main>
@@ -60,4 +71,4 @@ const AuthFormLayout = <FormValues extends FieldValues>({
   );
 };
 
-export default AuthFormLayout;
+export default AuthForm;

@@ -1,11 +1,15 @@
-'use client';
-
 import React from 'react';
 
-import { AuthFormLayout, Modal } from '@/components';
-import { useLogin } from './useLogin';
+import { AuthForm, Modal } from '@/components';
 
-const Login = () => {
+import { useLogin } from './useLogin';
+import { PropsType } from './types';
+
+const Login: React.FC<PropsType> = ({
+  loginOpen,
+  setLoginOpen,
+  setRegisterOpen,
+}) => {
   const {
     register,
     handleSubmit,
@@ -19,12 +23,15 @@ const Login = () => {
 
   return (
     <Modal
-      className='btn btn-secondary text-sm h-8'
+      className='text-sm h-8'
+      buttonVariant='secondary'
       buttonText='Log in'
+      open={loginOpen}
+      setOpen={setLoginOpen}
       id='login-modal'
       reset={reset}
     >
-      <AuthFormLayout
+      <AuthForm
         title='Log in to your account'
         subTitle='Welcome back! Please enter your details.'
         inputs={inputs}
@@ -42,18 +49,14 @@ const Login = () => {
             type='button'
             className='text-blue-500 underline hover:opacity-80 hover:cursor-pointer'
             onClick={() => {
-              (
-                document.getElementById('login-modal') as HTMLDialogElement
-              )?.close();
-              (
-                document.getElementById('register-modal') as HTMLDialogElement
-              )?.showModal();
+              setLoginOpen(false);
+              setRegisterOpen(true);
             }}
           >
             Sign up
           </button>
         </p>
-      </AuthFormLayout>
+      </AuthForm>
     </Modal>
   );
 };
