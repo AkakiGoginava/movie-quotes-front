@@ -1,5 +1,79 @@
 @import 'tailwindcss';
 
+@plugin 'daisyui';
+@plugin '@tailwindcss/forms';
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/Helvetica-Neue-Font/HelveticaNeueRoman.otf')
+    format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/Helvetica-Neue-Font/HelveticaNeueMedium.otf')
+    format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/Helvetica-Neue-Font/HelveticaNeueBold.otf')
+    format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Georgian';
+  src: url('/fonts/Helvetica.Georgian/helvetica-neue-lt-geo-55-roman.ttf')
+    format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+10A0-10FF;
+}
+@font-face {
+  font-family: 'Helvetica Neue Georgian';
+  src: url('/fonts/Helvetica.Georgian/Helvetica Neue LT GEO 65 Medium.ttf')
+    format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+10A0-10FF;
+}
+@font-face {
+  font-family: 'Helvetica Neue Georgian';
+  src: url('/fonts/Helvetica.Georgian/Helvetica Neue LT GEO 75 Bold.ttf')
+    format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+10A0-10FF;
+}
+
+@theme {
+  --color-light-yellow: #ddccaa;
+  --color-obsidian: #222030;
+
+  --text-2xs: 0.5rem;
+}
+
+@layer components {
+  .bg-primary {
+    background: linear-gradient(
+      187.16deg,
+      #181623 0.07%,
+      #191725 51.65%,
+      #0d0b14 98.75%
+    );
+  }
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
