@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { AuthInputFieldType, LoginInput } from '@/types';
+import { useAuth } from '@/hooks';
 
 export const useLogin = () => {
   const {
@@ -8,10 +9,9 @@ export const useLogin = () => {
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
+    setError,
     reset,
   } = useForm<LoginInput>({ mode: 'onChange' });
-
-  const onSubmit: SubmitHandler<LoginInput> = (data) => console.log(data);
 
   const inputs: AuthInputFieldType<LoginInput>[] = [
     {
@@ -42,6 +42,11 @@ export const useLogin = () => {
       type: 'checkbox',
     },
   ];
+
+  const { handleLogin } = useAuth();
+
+  const onSubmit: SubmitHandler<LoginInput> = (data) =>
+    handleLogin(data, setError, inputs);
 
   return {
     register,

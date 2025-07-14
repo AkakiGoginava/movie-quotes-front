@@ -6,12 +6,12 @@ import { AuthInputFieldType } from '@/types';
 
 const useAuthMutation = <FormValues extends FieldValues>(
   mutationFn: (data: FormValues) => Promise<AxiosResponse<{}>>,
-  options = {},
+  options?: {
+    onSuccess?: (data: AxiosResponse<{}>) => void;
+    onError?: (error: Error) => void;
+  },
 ) => {
-  const mutation = useMutation({
-    mutationFn,
-    ...options,
-  });
+  const mutation = useMutation({ mutationFn });
 
   return (
     formData: FormValues,
@@ -21,6 +21,8 @@ const useAuthMutation = <FormValues extends FieldValues>(
     mutation.mutate(formData, {
       onSuccess: (data) => {
         console.log(data);
+
+        if (options?.onSuccess) options.onSuccess(data);
       },
       onError: (error: Error) => {
         const axiosError = error as AxiosError;
@@ -34,6 +36,8 @@ const useAuthMutation = <FormValues extends FieldValues>(
             message: data?.errors[name][0] ?? 'error',
           });
         });
+
+        if (options?.onError) options.onError(error);
       },
     });
   };

@@ -1,10 +1,15 @@
-import { Login, Register, Dropdown } from '@/components';
+import { Login, Register, Dropdown, Button } from '@/components';
 
 import { useHeader } from './useHeader';
 import { PropsType } from './types';
+import { useAuth } from '@/hooks';
 
 const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
   const { loginOpen, setLoginOpen } = useHeader();
+
+  const { user, isLoading, handleLogout } = useAuth();
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <header className='fixed z-20 w-full flex gap-2 items-center px-4 md:px-17.5 py-7 bg-transparent'>
@@ -12,17 +17,32 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
 
       <Dropdown options={['Eng', 'Geo']} selected={0} />
 
-      <Login
-        loginOpen={loginOpen}
-        setLoginOpen={setLoginOpen}
-        setRegisterOpen={setRegisterOpen}
-      />
+      {user ? (
+        <Button
+          type='button'
+          variant='secondary'
+          handleClick={() => {
+            handleLogout();
+          }}
+          className='text-sm h-8'
+        >
+          Log out
+        </Button>
+      ) : (
+        <>
+          <Login
+            loginOpen={loginOpen}
+            setLoginOpen={setLoginOpen}
+            setRegisterOpen={setRegisterOpen}
+          />
 
-      <Register
-        registerOpen={registerOpen}
-        setLoginOpen={setLoginOpen}
-        setRegisterOpen={setRegisterOpen}
-      />
+          <Register
+            registerOpen={registerOpen}
+            setLoginOpen={setLoginOpen}
+            setRegisterOpen={setRegisterOpen}
+          />
+        </>
+      )}
     </header>
   );
 };
