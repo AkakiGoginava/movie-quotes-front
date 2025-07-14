@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { AuthInputFieldType, RegisterInput } from '@/types';
+import { useAuth } from '@/hooks';
 
 export const useRegister = () => {
   const {
@@ -9,11 +10,10 @@ export const useRegister = () => {
     formState: { errors, touchedFields },
     getValues,
     reset,
+    setError,
   } = useForm<RegisterInput>({
     mode: 'onChange',
   });
-
-  const onSubmit: SubmitHandler<RegisterInput> = (data) => console.log(data);
 
   const inputs: AuthInputFieldType<RegisterInput>[] = [
     {
@@ -71,6 +71,11 @@ export const useRegister = () => {
       },
     },
   ];
+
+  const { handleRegister } = useAuth();
+
+  const onSubmit: SubmitHandler<RegisterInput> = (data) =>
+    handleRegister(data, setError, inputs);
 
   return {
     register,

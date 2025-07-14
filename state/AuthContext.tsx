@@ -1,10 +1,15 @@
-import { useAuthMutation } from '@/hooks';
-import { registerUser } from '@/services';
 import { createContext } from 'react';
 
-export const AuthContext = createContext({});
+import { useAuthMutation } from '@/hooks';
+import { registerUser } from '@/services';
 
-export const AuthProvider = ({ children }) => {
+import { AuthContextType } from './types';
+
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined,
+);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const handleRegister = useAuthMutation(registerUser);
 
   return (
