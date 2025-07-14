@@ -1,8 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { AuthInputFieldType } from '@/types';
-
-import { RegisterInput } from './types';
+import { AuthInputFieldType, RegisterInput } from '@/types';
 
 export const useRegister = () => {
   const {
