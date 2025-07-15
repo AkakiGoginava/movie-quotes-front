@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     select: (data) => data?.data || null,
   });
 
-  const currentUser =
+  const currentUser: any =
     error && (error as any)?.response?.status === 401 ? null : user;
 
   const handleRegister = useAuthMutation(registerUser, {
@@ -50,7 +50,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AuthContext.Provider
       value={{
-        user: currentUser ?? null,
+        user: currentUser?.user ?? null,
+        isVerified: !!currentUser?.user?.email_verified_at,
         isLoading,
         handleRegister,
         handleLogin,

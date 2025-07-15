@@ -29,7 +29,6 @@ const Login: React.FC<PropsType> = ({
       buttonText='Log in'
       open={loginOpen}
       setOpen={setLoginOpen}
-      id='login-modal'
       reset={reset}
     >
       <AuthForm

@@ -5,6 +5,7 @@ import { AuthInputFieldType, LoginInput, RegisterInput } from '@/types';
 export type AuthContextType = {
   user: any;
   isLoading: boolean;
+  isVerified: boolean;
   handleRegister: (
     formData: RegisterInput,
     setError: UseFormSetError<RegisterInput>,

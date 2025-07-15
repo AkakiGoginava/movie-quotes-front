@@ -4,3 +4,4 @@ export * from './Auth';
 export * from './Button';
 export * from './Dropdown';
 export * from './Header';
+export * from './Notifications';

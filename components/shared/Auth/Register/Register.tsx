@@ -29,7 +29,6 @@ const Register: React.FC<PropsType> = ({
       buttonText='Sign up'
       open={registerOpen}
       setOpen={setRegisterOpen}
-      id='register-modal'
       reset={reset}
     >
       <AuthForm

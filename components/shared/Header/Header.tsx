@@ -1,4 +1,10 @@
-import { Login, Register, Dropdown, Button } from '@/components';
+import {
+  Login,
+  Register,
+  Dropdown,
+  Button,
+  VerifyEmailNotification,
+} from '@/components';
 
 import { useHeader } from './useHeader';
 import { PropsType } from './types';
@@ -43,6 +49,8 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
           />
         </>
       )}
+
+      <VerifyEmailNotification />
     </header>
   );
 };
