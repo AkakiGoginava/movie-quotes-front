@@ -2,12 +2,10 @@ import { Login, Register, Dropdown, Button } from '@/components';
 
 import { useHeader } from './useHeader';
 import { PropsType } from './types';
-import { useAuth } from '@/hooks';
 
 const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
-  const { loginOpen, setLoginOpen } = useHeader();
-
-  const { user, isLoading, handleLogout } = useAuth();
+  const { loginOpen, setLoginOpen, user, isLoading, handleLogout } =
+    useHeader();
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -22,6 +20,8 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
           type='button'
           variant='secondary'
           handleClick={() => {
+            setLoginOpen(false);
+            setRegisterOpen(false);
             handleLogout();
           }}
           className='text-sm h-8'

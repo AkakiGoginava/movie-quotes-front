@@ -14,6 +14,7 @@ const Register: React.FC<PropsType> = ({
     register,
     handleSubmit,
     onSubmit,
+    isSubmitting,
     errors,
     touchedFields,
     getValues,
@@ -40,6 +41,7 @@ const Register: React.FC<PropsType> = ({
         register={register}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
+        isSubmitting={isSubmitting}
         errors={errors}
         touchedFields={touchedFields}
         getValues={getValues}

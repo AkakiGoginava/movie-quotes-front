@@ -7,7 +7,7 @@ export const useLogin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
+    formState: { errors, touchedFields, isSubmitting },
     getValues,
     setError,
     reset,
@@ -52,6 +52,7 @@ export const useLogin = () => {
     register,
     handleSubmit,
     onSubmit,
+    isSubmitting,
     errors,
     touchedFields,
     getValues,

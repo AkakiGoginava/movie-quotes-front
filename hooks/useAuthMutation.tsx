@@ -18,10 +18,8 @@ const useAuthMutation = <FormValues extends FieldValues>(
     setError: UseFormSetError<FormValues>,
     inputs: AuthInputFieldType<FormValues>[],
   ) => {
-    mutation.mutate(formData, {
+    return mutation.mutateAsync(formData, {
       onSuccess: (data) => {
-        console.log(data);
-
         if (options?.onSuccess) options.onSuccess(data);
       },
       onError: (error: Error) => {

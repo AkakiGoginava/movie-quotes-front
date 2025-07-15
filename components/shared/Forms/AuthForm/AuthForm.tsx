@@ -14,6 +14,7 @@ const AuthForm = <FormValues extends FieldValues>({
   register,
   handleSubmit,
   onSubmit,
+  isSubmitting,
   errors,
   touchedFields,
   getValues,
@@ -49,6 +50,7 @@ const AuthForm = <FormValues extends FieldValues>({
           variant='primary'
           handleClick={() => {}}
           className='w-full text-base'
+          disabled={isSubmitting}
         >
           {submitText}
         </Button>
@@ -58,6 +60,7 @@ const AuthForm = <FormValues extends FieldValues>({
           variant='secondary'
           handleClick={() => {}}
           className='text-base'
+          disabled={isSubmitting}
         >
           <GoogleIcon />
           <span>Sign {hasGoogleSignUp ? 'up' : 'in'} with Google</span>

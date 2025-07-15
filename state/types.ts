@@ -3,6 +3,7 @@ import { UseFormSetError } from 'react-hook-form';
 import { AuthInputFieldType, LoginInput, RegisterInput } from '@/types';
 
 export type AuthContextType = {
+  user: any;
   isLoading: boolean;
   handleRegister: (
     formData: RegisterInput,

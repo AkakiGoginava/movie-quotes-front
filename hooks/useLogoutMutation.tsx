@@ -2,18 +2,22 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { AxiosResponse } from 'axios';
 
-const useLogoutMutation = (mutationFn: () => Promise<AxiosResponse<{}>>) => {
+const useLogoutMutation = (
+  mutationFn: () => Promise<AxiosResponse<{}>>,
+  options?: {
+    onSuccess?: () => void;
+    onError?: (error: Error) => void;
+  },
+) => {
   const mutation = useMutation({ mutationFn });
-  const queryClient = useQueryClient();
 
   return () => {
     mutation.mutate(undefined, {
-      onSuccess: (data: AxiosResponse<{}>) => {
-        console.log('Logout successful: ', data);
-        queryClient.invalidateQueries({ queryKey: ['user'] });
+      onSuccess: () => {
+        if (options?.onSuccess) options.onSuccess();
       },
       onError: (error: Error) => {
-        console.log('Error logging out');
+        if (options?.onError) options.onError(error);
         throw error;
       },
     });

@@ -7,7 +7,7 @@ export const useRegister = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
+    formState: { errors, touchedFields, isSubmitting },
     getValues,
     reset,
     setError,
@@ -81,6 +81,7 @@ export const useRegister = () => {
     register,
     handleSubmit,
     onSubmit,
+    isSubmitting,
     errors,
     touchedFields,
     getValues,

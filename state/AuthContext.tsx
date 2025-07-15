@@ -14,12 +14,20 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery({
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['user'],
     queryFn: getUser,
     staleTime: Infinity,
     retry: false,
+    select: (data) => data?.data || null,
   });
+
+  const currentUser =
+    error && (error as any)?.response?.status === 401 ? null : user;
 
   const handleRegister = useAuthMutation(registerUser, {
     onSuccess: () => {
@@ -33,12 +41,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const handleLogout = useLogoutMutation(logoutUser);
+  const handleLogout = useLogoutMutation(logoutUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
 
   return (
     <AuthContext.Provider
       value={{
-        user: user?.data,
+        user: currentUser ?? null,
         isLoading,
         handleRegister,
         handleLogin,

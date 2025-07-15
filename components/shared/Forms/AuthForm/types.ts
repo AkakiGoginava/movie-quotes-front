@@ -21,6 +21,7 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   register: UseFormRegister<FormValues>;
   handleSubmit: UseFormHandleSubmit<FormValues, FormValues>;
   onSubmit: SubmitHandler<FormValues>;
+  isSubmitting: boolean;
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
   getValues: UseFormGetValues<FormValues>;

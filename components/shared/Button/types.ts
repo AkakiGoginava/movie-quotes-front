@@ -3,5 +3,6 @@ export type PropsType = {
   variant?: 'primary' | 'secondary';
   className?: string;
   handleClick: () => void;
+  disabled?: boolean;
   children: React.ReactNode;
 };
