@@ -5,3 +5,4 @@ export { default as ValidIcon } from './valid-icon.svg';
 export { default as EyeIcon } from './eye-icon.svg';
 export { default as CrossedEyeIcon } from './crossed-eye-icon.svg';
 export { default as SendCheckIcon } from './send-check-icon.svg';
+export { default as WarningIcon } from './warning-icon.svg';

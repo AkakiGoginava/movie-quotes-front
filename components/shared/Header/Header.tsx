@@ -4,6 +4,7 @@ import {
   Dropdown,
   Button,
   VerifyEmailNotification,
+  InvalidTokenNotification,
 } from '@/components';
 
 import { useHeader } from './useHeader';
@@ -15,6 +16,8 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
     setLoginOpen,
     VerifyEmailNotificationOpen,
     setVerifyEmailNotificationOpen,
+    invalidTokenNotificationOpen,
+    setInvalidTokenNotificationOpen,
     user,
     isLoading,
     handleLogout,
@@ -60,6 +63,11 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
       <VerifyEmailNotification
         open={VerifyEmailNotificationOpen}
         setOpen={setVerifyEmailNotificationOpen}
+      />
+
+      <InvalidTokenNotification
+        open={invalidTokenNotificationOpen}
+        setOpen={setInvalidTokenNotificationOpen}
       />
     </header>
   );

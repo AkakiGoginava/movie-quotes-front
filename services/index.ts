@@ -46,3 +46,13 @@ export const getUser = async (): Promise<AxiosResponse<{}>> => {
 
   return response;
 };
+
+export const checkEmailToken = async (
+  token: string,
+): Promise<AxiosResponse<{}>> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/email/check-token', { token });
+
+  return response;
+};
