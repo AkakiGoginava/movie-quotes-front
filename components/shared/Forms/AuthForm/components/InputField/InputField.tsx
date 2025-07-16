@@ -63,7 +63,14 @@ const InputField = <FormValues extends FieldValues>({
         {...register(input.name, input?.rules)}
       />
 
-      <div className='absolute right-3 md:right-2 bottom-2 flex gap-1.5 text-gray-600'>
+      <div
+        className={cn(
+          'absolute right-3 md:right-2 bottom-2 flex gap-1.5 text-gray-600',
+          {
+            hidden: input.type === 'checkbox',
+          },
+        )}
+      >
         {isInvalid && <InvalidIcon />}
         {hasEnteredInput && isValid && <ValidIcon />}
 
@@ -81,7 +88,11 @@ const InputField = <FormValues extends FieldValues>({
         )}
       </div>
 
-      <p className='absolute -bottom-6 text-red-500 text-sm'>
+      <p
+        className={cn('absolute -bottom-6 text-red-500 text-sm', {
+          hidden: input.type === 'checkbox',
+        })}
+      >
         {(errors?.[input.name] as { message?: string })?.message}
       </p>
     </div>

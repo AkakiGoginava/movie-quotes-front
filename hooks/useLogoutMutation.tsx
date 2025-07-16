@@ -18,7 +18,6 @@ const useLogoutMutation = (
       },
       onError: (error: Error) => {
         if (options?.onError) options.onError(error);
-        throw error;
       },
     });
   };

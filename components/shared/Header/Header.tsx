@@ -10,8 +10,15 @@ import { useHeader } from './useHeader';
 import { PropsType } from './types';
 
 const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
-  const { loginOpen, setLoginOpen, user, isLoading, handleLogout } =
-    useHeader();
+  const {
+    loginOpen,
+    setLoginOpen,
+    VerifyEmailNotificationOpen,
+    setVerifyEmailNotificationOpen,
+    user,
+    isLoading,
+    handleLogout,
+  } = useHeader();
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -50,7 +57,10 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
         </>
       )}
 
-      <VerifyEmailNotification />
+      <VerifyEmailNotification
+        open={VerifyEmailNotificationOpen}
+        setOpen={setVerifyEmailNotificationOpen}
+      />
     </header>
   );
 };

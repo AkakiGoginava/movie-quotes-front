@@ -18,7 +18,7 @@ const useAuthMutation = <FormValues extends FieldValues>(
     setError: UseFormSetError<FormValues>,
     inputs: AuthInputFieldType<FormValues>[],
   ) => {
-    return mutation.mutateAsync(formData, {
+    mutation.mutate(formData, {
       onSuccess: (data) => {
         if (options?.onSuccess) options.onSuccess(data);
       },
@@ -28,11 +28,13 @@ const useAuthMutation = <FormValues extends FieldValues>(
           errors: Record<string, string[]>;
         };
 
-        inputs.forEach(({ name }) => {
-          setError(name, {
-            type: 'server',
-            message: data?.errors[name][0] ?? 'error',
-          });
+        inputs.forEach(({ name, type: inputType }) => {
+          if (inputType !== 'checkbox') {
+            setError(name, {
+              type: 'server',
+              message: data?.errors[name]?.[0] ?? 'error',
+            });
+          }
         });
 
         if (options?.onError) options.onError(error);
