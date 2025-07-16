@@ -13,33 +13,37 @@ const useAuthMutation = <FormValues extends FieldValues>(
 ) => {
   const mutation = useMutation({ mutationFn });
 
-  return (
+  return async (
     formData: FormValues,
     setError: UseFormSetError<FormValues>,
     inputs: AuthInputFieldType<FormValues>[],
   ) => {
-    mutation.mutate(formData, {
-      onSuccess: (data) => {
-        if (options?.onSuccess) options.onSuccess(data);
-      },
-      onError: (error: Error) => {
-        const axiosError = error as AxiosError;
-        const data = axiosError?.response?.data as {
-          errors: Record<string, string[]>;
-        };
+    try {
+      await mutation.mutateAsync(formData, {
+        onSuccess: (data) => {
+          if (options?.onSuccess) options.onSuccess(data);
+        },
+        onError: (error: Error) => {
+          const axiosError = error as AxiosError;
+          const data = axiosError?.response?.data as {
+            errors: Record<string, string[]>;
+          };
 
-        inputs.forEach(({ name, type: inputType }) => {
-          if (inputType !== 'checkbox') {
-            setError(name, {
-              type: 'server',
-              message: data?.errors[name]?.[0] ?? 'error',
-            });
-          }
-        });
+          inputs.forEach(({ name, type: inputType }) => {
+            if (inputType !== 'checkbox' && data?.errors[name]) {
+              setError(name, {
+                type: 'server',
+                message: data.errors[name][0] ?? 'error',
+              });
+            }
+          });
 
-        if (options?.onError) options.onError(error);
-      },
-    });
+          if (options?.onError) options.onError(error);
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

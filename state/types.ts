@@ -16,5 +16,5 @@ export type AuthContextType = {
     setError: UseFormSetError<LoginInput>,
     inputs: AuthInputFieldType<LoginInput>[],
   ) => void;
-  handleLogout: () => void;
+  handleLogout: () => Promise<void>;
 };

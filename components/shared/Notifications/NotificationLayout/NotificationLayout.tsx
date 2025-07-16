@@ -1,5 +1,4 @@
 import { Button, Modal } from '@/components';
-import { useAuth } from '@/hooks';
 
 import { PropsType } from './types';
 
@@ -10,17 +9,16 @@ const NotificationLayout: React.FC<PropsType> = ({
   title,
   text,
   btnText,
+  hasExit = true,
   handleClick,
 }) => {
-  const { user } = useAuth();
-
   return (
     <Modal
       className='hidden'
       buttonText=''
       open={open}
       setOpen={setOpen}
-      hasExit={false}
+      hasExit={hasExit}
     >
       <div className='flex flex-col gap-5 items-center justify-center w-90 md:w-93 pt-6 pb-18 mt-20 md:mt-0 bg-notification'>
         {icon}

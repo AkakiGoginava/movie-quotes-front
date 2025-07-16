@@ -1,13 +1,10 @@
 import { NotificationLayout, WarningIcon } from '@/components';
-import { useAuth } from '@/hooks';
 
 import { PropsType } from './types';
-import { useSearchParams } from 'next/navigation';
+import { useInvalidTokenNotification } from './useInvalidTokenNotification';
 
 const InvalidTokenNotification: React.FC<PropsType> = ({ open, setOpen }) => {
-  const searchParams = useSearchParams();
-
-  const email = searchParams.get('email');
+  const { requestEmail } = useInvalidTokenNotification();
 
   return (
     <NotificationLayout
@@ -17,9 +14,8 @@ const InvalidTokenNotification: React.FC<PropsType> = ({ open, setOpen }) => {
       title='Link expired!'
       text="Login link expired, because you haven't used it."
       btnText='Request another link'
-      handleClick={() => {
-        window.open(`https://${user?.email?.split('@')[1]}`, '_blank');
-      }}
+      hasExit={false}
+      handleClick={requestEmail}
     />
   );
 };

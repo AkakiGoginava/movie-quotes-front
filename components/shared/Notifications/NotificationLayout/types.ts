@@ -7,5 +7,6 @@ export type PropsType = {
   text: string;
   btnText: string;
   icon: ReactNode;
+  hasExit?: boolean;
   handleClick: () => void;
 };

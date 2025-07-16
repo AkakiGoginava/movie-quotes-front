@@ -1,1 +1,1 @@
-export { default as useCheckEmailTokenMutation } from './useCheckEmailTokenMutation';
+export { default as useVerifyEmail } from './useVerifyEmail';

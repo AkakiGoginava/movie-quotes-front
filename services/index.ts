@@ -56,3 +56,23 @@ export const checkEmailToken = async (
 
   return response;
 };
+
+export const requestVerificationEmail = async (
+  email: string,
+): Promise<AxiosResponse<{}>> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/email/request-verification', {
+    email,
+  });
+
+  return response;
+};
+
+export const verifyEmail = async (token: string) => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/email/verify', { token });
+
+  return response;
+};

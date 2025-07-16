@@ -16,6 +16,7 @@ const VerifyEmailNotification: React.FC<PropsType> = ({ open, setOpen }) => {
       title='Thank you!'
       text='Please check your email and follow the instructions to activate your account.'
       btnText='Go to my email'
+      hasExit={false}
       handleClick={() => {
         window.open(`https://${user?.email?.split('@')[1]}`, '_blank');
       }}
