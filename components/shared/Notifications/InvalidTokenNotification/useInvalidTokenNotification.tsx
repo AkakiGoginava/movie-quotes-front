@@ -1,8 +1,14 @@
-import { requestVerificationEmail } from '@/services';
-import { useMutation } from '@tanstack/react-query';
-import { useSearchParams } from 'next/navigation';
+import { Dispatch, SetStateAction } from 'react';
 
-export const useInvalidTokenNotification = () => {
+import { useSearchParams } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+
+import { requestVerificationEmail } from '@/services';
+
+export const useInvalidTokenNotification = (
+  setOpen: Dispatch<SetStateAction<boolean>>,
+  setVerifyEmailNotificationOpen: Dispatch<SetStateAction<boolean>>,
+) => {
   const searchParams = useSearchParams();
   const email = searchParams.get('email') ?? '';
 
@@ -10,6 +16,8 @@ export const useInvalidTokenNotification = () => {
     mutationFn: requestVerificationEmail,
     onSuccess: (data) => {
       console.log('Request successful', data);
+      setOpen(false);
+      setVerifyEmailNotificationOpen(true);
     },
     onError: (error) => {
       console.log('Request failed', error);

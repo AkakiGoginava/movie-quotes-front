@@ -9,6 +9,7 @@ export const useHeader = () => {
     useAuth();
 
   const [verificationStarted, setVerificationStarted] = useState(false);
+
   const [loginOpen, setLoginOpen] = useState(false);
   const [successNotificationOpen, setSuccessNotificationOpen] = useState(false);
 
@@ -19,7 +20,6 @@ export const useHeader = () => {
     useState(false);
 
   const searchParams = useSearchParams();
-
   const action = searchParams.get('action');
   const token = searchParams.get('token') ?? '';
 
@@ -28,12 +28,7 @@ export const useHeader = () => {
       !!user && !isVerified && action !== 'verify',
     );
 
-    if (
-      !isLoading &&
-      action === 'verify' &&
-      !(user && isVerified) &&
-      !verificationStarted
-    ) {
+    if (action === 'verify' && !(user && isVerified) && !verificationStarted) {
       setVerificationStarted(true);
       handleVerifyEmail(
         token,
@@ -41,7 +36,7 @@ export const useHeader = () => {
         setInvalidTokenNotificationOpen,
       );
     }
-  }, [user, isVerified, isLoading, action, token]);
+  }, [user, isVerified, action, token]);
 
   return {
     loginOpen,

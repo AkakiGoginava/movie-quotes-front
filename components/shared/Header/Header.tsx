@@ -71,6 +71,7 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
       <InvalidTokenNotification
         open={invalidTokenNotificationOpen}
         setOpen={setInvalidTokenNotificationOpen}
+        setVerifyEmailNotificationOpen={setVerifyEmailNotificationOpen}
       />
 
       <SuccessNotification

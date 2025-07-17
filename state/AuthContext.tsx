@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -22,16 +22,16 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [queryKey, setQueryKey] = useState(['user']);
+  const queryClient = useQueryClient();
 
   const {
     data: user,
     isLoading,
     error,
   } = useQuery({
-    queryKey: queryKey,
+    queryKey: ['user'],
     queryFn: getUser,
-    staleTime: 0,
+    staleTime: Infinity,
     retry: false,
     select: (data) => {
       return data?.data || null;
@@ -40,25 +40,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleRegister = useAuthMutation(registerUser, {
     onSuccess: () => {
-      setQueryKey(['user', Math.random().toString(36).substring(2)]);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 
   const handleLogin = useAuthMutation(loginUser, {
     onSuccess: () => {
-      setQueryKey(['user', Math.random().toString(36).substring(2)]);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 
   const handleLogout = useLogoutMutation(logoutUser, {
     onSuccess: () => {
-      setQueryKey(['user', Math.random().toString(36).substring(2)]);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 
   const handleVerifyEmail = useVerifyEmailMutation(verifyEmail, {
     onSuccess: () => {
-      setQueryKey(['user', Math.random().toString(36).substring(2)]);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 

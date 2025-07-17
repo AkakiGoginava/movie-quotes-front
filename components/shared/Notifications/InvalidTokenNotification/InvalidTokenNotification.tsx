@@ -3,8 +3,15 @@ import { NotificationLayout, WarningIcon } from '@/components';
 import { PropsType } from './types';
 import { useInvalidTokenNotification } from './useInvalidTokenNotification';
 
-const InvalidTokenNotification: React.FC<PropsType> = ({ open, setOpen }) => {
-  const { requestEmail } = useInvalidTokenNotification();
+const InvalidTokenNotification: React.FC<PropsType> = ({
+  open,
+  setOpen,
+  setVerifyEmailNotificationOpen,
+}) => {
+  const { requestEmail } = useInvalidTokenNotification(
+    setOpen,
+    setVerifyEmailNotificationOpen,
+  );
 
   return (
     <NotificationLayout
