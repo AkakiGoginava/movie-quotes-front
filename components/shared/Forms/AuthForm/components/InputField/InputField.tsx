@@ -55,7 +55,7 @@ const InputField = <FormValues extends FieldValues>({
             'border-transparent focus:ring-gray-500': !hasEnteredInput,
             'border-red-500 focus:ring-red-500': isInvalid,
             'border-green-500 focus:ring-green-500': hasEnteredInput && isValid,
-            'w-4 h-4 p-0 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer':
+            'w-4 h-4 p-0 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer border-white':
               input.type === 'checkbox',
           },
         )}

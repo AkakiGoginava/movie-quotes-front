@@ -10,7 +10,9 @@ const NotificationLayout: React.FC<PropsType> = ({
   text,
   btnText,
   hasExit = true,
+  hasBtn = true,
   handleClick,
+  children,
 }) => {
   return (
     <Modal
@@ -27,14 +29,18 @@ const NotificationLayout: React.FC<PropsType> = ({
 
         <p className='text-center'>{text}</p>
 
-        <Button
-          type='button'
-          handleClick={handleClick}
-          variant='primary'
-          className='w-71 md:w-full text-base'
-        >
-          {btnText}
-        </Button>
+        {children}
+
+        {hasBtn && (
+          <Button
+            type='button'
+            handleClick={handleClick}
+            variant='primary'
+            className='w-71 md:w-full text-base'
+          >
+            {btnText}
+          </Button>
+        )}
       </div>
     </Modal>
   );

@@ -16,15 +16,22 @@ export const useInvalidTokenNotification = (
     mutationFn: requestVerificationEmail,
     onSuccess: (data) => {
       console.log('Request successful', data);
+
       setOpen(false);
       setVerifyEmailNotificationOpen(true);
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.log('Request failed', error);
+      alert(error?.response?.data?.message);
     },
   });
 
-  const requestEmail = () => requestVerificationEmailMutation.mutate(email);
+  const handleRequestEmail = () => {
+    requestVerificationEmailMutation.mutate(email);
+  };
 
-  return { requestEmail };
+  return {
+    handleRequestEmail,
+    isLoading: requestVerificationEmailMutation.isPending,
+  };
 };

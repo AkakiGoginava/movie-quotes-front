@@ -1,3 +1,5 @@
+import { useSearchParams } from 'next/navigation';
+
 import { NotificationLayout, SendCheckIcon } from '@/components';
 import { useAuth } from '@/hooks';
 
@@ -5,6 +7,9 @@ import { PropsType } from './types';
 
 const VerifyEmailNotification: React.FC<PropsType> = ({ open, setOpen }) => {
   const { user, isLoading } = useAuth();
+  const searchParams = useSearchParams();
+
+  const email = searchParams.get('email');
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -18,7 +23,10 @@ const VerifyEmailNotification: React.FC<PropsType> = ({ open, setOpen }) => {
       btnText='Go to my email'
       hasExit={false}
       handleClick={() => {
-        window.open(`https://${user?.email?.split('@')[1]}`, '_blank');
+        window.open(
+          `https://mail.google.com/mail/u/${email ?? user?.email}/#search/from:movie@quotes.com`,
+          '_blank',
+        );
       }}
     />
   );
