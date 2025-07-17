@@ -10,7 +10,7 @@ const NotificationLayout: React.FC<PropsType> = ({
   text,
   btnText,
   hasExit = true,
-  hasBtn = true,
+  hasBtn,
   handleClick,
   children,
 }) => {

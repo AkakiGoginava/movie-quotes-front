@@ -22,6 +22,7 @@ const VerifyEmailNotification: React.FC<PropsType> = ({ open, setOpen }) => {
       text='Please check your email and follow the instructions to activate your account.'
       btnText='Go to my email'
       hasExit={false}
+      hasBtn={true}
       handleClick={() => {
         window.open(
           `https://mail.google.com/mail/u/${email ?? user?.email}/#search/from:movie@quotes.com`,

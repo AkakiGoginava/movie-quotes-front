@@ -14,6 +14,7 @@ const SuccessNotification: React.FC<PropsType> = ({
       icon={<SuccessIcon />}
       title='Success!'
       text='Email verified successfully.'
+      hasBtn={true}
       btnText='Log in'
       handleClick={() => {
         setOpen(false);
