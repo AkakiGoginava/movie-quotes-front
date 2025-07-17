@@ -1,9 +1,19 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { useAuthMutation, useLogoutMutation } from '@/hooks';
-import { getUser, loginUser, logoutUser, registerUser } from '@/services';
+import {
+  useAuthMutation,
+  useLogoutMutation,
+  useVerifyEmailMutation,
+} from '@/hooks';
+import {
+  getUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+  verifyEmail,
+} from '@/services';
 
 import { AuthContextType } from './types';
 
@@ -12,19 +22,17 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const queryClient = useQueryClient();
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [queryKey, setQueryKey] = useState(['user']);
 
   const {
     data: user,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['user'],
+    queryKey: queryKey,
     queryFn: getUser,
     staleTime: 0,
     retry: false,
-    enabled: !isLoggedOut,
     select: (data) => {
       return data?.data || null;
     },
@@ -32,31 +40,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleRegister = useAuthMutation(registerUser, {
     onSuccess: () => {
-      setIsLoggedOut(false);
-      queryClient.invalidateQueries({ queryKey: ['user'] });
+      setQueryKey(['user', Math.random().toString(36).substring(2)]);
     },
   });
 
   const handleLogin = useAuthMutation(loginUser, {
     onSuccess: () => {
-      setIsLoggedOut(false);
-      queryClient.invalidateQueries({ queryKey: ['user'] });
+      setQueryKey(['user', Math.random().toString(36).substring(2)]);
     },
   });
 
   const handleLogout = useLogoutMutation(logoutUser, {
     onSuccess: () => {
-      setIsLoggedOut(true);
-      queryClient.removeQueries({ queryKey: ['user'] });
+      setQueryKey(['user', Math.random().toString(36).substring(2)]);
+    },
+  });
+
+  const handleVerifyEmail = useVerifyEmailMutation(verifyEmail, {
+    onSuccess: () => {
+      setQueryKey(['user', Math.random().toString(36).substring(2)]);
     },
   });
 
   const errorStatus = (error as any)?.status;
-  const currentUser: any = isLoggedOut
-    ? null
-    : !isLoading && (!error || errorStatus != 401)
-      ? user
-      : null;
+  const currentUser: any =
+    !isLoading && (!error || errorStatus != 401) ? user : null;
 
   return (
     <AuthContext.Provider
@@ -67,6 +75,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         handleRegister,
         handleLogin,
         handleLogout,
+        handleVerifyEmail,
       }}
     >
       {children}

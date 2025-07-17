@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { UseFormSetError } from 'react-hook-form';
 
 import { AuthInputFieldType, LoginInput, RegisterInput } from '@/types';
@@ -17,4 +19,9 @@ export type AuthContextType = {
     inputs: AuthInputFieldType<LoginInput>[],
   ) => void;
   handleLogout: () => Promise<void>;
+  handleVerifyEmail: (
+    token: string,
+    setSuccessNotificationOpen: Dispatch<SetStateAction<boolean>>,
+    setInvalidTokenNotificationOpen: Dispatch<SetStateAction<boolean>>,
+  ) => void;
 };
