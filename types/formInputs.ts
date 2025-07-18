@@ -24,3 +24,9 @@ export type LoginInput = {
 export type ForgotPasswordInput = {
   email: string;
 };
+
+export type ResetPasswordInput = {
+  email: string;
+  password: string;
+  password_confirmation: string;
+};

@@ -70,6 +70,7 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
             forgotPasswordOpen={ForgotPasswordOpen}
             setForgotPasswordOpen={setForgotPasswordOpen}
             setLoginOpen={setLoginOpen}
+            setVerifyEmailNotificationOpen={setVerifyEmailNotificationOpen}
           />
         </>
       )}

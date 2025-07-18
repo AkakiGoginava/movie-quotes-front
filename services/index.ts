@@ -1,6 +1,11 @@
-import { AxiosResponse } from 'axios';
+import { Axios, AxiosResponse } from 'axios';
 
-import { ForgotPasswordInput, LoginInput, RegisterInput } from '@/types';
+import {
+  ForgotPasswordInput,
+  LoginInput,
+  RegisterInput,
+  ResetPasswordInput,
+} from '@/types';
 
 import axios from './axios';
 
@@ -57,22 +62,28 @@ export const checkEmailToken = async (
   return response;
 };
 
-export const requestVerificationEmail = async (
-  email: string,
-): Promise<AxiosResponse<{}>> => {
-  await getCsrfCookie();
-
-  const response = await axios.post('/api/email/request-verification', {
-    email,
-  });
-
-  return response;
-};
-
 export const verifyEmail = async (token: string) => {
   await getCsrfCookie();
 
   const response = await axios.post('/api/email/verify', { token });
+
+  return response;
+};
+
+export const requestNewLink = async (
+  action: string,
+  email: string,
+): Promise<AxiosResponse<{}>> => {
+  await getCsrfCookie();
+
+  const apiRoute =
+    action === 'verify'
+      ? '/api/email/request-verification'
+      : '/api/forgot-password';
+
+  const response = await axios.post(apiRoute, {
+    email,
+  });
 
   return response;
 };
@@ -83,6 +94,16 @@ export const forgotPassword = async (
   await getCsrfCookie();
 
   const response = await axios.post('/api/forgot-password', data);
+
+  return response;
+};
+
+export const resetPassword = async (
+  data: ResetPasswordInput,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/reset-password', data);
 
   return response;
 };

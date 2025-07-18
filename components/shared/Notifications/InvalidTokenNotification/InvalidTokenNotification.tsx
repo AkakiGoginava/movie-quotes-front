@@ -8,10 +8,8 @@ const InvalidTokenNotification: React.FC<PropsType> = ({
   setOpen,
   setVerifyEmailNotificationOpen,
 }) => {
-  const { handleRequestEmail, isLoading } = useInvalidTokenNotification(
-    setOpen,
-    setVerifyEmailNotificationOpen,
-  );
+  const { handleRequestNewLink, isLoading, action } =
+    useInvalidTokenNotification(setOpen, setVerifyEmailNotificationOpen);
 
   return (
     <NotificationLayout
@@ -20,14 +18,14 @@ const InvalidTokenNotification: React.FC<PropsType> = ({
       icon={<WarningIcon />}
       title='Link expired!'
       text="Login link expired, because you haven't used it."
-      hasExit={false}
+      hasExit={action != 'verify'}
       hasBtn={false}
     >
       <Button
         type='submit'
         variant='primary'
         className='w-full text-base'
-        handleClick={() => handleRequestEmail()}
+        handleClick={() => handleRequestNewLink()}
         disabled={isLoading}
       >
         Request another link

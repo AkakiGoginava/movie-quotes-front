@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 
-import { requestVerificationEmail } from '@/services';
+import { requestNewLink } from '@/services';
 
 export const useInvalidTokenNotification = (
   setOpen: Dispatch<SetStateAction<boolean>>,
@@ -11,9 +11,11 @@ export const useInvalidTokenNotification = (
 ) => {
   const searchParams = useSearchParams();
   const email = searchParams.get('email') ?? '';
+  const action = searchParams.get('action') ?? '';
 
-  const requestVerificationEmailMutation = useMutation({
-    mutationFn: requestVerificationEmail,
+  const requestNewLinkMutation = useMutation({
+    mutationFn: ({ action, email }: { action: string; email: string }) =>
+      requestNewLink(action, email),
     onSuccess: (data) => {
       console.log('Request successful', data);
 
@@ -26,12 +28,17 @@ export const useInvalidTokenNotification = (
     },
   });
 
-  const handleRequestEmail = () => {
-    requestVerificationEmailMutation.mutate(email);
+  const handleRequestNewLink = () => {
+    if (!action || !email) {
+      console.warn('Action or email not available');
+      return;
+    }
+    requestNewLinkMutation.mutate({ action, email });
   };
 
   return {
-    handleRequestEmail,
-    isLoading: requestVerificationEmailMutation.isPending,
+    handleRequestNewLink,
+    isLoading: requestNewLinkMutation.isPending,
+    action,
   };
 };

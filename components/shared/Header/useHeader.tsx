@@ -36,6 +36,8 @@ export const useHeader = () => {
         setSuccessNotificationOpen,
         setInvalidTokenNotificationOpen,
       );
+    } else if (action === 'reset-password' && !user) {
+      setInvalidTokenNotificationOpen(true);
     }
   }, [user, isVerified, action, token]);
 

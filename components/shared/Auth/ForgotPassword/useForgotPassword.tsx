@@ -2,8 +2,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { AuthInputFieldType, ForgotPasswordInput } from '@/types';
 import { useAuth } from '@/hooks';
+import { Dispatch, SetStateAction } from 'react';
 
-export const useForgotPassword = () => {
+export const useForgotPassword = (
+  setForgotPasswordOpen: Dispatch<SetStateAction<boolean>>,
+  setVerifyEmailNotificationOpen: Dispatch<SetStateAction<boolean>>,
+) => {
   const {
     register,
     handleSubmit,
@@ -31,8 +35,15 @@ export const useForgotPassword = () => {
 
   const { handleForgotPassword } = useAuth();
 
+  const forgotPasswordWithOptions = handleForgotPassword({
+    onSuccess: () => {
+      setForgotPasswordOpen(false);
+      setVerifyEmailNotificationOpen(true);
+    },
+  });
+
   const onSubmit: SubmitHandler<ForgotPasswordInput> = (data) =>
-    handleForgotPassword(data, setError, inputs);
+    forgotPasswordWithOptions(data, setError, inputs);
 
   return {
     register,

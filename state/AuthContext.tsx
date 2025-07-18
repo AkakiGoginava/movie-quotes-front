@@ -63,7 +63,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const handleForgotPassword = useAuthMutation(forgotPassword);
+  const handleForgotPassword = (options?: { onSuccess?: () => void }) =>
+    useAuthMutation(forgotPassword, options);
 
   const errorStatus = (error as any)?.status;
   const currentUser: any =

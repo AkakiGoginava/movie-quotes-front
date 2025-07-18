@@ -29,7 +29,9 @@ export type AuthContextType = {
     setSuccessNotificationOpen: Dispatch<SetStateAction<boolean>>,
     setInvalidTokenNotificationOpen: Dispatch<SetStateAction<boolean>>,
   ) => void;
-  handleForgotPassword: (
+  handleForgotPassword: (options?: {
+    onSuccess?: () => void;
+  }) => (
     formData: ForgotPasswordInput,
     setError: UseFormSetError<ForgotPasswordInput>,
     inputs: AuthInputFieldType<ForgotPasswordInput>[],
