@@ -6,8 +6,8 @@ import { PropsType } from './types';
 import { useForgotPassword } from './useForgotPassword';
 
 const ForgotPassword: React.FC<PropsType> = ({
-  forgotPasswordOpen,
-  setForgotPasswordOpen,
+  open,
+  setOpen,
   setLoginOpen,
   setPasswordResetNotificationOpen,
 }) => {
@@ -21,17 +21,14 @@ const ForgotPassword: React.FC<PropsType> = ({
     getValues,
     reset,
     inputs,
-  } = useForgotPassword(
-    setForgotPasswordOpen,
-    setPasswordResetNotificationOpen,
-  );
+  } = useForgotPassword(setOpen, setPasswordResetNotificationOpen);
 
   return (
     <Modal
       className='hidden'
       buttonText=''
-      open={forgotPasswordOpen}
-      setOpen={setForgotPasswordOpen}
+      open={open}
+      setOpen={setOpen}
       reset={reset}
     >
       <AuthForm
@@ -51,7 +48,7 @@ const ForgotPassword: React.FC<PropsType> = ({
           type='button'
           className='text-gray-500 hover:opacity-80 hover:cursor-pointer flex items-center justify-center gap-2'
           onClick={() => {
-            setForgotPasswordOpen(false);
+            setOpen(false);
             setLoginOpen(true);
           }}
         >

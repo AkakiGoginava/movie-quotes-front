@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks';
 import { Dispatch, SetStateAction } from 'react';
 
 export const useForgotPassword = (
-  setForgotPasswordOpen: Dispatch<SetStateAction<boolean>>,
+  setOpen: Dispatch<SetStateAction<boolean>>,
   setPasswordResetNotificationOpen: Dispatch<SetStateAction<boolean>>,
 ) => {
   const {
@@ -37,7 +37,7 @@ export const useForgotPassword = (
 
   const forgotPasswordWithOptions = handleForgotPassword({
     onSuccess: () => {
-      setForgotPasswordOpen(false);
+      setOpen(false);
       setPasswordResetNotificationOpen(true);
     },
   });

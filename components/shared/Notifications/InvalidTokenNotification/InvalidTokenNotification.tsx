@@ -17,7 +17,7 @@ const InvalidTokenNotification: React.FC<PropsType> = ({
       setOpen={setOpen}
       icon={<WarningIcon />}
       title='Link expired!'
-      text="Login link expired, because you haven't used it."
+      text="Link has expired, because you haven't used it."
       hasExit={action != 'verify'}
       hasBtn={false}
     >

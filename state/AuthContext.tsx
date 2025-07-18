@@ -13,6 +13,7 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  resetPassword,
   verifyEmail,
 } from '@/services';
 
@@ -66,6 +67,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const handleForgotPassword = (options?: { onSuccess?: () => void }) =>
     useAuthMutation(forgotPassword, options);
 
+  const handleResetPassword = (options?: { onSuccess?: () => void }) =>
+    useAuthMutation(resetPassword, options);
+
   const errorStatus = (error as any)?.status;
   const currentUser: any =
     !isLoading && (!error || errorStatus != 401) ? user : null;
@@ -81,6 +85,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         handleLogout,
         handleVerifyEmail,
         handleForgotPassword,
+        handleResetPassword,
       }}
     >
       {children}

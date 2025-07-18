@@ -1,39 +1,43 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { UseFormSetError } from 'react-hook-form';
+import { UseFormSetError, FieldValues } from 'react-hook-form';
 
 import {
   AuthInputFieldType,
   ForgotPasswordInput,
   LoginInput,
   RegisterInput,
+  ResetPasswordInput,
 } from '@/types';
+
+type AuthHandler<T extends FieldValues> = (
+  formData: T,
+  setError: UseFormSetError<T>,
+  inputs: AuthInputFieldType<T>[],
+) => Promise<void>;
+
+type AuthHandlerFactory<T extends FieldValues> = (options?: {
+  onSuccess?: () => void;
+  onError?: () => void;
+}) => AuthHandler<T>;
+
+type NotificationSetter = Dispatch<SetStateAction<boolean>>;
 
 export type AuthContextType = {
   user: any;
   isLoading: boolean;
   isVerified: boolean;
-  handleRegister: (
-    formData: RegisterInput,
-    setError: UseFormSetError<RegisterInput>,
-    inputs: AuthInputFieldType<RegisterInput>[],
-  ) => Promise<void>;
-  handleLogin: (
-    formData: LoginInput,
-    setError: UseFormSetError<LoginInput>,
-    inputs: AuthInputFieldType<LoginInput>[],
-  ) => Promise<void>;
+
+  handleRegister: AuthHandler<RegisterInput>;
+  handleLogin: AuthHandler<LoginInput>;
   handleLogout: () => Promise<void>;
+
   handleVerifyEmail: (
     token: string,
-    setSuccessNotificationOpen: Dispatch<SetStateAction<boolean>>,
-    setInvalidTokenNotificationOpen: Dispatch<SetStateAction<boolean>>,
+    setSuccessNotificationOpen: NotificationSetter,
+    setInvalidTokenNotificationOpen: NotificationSetter,
   ) => void;
-  handleForgotPassword: (options?: {
-    onSuccess?: () => void;
-  }) => (
-    formData: ForgotPasswordInput,
-    setError: UseFormSetError<ForgotPasswordInput>,
-    inputs: AuthInputFieldType<ForgotPasswordInput>[],
-  ) => Promise<void>;
+
+  handleForgotPassword: AuthHandlerFactory<ForgotPasswordInput>;
+  handleResetPassword: AuthHandlerFactory<ResetPasswordInput>;
 };

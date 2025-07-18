@@ -26,6 +26,7 @@ export type ForgotPasswordInput = {
 };
 
 export type ResetPasswordInput = {
+  token: string;
   email: string;
   password: string;
   password_confirmation: string;

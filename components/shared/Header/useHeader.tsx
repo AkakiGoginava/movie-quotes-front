@@ -11,7 +11,8 @@ export const useHeader = () => {
   const [verificationStarted, setVerificationStarted] = useState(false);
 
   const [loginOpen, setLoginOpen] = useState(false);
-  const [ForgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+  const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+  const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
   const [successNotificationOpen, setSuccessNotificationOpen] = useState(false);
 
   const [verifyEmailNotificationOpen, setVerifyEmailNotificationOpen] =
@@ -40,7 +41,7 @@ export const useHeader = () => {
         setInvalidTokenNotificationOpen,
       );
     } else if (action === 'reset-password' && !user) {
-      setInvalidTokenNotificationOpen(true);
+      setResetPasswordOpen(true);
     }
   }, [user, isVerified, action, token]);
 
@@ -52,8 +53,10 @@ export const useHeader = () => {
   return {
     loginOpen,
     setLoginOpen,
-    ForgotPasswordOpen,
+    forgotPasswordOpen,
     setForgotPasswordOpen,
+    resetPasswordOpen,
+    setResetPasswordOpen,
     handleForgotPasswordClick,
     verifyEmailNotificationOpen,
     setVerifyEmailNotificationOpen,

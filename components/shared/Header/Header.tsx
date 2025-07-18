@@ -7,6 +7,7 @@ import {
   InvalidTokenNotification,
   SuccessNotification,
   ForgotPassword,
+  ResetPassword,
 } from '@/components';
 
 import { useHeader } from './useHeader';
@@ -16,8 +17,10 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
   const {
     loginOpen,
     setLoginOpen,
-    ForgotPasswordOpen,
+    forgotPasswordOpen,
     setForgotPasswordOpen,
+    resetPasswordOpen,
+    setResetPasswordOpen,
     handleForgotPasswordClick,
     verifyEmailNotificationOpen,
     setVerifyEmailNotificationOpen,
@@ -41,18 +44,20 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
       <Dropdown options={['Eng', 'Geo']} selected={0} />
 
       {user ? (
-        <Button
-          type='button'
-          variant='secondary'
-          handleClick={() => {
-            setLoginOpen(false);
-            setRegisterOpen(false);
-            handleLogout();
-          }}
-          className='text-sm h-8'
-        >
-          Log out
-        </Button>
+        <>
+          <Button
+            type='button'
+            variant='secondary'
+            handleClick={() => {
+              setLoginOpen(false);
+              setRegisterOpen(false);
+              handleLogout();
+            }}
+            className='text-sm h-8'
+          >
+            Log out
+          </Button>
+        </>
       ) : (
         <>
           <Login
@@ -69,10 +74,18 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
           />
 
           <ForgotPassword
-            forgotPasswordOpen={ForgotPasswordOpen}
-            setForgotPasswordOpen={setForgotPasswordOpen}
+            open={forgotPasswordOpen}
+            setOpen={setForgotPasswordOpen}
             setLoginOpen={setLoginOpen}
             setPasswordResetNotificationOpen={setPasswordResetNotificationOpen}
+          />
+
+          <ResetPassword
+            open={resetPasswordOpen}
+            setOpen={setResetPasswordOpen}
+            setLoginOpen={setLoginOpen}
+            setResetSuccessNotificationOpen={setSuccessNotificationOpen}
+            setInvalidTokenNotificationOpen={setInvalidTokenNotificationOpen}
           />
         </>
       )}
