@@ -4,5 +4,5 @@ export type PropsType = {
   forgotPasswordOpen: boolean;
   setForgotPasswordOpen: Dispatch<SetStateAction<boolean>>;
   setLoginOpen: Dispatch<SetStateAction<boolean>>;
-  setVerifyEmailNotificationOpen: Dispatch<SetStateAction<boolean>>;
+  setPasswordResetNotificationOpen: Dispatch<SetStateAction<boolean>>;
 };

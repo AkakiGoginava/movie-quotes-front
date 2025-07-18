@@ -17,6 +17,9 @@ export const useHeader = () => {
   const [verifyEmailNotificationOpen, setVerifyEmailNotificationOpen] =
     useState(false);
 
+  const [passwordResetNotificationOpen, setPasswordResetNotificationOpen] =
+    useState(false);
+
   const [invalidTokenNotificationOpen, setInvalidTokenNotificationOpen] =
     useState(false);
 
@@ -54,6 +57,8 @@ export const useHeader = () => {
     handleForgotPasswordClick,
     verifyEmailNotificationOpen,
     setVerifyEmailNotificationOpen,
+    passwordResetNotificationOpen,
+    setPasswordResetNotificationOpen,
     invalidTokenNotificationOpen,
     setInvalidTokenNotificationOpen,
     successNotificationOpen,

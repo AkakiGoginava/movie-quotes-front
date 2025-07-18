@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 export const useForgotPassword = (
   setForgotPasswordOpen: Dispatch<SetStateAction<boolean>>,
-  setVerifyEmailNotificationOpen: Dispatch<SetStateAction<boolean>>,
+  setPasswordResetNotificationOpen: Dispatch<SetStateAction<boolean>>,
 ) => {
   const {
     register,
@@ -38,7 +38,7 @@ export const useForgotPassword = (
   const forgotPasswordWithOptions = handleForgotPassword({
     onSuccess: () => {
       setForgotPasswordOpen(false);
-      setVerifyEmailNotificationOpen(true);
+      setPasswordResetNotificationOpen(true);
     },
   });
 

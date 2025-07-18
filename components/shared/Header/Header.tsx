@@ -3,7 +3,7 @@ import {
   Register,
   Dropdown,
   Button,
-  VerifyEmailNotification,
+  EmailSentNotification,
   InvalidTokenNotification,
   SuccessNotification,
   ForgotPassword,
@@ -21,6 +21,8 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
     handleForgotPasswordClick,
     verifyEmailNotificationOpen,
     setVerifyEmailNotificationOpen,
+    passwordResetNotificationOpen,
+    setPasswordResetNotificationOpen,
     invalidTokenNotificationOpen,
     setInvalidTokenNotificationOpen,
     successNotificationOpen,
@@ -70,14 +72,24 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
             forgotPasswordOpen={ForgotPasswordOpen}
             setForgotPasswordOpen={setForgotPasswordOpen}
             setLoginOpen={setLoginOpen}
-            setVerifyEmailNotificationOpen={setVerifyEmailNotificationOpen}
+            setPasswordResetNotificationOpen={setPasswordResetNotificationOpen}
           />
         </>
       )}
 
-      <VerifyEmailNotification
+      <EmailSentNotification
         open={verifyEmailNotificationOpen}
         setOpen={setVerifyEmailNotificationOpen}
+        title='Thank you!'
+        text='Please check your email and follow the instructions to activate your account.'
+      />
+
+      <EmailSentNotification
+        open={passwordResetNotificationOpen}
+        setOpen={setPasswordResetNotificationOpen}
+        title='Check you email'
+        text='We have sent a password recover instructions to your email'
+        hasExit
       />
 
       <InvalidTokenNotification

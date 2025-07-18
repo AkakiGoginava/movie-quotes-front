@@ -5,12 +5,17 @@ import { useAuth } from '@/hooks';
 
 import { PropsType } from './types';
 
-const VerifyEmailNotification: React.FC<PropsType> = ({ open, setOpen }) => {
+const EmailSentNotification: React.FC<PropsType> = ({
+  open,
+  setOpen,
+  hasExit = false,
+  title,
+  text,
+}) => {
   const { user, isLoading } = useAuth();
   const searchParams = useSearchParams();
 
   const email = searchParams.get('email');
-  const action = searchParams.get('action');
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -19,10 +24,10 @@ const VerifyEmailNotification: React.FC<PropsType> = ({ open, setOpen }) => {
       open={open}
       setOpen={setOpen}
       icon={<SendCheckIcon />}
-      title='Thank you!'
-      text='Please check your email and follow the instructions to finish the operation.'
+      title={title}
+      text={text}
       btnText='Go to my email'
-      hasExit={action != 'verify'}
+      hasExit={hasExit}
       hasBtn={true}
       handleClick={() => {
         window.open(
@@ -30,8 +35,19 @@ const VerifyEmailNotification: React.FC<PropsType> = ({ open, setOpen }) => {
           '_blank',
         );
       }}
-    />
+    >
+      {hasExit && (
+        <p
+          className='text-gray-500 transition hover:opacity-80 hover:cursor-pointer'
+          onClick={() => {
+            setOpen(false);
+          }}
+        >
+          Skip, I'll confirm later
+        </p>
+      )}
+    </NotificationLayout>
   );
 };
 
-export default VerifyEmailNotification;
+export default EmailSentNotification;

@@ -9,7 +9,7 @@ const ForgotPassword: React.FC<PropsType> = ({
   forgotPasswordOpen,
   setForgotPasswordOpen,
   setLoginOpen,
-  setVerifyEmailNotificationOpen,
+  setPasswordResetNotificationOpen,
 }) => {
   const {
     register,
@@ -21,7 +21,10 @@ const ForgotPassword: React.FC<PropsType> = ({
     getValues,
     reset,
     inputs,
-  } = useForgotPassword(setForgotPasswordOpen, setVerifyEmailNotificationOpen);
+  } = useForgotPassword(
+    setForgotPasswordOpen,
+    setPasswordResetNotificationOpen,
+  );
 
   return (
     <Modal
