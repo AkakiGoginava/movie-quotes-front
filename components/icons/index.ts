@@ -7,3 +7,4 @@ export { default as CrossedEyeIcon } from './crossed-eye-icon.svg';
 export { default as SendCheckIcon } from './send-check-icon.svg';
 export { default as WarningIcon } from './warning-icon.svg';
 export { default as SuccessIcon } from './success-icon.svg';
+export { default as ReturnArrowIcon } from './return-arrow-icon.svg';

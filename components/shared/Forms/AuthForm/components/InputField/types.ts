@@ -14,4 +14,5 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
   getValues: UseFormGetValues<FormValues>;
+  handleForgotPasswordClick?: () => void;
 };

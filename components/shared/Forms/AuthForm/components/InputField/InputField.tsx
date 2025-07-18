@@ -17,6 +17,7 @@ const InputField = <FormValues extends FieldValues>({
   register,
   touchedFields,
   getValues,
+  handleForgotPasswordClick,
 }: PropsType<FormValues>) => {
   const [show, setShow] = useState(false);
 
@@ -35,7 +36,13 @@ const InputField = <FormValues extends FieldValues>({
       key={input.name}
     >
       {input.type === 'checkbox' && (
-        <button type='button' className='link text-blue-500 hover:opacity-85'>
+        <button
+          type='button'
+          className='link text-blue-500 hover:opacity-85'
+          onClick={() => {
+            handleForgotPasswordClick?.();
+          }}
+        >
           Forgot password?
         </button>
       )}

@@ -10,7 +10,8 @@ const AuthForm = <FormValues extends FieldValues>({
   subTitle,
   submitText,
   inputs,
-  hasGoogleAuth: hasGoogleSignUp = false,
+  hasGoogleSignUp,
+  hasGoogleSignIn,
   register,
   handleSubmit,
   onSubmit,
@@ -18,15 +19,16 @@ const AuthForm = <FormValues extends FieldValues>({
   errors,
   touchedFields,
   getValues,
+  handleForgotPasswordClick,
   children,
 }: PropsType<FormValues>) => {
   return (
     <form
-      className='flex flex-col gap-6'
+      className='flex flex-col gap-6 items-center'
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
-      <header className='flex flex-col gap-3'>
+      <header className='flex flex-col gap-3 max-w-80'>
         <h1 className='text-center font-medium text-2xl md:text-3xl text-white'>
           {title}
         </h1>
@@ -42,6 +44,7 @@ const AuthForm = <FormValues extends FieldValues>({
             register={register}
             touchedFields={touchedFields}
             getValues={getValues}
+            handleForgotPasswordClick={handleForgotPasswordClick}
           />
         ))}
 
@@ -55,16 +58,18 @@ const AuthForm = <FormValues extends FieldValues>({
           {submitText}
         </Button>
 
-        <Button
-          type='button'
-          variant='secondary'
-          handleClick={() => {}}
-          className='text-base'
-          disabled={isSubmitting}
-        >
-          <GoogleIcon />
-          <span>Sign {hasGoogleSignUp ? 'up' : 'in'} with Google</span>
-        </Button>
+        {(hasGoogleSignUp || hasGoogleSignIn) && (
+          <Button
+            type='button'
+            variant='secondary'
+            handleClick={() => {}}
+            className='text-base'
+            disabled={isSubmitting}
+          >
+            <GoogleIcon />
+            <span>Sign {hasGoogleSignIn ? 'in' : 'up'} with Google</span>
+          </Button>
+        )}
 
         {children}
       </main>

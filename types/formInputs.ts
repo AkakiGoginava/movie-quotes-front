@@ -20,3 +20,7 @@ export type LoginInput = {
   password: string;
   remember: boolean;
 };
+
+export type ForgotPasswordInput = {
+  email: string;
+};

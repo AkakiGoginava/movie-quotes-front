@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { LoginInput, RegisterInput } from '@/types';
+import { ForgotPasswordInput, LoginInput, RegisterInput } from '@/types';
 
 import axios from './axios';
 
@@ -73,6 +73,16 @@ export const verifyEmail = async (token: string) => {
   await getCsrfCookie();
 
   const response = await axios.post('/api/email/verify', { token });
+
+  return response;
+};
+
+export const forgotPassword = async (
+  data: ForgotPasswordInput,
+): Promise<AxiosResponse<{}>> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/forgot-password', data);
 
   return response;
 };

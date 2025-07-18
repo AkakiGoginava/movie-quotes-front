@@ -9,6 +9,7 @@ const Login: React.FC<PropsType> = ({
   loginOpen,
   setLoginOpen,
   setRegisterOpen,
+  handleForgotPasswordClick,
 }) => {
   const {
     register,
@@ -38,11 +39,13 @@ const Login: React.FC<PropsType> = ({
         submitText='Sign in'
         register={register}
         handleSubmit={handleSubmit}
+        hasGoogleSignIn
         onSubmit={onSubmit}
         isSubmitting={isSubmitting}
         errors={errors}
         touchedFields={touchedFields}
         getValues={getValues}
+        handleForgotPasswordClick={handleForgotPasswordClick}
       >
         <p className='text-gray-500 text-center mt-8'>
           Don't have an account?{' '}

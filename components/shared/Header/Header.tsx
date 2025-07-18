@@ -6,6 +6,7 @@ import {
   VerifyEmailNotification,
   InvalidTokenNotification,
   SuccessNotification,
+  ForgotPassword,
 } from '@/components';
 
 import { useHeader } from './useHeader';
@@ -15,6 +16,9 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
   const {
     loginOpen,
     setLoginOpen,
+    ForgotPasswordOpen,
+    setForgotPasswordOpen,
+    handleForgotPasswordClick,
     verifyEmailNotificationOpen,
     setVerifyEmailNotificationOpen,
     invalidTokenNotificationOpen,
@@ -53,12 +57,19 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
             loginOpen={loginOpen}
             setLoginOpen={setLoginOpen}
             setRegisterOpen={setRegisterOpen}
+            handleForgotPasswordClick={handleForgotPasswordClick}
           />
 
           <Register
             registerOpen={registerOpen}
-            setLoginOpen={setLoginOpen}
             setRegisterOpen={setRegisterOpen}
+            setLoginOpen={setLoginOpen}
+          />
+
+          <ForgotPassword
+            forgotPasswordOpen={ForgotPasswordOpen}
+            setForgotPasswordOpen={setForgotPasswordOpen}
+            setLoginOpen={setLoginOpen}
           />
         </>
       )}

@@ -17,7 +17,8 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   subTitle: string;
   submitText: string;
   inputs: AuthInputFieldType<FormValues>[];
-  hasGoogleAuth?: boolean;
+  hasGoogleSignUp?: boolean;
+  hasGoogleSignIn?: boolean;
   register: UseFormRegister<FormValues>;
   handleSubmit: UseFormHandleSubmit<FormValues, FormValues>;
   onSubmit: SubmitHandler<FormValues>;
@@ -25,5 +26,6 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
   getValues: UseFormGetValues<FormValues>;
+  handleForgotPasswordClick?: () => void;
   children?: JSX.Element;
 };

@@ -8,6 +8,7 @@ import {
   useVerifyEmailMutation,
 } from '@/hooks';
 import {
+  forgotPassword,
   getUser,
   loginUser,
   logoutUser,
@@ -62,6 +63,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
+  const handleForgotPassword = useAuthMutation(forgotPassword);
+
   const errorStatus = (error as any)?.status;
   const currentUser: any =
     !isLoading && (!error || errorStatus != 401) ? user : null;
@@ -76,6 +79,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         handleLogin,
         handleLogout,
         handleVerifyEmail,
+        handleForgotPassword,
       }}
     >
       {children}

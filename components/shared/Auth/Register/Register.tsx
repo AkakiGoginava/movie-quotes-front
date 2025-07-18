@@ -36,7 +36,7 @@ const Register: React.FC<PropsType> = ({
         subTitle='Start your journey!'
         inputs={inputs}
         submitText='Get started'
-        hasGoogleAuth
+        hasGoogleSignUp
         register={register}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}

@@ -29,8 +29,6 @@ const NotificationLayout: React.FC<PropsType> = ({
 
         <p className='text-center'>{text}</p>
 
-        {children}
-
         {hasBtn && (
           <Button
             type='button'
@@ -41,6 +39,8 @@ const NotificationLayout: React.FC<PropsType> = ({
             {btnText}
           </Button>
         )}
+
+        {children}
       </div>
     </Modal>
   );

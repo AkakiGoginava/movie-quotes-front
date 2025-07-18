@@ -2,7 +2,12 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { UseFormSetError } from 'react-hook-form';
 
-import { AuthInputFieldType, LoginInput, RegisterInput } from '@/types';
+import {
+  AuthInputFieldType,
+  ForgotPasswordInput,
+  LoginInput,
+  RegisterInput,
+} from '@/types';
 
 export type AuthContextType = {
   user: any;
@@ -12,16 +17,21 @@ export type AuthContextType = {
     formData: RegisterInput,
     setError: UseFormSetError<RegisterInput>,
     inputs: AuthInputFieldType<RegisterInput>[],
-  ) => void;
+  ) => Promise<void>;
   handleLogin: (
     formData: LoginInput,
     setError: UseFormSetError<LoginInput>,
     inputs: AuthInputFieldType<LoginInput>[],
-  ) => void;
+  ) => Promise<void>;
   handleLogout: () => Promise<void>;
   handleVerifyEmail: (
     token: string,
     setSuccessNotificationOpen: Dispatch<SetStateAction<boolean>>,
     setInvalidTokenNotificationOpen: Dispatch<SetStateAction<boolean>>,
   ) => void;
+  handleForgotPassword: (
+    formData: ForgotPasswordInput,
+    setError: UseFormSetError<ForgotPasswordInput>,
+    inputs: AuthInputFieldType<ForgotPasswordInput>[],
+  ) => Promise<void>;
 };
