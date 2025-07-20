@@ -1,15 +1,16 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext } from 'react';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
   useAuthMutation,
-  useLogoutMutation,
+  useSimpleMutation,
   useVerifyEmailMutation,
 } from '@/hooks';
 import {
   forgotPassword,
   getUser,
+  googleCallback,
   loginUser,
   logoutUser,
   registerUser,
@@ -52,7 +53,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const handleLogout = useLogoutMutation(logoutUser, {
+  const handleGoogleAuth = (options?: { onSuccess?: () => void }) =>
+    useSimpleMutation(googleCallback, options);
+
+  const handleLogout = useSimpleMutation(logoutUser, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
@@ -82,6 +86,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         isLoading,
         handleRegister,
         handleLogin,
+        handleGoogleAuth,
         handleLogout,
         handleVerifyEmail,
         handleForgotPassword,

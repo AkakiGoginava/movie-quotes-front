@@ -107,3 +107,11 @@ export const resetPassword = async (
 
   return response;
 };
+
+export const googleCallback = async (code: string): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/google', { code });
+
+  return response;
+};

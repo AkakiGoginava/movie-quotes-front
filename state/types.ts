@@ -21,6 +21,8 @@ type AuthHandlerFactory<T extends FieldValues> = (options?: {
   onError?: () => void;
 }) => AuthHandler<T>;
 
+type SimpleMutation = (...args: any[]) => Promise<any>;
+
 type NotificationSetter = Dispatch<SetStateAction<boolean>>;
 
 export type AuthContextType = {
@@ -30,7 +32,11 @@ export type AuthContextType = {
 
   handleRegister: AuthHandler<RegisterInput>;
   handleLogin: AuthHandler<LoginInput>;
-  handleLogout: () => Promise<void>;
+  handleGoogleAuth: (options?: {
+    onSuccess?: () => void;
+    onError?: () => void;
+  }) => SimpleMutation;
+  handleLogout: SimpleMutation;
 
   handleVerifyEmail: (
     token: string,

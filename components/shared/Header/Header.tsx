@@ -33,7 +33,7 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
     user,
     isLoading,
     handleLogout,
-  } = useHeader();
+  } = useHeader(setRegisterOpen);
 
   if (isLoading) return <div>Loading...</div>;
 

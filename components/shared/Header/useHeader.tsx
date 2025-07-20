@@ -1,12 +1,26 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
 import { useAuth } from '@/hooks';
 
-export const useHeader = () => {
-  const { user, isLoading, handleLogout, isVerified, handleVerifyEmail } =
-    useAuth();
+export const useHeader = (
+  setRegisterOpen: Dispatch<SetStateAction<boolean>>,
+) => {
+  const {
+    user,
+    isLoading,
+    handleLogout,
+    isVerified,
+    handleVerifyEmail,
+    handleGoogleAuth,
+  } = useAuth();
+
+  const searchParams = useSearchParams();
+
+  const action = searchParams.get('action');
+  const token = searchParams.get('token') ?? '';
+  const googleAuthCode = searchParams.get('code');
 
   const [verificationStarted, setVerificationStarted] = useState(false);
 
@@ -24,9 +38,12 @@ export const useHeader = () => {
   const [invalidTokenNotificationOpen, setInvalidTokenNotificationOpen] =
     useState(false);
 
-  const searchParams = useSearchParams();
-  const action = searchParams.get('action');
-  const token = searchParams.get('token') ?? '';
+  const handleGoogleAuthWithOptions = handleGoogleAuth({
+    onSuccess: () => {
+      setLoginOpen(false);
+      setRegisterOpen(false);
+    },
+  });
 
   useEffect(() => {
     setVerifyEmailNotificationOpen(
@@ -42,8 +59,11 @@ export const useHeader = () => {
       );
     } else if (action === 'reset-password' && !user) {
       setResetPasswordOpen(true);
+    } else if (googleAuthCode) {
+      console.log(googleAuthCode);
+      handleGoogleAuthWithOptions(googleAuthCode);
     }
-  }, [user, isVerified, action, token]);
+  }, [user, isVerified, action, token, googleAuthCode]);
 
   const handleForgotPasswordClick = () => {
     setLoginOpen(false);
