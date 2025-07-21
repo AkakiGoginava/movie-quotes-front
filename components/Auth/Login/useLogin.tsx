@@ -45,9 +45,9 @@ export const useLogin = () => {
 
   const { handleLogin } = useAuth();
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) =>
+  const onSubmit: SubmitHandler<LoginInput> = (data) => {
     handleLogin(data, setError, inputs);
-
+  };
   return {
     register,
     handleSubmit,

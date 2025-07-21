@@ -60,7 +60,6 @@ export const useHeader = (
     } else if (action === 'reset-password' && !user) {
       setResetPasswordOpen(true);
     } else if (googleAuthCode) {
-      console.log(googleAuthCode);
       handleGoogleAuthWithOptions(googleAuthCode);
     }
   }, [user, isVerified, action, token, googleAuthCode]);

@@ -6,7 +6,7 @@ const useSimpleMutation = (
   mutationFn: (...args: any[]) => Promise<AxiosResponse<{}>>,
   options?: {
     onSuccess?: () => void;
-    onError?: (error: any) => void;
+    onError?: (error: Error) => void;
   },
 ) => {
   const mutation = useMutation({

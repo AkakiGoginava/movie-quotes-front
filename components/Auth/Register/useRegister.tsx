@@ -74,8 +74,9 @@ export const useRegister = () => {
 
   const { handleRegister } = useAuth();
 
-  const onSubmit: SubmitHandler<RegisterInput> = (data) =>
+  const onSubmit: SubmitHandler<RegisterInput> = (data) => {
     handleRegister(data, setError, inputs);
+  };
 
   return {
     register,

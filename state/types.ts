@@ -8,6 +8,7 @@ import {
   LoginInput,
   RegisterInput,
   ResetPasswordInput,
+  User,
 } from '@/types';
 
 type AuthHandler<T extends FieldValues> = (
@@ -26,7 +27,7 @@ type SimpleMutation = (...args: any[]) => Promise<any>;
 type NotificationSetter = Dispatch<SetStateAction<boolean>>;
 
 export type AuthContextType = {
-  user: any;
+  user: User | null;
   isLoading: boolean;
   isVerified: boolean;
 

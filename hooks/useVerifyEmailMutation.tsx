@@ -22,9 +22,7 @@ const useVerifyEmailMutation = (
   ) => {
     verifyEmailMutation.mutate(token, {
       onSuccess: () => {
-        setTimeout(() => {
-          router.replace(window.location.pathname);
-        }, 200);
+        router.replace(window.location.pathname);
 
         setSuccessNotificationOpen(true);
 

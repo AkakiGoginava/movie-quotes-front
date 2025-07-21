@@ -17,20 +17,13 @@ export const useInvalidTokenNotification = (
     mutationFn: ({ action, email }: { action: string; email: string }) =>
       requestNewLink(action, email),
     onSuccess: (data) => {
-      console.log('Request successful', data);
-
       setOpen(false);
       setVerifyEmailNotificationOpen(true);
-    },
-    onError: (error: any) => {
-      console.log('Request failed', error);
-      alert(error?.response?.data?.message);
     },
   });
 
   const handleRequestNewLink = () => {
     if (!action || !email) {
-      console.warn('Action or email not available');
       return;
     }
     requestNewLinkMutation.mutate({ action, email });

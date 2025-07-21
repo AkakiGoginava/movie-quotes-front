@@ -1,5 +1,6 @@
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 
+import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
@@ -17,6 +18,7 @@ import {
   resetPassword,
   verifyEmail,
 } from '@/services';
+import { User } from '@/types';
 
 import { AuthContextType } from './types';
 
@@ -27,19 +29,14 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
 
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data, isLoading, error } = useQuery<AxiosResponse<{ user: User }>>({
     queryKey: ['user'],
     queryFn: getUser,
     staleTime: Infinity,
     retry: false,
-    select: (data) => {
-      return data?.data || null;
-    },
   });
+
+  const user = data?.data?.user || null;
 
   const handleRegister = useAuthMutation(registerUser, {
     onSuccess: () => {
@@ -74,15 +71,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const handleResetPassword = (options?: { onSuccess?: () => void }) =>
     useAuthMutation(resetPassword, options);
 
-  const errorStatus = (error as any)?.status;
-  const currentUser: any =
+  const errorStatus = (error as AxiosError)?.status;
+  const currentUser: User | null =
     !isLoading && (!error || errorStatus != 401) ? user : null;
 
   return (
     <AuthContext.Provider
       value={{
-        user: currentUser?.user,
-        isVerified: !!currentUser?.user?.email_verified_at,
+        user: currentUser,
+        isVerified: !!currentUser?.email_verified_at,
         isLoading,
         handleRegister,
         handleLogin,

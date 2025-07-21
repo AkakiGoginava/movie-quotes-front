@@ -70,9 +70,7 @@ export const useResetPassword = (
 
   const resetPasswordWithOptions = handleResetPassword({
     onSuccess: () => {
-      setTimeout(() => {
-        router.replace(window.location.pathname);
-      }, 200);
+      router.replace(window.location.pathname);
 
       setOpen(false);
       setResetSuccessNotificationOpen(true);
@@ -83,8 +81,9 @@ export const useResetPassword = (
     },
   });
 
-  const onSubmit: SubmitHandler<ResetPasswordInput> = (data) =>
+  const onSubmit: SubmitHandler<ResetPasswordInput> = (data) => {
     resetPasswordWithOptions(data, setError, inputs);
+  };
 
   return {
     register,

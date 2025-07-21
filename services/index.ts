@@ -1,10 +1,11 @@
-import { Axios, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import {
   ForgotPasswordInput,
   LoginInput,
   RegisterInput,
   ResetPasswordInput,
+  User,
 } from '@/types';
 
 import axios from './axios';
@@ -46,7 +47,7 @@ export const logoutUser = async (): Promise<AxiosResponse<{}>> => {
   return response;
 };
 
-export const getUser = async (): Promise<AxiosResponse<{}>> => {
+export const getUser = async (): Promise<AxiosResponse<{ user: User }>> => {
   const response = await axios.get('/api/user');
 
   return response;

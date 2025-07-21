@@ -42,8 +42,9 @@ export const useForgotPassword = (
     },
   });
 
-  const onSubmit: SubmitHandler<ForgotPasswordInput> = (data) =>
-    forgotPasswordWithOptions(data, setError, inputs);
+  const onSubmit: SubmitHandler<ForgotPasswordInput> = (data) => {
+    return forgotPasswordWithOptions(data, setError, inputs);
+  };
 
   return {
     register,
