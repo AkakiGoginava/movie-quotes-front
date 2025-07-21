@@ -4,3 +4,7 @@ export { default as InvalidIcon } from './invalid-icon.svg';
 export { default as ValidIcon } from './valid-icon.svg';
 export { default as EyeIcon } from './eye-icon.svg';
 export { default as CrossedEyeIcon } from './crossed-eye-icon.svg';
+export { default as SendCheckIcon } from './send-check-icon.svg';
+export { default as WarningIcon } from './warning-icon.svg';
+export { default as SuccessIcon } from './success-icon.svg';
+export { default as ReturnArrowIcon } from './return-arrow-icon.svg';

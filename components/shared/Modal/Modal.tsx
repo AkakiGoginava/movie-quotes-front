@@ -12,8 +12,8 @@ const Modal = <FormValues extends FieldValues>({
   buttonText,
   open,
   setOpen,
-  id,
   reset,
+  hasExit = true,
   children,
 }: PropsType<FormValues>) => {
   return (
@@ -27,30 +27,33 @@ const Modal = <FormValues extends FieldValues>({
         {buttonText}
       </Button>
 
-      <dialog id={id} className='modal' open={open}>
-        <div className='modal-box max-w-full size-full md:size-auto px-8.5 md:px-30 pt-12 pb-0 bg-primary'>
-          <button
-            className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
-            onClick={() => {
-              reset();
-              setOpen(false);
-            }}
-          >
-            ✕
-          </button>
-
+      <dialog className='modal' open={open}>
+        <div className='modal-box max-w-full size-full md:size-auto px-8.5 md:px-20 pt-12 pb-0 bg-primary'>
+          {hasExit && (
+            <button
+              className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
+              onClick={() => {
+                reset?.();
+                setOpen(false);
+              }}
+            >
+              ✕
+            </button>
+          )}
           {children}
         </div>
 
-        <div className='modal-backdrop'>
-          <button
-            onClick={() => {
-              reset();
-              setOpen(false);
-            }}
-          >
-            close
-          </button>
+        <div className='modal-backdrop backdrop-blur-xs'>
+          {hasExit && (
+            <button
+              onClick={() => {
+                reset?.();
+                setOpen(false);
+              }}
+            >
+              close
+            </button>
+          )}
         </div>
       </dialog>
     </>

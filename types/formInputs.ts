@@ -7,3 +7,27 @@ export type AuthInputFieldType<FormValues extends FieldValues = FieldValues> = {
   label: string;
   rules?: RegisterOptions<FormValues, Path<FormValues>>;
 };
+
+export type RegisterInput = {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+};
+
+export type LoginInput = {
+  email: string;
+  password: string;
+  remember: boolean;
+};
+
+export type ForgotPasswordInput = {
+  email: string;
+};
+
+export type ResetPasswordInput = {
+  token: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+};

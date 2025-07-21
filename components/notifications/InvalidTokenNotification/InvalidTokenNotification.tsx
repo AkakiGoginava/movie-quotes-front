@@ -1,0 +1,37 @@
+import { Button, NotificationLayout, WarningIcon } from '@/components';
+
+import { PropsType } from './types';
+import { useInvalidTokenNotification } from './useInvalidTokenNotification';
+
+const InvalidTokenNotification: React.FC<PropsType> = ({
+  open,
+  setOpen,
+  setVerifyEmailNotificationOpen,
+}) => {
+  const { handleRequestNewLink, isLoading, action } =
+    useInvalidTokenNotification(setOpen, setVerifyEmailNotificationOpen);
+
+  return (
+    <NotificationLayout
+      open={open}
+      setOpen={setOpen}
+      icon={<WarningIcon />}
+      title='Link expired!'
+      text="Link has expired, because you haven't used it."
+      hasExit={action != 'verify'}
+      hasBtn={false}
+    >
+      <Button
+        type='submit'
+        variant='primary'
+        className='w-full text-base'
+        handleClick={() => handleRequestNewLink()}
+        disabled={isLoading}
+      >
+        Request another link
+      </Button>
+    </NotificationLayout>
+  );
+};
+
+export default InvalidTokenNotification;

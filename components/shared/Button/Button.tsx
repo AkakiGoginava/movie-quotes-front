@@ -9,12 +9,14 @@ const Button: React.FC<PropsType> = ({
   variant,
   className,
   handleClick,
+  disabled = false,
   children,
 }) => {
   return (
     <button
       type={type}
       onClick={handleClick}
+      disabled={disabled}
       className={cn(
         'btn px-4 py-0 font-normal rounded-sm hover:opacity-85 transition',
         className,

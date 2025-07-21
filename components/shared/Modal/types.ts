@@ -8,7 +8,7 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   buttonText: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  id: string;
-  reset: UseFormReset<FormValues>;
+  hasExit?: boolean;
+  reset?: UseFormReset<FormValues>;
   children: JSX.Element;
 };
