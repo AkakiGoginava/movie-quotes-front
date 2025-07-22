@@ -80,6 +80,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         user: currentUser,
         isVerified: !!currentUser?.email_verified_at,
+        isGoogleUser: !!currentUser?.google_id,
         isLoading,
         handleRegister,
         handleLogin,

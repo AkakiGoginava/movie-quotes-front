@@ -30,6 +30,7 @@ export type AuthContextType = {
   user: User | null;
   isLoading: boolean;
   isVerified: boolean;
+  isGoogleUser: boolean;
 
   handleRegister: AuthHandler<RegisterInput>;
   handleLogin: AuthHandler<LoginInput>;

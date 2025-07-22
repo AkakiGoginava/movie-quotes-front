@@ -1,9 +1,8 @@
 import { FieldValues } from 'react-hook-form';
 
-import { Button, GoogleIcon } from '@/components';
+import { Button, GoogleIcon, InputField } from '@/components';
 
 import { PropsType } from './types';
-import { InputField } from './components';
 
 const AuthForm = <FormValues extends FieldValues>({
   title,
@@ -60,6 +59,7 @@ const AuthForm = <FormValues extends FieldValues>({
             touchedFields={touchedFields}
             getValues={getValues}
             handleForgotPasswordClick={handleForgotPasswordClick}
+            showError
           />
         ))}
 

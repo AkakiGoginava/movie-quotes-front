@@ -18,6 +18,7 @@ const InputField = <FormValues extends FieldValues>({
   touchedFields,
   getValues,
   handleForgotPasswordClick,
+  showError,
 }: PropsType<FormValues>) => {
   const [show, setShow] = useState(false);
 
@@ -100,7 +101,7 @@ const InputField = <FormValues extends FieldValues>({
           hidden: input.type === 'checkbox',
         })}
       >
-        {(errors?.[input.name] as { message?: string })?.message}
+        {showError && (errors?.[input.name] as { message?: string })?.message}
       </p>
     </div>
   );
