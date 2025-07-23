@@ -1,5 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+
+import {
+  FieldErrors,
+  FieldNamesMarkedBoolean,
+  FieldValues,
+  UseFormGetValues,
+  UseFormRegister,
+} from 'react-hook-form';
+
+import { InputFieldType } from '@/types';
 
 type Props = {
   info: {
@@ -9,12 +18,15 @@ type Props = {
   };
 };
 
-type Editable = {
+type Editable<FormValues extends FieldValues = FieldValues> = {
   editable: true;
   editing: boolean;
   setEditing: Dispatch<SetStateAction<boolean>>;
-  editInputs: {};
-  register: UseFormRegister<FieldValues>;
+  editInputs: InputFieldType<FormValues>[];
+  register: UseFormRegister<FormValues>;
+  getValues: UseFormGetValues<FormValues>;
+  errors: FieldErrors<FormValues>;
+  touchedFields: FieldNamesMarkedBoolean<FormValues>;
 };
 
 type NonEditable = {
@@ -23,6 +35,10 @@ type NonEditable = {
   setEditing?: never;
   editInputs?: never;
   register?: never;
+  getValues?: never;
+  errors?: never;
+  touchedFields?: never;
 };
 
-export type PropsType = Props & (Editable | NonEditable);
+export type PropsType<FormValues extends FieldValues = FieldValues> = Props &
+  (Editable<FormValues> | NonEditable);

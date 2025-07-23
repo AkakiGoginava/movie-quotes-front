@@ -1,13 +1,20 @@
+import { FieldValues } from 'react-hook-form';
+
 import { InputField } from '@/components';
+
 import { PropsType } from './types';
 
-const InfoField: React.FC<PropsType> = ({
+const InfoField = <FormValues extends FieldValues = FieldValues>({
   info,
   editable,
   editing,
   setEditing,
   editInputs,
-}) => {
+  register,
+  getValues,
+  errors,
+  touchedFields,
+}: PropsType<FormValues>) => {
   return (
     <div>
       <div className='flex flex-col gap-2'>
@@ -35,7 +42,20 @@ const InfoField: React.FC<PropsType> = ({
         </div>
       </div>
 
-      {editing && <div>{editInputs.map((input) => {})}</div>}
+      {editing && (
+        <div>
+          {editInputs.map((input, idx) => (
+            <InputField<FormValues>
+              key={idx}
+              input={input}
+              errors={errors}
+              register={register}
+              touchedFields={touchedFields}
+              getValues={getValues}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

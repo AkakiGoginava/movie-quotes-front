@@ -1,8 +1,15 @@
+import { useState } from 'react';
+
+import { useForm } from 'react-hook-form';
+
 import { useAuth } from '@/hooks';
 import { InputFieldType } from '@/types';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { PasswordEditInputType, UsernameEditInputType } from './types';
+
+import {
+  PasswordEditInputType,
+  ProfileEditInputType,
+  UsernameEditInputType,
+} from './types';
 
 const useProfileForm = () => {
   const { isLoading, user, isGoogleUser } = useAuth();
@@ -12,9 +19,9 @@ const useProfileForm = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, touchedFields },
     getValues,
-  } = useForm({
+  } = useForm<ProfileEditInputType>({
     mode: 'onChange',
   });
 
@@ -88,8 +95,9 @@ const useProfileForm = () => {
     user,
     isGoogleUser,
     register,
-    errors,
     getValues,
+    errors,
+    touchedFields,
     userInfo,
     editPasswordInput,
     editUsernameInput,

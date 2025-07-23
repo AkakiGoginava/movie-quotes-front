@@ -1,15 +1,11 @@
+import { useState } from 'react';
+
 import { FieldValues, get } from 'react-hook-form';
 
 import { cn } from '@/helpers';
+import { CrossedEyeIcon, EyeIcon, InvalidIcon, ValidIcon } from '@/components';
 
 import { PropsType } from './types';
-import {
-  CrossedEyeIcon,
-  EyeIcon,
-  InvalidIcon,
-  ValidIcon,
-} from '@/components/icons';
-import { useState } from 'react';
 
 const InputField = <FormValues extends FieldValues>({
   input,
