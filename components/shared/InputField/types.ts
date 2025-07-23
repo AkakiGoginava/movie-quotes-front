@@ -6,10 +6,10 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 
-import { AuthInputFieldType } from '@/types';
+import { InputFieldType } from '@/types';
 
 export type PropsType<FormValues extends FieldValues = FieldValues> = {
-  input: AuthInputFieldType<FormValues>;
+  input: InputFieldType<FormValues>;
   register: UseFormRegister<FormValues>;
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;

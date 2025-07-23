@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { AuthInputFieldType, RegisterInput } from '@/types';
+import { InputFieldType, RegisterInput } from '@/types';
 import { useAuth } from '@/hooks';
 
 export const useRegister = () => {
@@ -15,7 +15,7 @@ export const useRegister = () => {
     mode: 'onChange',
   });
 
-  const inputs: AuthInputFieldType<RegisterInput>[] = [
+  const inputs: InputFieldType<RegisterInput>[] = [
     {
       label: 'Name',
       name: 'name',

@@ -10,13 +10,13 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 
-import { AuthInputFieldType } from '@/types';
+import { InputFieldType } from '@/types';
 
 export type PropsType<FormValues extends FieldValues = FieldValues> = {
   title: string;
   subTitle: string;
   submitText: string;
-  inputs: AuthInputFieldType<FormValues>[];
+  inputs: InputFieldType<FormValues>[];
   hasGoogleSignUp?: boolean;
   hasGoogleSignIn?: boolean;
   register: UseFormRegister<FormValues>;

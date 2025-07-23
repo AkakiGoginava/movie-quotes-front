@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { UseFormSetError, FieldValues } from 'react-hook-form';
 
 import {
-  AuthInputFieldType,
+  InputFieldType,
   ForgotPasswordInput,
   LoginInput,
   RegisterInput,
@@ -14,7 +14,7 @@ import {
 type AuthHandler<T extends FieldValues> = (
   formData: T,
   setError: UseFormSetError<T>,
-  inputs: AuthInputFieldType<T>[],
+  inputs: InputFieldType<T>[],
 ) => Promise<void>;
 
 type AuthHandlerFactory<T extends FieldValues> = (options?: {

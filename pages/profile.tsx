@@ -1,9 +1,12 @@
-import { InfoField, InputField } from '@/components';
+import { Button, InfoField, InputField } from '@/components';
 import { useAuth } from '@/hooks';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export default function Home() {
+export default function Profile() {
   const { isLoading, user, isGoogleUser } = useAuth();
+  const [editingUsername, setEditingUsername] = useState(false);
+  const [editingPassword, setEditingPassword] = useState(false);
 
   const {
     register,
@@ -72,7 +75,7 @@ export default function Home() {
       placeholder: 'Confirm new password',
       rules: {
         required: { value: true, message: 'Please confirm your password' },
-        validate: (value) =>
+        validate: (value: string) =>
           value === getValues('password') || 'Passwords do not match',
       },
     },
@@ -81,8 +84,8 @@ export default function Home() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className='py-8 h-screen bg-primary'>
-      <section>
+    <div className='py-8 h-full bg-primary'>
+      <section className='inline-block'>
         <h1 className='text-2xl font-medium ml-10 mb-20'>My profile</h1>
 
         <div className='relative ml-42 px-66 pt-66 pb-30 bg-slate-950 rounded-xl inline-flex'>
@@ -96,13 +99,42 @@ export default function Home() {
           </div>
 
           <div className='flex flex-col gap-10'>
-            <InfoField info={userInfo.username} editable />
+            <InfoField
+              info={userInfo.username}
+              editable
+              editing={editingUsername}
+              setEditing={setEditingUsername}
+              editInputs={editUsernameInput}
+            />
 
             <InfoField info={userInfo.email} />
 
-            {!isGoogleUser && <InfoField info={userInfo.password} editable />}
+            {!isGoogleUser && (
+              <InfoField
+                info={userInfo.password}
+                editable
+                editing={editingPassword}
+                setEditing={setEditingPassword}
+                editInputs={editPasswordInput}
+              />
+            )}
           </div>
         </div>
+
+        {(editingUsername || editingPassword) && (
+          <div className='flex gap-2 mt-20'>
+            <Button
+              type='button'
+              className='btn-ghost ml-auto text-xl bg-transparent h-12'
+            >
+              Cancel
+            </Button>
+
+            <Button type='submit' variant='primary' className='text-xl h-12'>
+              Save changes
+            </Button>
+          </div>
+        )}
       </section>
     </div>
   );

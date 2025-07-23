@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { AuthInputFieldType, LoginInput } from '@/types';
+import { InputFieldType, LoginInput } from '@/types';
 import { useAuth } from '@/hooks';
 
 export const useLogin = () => {
@@ -13,7 +13,7 @@ export const useLogin = () => {
     reset,
   } = useForm<LoginInput>({ mode: 'onChange' });
 
-  const inputs: AuthInputFieldType<LoginInput>[] = [
+  const inputs: InputFieldType<LoginInput>[] = [
     {
       label: 'Email',
       name: 'email',

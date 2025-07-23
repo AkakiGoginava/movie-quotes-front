@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { AuthInputFieldType, ForgotPasswordInput } from '@/types';
+import { InputFieldType, ForgotPasswordInput } from '@/types';
 import { useAuth } from '@/hooks';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -17,7 +17,7 @@ export const useForgotPassword = (
     reset,
   } = useForm<ForgotPasswordInput>({ mode: 'onChange' });
 
-  const inputs: AuthInputFieldType<ForgotPasswordInput>[] = [
+  const inputs: InputFieldType<ForgotPasswordInput>[] = [
     {
       label: 'Email',
       name: 'email',
