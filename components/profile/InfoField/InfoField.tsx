@@ -1,3 +1,4 @@
+import { InputField } from '@/components';
 import { PropsType } from './types';
 
 const InfoField: React.FC<PropsType> = ({
@@ -34,7 +35,7 @@ const InfoField: React.FC<PropsType> = ({
         </div>
       </div>
 
-      {editing && <div></div>}
+      {editing && <div>{editInputs.map((input) => {})}</div>}
     </div>
   );
 };
