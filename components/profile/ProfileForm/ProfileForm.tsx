@@ -1,11 +1,7 @@
 import { Button, InfoField } from '@/components';
 
 import useProfileForm from './useProfileForm';
-import {
-  PasswordEditInputType,
-  ProfileEditInputType,
-  UsernameEditInputType,
-} from './types';
+import { ProfileEditInputType } from './types';
 import { InputFieldType } from '@/types';
 
 const ProfileForm = () => {
@@ -44,6 +40,7 @@ const ProfileForm = () => {
 
         <div className='flex flex-col gap-10'>
           <InfoField<ProfileEditInputType>
+            name='Username'
             info={userInfo.username}
             editable
             editing={editingUsername}
@@ -57,10 +54,11 @@ const ProfileForm = () => {
             errors={errors}
           />
 
-          <InfoField info={userInfo.email} />
+          <InfoField name='Email' info={userInfo.email} />
 
           {!isGoogleUser && (
             <InfoField<ProfileEditInputType>
+              name='Password'
               info={userInfo.password}
               editable
               editing={editingPassword}

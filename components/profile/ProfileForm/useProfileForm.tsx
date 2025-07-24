@@ -23,6 +23,8 @@ const useProfileForm = () => {
     getValues,
   } = useForm<ProfileEditInputType>({
     mode: 'onChange',
+    shouldUnregister: true,
+    criteriaMode: 'all',
   });
 
   const userInfo = {
@@ -45,17 +47,17 @@ const useProfileForm = () => {
 
   const editUsernameInput: InputFieldType<UsernameEditInputType>[] = [
     {
-      label: 'Username',
+      label: 'New username',
       name: 'name',
       type: 'text',
-      placeholder: 'At least 3 & max.15 lower case characters',
+      placeholder: 'Enter new username',
       rules: {
-        required: { value: true, message: 'Please enter new name' },
-        minLength: { value: 3, message: 'Minimum length is 3' },
-        maxLength: { value: 15, message: 'Maximum length is 15' },
+        required: { value: true, message: 'New username' },
+        minLength: { value: 3, message: '3 or more characters' },
+        maxLength: { value: 15, message: '15 or fewer characters' },
         pattern: {
           value: /^[a-z0-9]+$/,
-          message: 'Only lowercase letters and numbers allowed',
+          message: 'Lowercase characters',
         },
       },
     },
@@ -68,12 +70,12 @@ const useProfileForm = () => {
       type: 'password',
       placeholder: 'New password',
       rules: {
-        required: { value: true, message: 'Please enter new password' },
-        minLength: { value: 8, message: 'Minimum length is 8' },
-        maxLength: { value: 15, message: 'Maximum length is 15' },
+        required: { value: true, message: 'New password' },
+        minLength: { value: 8, message: '8  or more characters' },
+        maxLength: { value: 15, message: '15 or fewer characters' },
         pattern: {
           value: /^[a-z0-9]+$/,
-          message: 'Only lowercase letters and numbers allowed',
+          message: 'Lowercase characters',
         },
       },
     },

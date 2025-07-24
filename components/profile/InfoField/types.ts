@@ -11,6 +11,7 @@ import {
 import { InputFieldType } from '@/types';
 
 type Props = {
+  name: string;
   info: {
     label: string;
     value: string | undefined;

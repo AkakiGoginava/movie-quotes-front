@@ -15,6 +15,7 @@ const InputField = <FormValues extends FieldValues>({
   getValues,
   handleForgotPasswordClick,
   showError,
+  className,
 }: PropsType<FormValues>) => {
   const [show, setShow] = useState(false);
 
@@ -44,52 +45,60 @@ const InputField = <FormValues extends FieldValues>({
         </button>
       )}
 
-      <label className='text-white h-4.5 mr-auto' htmlFor={input.name}>
+      <label className='text-white h-4.5 mr-auto mb-1' htmlFor={input.name}>
         {input.label}
       </label>
 
-      <input
-        id={input.name}
-        type={
-          input.type === 'password' ? (show ? 'text' : 'password') : input.type
-        }
-        className={cn(
-          'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-9.5 pl-2 pr-13 focus:ring-2 ',
-          {
-            'border-transparent focus:ring-gray-500': !hasEnteredInput,
-            'border-red-500 focus:ring-red-500': isInvalid,
-            'border-green-500 focus:ring-green-500': hasEnteredInput && isValid,
-            'w-4 h-4 p-0 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer border-white':
-              input.type === 'checkbox',
-          },
-        )}
-        placeholder={input.placeholder}
-        {...register(input.name, input?.rules)}
-      />
+      <div className='relative'>
+        <input
+          id={input.name}
+          type={
+            input.type === 'password'
+              ? show
+                ? 'text'
+                : 'password'
+              : input.type
+          }
+          className={cn(
+            'text-black bg-gray-300 outline-none rounded-sm border-2 w-89 h-9.5 pl-2 pr-13 focus:ring-2 ',
+            {
+              'border-transparent focus:ring-gray-500': !hasEnteredInput,
+              'border-red-500 focus:ring-red-500': isInvalid,
+              'border-green-500 focus:ring-green-500':
+                hasEnteredInput && isValid,
+              'w-4 h-4 p-0 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer border-white':
+                input.type === 'checkbox',
+            },
+            className,
+          )}
+          placeholder={input.placeholder}
+          {...register(input.name, input?.rules)}
+        />
 
-      <div
-        className={cn(
-          'absolute right-3 md:right-2 bottom-2 flex gap-1.5 text-gray-600',
-          {
-            hidden: input.type === 'checkbox',
-          },
-        )}
-      >
-        {isInvalid && <InvalidIcon />}
-        {hasEnteredInput && isValid && <ValidIcon />}
+        <div
+          className={cn(
+            'absolute right-3 md:right-2 top-1/2 -translate-1/2 flex gap-1.5 text-gray-600',
+            {
+              hidden: input.type === 'checkbox',
+            },
+          )}
+        >
+          {isInvalid && <InvalidIcon />}
+          {hasEnteredInput && isValid && <ValidIcon />}
 
-        {input.type === 'password' && (
-          <div
-            className='hover:cursor-pointe'
-            onClick={() => setShow((prev) => !prev)}
-          >
-            {show ? (
-              <EyeIcon className='min-h-5 min-w-5' />
-            ) : (
-              <CrossedEyeIcon className='min-h-5 min-w-5' />
-            )}
-          </div>
-        )}
+          {input.type === 'password' && (
+            <div
+              className='hover:cursor-pointe'
+              onClick={() => setShow((prev) => !prev)}
+            >
+              {show ? (
+                <EyeIcon className='min-h-5 min-w-5' />
+              ) : (
+                <CrossedEyeIcon className='min-h-5 min-w-5' />
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       <p
