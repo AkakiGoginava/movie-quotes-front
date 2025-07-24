@@ -10,7 +10,7 @@ const ProfileForm = () => {
     user,
     isGoogleUser,
     register,
-    handleSubmit,
+    onSubmit,
     getValues,
     errors,
     touchedFields,
@@ -26,7 +26,7 @@ const ProfileForm = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <form onSubmit={() => {}} className='inline-block'>
+    <form onSubmit={onSubmit} className='inline-block'>
       <h1 className='text-2xl font-medium ml-10 mb-20'>My profile</h1>
 
       <div className='relative ml-42 px-66 pt-66 pb-30 bg-slate-950 rounded-xl inline-flex'>

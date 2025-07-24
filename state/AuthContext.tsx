@@ -78,7 +78,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleEditUserFactory = (options?: { onSuccess?: () => void }) => {
-    return useAuthMutation(editUser, options);
+    return useAuthMutation(editUser, {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+
+        options?.onSuccess?.();
+      },
+    });
   };
 
   const errorStatus = (error as AxiosError)?.status;

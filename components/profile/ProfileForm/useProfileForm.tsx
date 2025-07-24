@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
@@ -9,8 +9,6 @@ import {
   ProfileEditInput,
   UsernameEditInput,
 } from '@/types';
-import { useMutation } from '@tanstack/react-query';
-import { editUser } from '@/services';
 
 const useProfileForm = () => {
   const { isLoading, user, isGoogleUser, handleEditUserFactory } = useAuth();
@@ -34,6 +32,10 @@ const useProfileForm = () => {
       setEditingUsername(false);
       setEditingPassword(false);
     },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    handleEditUser(data);
   });
 
   const userInfo = {
@@ -106,7 +108,7 @@ const useProfileForm = () => {
     user,
     isGoogleUser,
     register,
-    handleSubmit,
+    onSubmit,
     getValues,
     errors,
     touchedFields,

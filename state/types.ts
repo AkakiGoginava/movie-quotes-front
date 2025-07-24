@@ -14,8 +14,8 @@ import {
 
 type AuthHandler<T extends FieldValues> = (
   formData: T,
-  setError: UseFormSetError<T>,
-  inputs: InputFieldType<T>[],
+  setError?: UseFormSetError<T>,
+  inputs?: InputFieldType<T>[],
 ) => Promise<void>;
 
 type AuthHandlerFactory<T extends FieldValues> = (options?: {
