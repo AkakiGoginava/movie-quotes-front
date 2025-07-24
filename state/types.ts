@@ -13,7 +13,7 @@ import {
 } from '@/types';
 
 type AuthHandler<T extends FieldValues> = (
-  formData: T,
+  formData: T | FormData,
   setError?: UseFormSetError<T>,
   inputs?: InputFieldType<T>[],
 ) => Promise<void>;

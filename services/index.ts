@@ -21,7 +21,7 @@ const getCsrfCookie = async () => {
 };
 
 export const registerUser = async (
-  data: RegisterInput,
+  data: RegisterInput | FormData,
 ): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
@@ -31,7 +31,7 @@ export const registerUser = async (
 };
 
 export const loginUser = async (
-  data: LoginInput,
+  data: LoginInput | FormData,
 ): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
@@ -55,11 +55,19 @@ export const getUser = async (): Promise<AxiosResponse<{ user: User }>> => {
 };
 
 export const editUser = async (
-  data: ProfileEditInput,
+  data: ProfileEditInput | FormData,
 ): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
-  const response = await axios.post('/api/edit-user', data);
+  const isFormData = data instanceof FormData;
+
+  const response = await axios.post('/api/edit-user', data, {
+    headers: isFormData
+      ? {
+          'Content-Type': 'multipart/form-data',
+        }
+      : undefined,
+  });
 
   return response;
 };
@@ -101,7 +109,7 @@ export const requestNewLink = async (
 };
 
 export const forgotPassword = async (
-  data: ForgotPasswordInput,
+  data: ForgotPasswordInput | FormData,
 ): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
@@ -111,7 +119,7 @@ export const forgotPassword = async (
 };
 
 export const resetPassword = async (
-  data: ResetPasswordInput,
+  data: ResetPasswordInput | FormData,
 ): Promise<AxiosResponse> => {
   await getCsrfCookie();
 

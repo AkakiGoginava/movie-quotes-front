@@ -1,5 +1,4 @@
 import { Button, InfoField } from '@/components';
-
 import { InputFieldType, ProfileEditInput } from '@/types';
 
 import useProfileForm from './useProfileForm';
@@ -17,10 +16,15 @@ const ProfileForm = () => {
     userInfo,
     editPasswordInput,
     editUsernameInput,
+    editingAvatar,
+    setEditingAvatar,
     editingPassword,
     setEditingPassword,
     editingUsername,
     setEditingUsername,
+    selectedImage,
+    handleImageClear,
+    isSubmitting,
   } = useProfileForm();
 
   if (isLoading) return <div>Loading...</div>;
@@ -31,12 +35,37 @@ const ProfileForm = () => {
 
       <div className='relative ml-42 px-66 pt-66 pb-30 bg-slate-950 rounded-xl inline-flex'>
         <div className='absolute top-0 -translate-y-1/3 left-1/2 -translate-x-1/2 flex flex-col gap-2'>
-          <img
-            src='https://placehold.co/188'
-            alt='avatar'
-            className='rounded-full'
+          <div className='relative'>
+            <img
+              src={selectedImage || user?.avatar_url}
+              alt='avatar'
+              className='rounded-full size-47 object-contain bg-gray-300'
+            />
+
+            {editingAvatar && (
+              <button
+                type='button'
+                className='absolute right-3.5 bottom-3.5 w-6 h-6 rounded-full bg-white text-black text-sm flex items-center justify-center shadow-md hover:bg-gray-300 hover:cursor-pointer transition'
+                onClick={handleImageClear}
+              >
+                x
+              </button>
+            )}
+          </div>
+
+          <input
+            {...register('image')}
+            type='file'
+            id='image'
+            className='hidden'
+            accept='image/*'
           />
-          <p className='text-xl text-center'>Upload new photo</p>
+          <label
+            htmlFor='image'
+            className='text-xl text-center hover:text-gray-300 cursor-pointer transition'
+          >
+            Upload new photo
+          </label>
         </div>
 
         <div className='flex flex-col gap-10'>
@@ -76,7 +105,7 @@ const ProfileForm = () => {
         </div>
       </div>
 
-      {(editingUsername || editingPassword) && (
+      {(editingAvatar || editingUsername || editingPassword) && (
         <div className='flex gap-2 mt-20'>
           <Button
             type='button'
@@ -84,12 +113,19 @@ const ProfileForm = () => {
             handleClick={() => {
               setEditingUsername(false);
               setEditingPassword(false);
+              setEditingAvatar(false);
+              handleImageClear();
             }}
           >
             Cancel
           </Button>
 
-          <Button type='submit' variant='primary' className='text-xl h-12'>
+          <Button
+            type='submit'
+            variant='primary'
+            disabled={isSubmitting}
+            className='text-xl h-12'
+          >
             Save changes
           </Button>
         </div>

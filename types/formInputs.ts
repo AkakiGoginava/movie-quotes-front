@@ -41,4 +41,14 @@ export type PasswordEditInput = {
   password_confirmation: string;
 };
 
-export type ProfileEditInput = UsernameEditInput & PasswordEditInput;
+export type AvatarEditInput = {
+  image?: FileList;
+};
+
+export type ProfileEditInput = UsernameEditInput &
+  PasswordEditInput &
+  AvatarEditInput;
+
+export type ProcessedProfileEditInput = UsernameEditInput &
+  PasswordEditInput &
+  AvatarEditInput;

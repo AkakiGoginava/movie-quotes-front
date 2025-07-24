@@ -13,29 +13,61 @@ import {
 const useProfileForm = () => {
   const { isLoading, user, isGoogleUser, handleEditUserFactory } = useAuth();
 
+  const [editingAvatar, setEditingAvatar] = useState(false);
   const [editingUsername, setEditingUsername] = useState(false);
   const [editingPassword, setEditingPassword] = useState(false);
 
   const {
     register,
-    formState: { errors, touchedFields },
+    formState: { errors, touchedFields, isSubmitting },
     getValues,
     handleSubmit,
+    watch,
+    setValue,
   } = useForm<ProfileEditInput>({
     mode: 'onChange',
     shouldUnregister: true,
     criteriaMode: 'all',
   });
 
+  const watchedImage = watch('image');
+
+  const selectedImage = watchedImage?.[0]
+    ? URL.createObjectURL(watchedImage[0])
+    : null;
+
+  const hasImage = !!(watchedImage && watchedImage.length > 0);
+
+  useEffect(() => {
+    setEditingAvatar(hasImage);
+  }, [hasImage]);
+
+  const handleImageClear = () => {
+    setEditingAvatar(false);
+    setValue('image', undefined);
+  };
+
   const handleEditUser = handleEditUserFactory({
     onSuccess: () => {
       setEditingUsername(false);
       setEditingPassword(false);
+      handleImageClear();
     },
   });
 
   const onSubmit = handleSubmit((data) => {
-    handleEditUser(data);
+    const formData = new FormData();
+
+    if (data.name) formData.append('name', data.name);
+    if (data.password) formData.append('password', data.password);
+    if (data.password_confirmation)
+      formData.append('password_confirmation', data.password_confirmation);
+
+    if (data.image && data.image.length > 0) {
+      formData.append('image', data.image[0]);
+    }
+
+    handleEditUser(formData);
   });
 
   const userInfo = {
@@ -115,10 +147,15 @@ const useProfileForm = () => {
     userInfo,
     editPasswordInput,
     editUsernameInput,
+    editingAvatar,
+    setEditingAvatar,
     editingPassword,
     setEditingPassword,
     editingUsername,
     setEditingUsername,
+    selectedImage,
+    handleImageClear,
+    isSubmitting,
   };
 };
 

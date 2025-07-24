@@ -1,11 +1,11 @@
-import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { FieldValues, UseFormSetError } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 
 import { InputFieldType } from '@/types';
 
 const useAuthMutation = <FormValues extends FieldValues>(
-  mutationFn: (data: FormValues) => Promise<AxiosResponse<{}>>,
+  mutationFn: (data: FormValues | FormData) => Promise<AxiosResponse<{}>>,
   options?: {
     onSuccess?: (data: AxiosResponse<{}>) => void;
     onError?: (error: Error) => void;
@@ -14,7 +14,7 @@ const useAuthMutation = <FormValues extends FieldValues>(
   const mutation = useMutation({ mutationFn });
 
   return async (
-    formData: FormValues,
+    formData: FormValues | FormData,
     setError?: UseFormSetError<FormValues>,
     inputs?: InputFieldType<FormValues>[],
   ) => {
