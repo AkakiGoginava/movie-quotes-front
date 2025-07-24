@@ -33,9 +33,9 @@ export const useForgotPassword = (
     },
   ];
 
-  const { handleForgotPassword } = useAuth();
+  const { handleForgotPasswordFactory } = useAuth();
 
-  const forgotPasswordWithOptions = handleForgotPassword({
+  const handleForgotPassword = handleForgotPasswordFactory({
     onSuccess: () => {
       setOpen(false);
       setPasswordResetNotificationOpen(true);
@@ -43,7 +43,7 @@ export const useForgotPassword = (
   });
 
   const onSubmit: SubmitHandler<ForgotPasswordInput> = (data) => {
-    return forgotPasswordWithOptions(data, setError, inputs);
+    return handleForgotPassword(data, setError, inputs);
   };
 
   return {

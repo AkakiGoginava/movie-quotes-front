@@ -15,8 +15,8 @@ const useAuthMutation = <FormValues extends FieldValues>(
 
   return async (
     formData: FormValues,
-    setError: UseFormSetError<FormValues>,
-    inputs: InputFieldType<FormValues>[],
+    setError?: UseFormSetError<FormValues>,
+    inputs?: InputFieldType<FormValues>[],
   ) => {
     try {
       await mutation.mutateAsync(formData, {
@@ -24,13 +24,13 @@ const useAuthMutation = <FormValues extends FieldValues>(
           if (options?.onSuccess) options.onSuccess(data);
         },
         onError: (error) => {
-          inputs.forEach(({ name, type: inputType }) => {
+          inputs?.forEach(({ name, type: inputType }) => {
             if (
               axios.isAxiosError(error) &&
               inputType !== 'checkbox' &&
               error?.response?.data.errors[name]
             ) {
-              setError(name, {
+              setError?.(name, {
                 type: 'server',
                 message: error.response.data.errors[name][0] ?? 'error',
               });

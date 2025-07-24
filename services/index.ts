@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 import {
   ForgotPasswordInput,
   LoginInput,
+  ProfileEditInput,
   RegisterInput,
   ResetPasswordInput,
   User,
@@ -49,6 +50,16 @@ export const logoutUser = async (): Promise<AxiosResponse<{}>> => {
 
 export const getUser = async (): Promise<AxiosResponse<{ user: User }>> => {
   const response = await axios.get('/api/user');
+
+  return response;
+};
+
+export const editUser = async (
+  data: ProfileEditInput,
+): Promise<AxiosResponse<{}>> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/edit-user', data);
 
   return response;
 };

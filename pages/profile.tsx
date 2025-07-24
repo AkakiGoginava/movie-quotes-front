@@ -2,7 +2,7 @@ import { ProfileForm } from '@/components';
 
 export default function Profile() {
   return (
-    <div className='py-8 h-full bg-primary'>
+    <div className='py-8'>
       <ProfileForm />
     </div>
   );

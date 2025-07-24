@@ -9,6 +9,7 @@ import {
   RegisterInput,
   ResetPasswordInput,
   User,
+  ProfileEditInput,
 } from '@/types';
 
 type AuthHandler<T extends FieldValues> = (
@@ -34,7 +35,7 @@ export type AuthContextType = {
 
   handleRegister: AuthHandler<RegisterInput>;
   handleLogin: AuthHandler<LoginInput>;
-  handleGoogleAuth: (options?: {
+  handleGoogleAuthFactory: (options?: {
     onSuccess?: () => void;
     onError?: () => void;
   }) => SimpleMutation;
@@ -46,6 +47,7 @@ export type AuthContextType = {
     setInvalidTokenNotificationOpen: NotificationSetter,
   ) => void;
 
-  handleForgotPassword: AuthHandlerFactory<ForgotPasswordInput>;
-  handleResetPassword: AuthHandlerFactory<ResetPasswordInput>;
+  handleForgotPasswordFactory: AuthHandlerFactory<ForgotPasswordInput>;
+  handleResetPasswordFactory: AuthHandlerFactory<ResetPasswordInput>;
+  handleEditUserFactory: AuthHandlerFactory<ProfileEditInput>;
 };

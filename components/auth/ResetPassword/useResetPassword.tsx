@@ -66,9 +66,9 @@ export const useResetPassword = (
     },
   ];
 
-  const { handleResetPassword } = useAuth();
+  const { handleResetPasswordFactory } = useAuth();
 
-  const resetPasswordWithOptions = handleResetPassword({
+  const handleResetPassword = handleResetPasswordFactory({
     onSuccess: () => {
       router.replace(window.location.pathname);
 
@@ -82,7 +82,7 @@ export const useResetPassword = (
   });
 
   const onSubmit: SubmitHandler<ResetPasswordInput> = (data) => {
-    resetPasswordWithOptions(data, setError, inputs);
+    handleResetPassword(data, setError, inputs);
   };
 
   return {

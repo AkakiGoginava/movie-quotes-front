@@ -1,8 +1,8 @@
 import { Button, InfoField } from '@/components';
 
+import { InputFieldType, ProfileEditInput } from '@/types';
+
 import useProfileForm from './useProfileForm';
-import { ProfileEditInputType } from './types';
-import { InputFieldType } from '@/types';
 
 const ProfileForm = () => {
   const {
@@ -10,6 +10,7 @@ const ProfileForm = () => {
     user,
     isGoogleUser,
     register,
+    handleSubmit,
     getValues,
     errors,
     touchedFields,
@@ -25,7 +26,7 @@ const ProfileForm = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <section className='inline-block'>
+    <form onSubmit={() => {}} className='inline-block'>
       <h1 className='text-2xl font-medium ml-10 mb-20'>My profile</h1>
 
       <div className='relative ml-42 px-66 pt-66 pb-30 bg-slate-950 rounded-xl inline-flex'>
@@ -39,14 +40,14 @@ const ProfileForm = () => {
         </div>
 
         <div className='flex flex-col gap-10'>
-          <InfoField<ProfileEditInputType>
+          <InfoField<ProfileEditInput>
             name='Username'
             info={userInfo.username}
             editable
             editing={editingUsername}
             setEditing={setEditingUsername}
             editInputs={
-              editUsernameInput as unknown as InputFieldType<ProfileEditInputType>[]
+              editUsernameInput as unknown as InputFieldType<ProfileEditInput>[]
             }
             register={register}
             getValues={getValues}
@@ -57,14 +58,14 @@ const ProfileForm = () => {
           <InfoField name='Email' info={userInfo.email} />
 
           {!isGoogleUser && (
-            <InfoField<ProfileEditInputType>
+            <InfoField<ProfileEditInput>
               name='Password'
               info={userInfo.password}
               editable
               editing={editingPassword}
               setEditing={setEditingPassword}
               editInputs={
-                editPasswordInput as unknown as InputFieldType<ProfileEditInputType>[]
+                editPasswordInput as unknown as InputFieldType<ProfileEditInput>[]
               }
               register={register}
               getValues={getValues}
@@ -80,6 +81,10 @@ const ProfileForm = () => {
           <Button
             type='button'
             className='btn-ghost ml-auto text-xl bg-transparent h-12'
+            handleClick={() => {
+              setEditingUsername(false);
+              setEditingPassword(false);
+            }}
           >
             Cancel
           </Button>
@@ -89,7 +94,7 @@ const ProfileForm = () => {
           </Button>
         </div>
       )}
-    </section>
+    </form>
   );
 };
 

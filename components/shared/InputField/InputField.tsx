@@ -77,7 +77,7 @@ const InputField = <FormValues extends FieldValues>({
 
         <div
           className={cn(
-            'absolute right-3 md:right-2 top-1/2 -translate-1/2 flex gap-1.5 text-gray-600',
+            'absolute right-3 md:right-2 top-1/2 -translate-y-1/2 flex gap-1.5 text-gray-600',
             {
               hidden: input.type === 'checkbox',
             },

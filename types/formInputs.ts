@@ -31,3 +31,14 @@ export type ResetPasswordInput = {
   password: string;
   password_confirmation: string;
 };
+
+export type UsernameEditInput = {
+  name: string;
+};
+
+export type PasswordEditInput = {
+  password: string;
+  password_confirmation: string;
+};
+
+export type ProfileEditInput = UsernameEditInput & PasswordEditInput;

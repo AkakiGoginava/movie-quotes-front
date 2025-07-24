@@ -13,7 +13,7 @@ export const useHeader = (
     handleLogout,
     isVerified,
     handleVerifyEmail,
-    handleGoogleAuth,
+    handleGoogleAuthFactory,
   } = useAuth();
 
   const searchParams = useSearchParams();
@@ -38,7 +38,7 @@ export const useHeader = (
   const [invalidTokenNotificationOpen, setInvalidTokenNotificationOpen] =
     useState(false);
 
-  const handleGoogleAuthWithOptions = handleGoogleAuth({
+  const handleGoogleAuth = handleGoogleAuthFactory({
     onSuccess: () => {
       setLoginOpen(false);
       setRegisterOpen(false);
@@ -60,7 +60,7 @@ export const useHeader = (
     } else if (action === 'reset-password' && !user) {
       setResetPasswordOpen(true);
     } else if (googleAuthCode) {
-      handleGoogleAuthWithOptions(googleAuthCode);
+      handleGoogleAuth(googleAuthCode);
     }
   }, [user, isVerified, action, token, googleAuthCode]);
 

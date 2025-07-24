@@ -3,16 +3,17 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '@/hooks';
-import { InputFieldType } from '@/types';
-
 import {
-  PasswordEditInputType,
-  ProfileEditInputType,
-  UsernameEditInputType,
-} from './types';
+  InputFieldType,
+  PasswordEditInput,
+  ProfileEditInput,
+  UsernameEditInput,
+} from '@/types';
+import { useMutation } from '@tanstack/react-query';
+import { editUser } from '@/services';
 
 const useProfileForm = () => {
-  const { isLoading, user, isGoogleUser } = useAuth();
+  const { isLoading, user, isGoogleUser, handleEditUserFactory } = useAuth();
 
   const [editingUsername, setEditingUsername] = useState(false);
   const [editingPassword, setEditingPassword] = useState(false);
@@ -21,10 +22,18 @@ const useProfileForm = () => {
     register,
     formState: { errors, touchedFields },
     getValues,
-  } = useForm<ProfileEditInputType>({
+    handleSubmit,
+  } = useForm<ProfileEditInput>({
     mode: 'onChange',
     shouldUnregister: true,
     criteriaMode: 'all',
+  });
+
+  const handleEditUser = handleEditUserFactory({
+    onSuccess: () => {
+      setEditingUsername(false);
+      setEditingPassword(false);
+    },
   });
 
   const userInfo = {
@@ -45,14 +54,14 @@ const useProfileForm = () => {
     },
   };
 
-  const editUsernameInput: InputFieldType<UsernameEditInputType>[] = [
+  const editUsernameInput: InputFieldType<UsernameEditInput>[] = [
     {
       label: 'New username',
       name: 'name',
       type: 'text',
       placeholder: 'Enter new username',
       rules: {
-        required: { value: true, message: 'New username' },
+        required: { value: true, message: 'Required' },
         minLength: { value: 3, message: '3 or more characters' },
         maxLength: { value: 15, message: '15 or fewer characters' },
         pattern: {
@@ -63,14 +72,14 @@ const useProfileForm = () => {
     },
   ];
 
-  const editPasswordInput: InputFieldType<PasswordEditInputType>[] = [
+  const editPasswordInput: InputFieldType<PasswordEditInput>[] = [
     {
       label: 'New password',
       name: 'password',
       type: 'password',
       placeholder: 'New password',
       rules: {
-        required: { value: true, message: 'New password' },
+        required: { value: true, message: 'Required' },
         minLength: { value: 8, message: '8  or more characters' },
         maxLength: { value: 15, message: '15 or fewer characters' },
         pattern: {
@@ -97,6 +106,7 @@ const useProfileForm = () => {
     user,
     isGoogleUser,
     register,
+    handleSubmit,
     getValues,
     errors,
     touchedFields,
