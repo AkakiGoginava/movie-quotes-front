@@ -16,6 +16,7 @@ const useProfileForm = () => {
   const [editingAvatar, setEditingAvatar] = useState(false);
   const [editingUsername, setEditingUsername] = useState(false);
   const [editingPassword, setEditingPassword] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
 
   const {
     register,
@@ -51,17 +52,20 @@ const useProfileForm = () => {
     onSuccess: () => {
       setEditingUsername(false);
       setEditingPassword(false);
+
       handleImageClear();
+
+      setSuccessModalOpen(true);
     },
   });
 
   const onSubmit = handleSubmit((data) => {
     const formData = new FormData();
 
-    if (data.name) formData.append('name', data.name);
-    if (data.password) formData.append('password', data.password);
-    if (data.password_confirmation)
-      formData.append('password_confirmation', data.password_confirmation);
+    Object.entries(data).forEach(([key, value]) => {
+      if (key === 'image' || !value) return;
+      formData.append(key, value as string);
+    });
 
     if (data.image && data.image.length > 0) {
       formData.append('image', data.image[0]);
@@ -156,6 +160,8 @@ const useProfileForm = () => {
     selectedImage,
     handleImageClear,
     isSubmitting,
+    successModalOpen,
+    setSuccessModalOpen,
   };
 };
 

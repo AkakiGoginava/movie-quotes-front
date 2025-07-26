@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 
 import { useAuth } from '@/hooks';
 
 export const useHeader = (
-  setRegisterOpen: Dispatch<SetStateAction<boolean>>,
+  setRegisterOpen?: Dispatch<SetStateAction<boolean>>,
 ) => {
   const {
     user,
@@ -17,6 +17,7 @@ export const useHeader = (
   } = useAuth();
 
   const searchParams = useSearchParams();
+  const currentPath = usePathname();
 
   const action = searchParams.get('action');
   const token = searchParams.get('token') ?? '';
@@ -41,7 +42,7 @@ export const useHeader = (
   const handleGoogleAuth = handleGoogleAuthFactory({
     onSuccess: () => {
       setLoginOpen(false);
-      setRegisterOpen(false);
+      setRegisterOpen?.(false);
     },
   });
 
@@ -88,5 +89,6 @@ export const useHeader = (
     user,
     isLoading,
     handleLogout,
+    currentPath,
   };
 };

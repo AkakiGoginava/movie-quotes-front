@@ -1,9 +1,9 @@
 import { FieldValues } from 'react-hook-form';
 
-import { InputField } from '@/components';
+import { Button, Modal, ReturnArrowIcon, ValidationList } from '@/components';
 
 import { PropsType } from './types';
-import { cn } from '@/helpers';
+import useInfoField from './useInfoField';
 
 const InfoField = <FormValues extends FieldValues = FieldValues>({
   name,
@@ -17,15 +17,17 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
   errors,
   touchedFields,
 }: PropsType<FormValues>) => {
+  const { promptOpen, setPromptOpen, isMobile } = useInfoField();
+
   return (
     <div>
       <div className='flex flex-col gap-2'>
         <label>{info.label}</label>
 
-        <div className='flex gap-4 items-center'>
+        <div className='flex gap-4 items-center justify-between md:justify-normal w-full md:w-auto border-b border-gray-500 pb-2 md:border-none md:pb-0'>
           <input
             type={info.type}
-            className='w-132 rounded-md text-black text-xl'
+            className='md:w-132 rounded-md md:text-black text-lg md:text-xl pl-0 md:pl-2 bg-transparent md:bg-white border-none md-border'
             value={info.value}
             disabled
           />
@@ -33,7 +35,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
           {editable && (
             <button
               type='button'
-              className='btn btn-ghost font-normal text-xl'
+              className='btn btn-ghost font-normal text-lg md:text-xl'
               onClick={() => {
                 setEditing((prev) => !prev);
               }}
@@ -44,60 +46,105 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
         </div>
       </div>
 
-      {editing && (
-        <div className='w-132 flex flex-col gap-6 mt-8'>
-          <div className='p-6 border border-gray-600 rounded-sm'>
-            <p className='mb-4'>{name} should contain:</p>
+      {editing && !isMobile && (
+        <ValidationList
+          name={name}
+          editInputs={editInputs}
+          getValues={getValues}
+          errors={errors}
+          register={register}
+          touchedFields={touchedFields}
+        />
+      )}
 
-            <ul className='text-sm'>
-              {editInputs[0].rules &&
-                Object.entries(editInputs[0].rules).map(
-                  ([ruleName, ruleConfig], idx) => {
-                    const fieldName = editInputs[0].name;
+      {isMobile && (
+        <>
+          {editing && (
+            <dialog className='modal mt-22' open={editing}>
+              <div className='modal-box max-w-full size-full py-0 px-0 bg-primary'>
+                <ReturnArrowIcon
+                  className='ml-6 my-4'
+                  onClick={() => {
+                    setEditing(false);
+                  }}
+                />
 
-                    const hasFieldValue = !!getValues(fieldName);
-                    const fieldError = errors[fieldName];
+                <ValidationList
+                  name={name}
+                  editInputs={editInputs}
+                  getValues={getValues}
+                  errors={errors}
+                  register={register}
+                  touchedFields={touchedFields}
+                />
 
-                    const hasRuleError =
-                      fieldError?.types &&
-                      typeof fieldError.types === 'object' &&
-                      ruleName in fieldError.types;
+                <div className='flex justify-between pt-7 px-8'>
+                  <Button
+                    className='bg-transparent'
+                    type='button'
+                    handleClick={() => {
+                      setEditing(false);
+                    }}
+                  >
+                    Cancel
+                  </Button>
 
-                    const isValid = !hasRuleError && hasFieldValue;
+                  <Button
+                    className='h-9.5'
+                    variant='primary'
+                    type='button'
+                    handleClick={() => {
+                      setPromptOpen(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </div>
+              </div>
+            </dialog>
+          )}
 
-                    const bulletClassName = cn('text-gray-400 mr-2 mt-0.5', {
-                      'text-green-500': isValid,
-                    });
+          <dialog className='modal' open={promptOpen}>
+            <div className='modal-box bg-obsidian p-0'>
+              <p className='text-center border-b border-gray-600 pb-10 pt-16'>
+                Are you sure you want to make changes?
+              </p>
 
-                    const textClassName = cn('text-gray-400', {
-                      'text-white': isValid,
-                    });
+              <div className='flex justify-between py-6 px-4'>
+                <Button
+                  className='bg-transparent'
+                  type='button'
+                  handleClick={() => {
+                    setPromptOpen(false);
+                  }}
+                >
+                  Cancel
+                </Button>
 
-                    return (
-                      <li key={idx}>
-                        <span className={bulletClassName}>•</span>
-                        <span className={textClassName}>
-                          {ruleConfig.message}
-                        </span>
-                      </li>
-                    );
-                  },
-                )}
-            </ul>
-          </div>
+                <Button
+                  className='h-9.5'
+                  variant='primary'
+                  type='submit'
+                  handleClick={() => {
+                    setPromptOpen(false);
+                  }}
+                >
+                  Confirm
+                </Button>
+              </div>
+            </div>
 
-          {editInputs.map((input, idx) => (
-            <InputField<FormValues>
-              key={idx}
-              input={input}
-              errors={errors}
-              register={register}
-              touchedFields={touchedFields}
-              getValues={getValues}
-              className='w-full bg-white text-xl rounded-md text-black py-5'
-            />
-          ))}
-        </div>
+            <div className='modal-backdrop backdrop-blur-xs'>
+              <button
+                onClick={() => {
+                  setPromptOpen(false);
+                }}
+              >
+                close
+              </button>
+            </div>
+          </dialog>
+        </>
       )}
     </div>
   );

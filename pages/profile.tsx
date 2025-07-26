@@ -1,9 +1,9 @@
-import { ProfileForm } from '@/components';
+import { Layout, ProfileForm } from '@/components';
 
 export default function Profile() {
   return (
-    <div className='py-8'>
+    <Layout>
       <ProfileForm />
-    </div>
+    </Layout>
   );
 }

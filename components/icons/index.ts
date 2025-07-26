@@ -8,3 +8,6 @@ export { default as SendCheckIcon } from './send-check-icon.svg';
 export { default as WarningIcon } from './warning-icon.svg';
 export { default as SuccessIcon } from './success-icon.svg';
 export { default as ReturnArrowIcon } from './return-arrow-icon.svg';
+export { default as MenuIcon } from './menu-icon.svg';
+export { default as CheckIcon } from './check-icon.svg';
+export { default as CrossIcon } from './cross-icon.svg';
