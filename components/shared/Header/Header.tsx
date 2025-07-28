@@ -9,6 +9,8 @@ import {
   ForgotPassword,
   ResetPassword,
   MenuIcon,
+  SearchIcon,
+  BellIcon,
 } from '@/components';
 
 import { useHeader } from './useHeader';
@@ -58,11 +60,15 @@ const Header: React.FC<PropsType> = ({
       </h3>
 
       <MenuIcon
-        className='md:hidden'
+        className='md:hidden mr-auto'
         onClick={() => {
           setSidebarOpen?.(true);
         }}
       />
+
+      <SearchIcon className='md:hidden mr-2' />
+
+      <BellIcon />
 
       <Dropdown options={['Eng', 'Geo']} selected={0} />
 
