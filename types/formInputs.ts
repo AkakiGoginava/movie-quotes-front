@@ -1,6 +1,6 @@
 import { FieldValues, Path, RegisterOptions } from 'react-hook-form';
 
-export type AuthInputFieldType<FormValues extends FieldValues = FieldValues> = {
+export type InputFieldType<FormValues extends FieldValues = FieldValues> = {
   name: Path<FormValues>;
   type: string;
   placeholder?: string;
@@ -31,3 +31,20 @@ export type ResetPasswordInput = {
   password: string;
   password_confirmation: string;
 };
+
+export type UsernameEditInput = {
+  name: string;
+};
+
+export type PasswordEditInput = {
+  password: string;
+  password_confirmation: string;
+};
+
+export type AvatarEditInput = {
+  image?: FileList;
+};
+
+export type ProfileEditInput = UsernameEditInput &
+  PasswordEditInput &
+  AvatarEditInput;

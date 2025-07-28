@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 
 import { useAuth } from '@/hooks';
 
 export const useHeader = (
-  setRegisterOpen: Dispatch<SetStateAction<boolean>>,
+  setRegisterOpen?: Dispatch<SetStateAction<boolean>>,
 ) => {
   const {
     user,
@@ -13,10 +13,11 @@ export const useHeader = (
     handleLogout,
     isVerified,
     handleVerifyEmail,
-    handleGoogleAuth,
+    handleGoogleAuthFactory,
   } = useAuth();
 
   const searchParams = useSearchParams();
+  const currentPath = usePathname();
 
   const action = searchParams.get('action');
   const token = searchParams.get('token') ?? '';
@@ -38,10 +39,10 @@ export const useHeader = (
   const [invalidTokenNotificationOpen, setInvalidTokenNotificationOpen] =
     useState(false);
 
-  const handleGoogleAuthWithOptions = handleGoogleAuth({
+  const handleGoogleAuth = handleGoogleAuthFactory({
     onSuccess: () => {
       setLoginOpen(false);
-      setRegisterOpen(false);
+      setRegisterOpen?.(false);
     },
   });
 
@@ -60,7 +61,7 @@ export const useHeader = (
     } else if (action === 'reset-password' && !user) {
       setResetPasswordOpen(true);
     } else if (googleAuthCode) {
-      handleGoogleAuthWithOptions(googleAuthCode);
+      handleGoogleAuth(googleAuthCode);
     }
   }, [user, isVerified, action, token, googleAuthCode]);
 
@@ -88,5 +89,6 @@ export const useHeader = (
     user,
     isLoading,
     handleLogout,
+    currentPath,
   };
 };

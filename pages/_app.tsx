@@ -1,3 +1,4 @@
+import { RouteGuard } from '@/components';
 import { AuthProvider } from '@/state';
 import '@/styles/globals.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -9,7 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <Component {...pageProps} />
+        <RouteGuard>
+          <Component {...pageProps} />
+        </RouteGuard>
       </AuthProvider>
     </QueryClientProvider>
   );

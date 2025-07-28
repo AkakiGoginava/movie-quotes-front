@@ -3,7 +3,7 @@ import { useEffect, Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { AuthInputFieldType, ResetPasswordInput } from '@/types';
+import { InputFieldType, ResetPasswordInput } from '@/types';
 import { useAuth } from '@/hooks';
 
 export const useResetPassword = (
@@ -37,7 +37,7 @@ export const useResetPassword = (
     }
   }, [searchParams, setValue]);
 
-  const inputs: AuthInputFieldType<ResetPasswordInput>[] = [
+  const inputs: InputFieldType<ResetPasswordInput>[] = [
     {
       label: 'Password',
       name: 'password',
@@ -66,9 +66,9 @@ export const useResetPassword = (
     },
   ];
 
-  const { handleResetPassword } = useAuth();
+  const { handleResetPasswordFactory } = useAuth();
 
-  const resetPasswordWithOptions = handleResetPassword({
+  const handleResetPassword = handleResetPasswordFactory({
     onSuccess: () => {
       router.replace(window.location.pathname);
 
@@ -82,7 +82,7 @@ export const useResetPassword = (
   });
 
   const onSubmit: SubmitHandler<ResetPasswordInput> = (data) => {
-    resetPasswordWithOptions(data, setError, inputs);
+    handleResetPassword(data, setError, inputs);
   };
 
   return {

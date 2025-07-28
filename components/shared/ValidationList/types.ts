@@ -1,3 +1,4 @@
+import { InputFieldType } from '@/types';
 import {
   FieldErrors,
   FieldNamesMarkedBoolean,
@@ -6,13 +7,11 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 
-import { AuthInputFieldType } from '@/types';
-
 export type PropsType<FormValues extends FieldValues = FieldValues> = {
-  input: AuthInputFieldType<FormValues>;
+  name: string;
+  editInputs: InputFieldType<FormValues>[];
   register: UseFormRegister<FormValues>;
+  getValues: UseFormGetValues<FormValues>;
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
-  getValues: UseFormGetValues<FormValues>;
-  handleForgotPasswordClick?: () => void;
 };

@@ -8,12 +8,18 @@ import {
   SuccessNotification,
   ForgotPassword,
   ResetPassword,
+  MenuIcon,
 } from '@/components';
 
 import { useHeader } from './useHeader';
 import { PropsType } from './types';
+import { cn } from '@/helpers';
 
-const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
+const Header: React.FC<PropsType> = ({
+  registerOpen,
+  setRegisterOpen,
+  setSidebarOpen,
+}) => {
   const {
     loginOpen,
     setLoginOpen,
@@ -33,13 +39,30 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
     user,
     isLoading,
     handleLogout,
+    currentPath,
   } = useHeader(setRegisterOpen);
 
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <header className='fixed z-20 w-full flex gap-2 items-center px-4 md:px-17.5 py-7 bg-transparent'>
-      <h3 className='font-medium text-light-yellow'>MOVIE QUOTES</h3>
+    <header
+      className={cn(
+        'fixed z-20 w-full flex gap-2 items-center px-8 md:px-17.5 py-7 bg-obsidian',
+        {
+          'bg-transparent': currentPath === '/',
+        },
+      )}
+    >
+      <h3 className='font-medium text-light-yellow hidden md:inline-block'>
+        MOVIE QUOTES
+      </h3>
+
+      <MenuIcon
+        className='md:hidden'
+        onClick={() => {
+          setSidebarOpen?.(true);
+        }}
+      />
 
       <Dropdown options={['Eng', 'Geo']} selected={0} />
 
@@ -50,7 +73,7 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
             variant='secondary'
             handleClick={() => {
               setLoginOpen(false);
-              setRegisterOpen(false);
+              setRegisterOpen?.(false);
               handleLogout();
             }}
             className='text-sm h-8'
@@ -60,18 +83,22 @@ const Header: React.FC<PropsType> = ({ registerOpen, setRegisterOpen }) => {
         </>
       ) : (
         <>
-          <Login
-            loginOpen={loginOpen}
-            setLoginOpen={setLoginOpen}
-            setRegisterOpen={setRegisterOpen}
-            handleForgotPasswordClick={handleForgotPasswordClick}
-          />
+          {registerOpen !== undefined && setRegisterOpen && (
+            <>
+              <Login
+                loginOpen={loginOpen}
+                setLoginOpen={setLoginOpen}
+                setRegisterOpen={setRegisterOpen}
+                handleForgotPasswordClick={handleForgotPasswordClick}
+              />
 
-          <Register
-            registerOpen={registerOpen}
-            setRegisterOpen={setRegisterOpen}
-            setLoginOpen={setLoginOpen}
-          />
+              <Register
+                registerOpen={registerOpen}
+                setRegisterOpen={setRegisterOpen}
+                setLoginOpen={setLoginOpen}
+              />
+            </>
+          )}
 
           <ForgotPassword
             open={forgotPasswordOpen}

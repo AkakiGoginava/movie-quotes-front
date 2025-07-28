@@ -3,18 +3,19 @@ import { Dispatch, SetStateAction } from 'react';
 import { UseFormSetError, FieldValues } from 'react-hook-form';
 
 import {
-  AuthInputFieldType,
+  InputFieldType,
   ForgotPasswordInput,
   LoginInput,
   RegisterInput,
   ResetPasswordInput,
   User,
+  ProfileEditInput,
 } from '@/types';
 
 type AuthHandler<T extends FieldValues> = (
-  formData: T,
-  setError: UseFormSetError<T>,
-  inputs: AuthInputFieldType<T>[],
+  formData: T | FormData,
+  setError?: UseFormSetError<T>,
+  inputs?: InputFieldType<T>[],
 ) => Promise<void>;
 
 type AuthHandlerFactory<T extends FieldValues> = (options?: {
@@ -30,10 +31,11 @@ export type AuthContextType = {
   user: User | null;
   isLoading: boolean;
   isVerified: boolean;
+  isGoogleUser: boolean;
 
   handleRegister: AuthHandler<RegisterInput>;
   handleLogin: AuthHandler<LoginInput>;
-  handleGoogleAuth: (options?: {
+  handleGoogleAuthFactory: (options?: {
     onSuccess?: () => void;
     onError?: () => void;
   }) => SimpleMutation;
@@ -45,6 +47,7 @@ export type AuthContextType = {
     setInvalidTokenNotificationOpen: NotificationSetter,
   ) => void;
 
-  handleForgotPassword: AuthHandlerFactory<ForgotPasswordInput>;
-  handleResetPassword: AuthHandlerFactory<ResetPasswordInput>;
+  handleForgotPasswordFactory: AuthHandlerFactory<ForgotPasswordInput>;
+  handleResetPasswordFactory: AuthHandlerFactory<ResetPasswordInput>;
+  handleEditUserFactory: AuthHandlerFactory<ProfileEditInput>;
 };

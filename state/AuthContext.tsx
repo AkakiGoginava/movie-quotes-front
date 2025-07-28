@@ -9,6 +9,7 @@ import {
   useVerifyEmailMutation,
 } from '@/hooks';
 import {
+  editUser,
   forgotPassword,
   getUser,
   googleCallback,
@@ -50,8 +51,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const handleGoogleAuth = (options?: { onSuccess?: () => void }) =>
-    useSimpleMutation(googleCallback, options);
+  const handleGoogleAuthFactory = (options?: { onSuccess?: () => void }) => {
+    return useSimpleMutation(googleCallback, options);
+  };
 
   const handleLogout = useSimpleMutation(logoutUser, {
     onSuccess: () => {
@@ -65,11 +67,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const handleForgotPassword = (options?: { onSuccess?: () => void }) =>
-    useAuthMutation(forgotPassword, options);
+  const handleForgotPasswordFactory = (options?: {
+    onSuccess?: () => void;
+  }) => {
+    return useAuthMutation(forgotPassword, options);
+  };
 
-  const handleResetPassword = (options?: { onSuccess?: () => void }) =>
-    useAuthMutation(resetPassword, options);
+  const handleResetPasswordFactory = (options?: { onSuccess?: () => void }) => {
+    return useAuthMutation(resetPassword, options);
+  };
+
+  const handleEditUserFactory = (options?: { onSuccess?: () => void }) => {
+    return useAuthMutation(editUser, {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+
+        options?.onSuccess?.();
+      },
+    });
+  };
 
   const errorStatus = (error as AxiosError)?.status;
   const currentUser: User | null =
@@ -80,14 +96,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         user: currentUser,
         isVerified: !!currentUser?.email_verified_at,
+        isGoogleUser: !!currentUser?.google_id,
         isLoading,
         handleRegister,
         handleLogin,
-        handleGoogleAuth,
         handleLogout,
         handleVerifyEmail,
-        handleForgotPassword,
-        handleResetPassword,
+        handleGoogleAuthFactory,
+        handleForgotPasswordFactory,
+        handleResetPasswordFactory,
+        handleEditUserFactory,
       }}
     >
       {children}

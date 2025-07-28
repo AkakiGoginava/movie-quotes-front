@@ -4,6 +4,7 @@ import { FieldValues, UseFormReset } from 'react-hook-form';
 
 export type PropsType<FormValues extends FieldValues = FieldValues> = {
   className?: string;
+  modalClassName?: string;
   buttonVariant?: 'primary' | 'secondary';
   buttonText: string;
   open: boolean;
