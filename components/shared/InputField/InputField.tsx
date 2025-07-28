@@ -20,7 +20,7 @@ const InputField = <FormValues extends FieldValues>({
   const [show, setShow] = useState(false);
 
   const hasEnteredInput: boolean =
-    get(touchedFields, input.name as string) && getValues(input.name);
+    get(touchedFields, input.name) && getValues(input.name);
 
   const isInvalid: boolean = !!errors[input.name];
   const isValid: boolean = !errors[input.name];
@@ -106,7 +106,7 @@ const InputField = <FormValues extends FieldValues>({
           hidden: input.type === 'checkbox',
         })}
       >
-        {showError && (errors?.[input.name] as { message?: string })?.message}
+        {showError && get(errors, `${input.name}.message`)}
       </p>
     </div>
   );

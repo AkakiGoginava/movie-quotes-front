@@ -48,7 +48,3 @@ export type AvatarEditInput = {
 export type ProfileEditInput = UsernameEditInput &
   PasswordEditInput &
   AvatarEditInput;
-
-export type ProcessedProfileEditInput = UsernameEditInput &
-  PasswordEditInput &
-  AvatarEditInput;

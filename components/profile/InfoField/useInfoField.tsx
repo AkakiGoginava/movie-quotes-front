@@ -1,19 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 const useInfoField = () => {
   const [promptOpen, setPromptOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, []);
   return { promptOpen, setPromptOpen, isMobile };
 };
 

@@ -89,9 +89,7 @@ const ProfileForm = () => {
                 editable
                 editing={editingUsername}
                 setEditing={setEditingUsername}
-                editInputs={
-                  editUsernameInput as unknown as InputFieldType<ProfileEditInput>[]
-                }
+                editInputs={editUsernameInput}
                 register={register}
                 getValues={getValues}
                 touchedFields={touchedFields}
@@ -107,9 +105,7 @@ const ProfileForm = () => {
                   editable
                   editing={editingPassword}
                   setEditing={setEditingPassword}
-                  editInputs={
-                    editPasswordInput as unknown as InputFieldType<ProfileEditInput>[]
-                  }
+                  editInputs={editPasswordInput}
                   register={register}
                   getValues={getValues}
                   touchedFields={touchedFields}

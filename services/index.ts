@@ -61,7 +61,7 @@ export const editUser = async (
 
   const isFormData = data instanceof FormData;
 
-  const response = await axios.post('/api/edit-user', data, {
+  const response = await axios.post('/api/user/update', data, {
     headers: isFormData
       ? {
           'Content-Type': 'multipart/form-data',

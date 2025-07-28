@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { useAuth } from '@/hooks';
-import {
-  InputFieldType,
-  PasswordEditInput,
-  ProfileEditInput,
-  UsernameEditInput,
-} from '@/types';
+import { InputFieldType, ProfileEditInput } from '@/types';
 
 const useProfileForm = () => {
   const { isLoading, user, isGoogleUser, handleEditUserFactory } = useAuth();
@@ -23,15 +18,18 @@ const useProfileForm = () => {
     formState: { errors, touchedFields, isSubmitting },
     getValues,
     handleSubmit,
-    watch,
     setValue,
+    control,
   } = useForm<ProfileEditInput>({
     mode: 'onChange',
     shouldUnregister: true,
     criteriaMode: 'all',
   });
 
-  const watchedImage = watch('image');
+  const watchedImage = useWatch({
+    control,
+    name: 'image',
+  });
 
   const selectedImage = watchedImage?.[0]
     ? URL.createObjectURL(watchedImage[0])
@@ -62,10 +60,15 @@ const useProfileForm = () => {
   const onSubmit = handleSubmit((data) => {
     const formData = new FormData();
 
-    Object.entries(data).forEach(([key, value]) => {
-      if (key === 'image' || !value) return;
-      formData.append(key, value as string);
-    });
+    if (data.name) {
+      formData.append('name', data.name);
+    }
+    if (data.password) {
+      formData.append('password', data.password);
+    }
+    if (data.password_confirmation) {
+      formData.append('password_confirmation', data.password_confirmation);
+    }
 
     if (data.image && data.image.length > 0) {
       formData.append('image', data.image[0]);
@@ -92,7 +95,7 @@ const useProfileForm = () => {
     },
   };
 
-  const editUsernameInput: InputFieldType<UsernameEditInput>[] = [
+  const editUsernameInput: InputFieldType<ProfileEditInput>[] = [
     {
       label: 'New username',
       name: 'name',
@@ -110,7 +113,7 @@ const useProfileForm = () => {
     },
   ];
 
-  const editPasswordInput: InputFieldType<PasswordEditInput>[] = [
+  const editPasswordInput: InputFieldType<ProfileEditInput>[] = [
     {
       label: 'New password',
       name: 'password',
@@ -133,7 +136,7 @@ const useProfileForm = () => {
       placeholder: 'Confirm new password',
       rules: {
         required: { value: true, message: 'Please confirm your password' },
-        validate: (value: string) =>
+        validate: (value) =>
           value === getValues('password') || 'Passwords do not match',
       },
     },
