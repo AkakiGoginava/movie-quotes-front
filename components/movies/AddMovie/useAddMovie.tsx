@@ -27,6 +27,10 @@ const useAddMovie = () => {
       rules: {
         required: { value: true, message: 'Please enter name' },
         minLength: { value: 3, message: 'Minimum length is 3' },
+        pattern: {
+          value: /^[a-zA-Z0-9\s\-.,!?'"():]+$/,
+          message: 'Please enter text in English',
+        },
       },
     },
     {
@@ -36,6 +40,10 @@ const useAddMovie = () => {
       rules: {
         required: { value: true, message: 'Please enter name' },
         minLength: { value: 3, message: 'Minimum length is 3' },
+        pattern: {
+          value: /^[\u10A0-\u10FF0-9\s\-.,!?'"():]+$/,
+          message: 'გთხოვთ შეიყვანოთ ტექსტი ქართულად',
+        },
       },
     },
     {
@@ -64,6 +72,10 @@ const useAddMovie = () => {
       type: 'text',
       rules: {
         required: { value: true, message: 'Please enter director name' },
+        pattern: {
+          value: /^[a-zA-Z\s\-.']+$/,
+          message: 'Please enter director name in English',
+        },
       },
     },
     {
@@ -72,6 +84,10 @@ const useAddMovie = () => {
       type: 'text',
       rules: {
         required: { value: true, message: 'Please enter director name' },
+        pattern: {
+          value: /^[\u10A0-\u10FF\s\-.']+$/,
+          message: 'გთხოვთ შეიყვანოთ რეჟისორის სახელი ქართულად',
+        },
       },
     },
     {
@@ -80,6 +96,10 @@ const useAddMovie = () => {
       type: 'textarea',
       rules: {
         required: { value: true, message: 'Please enter description' },
+        pattern: {
+          value: /^[a-zA-Z0-9\s\-.,!?'"():;/\n\r]+$/,
+          message: 'Please enter description in English',
+        },
       },
     },
     {
@@ -88,6 +108,10 @@ const useAddMovie = () => {
       type: 'textarea',
       rules: {
         required: { value: true, message: 'Please enter description' },
+        pattern: {
+          value: /^[\u10A0-\u10FF0-9\s\-.,!?'"():;/\n\r]+$/,
+          message: 'გთხოვთ შეიყვანოთ აღწერა ქართულად',
+        },
       },
     },
   ];

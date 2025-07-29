@@ -34,14 +34,14 @@ const InputField = <FormValues extends FieldValues>({
 
   const labelStyles = {
     base: 'text-white h-4.5 mr-auto mb-1 text-nowrap',
-    movie: 'text-xl mr-0 mb-2.5 text-gray-500',
+    movie: 'md:text-xl mr-0 mb-1.5 md:mb-2.5 text-gray-500',
     textarea: 'place-self-start mt-2',
   };
 
   const inputStyles = {
     base: 'outline-none rounded-sm border-2 focus:ring-2 pr-13',
     auth: 'text-black bg-gray-300 w-89 h-9.5 pl-2',
-    movie: 'bg-transparent border-0 focus:ring-0 text-white text-xl w-full',
+    movie: 'bg-transparent border-0 focus:ring-0 text-white md:text-xl w-full',
     textarea: 'min-h-10',
     checkbox:
       'w-4 h-4 p-0 focus:outline-0 focus:ring-0 rounded-md checked:bg-black hover:cursor-pointer border-white',
@@ -155,7 +155,7 @@ const InputField = <FormValues extends FieldValues>({
             )}
 
             {inputLanguage && (
-              <span className='text-lg text-gray-500'>{inputLanguage}</span>
+              <span className='md:text-lg text-gray-500'>{inputLanguage}</span>
             )}
 
             {input.type === 'password' && (

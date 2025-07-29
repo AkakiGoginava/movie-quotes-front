@@ -35,7 +35,7 @@ const AddMovie = () => {
         setOpen={setModalOpen}
         open={modalOpen}
         reset={reset}
-        modalClassName='md:p-0'
+        modalClassName='p-0'
       >
         <MovieForm
           title='Add movie'

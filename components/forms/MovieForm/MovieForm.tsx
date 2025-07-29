@@ -19,8 +19,8 @@ const MovieForm = <FormValues extends FieldValues = FieldValues>({
   const { user } = useAuth();
 
   return (
-    <div className='flex flex-col gap-8 min-w-225'>
-      <h1 className='text-2xl font-medium pt-8 pb-6 text-center border-b border-gray-700'>
+    <div className='flex flex-col gap-8 md:min-w-225 pb-6'>
+      <h1 className='text-xl md:text-2xl font-medium pt-8 pb-6 text-center border-b border-gray-700'>
         {title}
       </h1>
 
@@ -48,7 +48,12 @@ const MovieForm = <FormValues extends FieldValues = FieldValues>({
           />
         ))}
 
-        <Button type='submit' variant='primary' className='text-xl'>
+        <Button
+          type='submit'
+          variant='primary'
+          className='text-xl'
+          disabled={isSubmitting}
+        >
           {submitText}
         </Button>
       </form>
