@@ -2,6 +2,7 @@ import {
   FieldErrors,
   FieldNamesMarkedBoolean,
   FieldValues,
+  SubmitHandler,
   UseFormGetValues,
   UseFormRegister,
 } from 'react-hook-form';
@@ -9,19 +10,12 @@ import {
 import { InputFieldType } from '@/types';
 
 export type PropsType<FormValues extends FieldValues = FieldValues> = {
-  input: InputFieldType<FormValues>;
+  title: string;
+  submitText: string;
+  inputs: InputFieldType<FormValues>[];
   register: UseFormRegister<FormValues>;
-  errors: FieldErrors<FormValues>;
-  touchedFields: FieldNamesMarkedBoolean<FormValues>;
-  getValues: UseFormGetValues<FormValues>;
-  handleForgotPasswordClick?: () => void;
-  showError?: boolean;
-  className?: string;
-  type: 'auth' | 'movie';
-};
-
-export type UseInputFieldProps<FormValues extends FieldValues = FieldValues> = {
-  input: InputFieldType<FormValues>;
+  onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
+  isSubmitting: boolean;
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
   getValues: UseFormGetValues<FormValues>;

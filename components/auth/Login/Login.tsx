@@ -25,7 +25,8 @@ const Login: React.FC<PropsType> = ({
 
   return (
     <Modal
-      className='text-sm h-8'
+      hasButton
+      buttonClassName='text-sm h-8'
       buttonVariant='secondary'
       buttonText='Log in'
       open={loginOpen}

@@ -29,13 +29,7 @@ const ResetPassword: React.FC<PropsType> = ({
   );
 
   return (
-    <Modal
-      className='hidden'
-      buttonText=''
-      open={open}
-      setOpen={setOpen}
-      reset={reset}
-    >
+    <Modal open={open} setOpen={setOpen} reset={reset}>
       <AuthForm
         title='Create new password'
         subTitle='Your new password must be different from previous used passwords'

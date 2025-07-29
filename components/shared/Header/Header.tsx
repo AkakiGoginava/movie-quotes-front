@@ -55,22 +55,27 @@ const Header: React.FC<PropsType> = ({
         },
       )}
     >
-      <h3 className='font-medium text-light-yellow hidden md:inline-block'>
+      <h3 className='font-medium text-light-yellow hidden md:inline-block mr-auto'>
         MOVIE QUOTES
       </h3>
 
-      <MenuIcon
-        className='md:hidden mr-auto'
-        onClick={() => {
-          setSidebarOpen?.(true);
-        }}
-      />
+      {user && (
+        <>
+          <MenuIcon
+            className='md:hidden mr-auto'
+            onClick={() => {
+              setSidebarOpen?.(true);
+            }}
+          />
 
-      <SearchIcon className='md:hidden mr-2' />
+          <SearchIcon className='md:hidden mr-2' />
+          <BellIcon />
+        </>
+      )}
 
-      <BellIcon />
-
-      <Dropdown options={['Eng', 'Geo']} selected={0} />
+      <div className={cn('ml-auto', { 'ml-0': user })}>
+        <Dropdown options={['Eng', 'Geo']} selected={0} />
+      </div>
 
       {user ? (
         <>
@@ -82,7 +87,7 @@ const Header: React.FC<PropsType> = ({
               setRegisterOpen?.(false);
               handleLogout();
             }}
-            className='text-sm h-8'
+            className='text-sm h-8 hidden md:block'
           >
             Log out
           </Button>

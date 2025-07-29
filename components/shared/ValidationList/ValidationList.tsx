@@ -56,6 +56,7 @@ const ValidationList = <FormValues extends FieldValues = FieldValues>({
       {editInputs.map((input, idx) => (
         <InputField<FormValues>
           key={idx}
+          type='auth'
           input={input}
           errors={errors}
           register={register}

@@ -1,6 +1,6 @@
 import { FieldValues } from 'react-hook-form';
 
-import { Button, Modal, ReturnArrowIcon, ValidationList } from '@/components';
+import { Button, ReturnArrowIcon, ValidationList } from '@/components';
 
 import { PropsType } from './types';
 import useInfoField from './useInfoField';

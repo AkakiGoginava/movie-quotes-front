@@ -24,7 +24,8 @@ const Register: React.FC<PropsType> = ({
 
   return (
     <Modal
-      className='text-sm h-8'
+      hasButton
+      buttonClassName='text-sm h-8'
       buttonVariant='primary'
       buttonText='Sign up'
       open={registerOpen}

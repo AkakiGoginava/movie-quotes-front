@@ -1,4 +1,4 @@
-import { Button, Layout, PlusIcon, SearchIcon } from '@/components';
+import { AddMovie, Layout, SearchIcon } from '@/components';
 
 export default function Movies() {
   return (
@@ -17,10 +17,7 @@ export default function Movies() {
                 <span>Search</span>
               </div>
 
-              <Button variant='primary' type='button'>
-                <PlusIcon />
-                <span className='text-base md:text-xl'>Add movie</span>
-              </Button>
+              <AddMovie />
             </div>
           </header>
         </section>

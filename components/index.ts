@@ -4,3 +4,4 @@ export * from './auth';
 export * from './forms';
 export * from './notifications';
 export * from './profile';
+export * from './movies';

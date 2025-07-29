@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { CameraIcon, HouseIcon } from '@/components';
+import { Button, CameraIcon, HouseIcon } from '@/components';
 import { cn } from '@/helpers';
 import { useAuth } from '@/hooks';
 
 const Sidebar = () => {
-  const { isLoading, user } = useAuth();
+  const { isLoading, user, handleLogout } = useAuth();
   const pathName = usePathname();
 
   if (isLoading) return <div>Loading...</div>;
@@ -37,6 +37,17 @@ const Sidebar = () => {
         />
         <span className='text-2xl'>List of movies</span>
       </Link>
+
+      <Button
+        type='button'
+        variant='secondary'
+        handleClick={() => {
+          handleLogout();
+        }}
+        className='w-fit border-none text-2xl md:hidden pl-0'
+      >
+        Log out
+      </Button>
     </div>
   );
 };

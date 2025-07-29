@@ -48,3 +48,21 @@ export type AvatarEditInput = {
 export type ProfileEditInput = UsernameEditInput &
   PasswordEditInput &
   AvatarEditInput;
+
+export type MovieInputsType = {
+  name: {
+    en: string;
+    ka: string;
+  };
+  categories: number[];
+  year: string;
+  director: {
+    en: string;
+    ka: string;
+  };
+  description: {
+    en: string;
+    ka: string;
+  };
+  image: FileList;
+};
