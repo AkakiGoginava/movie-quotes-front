@@ -5,6 +5,7 @@ import { CrossedEyeIcon, EyeIcon, InvalidIcon, ValidIcon } from '@/components';
 
 import { PropsType } from './types';
 import useInputField from './useInputField';
+import { ImageInput } from './components';
 
 const InputField = <FormValues extends FieldValues>({
   input,
@@ -16,6 +17,7 @@ const InputField = <FormValues extends FieldValues>({
   showError,
   className,
   type,
+  control,
 }: PropsType<FormValues>) => {
   const { show, setShow, hasEnteredInput, isInvalid, isValid, inputLanguage } =
     useInputField<FormValues>({ input, errors, getValues, touchedFields });
@@ -59,6 +61,17 @@ const InputField = <FormValues extends FieldValues>({
   const errorStyles = {
     base: 'absolute -bottom-6 text-red-500 text-sm',
   };
+
+  if (input.type === 'file' && control)
+    return (
+      <ImageInput
+        input={input}
+        control={control}
+        hasEnteredInput={hasEnteredInput}
+        isInvalid={isInvalid}
+        isValid={isValid}
+      />
+    );
 
   return (
     <div

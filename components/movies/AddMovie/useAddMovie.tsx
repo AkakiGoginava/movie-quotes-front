@@ -9,7 +9,6 @@ const useAddMovie = () => {
     getValues,
     reset,
     setError,
-    setValue,
     control,
   } = useForm<MovieInputsType>({
     mode: 'onChange',
@@ -135,7 +134,6 @@ const useAddMovie = () => {
     errors,
     touchedFields,
     isSubmitting,
-    setValue,
     control,
   };
 };
