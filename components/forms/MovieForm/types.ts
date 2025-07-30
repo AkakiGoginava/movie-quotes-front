@@ -1,10 +1,11 @@
 import {
+  Control,
   FieldErrors,
   FieldNamesMarkedBoolean,
   FieldValues,
-  SubmitHandler,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from 'react-hook-form';
 
 import { InputFieldType } from '@/types';
@@ -19,4 +20,6 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
   getValues: UseFormGetValues<FormValues>;
+  setValue: UseFormSetValue<FormValues>;
+  control: Control<FormValues>;
 };

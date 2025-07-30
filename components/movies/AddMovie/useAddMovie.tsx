@@ -9,6 +9,8 @@ const useAddMovie = () => {
     getValues,
     reset,
     setError,
+    setValue,
+    control,
   } = useForm<MovieInputsType>({
     mode: 'onChange',
   });
@@ -114,6 +116,14 @@ const useAddMovie = () => {
         },
       },
     },
+    {
+      label: 'Upload image',
+      name: 'image',
+      type: 'file',
+      rules: {
+        required: { value: true, message: 'Please upload an image' },
+      },
+    },
   ];
 
   return {
@@ -125,6 +135,8 @@ const useAddMovie = () => {
     errors,
     touchedFields,
     isSubmitting,
+    setValue,
+    control,
   };
 };
 

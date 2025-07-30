@@ -14,6 +14,8 @@ const AddMovie = () => {
     errors,
     touchedFields,
     isSubmitting,
+    setValue,
+    control,
   } = useAddMovie();
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -47,6 +49,8 @@ const AddMovie = () => {
           errors={errors}
           touchedFields={touchedFields}
           isSubmitting={isSubmitting}
+          setValue={setValue}
+          control={control}
         />
       </Modal>
     </>

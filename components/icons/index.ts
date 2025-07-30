@@ -17,3 +17,4 @@ export { default as SearchIcon } from './search-icon.svg';
 export { default as CameraIcon } from './camera-icon.svg';
 export { default as HouseIcon } from './house-icon.svg';
 export { default as BellIcon } from './bell-icon.svg';
+export { default as ImageIcon } from './image-icon.svg';

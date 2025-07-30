@@ -27,6 +27,7 @@ const InputField = <FormValues extends FieldValues>({
 
   const movieInputContainerStyles = {
     base: 'flex gap-2 border rounded-md border-gray-500 py-0.5 px-3 items-center justify-center',
+    checkbox: 'flex flex-row-reverse gap-3 items-center mr-auto',
     neutral: 'focus:ring-gray-500',
     invalid: 'border-red-500 focus:ring-red-500',
     valid: 'border-green-500 focus:ring-green-500',
@@ -86,6 +87,7 @@ const InputField = <FormValues extends FieldValues>({
           [movieInputContainerStyles.invalid]: isInvalid && type === 'movie',
           [movieInputContainerStyles.valid]:
             hasEnteredInput && isValid && type === 'movie',
+          [movieInputContainerStyles.checkbox]: input.type === 'checkbox',
         })}
       >
         <label
