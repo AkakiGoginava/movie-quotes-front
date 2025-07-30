@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import {
+  Category,
   ForgotPasswordInput,
   LoginInput,
   ProfileEditInput,
@@ -132,6 +133,14 @@ export const googleCallback = async (code: string): Promise<AxiosResponse> => {
   await getCsrfCookie();
 
   const response = await axios.post('/api/google', { code });
+
+  return response;
+};
+
+export const getCategories = async (): Promise<
+  AxiosResponse<{ categories: Category[] }>
+> => {
+  const response = await axios.get('/api/categories');
 
   return response;
 };
