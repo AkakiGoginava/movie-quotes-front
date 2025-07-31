@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/hooks';
-import { usePathname } from 'next/navigation';
 
 type RouteGuardProps = {
   children: React.ReactNode;

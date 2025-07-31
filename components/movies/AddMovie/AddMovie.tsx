@@ -6,6 +6,7 @@ import useAddMovie from './useAddMovie';
 
 const AddMovie = () => {
   const {
+    isLoading,
     movieInputs,
     register,
     onSubmit,
@@ -18,6 +19,8 @@ const AddMovie = () => {
   } = useAddMovie();
 
   const [modalOpen, setModalOpen] = useState(false);
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <>

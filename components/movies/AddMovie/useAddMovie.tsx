@@ -1,5 +1,8 @@
-import { InputFieldType, MovieInputsType } from '@/types';
 import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+
+import { getCategories } from '@/services';
+import { InputFieldType, MovieInputsType } from '@/types';
 
 const useAddMovie = () => {
   const {
@@ -19,6 +22,12 @@ const useAddMovie = () => {
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);
+
+  const { data: categories, isLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: getCategories,
+    select: (data) => data.data.categories,
+  });
 
   const movieInputs: InputFieldType<MovieInputsType>[] = [
     {
@@ -50,7 +59,8 @@ const useAddMovie = () => {
     {
       label: 'Categories',
       name: 'categories',
-      type: 'text',
+      type: 'multiselect',
+      options: categories,
       rules: {
         required: { value: true, message: 'Please enter categories' },
       },
@@ -126,6 +136,7 @@ const useAddMovie = () => {
   ];
 
   return {
+    isLoading,
     movieInputs,
     register,
     onSubmit,

@@ -3,6 +3,7 @@ import { FieldValues, Path, RegisterOptions } from 'react-hook-form';
 export type InputFieldType<FormValues extends FieldValues = FieldValues> = {
   name: Path<FormValues>;
   type: string;
+  options?: any[];
   placeholder?: string;
   label: string;
   rules?: RegisterOptions<FormValues, Path<FormValues>>;

@@ -4,8 +4,8 @@ import { cn } from '@/helpers';
 import { CrossedEyeIcon, EyeIcon, InvalidIcon, ValidIcon } from '@/components';
 
 import { PropsType } from './types';
-import useInputField from './useInputField';
 import { ImageInput } from './components';
+import useInputField from './useInputField';
 
 const InputField = <FormValues extends FieldValues>({
   input,
