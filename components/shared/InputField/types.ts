@@ -27,4 +27,5 @@ export type UseInputFieldProps<FormValues extends FieldValues = FieldValues> = {
   errors: FieldErrors<FormValues>;
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
   getValues: UseFormGetValues<FormValues>;
+  control?: Control<FormValues>;
 };

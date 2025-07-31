@@ -4,7 +4,7 @@ import { cn } from '@/helpers';
 import { CrossedEyeIcon, EyeIcon, InvalidIcon, ValidIcon } from '@/components';
 
 import { PropsType } from './types';
-import { ImageInput } from './components';
+import { ImageInput, MultiselectInput } from './components';
 import useInputField from './useInputField';
 
 const InputField = <FormValues extends FieldValues>({
@@ -20,7 +20,13 @@ const InputField = <FormValues extends FieldValues>({
   control,
 }: PropsType<FormValues>) => {
   const { show, setShow, hasEnteredInput, isInvalid, isValid, inputLanguage } =
-    useInputField<FormValues>({ input, errors, getValues, touchedFields });
+    useInputField<FormValues>({
+      input,
+      errors,
+      getValues,
+      touchedFields,
+      control,
+    });
 
   const containerStyles = {
     base: 'relative flex flex-col gap-1',
@@ -65,6 +71,17 @@ const InputField = <FormValues extends FieldValues>({
   if (input.type === 'file' && control)
     return (
       <ImageInput
+        input={input}
+        control={control}
+        hasEnteredInput={hasEnteredInput}
+        isInvalid={isInvalid}
+        isValid={isValid}
+      />
+    );
+
+  if (input.type === 'multiselect' && control && input.options)
+    return (
+      <MultiselectInput
         input={input}
         control={control}
         hasEnteredInput={hasEnteredInput}

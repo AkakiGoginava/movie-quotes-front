@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { FieldValues, get } from 'react-hook-form';
+import { FieldValues, get, useWatch } from 'react-hook-form';
 
 import { UseInputFieldProps } from './types';
 
@@ -9,11 +9,19 @@ const useInputField = <FormValues extends FieldValues = FieldValues>({
   errors,
   touchedFields,
   getValues,
+  control,
 }: UseInputFieldProps<FormValues>) => {
   const [show, setShow] = useState(false);
 
-  const hasEnteredInput: boolean =
-    get(touchedFields, input.name) && getValues(input.name);
+  const watchedValue = useWatch({
+    control,
+    name: input.name,
+  });
+
+  const hasEnteredInput: boolean = control
+    ? !!watchedValue &&
+      (Array.isArray(watchedValue) ? watchedValue.length > 0 : true)
+    : get(touchedFields, input.name) && getValues(input.name);
 
   const isInvalid: boolean = !!get(errors, input.name);
   const isValid: boolean = !get(errors, input.name);

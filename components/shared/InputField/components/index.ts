@@ -1,1 +1,2 @@
-export { default as ImageInput } from './ImageInput';
+export * from './ImageInput';
+export * from './MultiselectInput';
