@@ -1,4 +1,4 @@
-import { createContext, useEffect } from 'react';
+import { createContext } from 'react';
 
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery, useQueryClient } from '@tanstack/react-query';

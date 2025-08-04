@@ -16,9 +16,9 @@ const AddMovie = () => {
     touchedFields,
     isSubmitting,
     control,
+    modalOpen,
+    setModalOpen,
   } = useAddMovie();
-
-  const [modalOpen, setModalOpen] = useState(false);
 
   if (isLoading) return <div>Loading...</div>;
 

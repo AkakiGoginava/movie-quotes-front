@@ -1,10 +1,14 @@
-import { useForm } from 'react-hook-form';
-import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
-import { getCategories } from '@/services';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQuery } from '@tanstack/react-query';
+
+import { getCategories, storeMovie } from '@/services';
 import { InputFieldType, MovieInputsType } from '@/types';
 
 const useAddMovie = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -17,8 +21,34 @@ const useAddMovie = () => {
     mode: 'onChange',
   });
 
+  const storeMovieMutation = useMutation({
+    mutationFn: storeMovie,
+    onSuccess: () => {
+      setModalOpen(false);
+    },
+  });
+
   const onSubmitHandler = (data: MovieInputsType) => {
-    console.log(data);
+    const formData = new FormData();
+
+    formData.append('name[en]', data.name.en);
+    formData.append('name[ka]', data.name.ka);
+
+    formData.append('director[en]', data.director.en);
+    formData.append('director[ka]', data.director.ka);
+
+    formData.append('description[en]', data.description.en);
+    formData.append('description[ka]', data.description.ka);
+
+    formData.append('year', data.year);
+
+    data.categories.forEach((categoryId, index) => {
+      formData.append(`categories[${index}]`, categoryId.toString());
+    });
+
+    formData.append('poster', data.poster[0]);
+
+    storeMovieMutation.mutate(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);
@@ -127,7 +157,7 @@ const useAddMovie = () => {
     },
     {
       label: 'Upload image',
-      name: 'image',
+      name: 'poster',
       type: 'file',
       rules: {
         required: { value: true, message: 'Please upload an image' },
@@ -146,6 +176,8 @@ const useAddMovie = () => {
     touchedFields,
     isSubmitting,
     control,
+    modalOpen,
+    setModalOpen,
   };
 };
 

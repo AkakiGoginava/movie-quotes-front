@@ -13,14 +13,20 @@ const useInputField = <FormValues extends FieldValues = FieldValues>({
 }: UseInputFieldProps<FormValues>) => {
   const [show, setShow] = useState(false);
 
-  const watchedValue = useWatch({
-    control,
-    name: input.name,
-  });
+  const watchedValue = control
+    ? useWatch({
+        control,
+        name: input.name,
+      })
+    : undefined;
+
+  const hasValue = (value: unknown): boolean => {
+    if (Array.isArray(value)) return value.length > 0;
+    return !!value;
+  };
 
   const hasEnteredInput: boolean = control
-    ? !!watchedValue &&
-      (Array.isArray(watchedValue) ? watchedValue.length > 0 : true)
+    ? hasValue(watchedValue)
     : get(touchedFields, input.name) && getValues(input.name);
 
   const isInvalid: boolean = !!get(errors, input.name);

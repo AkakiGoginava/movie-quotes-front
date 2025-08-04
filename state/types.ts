@@ -9,7 +9,6 @@ import {
   RegisterInput,
   ResetPasswordInput,
   User,
-  ProfileEditInput,
 } from '@/types';
 
 type AuthHandler<T extends FieldValues> = (
@@ -49,5 +48,5 @@ export type AuthContextType = {
 
   handleForgotPasswordFactory: AuthHandlerFactory<ForgotPasswordInput>;
   handleResetPasswordFactory: AuthHandlerFactory<ResetPasswordInput>;
-  handleEditUserFactory: AuthHandlerFactory<ProfileEditInput>;
+  handleEditUserFactory: AuthHandlerFactory<FormData>;
 };

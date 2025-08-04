@@ -85,7 +85,7 @@ const MultiselectInput = <FormValues extends FieldValues = FieldValues>({
                   </div>
                 ))
               ) : (
-                <span className='text-gray-500 text-xl'>{input.label}</span>
+                <span className='text-gray-500 md:text-xl'>{input.label}</span>
               )}
             </div>
 

@@ -65,5 +65,5 @@ export type MovieInputsType = {
     en: string;
     ka: string;
   };
-  image: FileList;
+  poster: FileList;
 };
