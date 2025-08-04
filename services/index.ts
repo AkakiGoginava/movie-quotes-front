@@ -170,3 +170,11 @@ export const getMovie = async (
 
   return response;
 };
+
+export const deleteMovie = async (id: string): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.delete(`/api/movies/${id}`);
+
+  return response;
+};

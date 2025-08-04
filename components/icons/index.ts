@@ -19,3 +19,5 @@ export { default as HouseIcon } from './house-icon.svg';
 export { default as BellIcon } from './bell-icon.svg';
 export { default as ImageIcon } from './image-icon.svg';
 export { default as QuoteIcon } from './quote-icon.svg';
+export { default as DeleteIcon } from './delete-icon.svg';
+export { default as EditIcon } from './edit-icon.svg';
