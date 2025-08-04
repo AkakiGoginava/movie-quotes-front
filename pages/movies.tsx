@@ -24,7 +24,7 @@ export default function Movies() {
   const totalMovies = data?.pages[0]?.data.total_movies ?? 0;
 
   return (
-    <Layout>
+    <Layout setActiveSearch={setActiveSearch}>
       <div>
         <section className='w-full px-7.5 md:pl-20 md:pr-17 flex flex-col gap-10'>
           <header className='flex gap-6 md:items-center justify-between py-4 md:py-0'>
@@ -41,6 +41,7 @@ export default function Movies() {
                   setActiveSearch(searchTerm);
                 }}
                 placeholder='Search movies... (Press Enter)'
+                className='hidden md:block'
               />
 
               <AddMovie />

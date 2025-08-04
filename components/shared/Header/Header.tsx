@@ -9,18 +9,19 @@ import {
   ForgotPassword,
   ResetPassword,
   MenuIcon,
-  SearchIcon,
   BellIcon,
+  Search,
 } from '@/components';
+import { cn } from '@/helpers';
 
 import { useHeader } from './useHeader';
 import { PropsType } from './types';
-import { cn } from '@/helpers';
 
 const Header: React.FC<PropsType> = ({
   registerOpen,
   setRegisterOpen,
   setSidebarOpen,
+  setActiveSearch,
 }) => {
   const {
     loginOpen,
@@ -68,7 +69,14 @@ const Header: React.FC<PropsType> = ({
             }}
           />
 
-          <SearchIcon className='md:hidden mr-2' />
+          {setActiveSearch && (
+            <Search
+              onSearch={(searchTerm: string) => {
+                setActiveSearch(searchTerm);
+              }}
+              className='md:hidden mr-2'
+            />
+          )}
           <BellIcon />
         </>
       )}
