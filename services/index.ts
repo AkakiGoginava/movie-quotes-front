@@ -4,8 +4,7 @@ import {
   Category,
   ForgotPasswordInput,
   LoginInput,
-  MovieInputsType,
-  ProfileEditInput,
+  MoviesResponse,
   RegisterInput,
   ResetPasswordInput,
   User,
@@ -150,8 +149,13 @@ export const storeMovie = async (
   return response;
 };
 
-export const getUserMovies = async (): Promise<AxiosResponse> => {
-  const response = await axios.get('/api/user/movies');
+export const getUserMovies = async (
+  cursor?: string,
+): Promise<AxiosResponse<MoviesResponse>> => {
+  const params = new URLSearchParams();
+  if (cursor) params.append('cursor', cursor);
+
+  const response = await axios.get(`/api/user/movies?${params.toString()}`);
 
   return response;
 };

@@ -26,3 +26,13 @@ export type Movie = {
   created_at: string;
   updated_at: string;
 };
+
+export type PaginatedResponse<T> = {
+  data: T[];
+  next_cursor: string | null;
+  prev_cursor: string | null;
+  per_page: number;
+  total_movies: number;
+};
+
+export type MoviesResponse = PaginatedResponse<Movie>;
