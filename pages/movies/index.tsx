@@ -1,27 +1,19 @@
-import { useState } from 'react';
-
-import { useInfiniteQuery } from '@tanstack/react-query';
-
 import { AddMovie, Layout, MovieCard, Search } from '@/components';
-import { getUserMovies } from '@/services';
+import { useMovie } from '@/hooks';
 import { Movie } from '@/types';
 
 export default function Movies() {
-  const [activeSearch, setActiveSearch] = useState('');
-
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['userMovies', activeSearch],
-      queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
-        getUserMovies(pageParam, activeSearch || undefined),
-      getNextPageParam: (lastPage) => lastPage.data.next_cursor,
-      initialPageParam: undefined,
-    });
+  const {
+    allMovies,
+    totalMovies,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+    setActiveSearch,
+  } = useMovie();
 
   if (isLoading) return <div>Loading...</div>;
-
-  const allMovies = data?.pages.flatMap((page) => page.data.data) ?? [];
-  const totalMovies = data?.pages[0]?.data.total_movies ?? 0;
 
   return (
     <Layout setActiveSearch={setActiveSearch}>

@@ -1,39 +1,29 @@
 import { useRouter } from 'next/router';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { Button, DeleteIcon, EditIcon, Layout, PlusIcon } from '@/components';
-import { getMovie, deleteMovie } from '@/services';
+import { getMovie } from '@/services';
 import { Category } from '@/types';
+import { useMovie } from '@/hooks';
 
 export default function MovieDetail() {
   const router = useRouter();
   const { id } = router.query;
-  const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  if (!id || typeof id !== 'string') {
+    return <div>Invalid movie ID</div>;
+  }
+
+  const { data: movie, isLoading } = useQuery({
     queryKey: ['movie', id],
-    queryFn: () => getMovie(id as string),
+    queryFn: () => getMovie(id),
     enabled: !!id,
+    select: (data) => data?.data?.movie,
   });
 
-  const deleteMutation = useMutation({
-    mutationFn: (movieId: string) => deleteMovie(movieId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userMovies'] });
-      router.push('/movies');
-    },
-  });
-
-  const handleDelete = () => {
-    if (id && typeof id === 'string') {
-      deleteMutation.mutate(id);
-    }
-  };
+  const { handleDelete } = useMovie();
 
   if (isLoading) return <div>Loading...</div>;
-
-  const movie = data?.data?.movie;
 
   return (
     <Layout>
@@ -49,7 +39,7 @@ export default function MovieDetail() {
                 <img
                   src={movie.poster_url}
                   alt={movie.title}
-                  className='w-full rounded-lg'
+                  className='w-full rounded-lg object-cover max-h-110'
                 />
               </div>
 
@@ -64,7 +54,7 @@ export default function MovieDetail() {
                     <span className='text-gray-500'>|</span>
                     <DeleteIcon
                       className='cursor-pointer'
-                      onClick={() => handleDelete()}
+                      onClick={() => handleDelete(movie.id)}
                     />
                   </div>
                 </div>

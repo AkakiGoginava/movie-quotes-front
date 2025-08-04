@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { getCategories, storeMovie } from '@/services';
 import { InputFieldType, MovieInputsType } from '@/types';
+import { useMovie } from '@/hooks';
 
 const useAddMovie = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { categories, isLoadingCategories, handleStoreMovieFactory } =
+    useMovie();
 
   const {
     register,
@@ -15,14 +16,12 @@ const useAddMovie = () => {
     formState: { errors, touchedFields, isSubmitting },
     getValues,
     reset,
-    setError,
     control,
   } = useForm<MovieInputsType>({
     mode: 'onChange',
   });
 
-  const storeMovieMutation = useMutation({
-    mutationFn: storeMovie,
+  const handleStoreMovie = handleStoreMovieFactory({
     onSuccess: () => {
       setModalOpen(false);
     },
@@ -48,16 +47,10 @@ const useAddMovie = () => {
 
     formData.append('poster', data.poster[0]);
 
-    storeMovieMutation.mutate(formData);
+    handleStoreMovie(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);
-
-  const { data: categories, isLoading } = useQuery({
-    queryKey: ['categories'],
-    queryFn: getCategories,
-    select: (data) => data.data.categories,
-  });
 
   const movieInputs: InputFieldType<MovieInputsType>[] = [
     {
@@ -166,7 +159,7 @@ const useAddMovie = () => {
   ];
 
   return {
-    isLoading,
+    isLoading: isLoadingCategories,
     movieInputs,
     register,
     onSubmit,

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Button, Modal, MovieForm, PlusIcon } from '@/components';
 
 import useAddMovie from './useAddMovie';

@@ -9,18 +9,20 @@ import {
   RegisterInput,
   ResetPasswordInput,
   User,
+  Category,
+  Movie,
 } from '@/types';
 
-type AuthHandler<T extends FieldValues> = (
+type FormHandler<T extends FieldValues> = (
   formData: T | FormData,
   setError?: UseFormSetError<T>,
   inputs?: InputFieldType<T>[],
 ) => Promise<void>;
 
-type AuthHandlerFactory<T extends FieldValues> = (options?: {
+type FormHandlerFactory<T extends FieldValues> = (options?: {
   onSuccess?: () => void;
   onError?: () => void;
-}) => AuthHandler<T>;
+}) => FormHandler<T>;
 
 type SimpleMutation = (...args: any[]) => Promise<any>;
 
@@ -32,8 +34,8 @@ export type AuthContextType = {
   isVerified: boolean;
   isGoogleUser: boolean;
 
-  handleRegister: AuthHandler<RegisterInput>;
-  handleLogin: AuthHandler<LoginInput>;
+  handleRegister: FormHandler<RegisterInput>;
+  handleLogin: FormHandler<LoginInput>;
   handleGoogleAuthFactory: (options?: {
     onSuccess?: () => void;
     onError?: () => void;
@@ -46,7 +48,23 @@ export type AuthContextType = {
     setInvalidTokenNotificationOpen: NotificationSetter,
   ) => void;
 
-  handleForgotPasswordFactory: AuthHandlerFactory<ForgotPasswordInput>;
-  handleResetPasswordFactory: AuthHandlerFactory<ResetPasswordInput>;
-  handleEditUserFactory: AuthHandlerFactory<FormData>;
+  handleForgotPasswordFactory: FormHandlerFactory<ForgotPasswordInput>;
+  handleResetPasswordFactory: FormHandlerFactory<ResetPasswordInput>;
+  handleEditUserFactory: FormHandlerFactory<FormData>;
+};
+
+export type MovieContextType = {
+  categories: Category[] | undefined;
+  isLoadingCategories: boolean;
+
+  allMovies: Movie[];
+  totalMovies: number;
+  isLoading: boolean;
+  isFetchingNextPage: boolean;
+  hasNextPage: boolean;
+  fetchNextPage: () => void;
+  setActiveSearch: Dispatch<SetStateAction<string>>;
+
+  handleDelete: SimpleMutation;
+  handleStoreMovieFactory: FormHandlerFactory<FormData>;
 };

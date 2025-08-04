@@ -1,9 +1,13 @@
 import { QuoteIcon } from '@/components';
 import { Movie } from '@/types';
+import Link from 'next/link';
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
-    <div className='flex flex-col gap-3 hover:cursor-pointer'>
+    <Link
+      href={`/movies/${movie.id}`}
+      className='flex flex-col gap-3 hover:cursor-pointer'
+    >
       <img
         src={movie.poster_url}
         alt='movie cover'
@@ -18,7 +22,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         <span>10</span>
         <QuoteIcon />
       </div>
-    </div>
+    </Link>
   );
 };
 
