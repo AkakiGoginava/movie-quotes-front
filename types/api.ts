@@ -21,6 +21,7 @@ export type Movie = {
   title: string;
   director: string;
   description: string;
+  categories: Category[];
   year: string;
   poster_url: string;
   created_at: string;
