@@ -1,16 +1,19 @@
-import { AxiosResponse } from 'axios';
+import { useState } from 'react';
+
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { AddMovie, Layout, MovieCard, SearchIcon } from '@/components';
+import { AddMovie, Layout, MovieCard, Search } from '@/components';
 import { getUserMovies } from '@/services';
-import { Movie, MoviesResponse } from '@/types';
+import { Movie } from '@/types';
 
 export default function Movies() {
+  const [activeSearch, setActiveSearch] = useState('');
+
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
-      queryKey: ['userMovies'],
+      queryKey: ['userMovies', activeSearch],
       queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
-        getUserMovies(pageParam),
+        getUserMovies(pageParam, activeSearch || undefined),
       getNextPageParam: (lastPage) => lastPage.data.next_cursor,
       initialPageParam: undefined,
     });
@@ -24,7 +27,7 @@ export default function Movies() {
     <Layout>
       <div>
         <section className='w-full px-7.5 md:pl-20 md:pr-17 flex flex-col gap-10'>
-          <header className='flex md:items-center justify-between py-4 md:py-0'>
+          <header className='flex gap-6 md:items-center justify-between py-4 md:py-0'>
             <div className='text-2xl font-medium text-wrap max-w-50 md:max-w-full'>
               My list of movies{' '}
               <span className='text-base md:text-2xl'>
@@ -32,11 +35,13 @@ export default function Movies() {
               </span>
             </div>
 
-            <div className='flex gap-8 items-center'>
-              <div className='hidden md:flex md:gap-4 md:items-center'>
-                <SearchIcon />
-                <span>Search</span>
-              </div>
+            <div className='flex gap-8 items-center flex-1'>
+              <Search
+                onSearch={(searchTerm: string) => {
+                  setActiveSearch(searchTerm);
+                }}
+                placeholder='Search movies... (Press Enter)'
+              />
 
               <AddMovie />
             </div>

@@ -151,9 +151,11 @@ export const storeMovie = async (
 
 export const getUserMovies = async (
   cursor?: string,
+  search?: string,
 ): Promise<AxiosResponse<MoviesResponse>> => {
   const params = new URLSearchParams();
   if (cursor) params.append('cursor', cursor);
+  if (search) params.append('filter[title]', search);
 
   const response = await axios.get(`/api/user/movies?${params.toString()}`);
 
