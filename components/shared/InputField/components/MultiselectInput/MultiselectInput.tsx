@@ -4,8 +4,9 @@ import { FieldValues, Controller } from 'react-hook-form';
 import { useClickAway } from 'react-use';
 
 import { cn } from '@/helpers';
+import { OptionType } from '@/types';
 
-import { OptionType, PropsType } from './types';
+import { PropsType } from './types';
 
 const MultiselectInput = <FormValues extends FieldValues = FieldValues>({
   input,

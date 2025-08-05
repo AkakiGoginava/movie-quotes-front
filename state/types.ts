@@ -67,4 +67,8 @@ export type MovieContextType = {
 
   handleDelete: SimpleMutation;
   handleStoreMovieFactory: FormHandlerFactory<FormData>;
+  handleUpdateMovieFactory: (
+    id: number,
+    options?: { onSuccess?: () => void },
+  ) => FormHandler<FormData>;
 };

@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import { InputFieldType, MovieInputsType } from '@/types';
+import { InputFieldType, MovieInputsType, MultiLanguageMovie } from '@/types';
 import { useMovie } from '@/hooks';
 
-const useAddMovie = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const { categories, isLoadingCategories, handleStoreMovieFactory } =
+const useEditMovie = (
+  setModalOpen: Dispatch<SetStateAction<boolean>>,
+  movie: MultiLanguageMovie,
+) => {
+  const { categories, isLoadingCategories, handleUpdateMovieFactory } =
     useMovie();
 
   const {
@@ -19,9 +21,25 @@ const useAddMovie = () => {
     control,
   } = useForm<MovieInputsType>({
     mode: 'onChange',
+    defaultValues: {
+      title: {
+        en: movie?.title.en || '',
+        ka: movie?.title.ka || '',
+      },
+      categories: movie?.categories.map((cat) => cat.id) || [],
+      year: movie?.year || '',
+      director: {
+        en: movie?.director.en || '',
+        ka: movie?.director.ka || '',
+      },
+      description: {
+        en: movie?.description.en || '',
+        ka: movie?.description.ka || '',
+      },
+    },
   });
 
-  const handleStoreMovie = handleStoreMovieFactory({
+  const handleUpdateMovie = handleUpdateMovieFactory(movie.id, {
     onSuccess: () => {
       setModalOpen(false);
     },
@@ -45,9 +63,9 @@ const useAddMovie = () => {
       formData.append(`categories[${index}]`, categoryId.toString());
     });
 
-    formData.append('poster', data.poster[0]);
+    if (data.poster) formData.append('poster', data.poster[0]);
 
-    handleStoreMovie(formData);
+    handleUpdateMovie(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);
@@ -152,9 +170,6 @@ const useAddMovie = () => {
       label: 'Upload image',
       name: 'poster',
       type: 'file',
-      rules: {
-        required: { value: true, message: 'Please upload an image' },
-      },
     },
   ];
 
@@ -169,9 +184,7 @@ const useAddMovie = () => {
     touchedFields,
     isSubmitting,
     control,
-    modalOpen,
-    setModalOpen,
   };
 };
 
-export default useAddMovie;
+export default useEditMovie;

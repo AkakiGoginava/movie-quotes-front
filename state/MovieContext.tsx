@@ -12,6 +12,7 @@ import {
   getCategories,
   getUserMovies,
   storeMovie,
+  updateMovie,
 } from '@/services';
 import { useFormMutation, useSimpleMutation } from '@/hooks';
 
@@ -36,7 +37,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     useInfiniteQuery({
       queryKey: ['userMovies', activeSearch],
       queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
-        getUserMovies(pageParam, activeSearch || undefined),
+        getUserMovies('en', pageParam, activeSearch || undefined),
       getNextPageParam: (lastPage) => lastPage.data.next_cursor,
       initialPageParam: undefined,
     });
@@ -61,6 +62,23 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const handleUpdateMovieFactory = (
+    id: number,
+    options?: { onSuccess?: () => void },
+  ) => {
+    return useFormMutation(
+      (formData: FormData) => updateMovie(Number(id), formData),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+          queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
+
+          options?.onSuccess?.();
+        },
+      },
+    );
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -77,6 +95,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
 
         handleDelete,
         handleStoreMovieFactory,
+        handleUpdateMovieFactory,
       }}
     >
       {children}

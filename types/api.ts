@@ -28,6 +28,27 @@ export type Movie = {
   updated_at: string;
 };
 
+export type MultiLanguageMovie = {
+  id: number;
+  title: {
+    en: string;
+    ka: string;
+  };
+  director: {
+    en: string;
+    ka: string;
+  };
+  description: {
+    en: string;
+    ka: string;
+  };
+  categories: Category[];
+  year: string;
+  poster_url: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type PaginatedResponse<T> = {
   data: T[];
   next_cursor: string | null;

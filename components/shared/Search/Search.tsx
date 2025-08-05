@@ -74,7 +74,7 @@ const Search: React.FC<PropsType> = ({
         )}
       </div>
 
-      <div onClick={openMobileSearch} className='cursor-pointer'>
+      <div onClick={openMobileSearch} className='cursor-pointer md:hidden'>
         <SearchIcon />
       </div>
 

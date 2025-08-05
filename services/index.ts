@@ -6,6 +6,7 @@ import {
   LoginInput,
   Movie,
   MoviesResponse,
+  MultiLanguageMovie,
   RegisterInput,
   ResetPasswordInput,
   User,
@@ -150,7 +151,21 @@ export const storeMovie = async (
   return response;
 };
 
+export const updateMovie = async (
+  id: number,
+  formData: FormData,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/movies/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return response;
+};
+
 export const getUserMovies = async (
+  language: string,
   cursor?: string,
   search?: string,
 ): Promise<AxiosResponse<MoviesResponse>> => {
@@ -158,14 +173,18 @@ export const getUserMovies = async (
   if (cursor) params.append('cursor', cursor);
   if (search) params.append('filter[title]', search);
 
-  const response = await axios.get(`/api/user/movies?${params.toString()}`);
+  const response = await axios.get(`/api/movies?${params.toString()}`, {
+    headers: {
+      Language: language,
+    },
+  });
 
   return response;
 };
 
 export const getMovie = async (
   id: string,
-): Promise<AxiosResponse<{ movie: Movie }>> => {
+): Promise<AxiosResponse<{ movie: MultiLanguageMovie }>> => {
   const response = await axios.get(`/api/movies/${id}`);
 
   return response;

@@ -1,7 +1,16 @@
+import { useState } from 'react';
+
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
 
-import { Button, DeleteIcon, EditIcon, Layout, PlusIcon } from '@/components';
+import {
+  Button,
+  DeleteIcon,
+  EditIcon,
+  EditMovie,
+  Layout,
+  PlusIcon,
+} from '@/components';
 import { getMovie } from '@/services';
 import { Category } from '@/types';
 import { useMovie } from '@/hooks';
@@ -9,6 +18,10 @@ import { useMovie } from '@/hooks';
 export default function MovieDetail() {
   const router = useRouter();
   const { id } = router.query;
+
+  const [openEditMoval, setOpenEditMoval] = useState(false);
+
+  const { handleDelete } = useMovie();
 
   if (!id || typeof id !== 'string') {
     return <div>Invalid movie ID</div>;
@@ -20,8 +33,6 @@ export default function MovieDetail() {
     enabled: !!id,
     select: (data) => data?.data?.movie,
   });
-
-  const { handleDelete } = useMovie();
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -38,7 +49,7 @@ export default function MovieDetail() {
               <div className='w-full md:w-auto md:flex-4'>
                 <img
                   src={movie.poster_url}
-                  alt={movie.title}
+                  alt={movie.title.en}
                   className='w-full rounded-lg object-cover max-h-110'
                 />
               </div>
@@ -46,11 +57,14 @@ export default function MovieDetail() {
               <div className='w-full md:w-auto md:flex-3 flex flex-col gap-5'>
                 <div className='flex justify-between items-center'>
                   <h1 className='font-medium text-2xl text-light-yellow'>
-                    {movie.title} ({movie.year})
+                    {movie.title.en} ({movie.year})
                   </h1>
 
                   <div className='flex gap-4 items-center bg-obsidian px-6 py-2 rounded-xl'>
-                    <EditIcon className='cursor-pointer' />
+                    <EditIcon
+                      className='cursor-pointer'
+                      onClick={() => setOpenEditMoval(true)}
+                    />
                     <span className='text-gray-500'>|</span>
                     <DeleteIcon
                       className='cursor-pointer'
@@ -71,11 +85,17 @@ export default function MovieDetail() {
                 </div>
 
                 <h2 className='text-lg font-bold mb-2'>
-                  Director: {movie.director}
+                  Director: {movie.director.en}
                 </h2>
 
-                <p className='text-lg'>{movie.description}</p>
+                <p className='text-lg'>{movie.description.en}</p>
               </div>
+
+              <EditMovie
+                modalOpen={openEditMoval}
+                setModalOpen={setOpenEditMoval}
+                movie={movie}
+              />
             </div>
           )}
         </section>
