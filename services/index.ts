@@ -4,7 +4,6 @@ import {
   Category,
   ForgotPasswordInput,
   LoginInput,
-  Movie,
   MoviesResponse,
   MultiLanguageMovie,
   RegisterInput,

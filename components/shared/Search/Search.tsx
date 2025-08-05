@@ -28,14 +28,6 @@ const Search: React.FC<PropsType> = ({
     setShowMobileModal(false);
   };
 
-  const openMobileSearch = () => {
-    setShowMobileModal(true);
-  };
-
-  const closeMobileSearch = () => {
-    setShowMobileModal(false);
-  };
-
   return (
     <div
       className={cn(
@@ -74,7 +66,12 @@ const Search: React.FC<PropsType> = ({
         )}
       </div>
 
-      <div onClick={openMobileSearch} className='cursor-pointer md:hidden'>
+      <div
+        onClick={() => {
+          setShowMobileModal(true);
+        }}
+        className='cursor-pointer md:hidden'
+      >
         <SearchIcon />
       </div>
 
@@ -82,9 +79,12 @@ const Search: React.FC<PropsType> = ({
         <div className='fixed inset-0 bg-black z-50 md:hidden'>
           <div className='flex items-start justify-between p-4 border-b border-gray-700'>
             <div className='flex items-center gap-4 flex-1'>
-              <div onClick={closeMobileSearch} className='cursor-pointer'>
-                <ReturnArrowIcon onClick={closeMobileSearch} />
-              </div>
+              <ReturnArrowIcon
+                onClick={() => {
+                  setShowMobileModal(false);
+                }}
+              />
+
               <input
                 type='text'
                 placeholder={placeholder}
