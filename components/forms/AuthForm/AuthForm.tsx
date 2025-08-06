@@ -53,6 +53,7 @@ const AuthForm = <FormValues extends FieldValues>({
         {inputs.map((input, idx) => (
           <InputField
             key={idx}
+            type='auth'
             input={input}
             errors={errors}
             register={register}

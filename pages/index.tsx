@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import { Button, Header } from '@/components';
+import { useAuth } from '@/hooks';
 
 type Quote = {
   quote: string;
@@ -10,6 +11,7 @@ type Quote = {
 };
 
 export default function Home() {
+  const { isLoading } = useAuth();
   const [registerOpen, setRegisterOpen] = useState(false);
 
   const quotes: Quote[] = [
@@ -30,6 +32,8 @@ export default function Home() {
       img: 'cover-image-3.png',
     },
   ];
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className='relative flex flex-col w-screen h-screen bg-black'>

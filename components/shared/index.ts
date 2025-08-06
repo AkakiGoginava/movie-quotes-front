@@ -7,3 +7,4 @@ export * from './InputField';
 export * from './Layout';
 export * from './Sidebar';
 export * from './ValidationList';
+export * from './Search';

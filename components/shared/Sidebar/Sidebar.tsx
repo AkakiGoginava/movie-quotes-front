@@ -1,8 +1,13 @@
-import { useAuth } from '@/hooks';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { Button, CameraIcon, HouseIcon } from '@/components';
+import { cn } from '@/helpers';
+import { useAuth } from '@/hooks';
 
 const Sidebar = () => {
-  const { isLoading, user } = useAuth();
+  const { isLoading, user, handleLogout } = useAuth();
+  const pathName = usePathname();
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -20,6 +25,29 @@ const Sidebar = () => {
           <p>Edit your profile</p>
         </Link>
       </div>
+
+      <Link href='/news' className='flex items-center gap-11 pl-2'>
+        <HouseIcon className={cn({ 'text-red-500': pathName === '/news' })} />
+        <span className='text-2xl'>News feed</span>
+      </Link>
+
+      <Link href='/movies' className='flex items-center gap-11 pl-2'>
+        <CameraIcon
+          className={cn({ 'text-red-500': pathName === '/movies' })}
+        />
+        <span className='text-2xl'>List of movies</span>
+      </Link>
+
+      <Button
+        type='button'
+        variant='secondary'
+        handleClick={() => {
+          handleLogout();
+        }}
+        className='w-fit border-none text-2xl md:hidden pl-0'
+      >
+        Log out
+      </Button>
     </div>
   );
 };

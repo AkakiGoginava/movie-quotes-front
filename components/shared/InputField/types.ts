@@ -1,4 +1,5 @@
 import {
+  Control,
   FieldErrors,
   FieldNamesMarkedBoolean,
   FieldValues,
@@ -17,4 +18,14 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   handleForgotPasswordClick?: () => void;
   showError?: boolean;
   className?: string;
+  type: 'auth' | 'movie';
+  control?: Control<FormValues>;
+};
+
+export type UseInputFieldProps<FormValues extends FieldValues = FieldValues> = {
+  input: InputFieldType<FormValues>;
+  errors: FieldErrors<FormValues>;
+  touchedFields: FieldNamesMarkedBoolean<FormValues>;
+  getValues: UseFormGetValues<FormValues>;
+  control?: Control<FormValues>;
 };

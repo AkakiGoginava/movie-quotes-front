@@ -1,8 +1,14 @@
 import { FieldValues, Path, RegisterOptions } from 'react-hook-form';
 
+export type OptionType = {
+  id: number;
+  name: string;
+};
+
 export type InputFieldType<FormValues extends FieldValues = FieldValues> = {
   name: Path<FormValues>;
   type: string;
+  options?: OptionType[];
   placeholder?: string;
   label: string;
   rules?: RegisterOptions<FormValues, Path<FormValues>>;
@@ -48,3 +54,21 @@ export type AvatarEditInput = {
 export type ProfileEditInput = UsernameEditInput &
   PasswordEditInput &
   AvatarEditInput;
+
+export type MovieInputsType = {
+  title: {
+    en: string;
+    ka: string;
+  };
+  categories: number[];
+  year: string;
+  director: {
+    en: string;
+    ka: string;
+  };
+  description: {
+    en: string;
+    ka: string;
+  };
+  poster: FileList;
+};

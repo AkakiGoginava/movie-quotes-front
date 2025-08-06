@@ -1,9 +1,11 @@
 import { AxiosResponse } from 'axios';
 
 import {
+  Category,
   ForgotPasswordInput,
   LoginInput,
-  ProfileEditInput,
+  MoviesResponse,
+  MultiLanguageMovie,
   RegisterInput,
   ResetPasswordInput,
   User,
@@ -54,19 +56,11 @@ export const getUser = async (): Promise<AxiosResponse<{ user: User }>> => {
   return response;
 };
 
-export const editUser = async (
-  data: ProfileEditInput | FormData,
-): Promise<AxiosResponse<{}>> => {
+export const editUser = async (data: FormData): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
-  const isFormData = data instanceof FormData;
-
   const response = await axios.post('/api/user/update', data, {
-    headers: isFormData
-      ? {
-          'Content-Type': 'multipart/form-data',
-        }
-      : undefined,
+    headers: { 'Content-Type': 'multipart/form-data' },
   });
 
   return response;
@@ -132,6 +126,73 @@ export const googleCallback = async (code: string): Promise<AxiosResponse> => {
   await getCsrfCookie();
 
   const response = await axios.post('/api/google', { code });
+
+  return response;
+};
+
+export const getCategories = async (): Promise<
+  AxiosResponse<{ categories: Category[] }>
+> => {
+  const response = await axios.get('/api/categories');
+
+  return response;
+};
+
+export const storeMovie = async (
+  formData: FormData,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/movies', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return response;
+};
+
+export const updateMovie = async (
+  id: number,
+  formData: FormData,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/movies/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return response;
+};
+
+export const getUserMovies = async (
+  language: string,
+  cursor?: string,
+  search?: string,
+): Promise<AxiosResponse<MoviesResponse>> => {
+  const params = new URLSearchParams();
+  if (cursor) params.append('cursor', cursor);
+  if (search) params.append('filter[title]', search);
+
+  const response = await axios.get(`/api/movies?${params.toString()}`, {
+    headers: {
+      Language: language,
+    },
+  });
+
+  return response;
+};
+
+export const getMovie = async (
+  id: string,
+): Promise<AxiosResponse<{ movie: MultiLanguageMovie }>> => {
+  const response = await axios.get(`/api/movies/${id}`);
+
+  return response;
+};
+
+export const deleteMovie = async (id: string): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.delete(`/api/movies/${id}`);
 
   return response;
 };

@@ -1,5 +1,5 @@
 import { RouteGuard } from '@/components';
-import { AuthProvider } from '@/state';
+import { AuthProvider, MovieProvider } from '@/state';
 import '@/styles/globals.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
@@ -10,9 +10,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouteGuard>
-          <Component {...pageProps} />
-        </RouteGuard>
+        <MovieProvider>
+          <RouteGuard>
+            <Component {...pageProps} />
+          </RouteGuard>
+        </MovieProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

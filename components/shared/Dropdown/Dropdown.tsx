@@ -3,7 +3,7 @@ import { PropsType } from './types';
 
 const Dropdown: React.FC<PropsType> = ({ options, selected }) => {
   return (
-    <div className='dropdown ml-auto'>
+    <div className='dropdown'>
       <div
         tabIndex={0}
         role='button'

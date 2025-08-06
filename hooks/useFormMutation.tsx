@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { InputFieldType } from '@/types';
 
-const useAuthMutation = <FormValues extends FieldValues>(
+const useFormMutation = <FormValues extends FieldValues>(
   mutationFn: (data: FormValues | FormData) => Promise<AxiosResponse<{}>>,
   options?: {
     onSuccess?: (data: AxiosResponse<{}>) => void;
@@ -44,4 +44,4 @@ const useAuthMutation = <FormValues extends FieldValues>(
   };
 };
 
-export default useAuthMutation;
+export default useFormMutation;

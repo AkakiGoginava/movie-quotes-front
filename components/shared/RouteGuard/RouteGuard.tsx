@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/hooks';
 
@@ -9,27 +10,34 @@ type RouteGuardProps = {
 
 const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const { user, isLoading, isVerified } = useAuth();
-  const router = useRouter();
 
   const [authorized, setAuthorized] = useState(false);
+
+  const router = useRouter();
+  const pathName = usePathname();
 
   useEffect(() => {
     if (isLoading) return;
 
-    const protectedRoutes = ['/profile'];
+    const protectedRoutes = ['/profile', '/news', '/movies'];
+    const publicRoutes = ['/'];
 
-    const path = router.asPath.split('?')[0];
-
-    if (protectedRoutes.includes(path)) {
+    if (protectedRoutes.includes(pathName)) {
       if (user && isVerified) {
         setAuthorized(true);
       } else {
         router.push('/');
       }
+    } else if (publicRoutes.includes(pathName)) {
+      if (user && isVerified) {
+        router.push('/news');
+      } else {
+        setAuthorized(true);
+      }
     } else {
       setAuthorized(true);
     }
-  }, [user, isLoading, isVerified, router]);
+  }, [user, isLoading, isVerified, pathName, router]);
 
   if (isLoading) {
     return <div>Loading...</div>;

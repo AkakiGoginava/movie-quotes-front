@@ -1,10 +1,10 @@
-import { createContext, useEffect } from 'react';
+import { createContext } from 'react';
 
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
-  useAuthMutation,
+  useFormMutation,
   useSimpleMutation,
   useVerifyEmailMutation,
 } from '@/hooks';
@@ -39,13 +39,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const user = data?.data?.user || null;
 
-  const handleRegister = useAuthMutation(registerUser, {
+  const handleRegister = useFormMutation(registerUser, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 
-  const handleLogin = useAuthMutation(loginUser, {
+  const handleLogin = useFormMutation(loginUser, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
@@ -70,15 +70,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const handleForgotPasswordFactory = (options?: {
     onSuccess?: () => void;
   }) => {
-    return useAuthMutation(forgotPassword, options);
+    return useFormMutation(forgotPassword, options);
   };
 
   const handleResetPasswordFactory = (options?: { onSuccess?: () => void }) => {
-    return useAuthMutation(resetPassword, options);
+    return useFormMutation(resetPassword, options);
   };
 
   const handleEditUserFactory = (options?: { onSuccess?: () => void }) => {
-    return useAuthMutation(editUser, {
+    return useFormMutation(editUser, {
       onSuccess: (data) => {
         queryClient.invalidateQueries({ queryKey: ['user'] });
 

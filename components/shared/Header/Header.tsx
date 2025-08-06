@@ -9,16 +9,19 @@ import {
   ForgotPassword,
   ResetPassword,
   MenuIcon,
+  BellIcon,
+  Search,
 } from '@/components';
+import { cn } from '@/helpers';
 
 import { useHeader } from './useHeader';
 import { PropsType } from './types';
-import { cn } from '@/helpers';
 
 const Header: React.FC<PropsType> = ({
   registerOpen,
   setRegisterOpen,
   setSidebarOpen,
+  setActiveSearch,
 }) => {
   const {
     loginOpen,
@@ -53,18 +56,34 @@ const Header: React.FC<PropsType> = ({
         },
       )}
     >
-      <h3 className='font-medium text-light-yellow hidden md:inline-block'>
+      <h3 className='font-medium text-light-yellow hidden md:inline-block mr-auto'>
         MOVIE QUOTES
       </h3>
 
-      <MenuIcon
-        className='md:hidden'
-        onClick={() => {
-          setSidebarOpen?.(true);
-        }}
-      />
+      {user && (
+        <>
+          <MenuIcon
+            className='md:hidden mr-auto'
+            onClick={() => {
+              setSidebarOpen?.(true);
+            }}
+          />
 
-      <Dropdown options={['Eng', 'Geo']} selected={0} />
+          {setActiveSearch && (
+            <Search
+              onSearch={(searchTerm: string) => {
+                setActiveSearch(searchTerm);
+              }}
+              className='md:hidden mr-2'
+            />
+          )}
+          <BellIcon />
+        </>
+      )}
+
+      <div className={cn('ml-auto', { 'ml-0': user })}>
+        <Dropdown options={['Eng', 'Geo']} selected={0} />
+      </div>
 
       {user ? (
         <>
@@ -76,7 +95,7 @@ const Header: React.FC<PropsType> = ({
               setRegisterOpen?.(false);
               handleLogout();
             }}
-            className='text-sm h-8'
+            className='text-sm h-8 hidden md:block'
           >
             Log out
           </Button>

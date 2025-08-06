@@ -24,13 +24,7 @@ const ForgotPassword: React.FC<PropsType> = ({
   } = useForgotPassword(setOpen, setPasswordResetNotificationOpen);
 
   return (
-    <Modal
-      className='hidden'
-      buttonText=''
-      open={open}
-      setOpen={setOpen}
-      reset={reset}
-    >
+    <Modal open={open} setOpen={setOpen} reset={reset}>
       <AuthForm
         title='Forgot password?'
         subTitle="Enter the email and we'll send an email with instructions to reset your password"
