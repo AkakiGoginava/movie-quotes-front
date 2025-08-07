@@ -20,7 +20,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
       </span>
 
       <div className='flex gap-3 items-center'>
-        <span>10</span>
+        <span>{movie.quotes_count}</span>
         <QuoteIcon />
       </div>
     </Link>

@@ -10,6 +10,7 @@ import {
   EditMovie,
   Layout,
   PlusIcon,
+  QuoteCard,
 } from '@/components';
 import { getMovie } from '@/services';
 import { Category } from '@/types';
@@ -38,8 +39,8 @@ export default function MovieDetail() {
 
   return (
     <Layout>
-      <div className='w-full px-7.5 py-8 md:py-0 md:pl-20 md:pr-17'>
-        <section className='mb-9'>
+      <div className='w-full py-8 md:py-0 md:pl-20 md:pr-17'>
+        <section className='mb-9 px-7.5 md:px-0'>
           <h1 className='text-2xl font-medium mb-8 hidden md:inline-block'>
             Movie description
           </h1>
@@ -100,11 +101,13 @@ export default function MovieDetail() {
           )}
         </section>
 
-        <section>
-          <div className='flex flex-col-reverse md:flex-row gap-8 md:gap-4 md:items-center'>
+        <section className='flex flex-col gap-9'>
+          <div className='px-7.5 flex flex-col-reverse md:flex-row gap-8 md:gap-4 md:items-center'>
             <div className='flex flex-col md:flex-row'>
-              <span className='text-2xl'>Quotes </span>
-              <span className='md:text-2xl'>(total 0)</span>
+              <span className='text-2xl'>Quotes</span>
+              <span className='ml-2 md:text-2xl'>
+                (total {movie?.quotes_count})
+              </span>
             </div>
 
             <span className='text-gray-500 hidden md:inline-block'>|</span>
@@ -118,6 +121,14 @@ export default function MovieDetail() {
               <PlusIcon /> <span>Add quote</span>
             </Button>
           </div>
+
+          {movie && movie.quotes && (
+            <div className='flex flex-col gap-9 md:max-w-207 pb-9'>
+              {movie.quotes.map((quote) => (
+                <QuoteCard key={quote.id} quote={quote} />
+              ))}
+            </div>
+          )}
         </section>
       </div>
     </Layout>

@@ -5,3 +5,4 @@ export * from './forms';
 export * from './notifications';
 export * from './profile';
 export * from './movies';
+export * from './quotes';

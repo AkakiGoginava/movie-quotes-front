@@ -33,8 +33,19 @@ export type Movie = {
   categories: Category[];
   year: string;
   poster_url: string;
+  quotes_count: string;
+  quotes: SimpleQuote[];
   created_at: string;
   updated_at: string;
+};
+
+export type SimpleQuote = {
+  id: number;
+  text: {
+    en: string;
+    ka: string;
+  };
+  poster_url: string;
 };
 
 export type PaginatedResponse<T> = {
