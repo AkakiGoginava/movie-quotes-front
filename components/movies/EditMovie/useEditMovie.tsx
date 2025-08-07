@@ -2,12 +2,12 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import { InputFieldType, MovieInputsType, MultiLanguageMovie } from '@/types';
+import { InputFieldType, MovieInputsType, Movie } from '@/types';
 import { useMovie } from '@/hooks';
 
 const useEditMovie = (
   setModalOpen: Dispatch<SetStateAction<boolean>>,
-  movie: MultiLanguageMovie,
+  movie: Movie,
 ) => {
   const { categories, isLoadingCategories, handleUpdateMovieFactory } =
     useMovie();

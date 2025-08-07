@@ -5,7 +5,7 @@ import {
   ForgotPasswordInput,
   LoginInput,
   MoviesResponse,
-  MultiLanguageMovie,
+  Movie,
   RegisterInput,
   ResetPasswordInput,
   User,
@@ -183,7 +183,7 @@ export const getUserMovies = async (
 
 export const getMovie = async (
   id: string,
-): Promise<AxiosResponse<{ movie: MultiLanguageMovie }>> => {
+): Promise<AxiosResponse<{ movie: Movie }>> => {
   const response = await axios.get(`/api/movies/${id}`);
 
   return response;

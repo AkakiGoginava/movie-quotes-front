@@ -18,18 +18,6 @@ export type Category = {
 
 export type Movie = {
   id: number;
-  title: string;
-  director: string;
-  description: string;
-  categories: Category[];
-  year: string;
-  poster_url: string;
-  created_at: string;
-  updated_at: string;
-};
-
-export type MultiLanguageMovie = {
-  id: number;
   title: {
     en: string;
     ka: string;
