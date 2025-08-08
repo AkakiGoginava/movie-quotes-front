@@ -7,6 +7,7 @@ import {
   EditQuote,
   EyeIcon,
   HeartIcon,
+  ViewQuote,
 } from '@/components';
 import { SimpleQuote } from '@/types';
 
@@ -20,6 +21,7 @@ const QuoteCard = ({
   handleDeleteQuote: (...args: any[]) => Promise<any>;
 }) => {
   const [openQuoteEdit, setOpenQuoteEdit] = useState(false);
+  const [openQuoteView, setOpenQuoteView] = useState(false);
 
   return (
     <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-zinc-900'>
@@ -59,7 +61,10 @@ const QuoteCard = ({
             className='dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm'
           >
             <li className='mb-2'>
-              <div className='flex gap-4'>
+              <div
+                className='flex gap-4'
+                onClick={() => setOpenQuoteView(true)}
+              >
                 <EyeIcon className='size-5' />
                 <span>View quote</span>
               </div>
@@ -93,6 +98,14 @@ const QuoteCard = ({
         modalOpen={openQuoteEdit}
         quote={quote}
         movieId={movieId}
+      />
+
+      <ViewQuote
+        setModalOpen={setOpenQuoteView}
+        modalOpen={openQuoteView}
+        quote={quote}
+        setOpenQuoteEdit={setOpenQuoteEdit}
+        handleDeleteQuote={handleDeleteQuote}
       />
     </section>
   );
