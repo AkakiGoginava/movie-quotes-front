@@ -2,9 +2,9 @@ import { FieldValues } from 'react-hook-form';
 
 import { Button, InputField } from '@/components';
 import { useAuth } from '@/hooks';
+import { Category } from '@/types';
 
 import { PropsType } from './types';
-import { Category } from '@/types';
 
 const QuoteForm = <FormValues extends FieldValues = FieldValues>({
   title,

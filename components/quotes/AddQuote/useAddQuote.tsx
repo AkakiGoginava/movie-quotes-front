@@ -23,6 +23,7 @@ const useAddQuote = ({ movieId }: { movieId: number }) => {
   const handleStoreQuote = handleStoreQuoteFactory(movieId, {
     onSuccess: () => {
       setModalOpen(false);
+      reset();
     },
   });
 
