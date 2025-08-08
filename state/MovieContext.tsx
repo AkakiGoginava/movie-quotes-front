@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 
 import {
   deleteMovie,
+  deleteQuote,
   getCategories,
   getUserMovies,
   storeMovie,
@@ -94,6 +95,21 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const deleteQuoteMutation = useSimpleMutation(deleteQuote);
+
+  const handleDeleteQuoteFactory = (movieId: number) => {
+    return async (quoteId: number) => {
+      const result = await deleteQuoteMutation(quoteId);
+
+      queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+      queryClient.invalidateQueries({
+        queryKey: ['movie', movieId.toString()],
+      });
+
+      return result;
+    };
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -113,6 +129,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
         handleUpdateMovieFactory,
 
         handleStoreQuoteFactory,
+        handleDeleteQuoteFactory,
       }}
     >
       {children}

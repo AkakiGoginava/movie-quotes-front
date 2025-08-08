@@ -28,7 +28,8 @@ const AddQuote = ({ movie }: { movie: Movie }) => {
           setModalOpen(true);
         }}
       >
-        <PlusIcon /> <span>Add quote</span>
+        <PlusIcon />
+        <span>Add quote</span>
       </Button>
 
       <Modal

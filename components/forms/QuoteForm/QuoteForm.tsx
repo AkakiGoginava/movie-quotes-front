@@ -42,28 +42,30 @@ const QuoteForm = <FormValues extends FieldValues = FieldValues>({
           <img
             src={movie.poster_url}
             alt='movie poster'
-            className='max-w-75 max-h-40 object-cover rounded-xl'
+            className='max-w-40 md:max-w-75 max-h-20 md:max-h-40 object-cover rounded-xl'
           />
 
-          <div className='flex flex-col gap-7.5'>
-            <h1 className='text-2xl font-medium text-light-yellow'>
-              {movie.title.en}
+          <div className='flex flex-col md:gap-7.5'>
+            <h1 className='md:text-2xl font-medium text-light-yellow'>
+              {movie.title.en} ({movie.year})
             </h1>
 
-            <div className='flex gap-2 flex-wrap'>
-              {movie.categories.map((category: Category) => (
-                <div
-                  key={category.id}
-                  className='font-bold text-lg bg-gray-600 py-1 px-3 rounded-lg'
-                >
-                  {category.name}
-                </div>
-              ))}
-            </div>
+            <div className='flex flex-col-reverse md:flex-col md:gap-7.5'>
+              <div className='flex gap-2 flex-wrap'>
+                {movie.categories.map((category: Category) => (
+                  <div
+                    key={category.id}
+                    className='font-bold text-sm md:text-lg bg-gray-600 py-1 px-2 md:px-3 rounded-lg'
+                  >
+                    {category.name}
+                  </div>
+                ))}
+              </div>
 
-            <h2 className='text-lg font-bold mb-2'>
-              Director: {movie.director.en}
-            </h2>
+              <h2 className='md:text-lg font-bold mb-2'>
+                Director: {movie.director.en}
+              </h2>
+            </div>
           </div>
         </div>
       )}

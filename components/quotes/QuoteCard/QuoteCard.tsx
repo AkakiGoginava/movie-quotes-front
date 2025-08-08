@@ -7,9 +7,15 @@ import {
 } from '@/components/icons';
 import { SimpleQuote } from '@/types';
 
-const QuoteCard = ({ quote }: { quote: SimpleQuote }) => {
+const QuoteCard = ({
+  quote,
+  handleDeleteQuote,
+}: {
+  quote: SimpleQuote;
+  handleDeleteQuote: (...args: any[]) => Promise<any>;
+}) => {
   return (
-    <section className='w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-zinc-900'>
+    <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-zinc-900'>
       <div className='w-full flex flex-col md:flex-row gap-6'>
         <img
           src={quote.poster_url}
@@ -18,8 +24,6 @@ const QuoteCard = ({ quote }: { quote: SimpleQuote }) => {
         />
 
         <p className='text-2xl italic'>"{quote.text.en}"</p>
-
-        <div className='ml-auto text-2xl font-bold hidden md:flex'>...</div>
       </div>
 
       <div className='border-b border-gray-700'></div>
@@ -35,7 +39,7 @@ const QuoteCard = ({ quote }: { quote: SimpleQuote }) => {
           <span>10</span>
         </div>
 
-        <div className='dropdown ml-auto md:hidden dropdown-top dropdown-end'>
+        <div className='dropdown dropdown-top dropdown-end absolute bottom-5 right-5 md:top-3'>
           <div
             tabIndex={0}
             role='button'
@@ -62,7 +66,10 @@ const QuoteCard = ({ quote }: { quote: SimpleQuote }) => {
             </li>
 
             <li className='flex gap-4'>
-              <div className='flex gap-4'>
+              <div
+                className='flex gap-4'
+                onClick={() => handleDeleteQuote(quote.id)}
+              >
                 <DeleteIcon />
                 <span>Delete</span>
               </div>

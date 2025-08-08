@@ -208,3 +208,11 @@ export const storeQuote = async (
 
   return response;
 };
+
+export const deleteQuote = async (id: string): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.delete(`/api/quotes/${id}`);
+
+  return response;
+};
