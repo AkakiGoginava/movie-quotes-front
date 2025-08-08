@@ -216,3 +216,16 @@ export const deleteQuote = async (id: string): Promise<AxiosResponse> => {
 
   return response;
 };
+
+export const updateQuote = async (
+  id: number,
+  formData: FormData,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/quotes/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return response;
+};

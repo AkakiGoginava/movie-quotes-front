@@ -31,10 +31,10 @@ const QuoteForm = <FormValues extends FieldValues = FieldValues>({
         <img
           src={user?.avatar_url}
           alt='avatar'
-          className='size-15 object-contain bg-gray-300 rounded-full'
+          className='size-10 md:size-15 object-contain bg-gray-300 rounded-full'
         />
 
-        <p className='flex text-2xl items-center '>{user?.name}</p>
+        <p className='flex text-xl items-center '>{user?.name}</p>
       </div>
 
       {movie && (

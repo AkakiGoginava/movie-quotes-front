@@ -1,19 +1,26 @@
+import { useState } from 'react';
+
 import {
   CommentIcon,
   DeleteIcon,
   EditIcon,
+  EditQuote,
   EyeIcon,
   HeartIcon,
-} from '@/components/icons';
+} from '@/components';
 import { SimpleQuote } from '@/types';
 
 const QuoteCard = ({
   quote,
+  movieId,
   handleDeleteQuote,
 }: {
   quote: SimpleQuote;
+  movieId: number;
   handleDeleteQuote: (...args: any[]) => Promise<any>;
 }) => {
+  const [openQuoteEdit, setOpenQuoteEdit] = useState(false);
+
   return (
     <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-zinc-900'>
       <div className='w-full flex flex-col md:flex-row gap-6'>
@@ -59,7 +66,10 @@ const QuoteCard = ({
             </li>
 
             <li className='flex gap-4'>
-              <div className='flex gap-4 mb-2'>
+              <div
+                className='flex gap-4 mb-2'
+                onClick={() => setOpenQuoteEdit(true)}
+              >
                 <EditIcon />
                 <span>Edit</span>
               </div>
@@ -77,6 +87,13 @@ const QuoteCard = ({
           </ul>
         </div>
       </div>
+
+      <EditQuote
+        setModalOpen={setOpenQuoteEdit}
+        modalOpen={openQuoteEdit}
+        quote={quote}
+        movieId={movieId}
+      />
     </section>
   );
 };

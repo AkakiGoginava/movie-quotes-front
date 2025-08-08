@@ -15,6 +15,7 @@ import {
   storeMovie,
   storeQuote,
   updateMovie,
+  updateQuote,
 } from '@/services';
 import { useFormMutation, useSimpleMutation } from '@/hooks';
 
@@ -68,17 +69,14 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     id: number,
     options?: { onSuccess?: () => void },
   ) => {
-    return useFormMutation(
-      (formData: FormData) => updateMovie(Number(id), formData),
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['userMovies'] });
-          queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
+    return useFormMutation((formData: FormData) => updateMovie(id, formData), {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
 
-          options?.onSuccess?.();
-        },
+        options?.onSuccess?.();
       },
-    );
+    });
   };
 
   const handleStoreQuoteFactory = (
@@ -110,6 +108,25 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     };
   };
 
+  const handleUpdateQuoteFactory = (
+    movieId: number,
+    quoteId: number,
+    options?: { onSuccess?: () => void },
+  ) => {
+    return useFormMutation(
+      (formData: FormData) => updateQuote(quoteId, formData),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: ['movie', movieId.toString()],
+          });
+
+          options?.onSuccess?.();
+        },
+      },
+    );
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -130,6 +147,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
 
         handleStoreQuoteFactory,
         handleDeleteQuoteFactory,
+        handleUpdateQuoteFactory,
       }}
     >
       {children}

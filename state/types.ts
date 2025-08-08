@@ -76,4 +76,9 @@ export type MovieContextType = {
 
   handleStoreQuoteFactory: FormHandlerWithIdFactory<FormData>;
   handleDeleteQuoteFactory: (movieId: number) => SimpleMutation;
+  handleUpdateQuoteFactory: (
+    movieId: number,
+    quoteId: number,
+    options?: { onSuccess?: () => void },
+  ) => FormHandler<FormData>;
 };
