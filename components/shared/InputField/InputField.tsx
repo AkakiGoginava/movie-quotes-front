@@ -100,7 +100,10 @@ const InputField = <FormValues extends FieldValues>({
       {input.type === 'checkbox' && (
         <button
           type='button'
-          className='link text-blue-500 hover:opacity-85'
+          className={cn(
+            'link text-blue-500 hover:opacity-85',
+            input?.className,
+          )}
           onClick={() => {
             handleForgotPasswordClick?.();
           }}
@@ -120,15 +123,17 @@ const InputField = <FormValues extends FieldValues>({
           [movieInputContainerStyles.checkbox]: input.type === 'checkbox',
         })}
       >
-        <label
-          className={cn(labelStyles.base, {
-            [labelStyles.movie]: type === 'movie',
-            [labelStyles.textarea]: input.type === 'textarea',
-          })}
-          htmlFor={input.name}
-        >
-          {input.label}
-        </label>
+        {input?.label && (
+          <label
+            className={cn(labelStyles.base, {
+              [labelStyles.movie]: type === 'movie',
+              [labelStyles.textarea]: input.type === 'textarea',
+            })}
+            htmlFor={input.name}
+          >
+            {input.label}
+          </label>
+        )}
 
         <div className='relative w-full overflow-visible'>
           {input.type === 'textarea' ? (
@@ -139,6 +144,7 @@ const InputField = <FormValues extends FieldValues>({
                 inputStyles.movie,
                 inputStyles.textarea,
                 className,
+                input?.className,
               )}
               placeholder={input.placeholder}
               {...register(input.name, input?.rules)}

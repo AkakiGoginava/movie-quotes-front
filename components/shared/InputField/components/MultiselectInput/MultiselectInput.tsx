@@ -65,29 +65,31 @@ const MultiselectInput = <FormValues extends FieldValues = FieldValues>({
               )}
               onClick={() => setIsOpen((prev) => !prev)}
             >
-              {getSelectedOptions().length > 0 ? (
-                getSelectedOptions().map((option: OptionType) => (
-                  <div
-                    key={option.id}
-                    className='flex items-center gap-1 bg-gray-500 px-2 py-1 rounded text-sm'
-                  >
-                    <span>{option.name}</span>
-
-                    <button
-                      type='button'
-                      className='ml-1 hover:bg-gray-400 hover:cursor-pointer rounded-full w-4 h-4 flex items-center justify-center text-xs'
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveOption(option.id);
-                      }}
+              {getSelectedOptions().length > 0
+                ? getSelectedOptions().map((option: OptionType) => (
+                    <div
+                      key={option.id}
+                      className='flex items-center gap-1 bg-gray-500 px-2 py-1 rounded text-sm'
                     >
-                      ×
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <span className='text-gray-500 md:text-xl'>{input.label}</span>
-              )}
+                      <span>{option.name}</span>
+
+                      <button
+                        type='button'
+                        className='ml-1 hover:bg-gray-400 hover:cursor-pointer rounded-full w-4 h-4 flex items-center justify-center text-xs'
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveOption(option.id);
+                        }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))
+                : input?.label && (
+                    <span className='text-gray-500 md:text-xl'>
+                      {input.label}
+                    </span>
+                  )}
             </div>
 
             {isOpen && (

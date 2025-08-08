@@ -12,6 +12,7 @@ import {
   getCategories,
   getUserMovies,
   storeMovie,
+  storeQuote,
   updateMovie,
 } from '@/services';
 import { useFormMutation, useSimpleMutation } from '@/hooks';
@@ -45,7 +46,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   const allMovies = data?.pages.flatMap((page) => page.data.data) ?? [];
   const totalMovies = data?.pages[0]?.data.total_movies ?? 0;
 
-  const handleDelete = useSimpleMutation(deleteMovie, {
+  const handleDeleteMovie = useSimpleMutation(deleteMovie, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userMovies'] });
       router.push('/movies');
@@ -79,6 +80,20 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const handleStoreQuoteFactory = (
+    id: number,
+    options?: { onSuccess?: () => void },
+  ) => {
+    return useFormMutation(storeQuote, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
+
+        options?.onSuccess?.();
+      },
+    });
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -93,9 +108,11 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
         fetchNextPage,
         setActiveSearch,
 
-        handleDelete,
+        handleDeleteMovie,
         handleStoreMovieFactory,
         handleUpdateMovieFactory,
+
+        handleStoreQuoteFactory,
       }}
     >
       {children}

@@ -155,6 +155,7 @@ const useAddMovie = () => {
       rules: {
         required: { value: true, message: 'Please upload an image' },
       },
+      variant: 'primary',
     },
   ];
 

@@ -196,3 +196,15 @@ export const deleteMovie = async (id: string): Promise<AxiosResponse> => {
 
   return response;
 };
+
+export const storeQuote = async (
+  formData: FormData,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/quotes', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return response;
+};

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
 
 import {
+  AddQuote,
   Button,
   DeleteIcon,
   EditIcon,
@@ -21,8 +22,9 @@ export default function MovieDetail() {
   const { id } = router.query;
 
   const [openEditMoval, setOpenEditMoval] = useState(false);
+  const [openAddQuoteModal, setOpenAddQuoteModal] = useState(false);
 
-  const { handleDelete } = useMovie();
+  const { handleDeleteMovie } = useMovie();
 
   if (!id || typeof id !== 'string') {
     return <div>Invalid movie ID</div>;
@@ -69,7 +71,7 @@ export default function MovieDetail() {
                     <span className='text-gray-500'>|</span>
                     <DeleteIcon
                       className='cursor-pointer'
-                      onClick={() => handleDelete(movie.id)}
+                      onClick={() => handleDeleteMovie(movie.id)}
                     />
                   </div>
                 </div>
@@ -101,35 +103,29 @@ export default function MovieDetail() {
           )}
         </section>
 
-        <section className='flex flex-col gap-9'>
-          <div className='px-7.5 flex flex-col-reverse md:flex-row gap-8 md:gap-4 md:items-center'>
-            <div className='flex flex-col md:flex-row'>
-              <span className='text-2xl'>Quotes</span>
-              <span className='ml-2 md:text-2xl'>
-                (total {movie?.quotes_count})
-              </span>
+        {movie && movie.quotes && (
+          <section className='flex flex-col gap-9'>
+            <div className='px-7.5 flex flex-col-reverse md:flex-row gap-8 md:gap-4 md:items-center'>
+              <div className='flex flex-col md:flex-row'>
+                <span className='text-2xl'>Quotes</span>
+                <span className='md:ml-2 md:text-2xl'>
+                  (total {movie.quotes_count})
+                </span>
+              </div>
+
+              <span className='text-gray-500 hidden md:inline-block'>|</span>
+              <div className='border-b border-gray-600 md:hidden' />
+
+              <AddQuote movie={movie} />
             </div>
 
-            <span className='text-gray-500 hidden md:inline-block'>|</span>
-            <div className='border-b border-gray-600 md:hidden' />
-
-            <Button
-              type='button'
-              variant='primary'
-              className='md:text-xl text-base w-fit'
-            >
-              <PlusIcon /> <span>Add quote</span>
-            </Button>
-          </div>
-
-          {movie && movie.quotes && (
             <div className='flex flex-col gap-9 md:max-w-207 pb-9'>
               {movie.quotes.map((quote) => (
                 <QuoteCard key={quote.id} quote={quote} />
               ))}
             </div>
-          )}
-        </section>
+          </section>
+        )}
       </div>
     </Layout>
   );

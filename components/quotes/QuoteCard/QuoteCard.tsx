@@ -1,4 +1,10 @@
-import { CommentIcon, HeartIcon } from '@/components/icons';
+import {
+  CommentIcon,
+  DeleteIcon,
+  EditIcon,
+  EyeIcon,
+  HeartIcon,
+} from '@/components/icons';
 import { SimpleQuote } from '@/types';
 
 const QuoteCard = ({ quote }: { quote: SimpleQuote }) => {
@@ -29,7 +35,40 @@ const QuoteCard = ({ quote }: { quote: SimpleQuote }) => {
           <span>10</span>
         </div>
 
-        <div className='ml-auto font-bold md:hidden'>...</div>
+        <div className='dropdown ml-auto md:hidden dropdown-top dropdown-end'>
+          <div
+            tabIndex={0}
+            role='button'
+            className='btn btn-ghost font-bold text-2xl'
+          >
+            ...
+          </div>
+          <ul
+            tabIndex={0}
+            className='dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm'
+          >
+            <li className='mb-2'>
+              <div className='flex gap-4'>
+                <EyeIcon className='size-5' />
+                <span>View quote</span>
+              </div>
+            </li>
+
+            <li className='flex gap-4'>
+              <div className='flex gap-4 mb-2'>
+                <EditIcon />
+                <span>Edit</span>
+              </div>
+            </li>
+
+            <li className='flex gap-4'>
+              <div className='flex gap-4'>
+                <DeleteIcon />
+                <span>Delete</span>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );

@@ -10,8 +10,10 @@ export type InputFieldType<FormValues extends FieldValues = FieldValues> = {
   type: string;
   options?: OptionType[];
   placeholder?: string;
-  label: string;
+  label?: string;
   rules?: RegisterOptions<FormValues, Path<FormValues>>;
+  className?: string;
+  variant?: 'primary' | 'secondary';
 };
 
 export type RegisterInput = {
@@ -67,6 +69,14 @@ export type MovieInputsType = {
     ka: string;
   };
   description: {
+    en: string;
+    ka: string;
+  };
+  poster: FileList;
+};
+
+export type QuoteInputsType = {
+  text: {
     en: string;
     ka: string;
   };
