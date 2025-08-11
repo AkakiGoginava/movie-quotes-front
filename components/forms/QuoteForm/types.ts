@@ -7,7 +7,7 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 
-import { InputFieldType } from '@/types';
+import { InputFieldType, Movie } from '@/types';
 
 export type PropsType<FormValues extends FieldValues = FieldValues> = {
   title: string;
@@ -20,4 +20,5 @@ export type PropsType<FormValues extends FieldValues = FieldValues> = {
   touchedFields: FieldNamesMarkedBoolean<FormValues>;
   getValues: UseFormGetValues<FormValues>;
   control: Control<FormValues>;
+  movie?: Movie;
 };

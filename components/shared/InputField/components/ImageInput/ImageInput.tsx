@@ -39,44 +39,60 @@ const ImageInput = <FormValues extends FieldValues = FieldValues>({
           <div
             {...getRootProps()}
             className={cn(
-              'border hover:bg-gray-800 rounded-md p-4 md:p-6 cursor-pointer transition-colors flex items-center gap-3',
+              'border hover:bg-gray-800 rounded-md cursor-pointer transition-colors flex items-center gap-3',
               {
                 'border-blue-500 bg-blue-500/10': isDragActive,
                 'border-gray-500': !hasEnteredInput,
                 'border-red-500': isInvalid,
                 'border-green-500': hasEnteredInput && isValid,
               },
+              input.className,
             )}
           >
             <input {...getInputProps()} />
-            <div className='flex items-center gap-4 md:text-lg w-full'>
+            <div className='md:text-lg w-full'>
               {selectedFile && selectedFile.length > 0 ? (
-                <div className='flex gap-4 w-full'>
-                  <img
-                    src={URL.createObjectURL(selectedFile[0])}
-                    alt='selected image'
-                    className='max-w-50 md:max-w-100 object-cover'
-                  />
+                input?.variant === 'primary' ? (
+                  <div className='flex gap-4 w-full p-4 md:p-5'>
+                    <img
+                      src={URL.createObjectURL(selectedFile[0])}
+                      alt='selected image'
+                      className='max-w-50 md:max-w-100 object-cover'
+                    />
 
-                  <div className='flex flex-col gap-5 items-center justify-center w-full md:ml-auto'>
-                    <p className='text-xs md:text-base font-bold text-light-yellow'>
-                      REPLACE PHOTO
-                    </p>
-
-                    <div className='hidden md:flex gap-2'>
-                      <ImageIcon />
-                      <p className='hidden md:inline-block text-xl'>
-                        Drag & drop your image here or
+                    <div className='flex flex-col gap-5 items-center justify-center w-full md:ml-auto'>
+                      <p className='text-xs md:text-base font-bold text-light-yellow'>
+                        REPLACE PHOTO
                       </p>
-                    </div>
 
-                    <div className='text-sm md:text-lg bg-purple-900 p-2'>
-                      Choose file
+                      <div className='hidden md:flex gap-2'>
+                        <ImageIcon />
+                        <p className='hidden md:inline-block text-xl'>
+                          Drag & drop your image here or
+                        </p>
+                      </div>
+
+                      <div className='text-sm md:text-lg bg-purple-900 p-2'>
+                        Choose file
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className='relative flex gap-4 w-full'>
+                    <img
+                      src={URL.createObjectURL(selectedFile[0])}
+                      alt='selected image'
+                      className='w-full max-h-75 md:max-h-100 object-cover rounded-xl'
+                    />
+
+                    <div className='absolute top-1/2 left-1/2 -translate-1/2 flex flex-col gap-2 items-center bg-black/40 p-5 rounded-xl'>
+                      <ImageIcon />
+                      <p>Change Photo</p>
+                    </div>
+                  </div>
+                )
               ) : (
-                <>
+                <div className='p-4 md:p-5 flex items-center gap-4'>
                   <ImageIcon />
                   <p className='hidden md:inline-block'>
                     Drag & drop your image here or
@@ -87,7 +103,7 @@ const ImageInput = <FormValues extends FieldValues = FieldValues>({
                   <div className='bg-purple-900 p-2 ml-auto md:ml-0'>
                     Choose file
                   </div>
-                </>
+                </div>
               )}
             </div>
           </div>

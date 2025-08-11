@@ -1,6 +1,7 @@
+import Link from 'next/link';
+
 import { QuoteIcon } from '@/components';
 import { Movie } from '@/types';
-import Link from 'next/link';
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
@@ -15,11 +16,11 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
       />
 
       <span className='font-medium text-2xl'>
-        {movie.title} ({movie.year})
+        {movie.title.en} ({movie.year})
       </span>
 
       <div className='flex gap-3 items-center'>
-        <span>10</span>
+        <span>{movie.quotes_count}</span>
         <QuoteIcon />
       </div>
     </Link>

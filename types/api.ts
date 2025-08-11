@@ -18,18 +18,6 @@ export type Category = {
 
 export type Movie = {
   id: number;
-  title: string;
-  director: string;
-  description: string;
-  categories: Category[];
-  year: string;
-  poster_url: string;
-  created_at: string;
-  updated_at: string;
-};
-
-export type MultiLanguageMovie = {
-  id: number;
   title: {
     en: string;
     ka: string;
@@ -45,8 +33,19 @@ export type MultiLanguageMovie = {
   categories: Category[];
   year: string;
   poster_url: string;
+  quotes_count: string;
+  quotes: SimpleQuote[];
   created_at: string;
   updated_at: string;
+};
+
+export type SimpleQuote = {
+  id: number;
+  text: {
+    en: string;
+    ka: string;
+  };
+  poster_url: string;
 };
 
 export type PaginatedResponse<T> = {

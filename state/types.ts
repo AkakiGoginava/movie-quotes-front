@@ -24,6 +24,11 @@ type FormHandlerFactory<T extends FieldValues> = (options?: {
   onError?: () => void;
 }) => FormHandler<T>;
 
+type FormHandlerWithIdFactory<T extends FieldValues> = (
+  id: number,
+  options?: { onSuccess?: () => void },
+) => FormHandler<T>;
+
 type SimpleMutation = (...args: any[]) => Promise<any>;
 
 type NotificationSetter = Dispatch<SetStateAction<boolean>>;
@@ -65,10 +70,15 @@ export type MovieContextType = {
   fetchNextPage: () => void;
   setActiveSearch: Dispatch<SetStateAction<string>>;
 
-  handleDelete: SimpleMutation;
+  handleDeleteMovie: SimpleMutation;
   handleStoreMovieFactory: FormHandlerFactory<FormData>;
-  handleUpdateMovieFactory: (
-    id: number,
+  handleUpdateMovieFactory: FormHandlerWithIdFactory<FormData>;
+
+  handleStoreQuoteFactory: FormHandlerWithIdFactory<FormData>;
+  handleDeleteQuoteFactory: (movieId: number) => SimpleMutation;
+  handleUpdateQuoteFactory: (
+    movieId: number,
+    quoteId: number,
     options?: { onSuccess?: () => void },
   ) => FormHandler<FormData>;
 };

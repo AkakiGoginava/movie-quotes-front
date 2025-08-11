@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 import { Modal, MovieForm } from '@/components';
-import { MultiLanguageMovie } from '@/types';
+import { Movie } from '@/types';
 
 import useEditMovie from './useEditMovie';
 
@@ -12,7 +12,7 @@ const EditMovie = ({
 }: {
   modalOpen: boolean;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
-  movie: MultiLanguageMovie;
+  movie: Movie;
 }) => {
   const {
     isLoading,

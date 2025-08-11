@@ -22,7 +22,11 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     const protectedRoutes = ['/profile', '/news', '/movies'];
     const publicRoutes = ['/'];
 
-    if (protectedRoutes.includes(pathName)) {
+    const isProtectedRoute = protectedRoutes.some(
+      (route) => pathName === route || pathName.startsWith(`${route}/`),
+    );
+
+    if (isProtectedRoute) {
       if (user && isVerified) {
         setAuthorized(true);
       } else {

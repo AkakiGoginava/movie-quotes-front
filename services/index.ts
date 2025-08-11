@@ -5,7 +5,7 @@ import {
   ForgotPasswordInput,
   LoginInput,
   MoviesResponse,
-  MultiLanguageMovie,
+  Movie,
   RegisterInput,
   ResetPasswordInput,
   User,
@@ -183,7 +183,7 @@ export const getUserMovies = async (
 
 export const getMovie = async (
   id: string,
-): Promise<AxiosResponse<{ movie: MultiLanguageMovie }>> => {
+): Promise<AxiosResponse<{ movie: Movie }>> => {
   const response = await axios.get(`/api/movies/${id}`);
 
   return response;
@@ -193,6 +193,39 @@ export const deleteMovie = async (id: string): Promise<AxiosResponse> => {
   await getCsrfCookie();
 
   const response = await axios.delete(`/api/movies/${id}`);
+
+  return response;
+};
+
+export const storeQuote = async (
+  formData: FormData,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/quotes', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return response;
+};
+
+export const deleteQuote = async (id: string): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.delete(`/api/quotes/${id}`);
+
+  return response;
+};
+
+export const updateQuote = async (
+  id: number,
+  formData: FormData,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/quotes/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
   return response;
 };

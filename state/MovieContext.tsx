@@ -9,10 +9,13 @@ import { useRouter } from 'next/navigation';
 
 import {
   deleteMovie,
+  deleteQuote,
   getCategories,
   getUserMovies,
   storeMovie,
+  storeQuote,
   updateMovie,
+  updateQuote,
 } from '@/services';
 import { useFormMutation, useSimpleMutation } from '@/hooks';
 
@@ -45,7 +48,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   const allMovies = data?.pages.flatMap((page) => page.data.data) ?? [];
   const totalMovies = data?.pages[0]?.data.total_movies ?? 0;
 
-  const handleDelete = useSimpleMutation(deleteMovie, {
+  const handleDeleteMovie = useSimpleMutation(deleteMovie, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userMovies'] });
       router.push('/movies');
@@ -66,12 +69,57 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     id: number,
     options?: { onSuccess?: () => void },
   ) => {
+    return useFormMutation((formData: FormData) => updateMovie(id, formData), {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
+
+        options?.onSuccess?.();
+      },
+    });
+  };
+
+  const handleStoreQuoteFactory = (
+    id: number,
+    options?: { onSuccess?: () => void },
+  ) => {
+    return useFormMutation(storeQuote, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
+
+        options?.onSuccess?.();
+      },
+    });
+  };
+
+  const deleteQuoteMutation = useSimpleMutation(deleteQuote);
+
+  const handleDeleteQuoteFactory = (movieId: number) => {
+    return async (quoteId: number) => {
+      const result = await deleteQuoteMutation(quoteId);
+
+      queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+      queryClient.invalidateQueries({
+        queryKey: ['movie', movieId.toString()],
+      });
+
+      return result;
+    };
+  };
+
+  const handleUpdateQuoteFactory = (
+    movieId: number,
+    quoteId: number,
+    options?: { onSuccess?: () => void },
+  ) => {
     return useFormMutation(
-      (formData: FormData) => updateMovie(Number(id), formData),
+      (formData: FormData) => updateQuote(quoteId, formData),
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['userMovies'] });
-          queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
+          queryClient.invalidateQueries({
+            queryKey: ['movie', movieId.toString()],
+          });
 
           options?.onSuccess?.();
         },
@@ -93,9 +141,13 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
         fetchNextPage,
         setActiveSearch,
 
-        handleDelete,
+        handleDeleteMovie,
         handleStoreMovieFactory,
         handleUpdateMovieFactory,
+
+        handleStoreQuoteFactory,
+        handleDeleteQuoteFactory,
+        handleUpdateQuoteFactory,
       }}
     >
       {children}
