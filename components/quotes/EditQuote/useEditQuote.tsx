@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import { InputFieldType, QuoteInputsType, SimpleQuote } from '@/types';
+import { InputFieldType, QuoteInputsType, Quote } from '@/types';
 import { useMovie } from '@/hooks';
 
 const useEditQuote = ({
@@ -11,7 +11,7 @@ const useEditQuote = ({
   setModalOpen,
 }: {
   movieId: number;
-  quote: SimpleQuote;
+  quote: Quote;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { handleUpdateQuoteFactory } = useMovie();

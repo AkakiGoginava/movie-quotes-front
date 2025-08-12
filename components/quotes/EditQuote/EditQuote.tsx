@@ -1,5 +1,5 @@
 import { Modal, QuoteForm } from '@/components';
-import { SimpleQuote } from '@/types';
+import { Quote } from '@/types';
 
 import useEditQuote from './useEditQuote';
 import { Dispatch, SetStateAction } from 'react';
@@ -11,7 +11,7 @@ const EditQuote = ({
   setModalOpen,
 }: {
   movieId: number;
-  quote: SimpleQuote;
+  quote: Quote;
   modalOpen: boolean;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
 }) => {

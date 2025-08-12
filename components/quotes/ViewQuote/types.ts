@@ -1,8 +1,8 @@
-import { SimpleQuote } from '@/types';
+import { Quote } from '@/types';
 import { Dispatch, SetStateAction } from 'react';
 
 export type PropsType = {
-  quote: SimpleQuote;
+  quote: Quote;
   modalOpen: boolean;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
   setOpenQuoteEdit: Dispatch<SetStateAction<boolean>>;

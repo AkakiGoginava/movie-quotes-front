@@ -16,6 +16,30 @@ export type Category = {
   updated_at: string;
 };
 
+export type Comment = {
+  id: number;
+  content: string;
+  user: {
+    id: number;
+    name: string;
+    avatar_url: string;
+  };
+};
+
+export type Quote = {
+  id: number;
+  text: {
+    en: string;
+    ka: string;
+  };
+  poster_url: string;
+  movie_title: string;
+  movie_year: string;
+  likes_count: number;
+  comments_count: number;
+  comments: Comment[];
+};
+
 export type Movie = {
   id: number;
   title: {
@@ -34,18 +58,9 @@ export type Movie = {
   year: string;
   poster_url: string;
   quotes_count: string;
-  quotes: SimpleQuote[];
+  quotes: Quote[];
   created_at: string;
   updated_at: string;
-};
-
-export type SimpleQuote = {
-  id: number;
-  text: {
-    en: string;
-    ka: string;
-  };
-  poster_url: string;
 };
 
 export type PaginatedResponse<T> = {

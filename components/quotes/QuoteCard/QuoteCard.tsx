@@ -9,14 +9,14 @@ import {
   HeartIcon,
   ViewQuote,
 } from '@/components';
-import { SimpleQuote } from '@/types';
+import { Quote } from '@/types';
 
 const QuoteCard = ({
   quote,
   movieId,
   handleDeleteQuote,
 }: {
-  quote: SimpleQuote;
+  quote: Quote;
   movieId: number;
   handleDeleteQuote: (...args: any[]) => Promise<any>;
 }) => {
