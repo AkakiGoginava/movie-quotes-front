@@ -13,11 +13,9 @@ import { Quote } from '@/types';
 
 const QuoteCard = ({
   quote,
-  movieId,
   handleDeleteQuote,
 }: {
   quote: Quote;
-  movieId: number;
   handleDeleteQuote: (...args: any[]) => Promise<any>;
 }) => {
   const [openQuoteEdit, setOpenQuoteEdit] = useState(false);
@@ -40,12 +38,12 @@ const QuoteCard = ({
       <div className='flex gap-6 text-xl'>
         <div className='flex items-center gap-3'>
           <CommentIcon />
-          <span>3</span>
+          <span>{quote.comments_count}</span>
         </div>
 
         <div className='flex items-center gap-3'>
           <HeartIcon />
-          <span>10</span>
+          <span>{quote.likes_count}</span>
         </div>
 
         <div className='dropdown dropdown-top dropdown-end absolute bottom-5 right-5 md:top-3'>
@@ -97,7 +95,6 @@ const QuoteCard = ({
         setModalOpen={setOpenQuoteEdit}
         modalOpen={openQuoteEdit}
         quote={quote}
-        movieId={movieId}
       />
 
       <ViewQuote

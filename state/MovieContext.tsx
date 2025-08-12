@@ -12,6 +12,7 @@ import {
   deleteQuote,
   getCategories,
   getUserMovies,
+  likeQuote,
   storeMovie,
   storeQuote,
   updateMovie,
@@ -127,6 +128,21 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const likeQuoteMutation = useSimpleMutation(likeQuote);
+
+  const handleQuoteLikeFactory = (movieId: number) => {
+    return async (quoteId: number) => {
+      const result = await likeQuoteMutation(quoteId);
+
+      queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+      queryClient.invalidateQueries({
+        queryKey: ['movie', movieId.toString()],
+      });
+
+      return result;
+    };
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -148,6 +164,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
         handleStoreQuoteFactory,
         handleDeleteQuoteFactory,
         handleUpdateQuoteFactory,
+        handleQuoteLikeFactory,
       }}
     >
       {children}

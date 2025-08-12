@@ -6,11 +6,9 @@ import { InputFieldType, QuoteInputsType, Quote } from '@/types';
 import { useMovie } from '@/hooks';
 
 const useEditQuote = ({
-  movieId,
   quote,
   setModalOpen,
 }: {
-  movieId: number;
   quote: Quote;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -42,7 +40,7 @@ const useEditQuote = ({
     });
   }, [quote]);
 
-  const handleUpdateQuote = handleUpdateQuoteFactory(movieId, quote.id, {
+  const handleUpdateQuote = handleUpdateQuoteFactory(quote.movie_id, quote.id, {
     onSuccess: () => {
       setModalOpen(false);
       reset();
@@ -52,7 +50,7 @@ const useEditQuote = ({
   const onSubmitHandler = (data: QuoteInputsType) => {
     const formData = new FormData();
 
-    formData.append('movie_id', movieId.toString());
+    formData.append('movie_id', quote.movie_id.toString());
 
     formData.append('text[en]', data.text.en);
     formData.append('text[ka]', data.text.ka);

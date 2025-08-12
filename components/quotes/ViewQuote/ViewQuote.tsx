@@ -3,11 +3,13 @@ import {
   DeleteIcon,
   EditIcon,
   HeartIcon,
+  LikedHeartIcon,
   Modal,
 } from '@/components';
-import { useAuth } from '@/hooks';
+import { useAuth, useMovie } from '@/hooks';
 
 import { PropsType } from './types';
+import { cn } from '@/helpers';
 
 const ViewQuote: React.FC<PropsType> = ({
   quote,
@@ -17,6 +19,10 @@ const ViewQuote: React.FC<PropsType> = ({
   handleDeleteQuote,
 }) => {
   const { user, isLoading } = useAuth();
+
+  const { handleQuoteLikeFactory } = useMovie();
+
+  const handleQuoteLike = handleQuoteLikeFactory(quote.movie_id);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -82,12 +88,17 @@ const ViewQuote: React.FC<PropsType> = ({
           <div className='flex gap-6 text-xl mt-5 border-b border-gray-600 pb-5'>
             <div className='flex items-center gap-3'>
               <CommentIcon />
-              <span>3</span>
+              <span>{quote.comments_count}</span>
             </div>
 
             <div className='flex items-center gap-3'>
-              <HeartIcon />
-              <span>10</span>
+              <div
+                onClick={() => handleQuoteLike(quote.id)}
+                className='cursor-pointer hover:opacity-80 fill-current'
+              >
+                {quote.is_liked ? <LikedHeartIcon /> : <HeartIcon />}
+              </div>
+              <span>{quote.likes_count}</span>
             </div>
           </div>
         </div>

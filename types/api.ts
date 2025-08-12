@@ -33,9 +33,11 @@ export type Quote = {
     ka: string;
   };
   poster_url: string;
+  movie_id: number;
   movie_title: string;
   movie_year: string;
   likes_count: number;
+  is_liked: boolean;
   comments_count: number;
   comments: Comment[];
 };

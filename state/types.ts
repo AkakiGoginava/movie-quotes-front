@@ -81,4 +81,5 @@ export type MovieContextType = {
     quoteId: number,
     options?: { onSuccess?: () => void },
   ) => FormHandler<FormData>;
+  handleQuoteLikeFactory: (movieId: number) => SimpleMutation;
 };

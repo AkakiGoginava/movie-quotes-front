@@ -229,3 +229,11 @@ export const updateQuote = async (
 
   return response;
 };
+
+export const likeQuote = async (id: number): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/quotes/${id}/like`);
+
+  return response;
+};

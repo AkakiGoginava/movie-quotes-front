@@ -122,7 +122,6 @@ export default function MovieDetail() {
               <QuoteCard
                 key={quote.id}
                 quote={quote}
-                movieId={movie.id}
                 handleDeleteQuote={handleDeleteQuote}
               />
             ))}
