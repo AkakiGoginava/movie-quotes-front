@@ -13,6 +13,7 @@ import {
   getCategories,
   getUserMovies,
   likeQuote,
+  postComment,
   storeMovie,
   storeQuote,
   updateMovie,
@@ -49,6 +50,8 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   const allMovies = data?.pages.flatMap((page) => page.data.data) ?? [];
   const totalMovies = data?.pages[0]?.data.total_movies ?? 0;
 
+  // Movie CRUD
+
   const handleDeleteMovie = useSimpleMutation(deleteMovie, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userMovies'] });
@@ -79,6 +82,8 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
       },
     });
   };
+
+  // Quote CRUD
 
   const handleStoreQuoteFactory = (
     id: number,
@@ -128,19 +133,28 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const likeQuoteMutation = useSimpleMutation(likeQuote);
+  // Quote interactions
 
   const handleQuoteLikeFactory = (movieId: number) => {
-    return async (quoteId: number) => {
-      const result = await likeQuoteMutation(quoteId);
+    return useSimpleMutation(likeQuote, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+        queryClient.invalidateQueries({
+          queryKey: ['movie', movieId.toString()],
+        });
+      },
+    });
+  };
 
-      queryClient.invalidateQueries({ queryKey: ['userMovies'] });
-      queryClient.invalidateQueries({
-        queryKey: ['movie', movieId.toString()],
-      });
-
-      return result;
-    };
+  const handlePostCommentFactory = (movieId: number) => {
+    return useSimpleMutation(postComment, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['userMovies'] });
+        queryClient.invalidateQueries({
+          queryKey: ['movie', movieId.toString()],
+        });
+      },
+    });
   };
 
   return (
@@ -164,7 +178,9 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
         handleStoreQuoteFactory,
         handleDeleteQuoteFactory,
         handleUpdateQuoteFactory,
+
         handleQuoteLikeFactory,
+        handlePostCommentFactory,
       }}
     >
       {children}

@@ -237,3 +237,14 @@ export const likeQuote = async (id: number): Promise<AxiosResponse> => {
 
   return response;
 };
+
+export const postComment = async (
+  id: number,
+  content: string,
+): Promise<AxiosResponse> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/quotes/${id}/comments`, { content });
+
+  return response;
+};
