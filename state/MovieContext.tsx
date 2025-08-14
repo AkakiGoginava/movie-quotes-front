@@ -1,11 +1,14 @@
 import { createContext, useState } from 'react';
 
+import { produce } from 'immer';
 import {
   useInfiniteQuery,
   useQuery,
   useQueryClient,
+  InfiniteData,
 } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { AxiosResponse } from 'axios';
 
 import {
   deleteMovie,
@@ -21,6 +24,12 @@ import {
   updateQuote,
 } from '@/services';
 import { useFormMutation, useSimpleMutation } from '@/hooks';
+import {
+  Quote,
+  QuotesResponse,
+  LikeQuoteResponse,
+  PostCommentResponse,
+} from '@/types';
 
 import { MovieContextType } from './types';
 
@@ -56,7 +65,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const allMovies = moviesData?.pages.flatMap((page) => page.data.data) ?? [];
-  const totalMovies = moviesData?.pages[0]?.data.total_movies ?? 0;
+  const totalMovies = moviesData?.pages[0]?.data.total_items ?? 0;
 
   const {
     data: quotesData,
@@ -160,8 +169,32 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   // Quote interactions
 
   const handleQuoteLikeFactory = (movieId: number) => {
-    return useSimpleMutation(likeQuote, {
-      onSuccess: () => {
+    return useSimpleMutation<LikeQuoteResponse>(likeQuote, {
+      onSuccess: (response, variables) => {
+        if (!variables?.[0] || !response?.data) return;
+
+        const quoteId = variables[0];
+        const responseData = response.data;
+
+        queryClient.setQueriesData(
+          { queryKey: ['quotes'] },
+          (oldData: InfiniteData<AxiosResponse<QuotesResponse>>) => {
+            return produce(
+              oldData,
+              (draft: InfiniteData<AxiosResponse<QuotesResponse>>) => {
+                draft?.pages.forEach((page) => {
+                  page.data.data.forEach((quote: Quote) => {
+                    if (quote.id === quoteId) {
+                      quote.is_liked = responseData.liked;
+                      quote.likes_count = responseData.likes_count;
+                    }
+                  });
+                });
+              },
+            );
+          },
+        );
+
         queryClient.invalidateQueries({ queryKey: ['userMovies'] });
         queryClient.invalidateQueries({
           queryKey: ['movie', movieId.toString()],
@@ -171,8 +204,31 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handlePostCommentFactory = (movieId: number) => {
-    return useSimpleMutation(postComment, {
-      onSuccess: () => {
+    return useSimpleMutation<PostCommentResponse>(postComment, {
+      onSuccess: (response, variables) => {
+        if (!variables?.[0] || !variables?.[1] || !response?.data) return;
+        const quoteId = variables[0];
+        const newComment = response.data.comment;
+
+        queryClient.setQueriesData(
+          { queryKey: ['quotes'] },
+          (oldData: InfiniteData<AxiosResponse<QuotesResponse>>) => {
+            return produce(
+              oldData,
+              (draft: InfiniteData<AxiosResponse<QuotesResponse>>) => {
+                draft?.pages.forEach((page) => {
+                  page.data.data.forEach((quote: Quote) => {
+                    if (quote.id === quoteId) {
+                      quote.comments_count += 1;
+                      quote.comments.unshift(newComment);
+                    }
+                  });
+                });
+              },
+            );
+          },
+        );
+
         queryClient.invalidateQueries({ queryKey: ['userMovies'] });
         queryClient.invalidateQueries({
           queryKey: ['movie', movieId.toString()],

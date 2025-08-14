@@ -70,11 +70,23 @@ export type Movie = {
 
 export type PaginatedResponse<T> = {
   data: T[];
+  path: string;
+  per_page: number;
   next_cursor: string | null;
   prev_cursor: string | null;
-  per_page: number;
-  total_movies: number;
+  next_page_url: string | null;
+  prev_page_url: string | null;
+  total_items: number;
 };
 
 export type MoviesResponse = PaginatedResponse<Movie>;
 export type QuotesResponse = PaginatedResponse<Quote>;
+
+export type LikeQuoteResponse = {
+  liked: boolean;
+  likes_count: number;
+};
+
+export type PostCommentResponse = {
+  comment: Comment;
+};

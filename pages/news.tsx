@@ -32,7 +32,7 @@ export default function News() {
           {allQuotes && (
             <main className='flex flex-col gap-8'>
               {allQuotes.map((quote) => (
-                <div className='bg-slate-950 px-9 py-8'>
+                <div key={quote.id} className='bg-slate-950 px-9 py-8'>
                   <ViewQuote quote={quote} readonly />
                 </div>
               ))}

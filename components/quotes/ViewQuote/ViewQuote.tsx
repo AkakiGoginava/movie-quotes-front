@@ -11,10 +11,10 @@ import useViewQuote from './useViewQuote';
 
 const ViewQuote: React.FC<PropsType> = ({
   quote,
-  readonly,
   setModalOpen,
   setOpenQuoteEdit,
   handleDeleteQuote,
+  readonly,
 }) => {
   const {
     user,
@@ -29,7 +29,7 @@ const ViewQuote: React.FC<PropsType> = ({
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <section className='flex flex-col gap-9 md:max-w-225 pb-6'>
+    <section className='flex flex-col gap-9 md:w-[45vw] pb-6'>
       {!readonly && (
         <>
           <div className='absolute flex gap-4 md:gap-6 top-6 md:top-13'>
@@ -37,13 +37,13 @@ const ViewQuote: React.FC<PropsType> = ({
               className='cursor-pointer'
               onClick={() => {
                 setModalOpen?.(false);
-                setOpenQuoteEdit(true);
+                setOpenQuoteEdit?.(true);
               }}
             />
             <span>|</span>
             <DeleteIcon
               className='cursor-pointer'
-              onClick={() => handleDeleteQuote(quote.id)}
+              onClick={() => handleDeleteQuote?.(quote.id)}
             />
           </div>
 
@@ -126,7 +126,9 @@ const ViewQuote: React.FC<PropsType> = ({
                 <span className='font-medium'>{comment.user.name}</span>
               </div>
 
-              <p className='border-b border-gray-600 pb-6'>{comment.content}</p>
+              <p className='md:ml-15 border-b border-gray-600 pb-6'>
+                {comment.content}
+              </p>
             </div>
           ))}
 

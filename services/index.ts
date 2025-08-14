@@ -3,9 +3,11 @@ import { AxiosResponse } from 'axios';
 import {
   Category,
   ForgotPasswordInput,
+  LikeQuoteResponse,
   LoginInput,
   MoviesResponse,
   Movie,
+  PostCommentResponse,
   RegisterInput,
   ResetPasswordInput,
   User,
@@ -239,7 +241,9 @@ export const updateQuote = async (
   return response;
 };
 
-export const likeQuote = async (id: number): Promise<AxiosResponse> => {
+export const likeQuote = async (
+  id: number,
+): Promise<AxiosResponse<LikeQuoteResponse>> => {
   await getCsrfCookie();
 
   const response = await axios.post(`/api/quotes/${id}/like`);
@@ -250,7 +254,7 @@ export const likeQuote = async (id: number): Promise<AxiosResponse> => {
 export const postComment = async (
   id: number,
   content: string,
-): Promise<AxiosResponse> => {
+): Promise<AxiosResponse<PostCommentResponse>> => {
   await getCsrfCookie();
 
   const response = await axios.post(`/api/quotes/${id}/comments`, { content });

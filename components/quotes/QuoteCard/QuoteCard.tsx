@@ -23,7 +23,7 @@ const QuoteCard = ({
   const [openQuoteView, setOpenQuoteView] = useState(false);
 
   return (
-    <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-zinc-900'>
+    <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-slate-950'>
       <div className='w-full flex flex-col md:flex-row gap-6'>
         <img
           src={quote.poster_url}
