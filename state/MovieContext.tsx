@@ -11,6 +11,7 @@ import {
   deleteMovie,
   deleteQuote,
   getCategories,
+  getQuotes,
   getUserMovies,
   likeQuote,
   postComment,
@@ -30,7 +31,9 @@ export const MovieContext = createContext<MovieContextType | undefined>(
 export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const [activeSearch, setActiveSearch] = useState('');
+
+  const [activeMoviesSearch, setActiveMoviesSearch] = useState('');
+  const [activeQuotesSearch, setActiveQuotesSearch] = useState('');
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
     queryKey: ['categories'],
@@ -38,17 +41,38 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     select: (data) => data.data.categories,
   });
 
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['userMovies', activeSearch],
-      queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
-        getUserMovies('en', pageParam, activeSearch || undefined),
-      getNextPageParam: (lastPage) => lastPage.data.next_cursor,
-      initialPageParam: undefined,
-    });
+  const {
+    data: moviesData,
+    isLoading: isLoadingMovies,
+    isFetchingNextPage: isFetchingMoviesNextPage,
+    hasNextPage: hasMoviesNextPage,
+    fetchNextPage: fetchMoviesNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['userMovies', activeMoviesSearch],
+    queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
+      getUserMovies(pageParam, activeMoviesSearch || undefined),
+    getNextPageParam: (lastPage) => lastPage.data.next_cursor,
+    initialPageParam: undefined,
+  });
 
-  const allMovies = data?.pages.flatMap((page) => page.data.data) ?? [];
-  const totalMovies = data?.pages[0]?.data.total_movies ?? 0;
+  const allMovies = moviesData?.pages.flatMap((page) => page.data.data) ?? [];
+  const totalMovies = moviesData?.pages[0]?.data.total_movies ?? 0;
+
+  const {
+    data: quotesData,
+    isLoading: isLoadingQuotes,
+    isFetchingNextPage: isFetchingQuotesNextPage,
+    hasNextPage: hasQuotesNextPage,
+    fetchNextPage: fetchQuotesNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['quotes', activeQuotesSearch],
+    queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
+      getQuotes(pageParam, activeQuotesSearch || undefined),
+    getNextPageParam: (lastPage) => lastPage.data.next_cursor,
+    initialPageParam: undefined,
+  });
+
+  const allQuotes = quotesData?.pages.flatMap((page) => page.data.data) ?? [];
 
   // Movie CRUD
 
@@ -165,15 +189,22 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
 
         allMovies,
         totalMovies,
-        isLoading,
-        isFetchingNextPage,
-        hasNextPage,
-        fetchNextPage,
-        setActiveSearch,
+        isLoadingMovies,
+        isFetchingMoviesNextPage,
+        hasMoviesNextPage,
+        fetchMoviesNextPage,
+        setActiveMoviesSearch,
 
         handleDeleteMovie,
         handleStoreMovieFactory,
         handleUpdateMovieFactory,
+
+        allQuotes,
+        isLoadingQuotes,
+        isFetchingQuotesNextPage,
+        hasQuotesNextPage,
+        fetchQuotesNextPage,
+        setActiveQuotesSearch,
 
         handleStoreQuoteFactory,
         handleDeleteQuoteFactory,

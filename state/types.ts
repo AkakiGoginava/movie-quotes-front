@@ -11,6 +11,7 @@ import {
   User,
   Category,
   Movie,
+  Quote,
 } from '@/types';
 
 type FormHandler<T extends FieldValues> = (
@@ -64,15 +65,22 @@ export type MovieContextType = {
 
   allMovies: Movie[];
   totalMovies: number;
-  isLoading: boolean;
-  isFetchingNextPage: boolean;
-  hasNextPage: boolean;
-  fetchNextPage: () => void;
-  setActiveSearch: Dispatch<SetStateAction<string>>;
+  isLoadingMovies: boolean;
+  isFetchingMoviesNextPage: boolean;
+  hasMoviesNextPage: boolean;
+  fetchMoviesNextPage: () => void;
+  setActiveMoviesSearch: Dispatch<SetStateAction<string>>;
 
   handleDeleteMovie: SimpleMutation;
   handleStoreMovieFactory: FormHandlerFactory<FormData>;
   handleUpdateMovieFactory: FormHandlerWithIdFactory<FormData>;
+
+  allQuotes: Quote[];
+  isLoadingQuotes: boolean;
+  isFetchingQuotesNextPage: boolean;
+  hasQuotesNextPage: boolean;
+  fetchQuotesNextPage: () => void;
+  setActiveQuotesSearch: Dispatch<SetStateAction<string>>;
 
   handleStoreQuoteFactory: FormHandlerWithIdFactory<FormData>;
   handleDeleteQuoteFactory: (movieId: number) => SimpleMutation;

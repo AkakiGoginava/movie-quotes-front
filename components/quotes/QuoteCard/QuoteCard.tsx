@@ -7,6 +7,7 @@ import {
   EditQuote,
   EyeIcon,
   HeartIcon,
+  Modal,
   ViewQuote,
 } from '@/components';
 import { Quote } from '@/types';
@@ -97,13 +98,18 @@ const QuoteCard = ({
         quote={quote}
       />
 
-      <ViewQuote
-        setModalOpen={setOpenQuoteView}
-        modalOpen={openQuoteView}
-        quote={quote}
-        setOpenQuoteEdit={setOpenQuoteEdit}
-        handleDeleteQuote={handleDeleteQuote}
-      />
+      <Modal
+        setOpen={setOpenQuoteView}
+        open={openQuoteView}
+        modalClassName='px-9 md:px-8'
+      >
+        <ViewQuote
+          setModalOpen={setOpenQuoteView}
+          quote={quote}
+          setOpenQuoteEdit={setOpenQuoteEdit}
+          handleDeleteQuote={handleDeleteQuote}
+        />
+      </Modal>
     </section>
   );
 };

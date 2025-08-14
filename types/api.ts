@@ -34,7 +34,10 @@ export type Quote = {
   };
   poster_url: string;
   movie_id: number;
-  movie_title: string;
+  movie_title: {
+    en: string;
+    ka: string;
+  };
   movie_year: string;
   likes_count: number;
   is_liked: boolean;
@@ -74,3 +77,4 @@ export type PaginatedResponse<T> = {
 };
 
 export type MoviesResponse = PaginatedResponse<Movie>;
+export type QuotesResponse = PaginatedResponse<Quote>;
