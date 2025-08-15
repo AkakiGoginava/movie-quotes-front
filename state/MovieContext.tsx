@@ -119,13 +119,18 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   // Quote CRUD
 
   const handleStoreQuoteFactory = (
-    id: number,
+    movieId: number | null,
     options?: { onSuccess?: () => void },
   ) => {
     return useFormMutation(storeQuote, {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['userMovies'] });
-        queryClient.invalidateQueries({ queryKey: ['movie', id.toString()] });
+
+        if (movieId) {
+          queryClient.invalidateQueries({
+            queryKey: ['movie', movieId.toString()],
+          });
+        }
 
         options?.onSuccess?.();
       },

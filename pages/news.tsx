@@ -1,4 +1,4 @@
-import { Layout, PencilIcon, SearchIcon, ViewQuote } from '@/components';
+import { AddQuoteWithMovie, Layout, Search, ViewQuote } from '@/components';
 import { useMovie } from '@/hooks';
 
 export default function News() {
@@ -16,17 +16,17 @@ export default function News() {
   return (
     <Layout setActiveSearch={setActiveQuotesSearch}>
       <div className='flex'>
-        <section className='flex flex-col gap-5 w-full max-w-235 mr-auto md:ml-30'>
-          <header className='flex gap-6 md:text-xl items-center'>
-            <div className='flex gap-4 flex-1 md:bg-obsidian px-8 md:px-4 py-8 md:py-3 rounded-xl items-center'>
-              <PencilIcon />
-              <span>Write new quote</span>
-            </div>
+        <section className='flex flex-col w-full max-w-235 mr-auto md:ml-30'>
+          <header className='flex gap-6 md:text-xl items-center md:mb-6'>
+            <AddQuoteWithMovie />
 
-            <div className='hidden md:flex md:gap-4 md:items-center'>
-              <SearchIcon />
-              <span>Search by</span>
-            </div>
+            <Search
+              onSearch={(searchTerm: string) => {
+                setActiveQuotesSearch(searchTerm);
+              }}
+              placeholder='Enter @ to search movies, Enter # to search quotes'
+              className='md:block hidden'
+            />
           </header>
 
           {allQuotes && (

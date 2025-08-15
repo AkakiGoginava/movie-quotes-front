@@ -82,7 +82,10 @@ export type MovieContextType = {
   fetchQuotesNextPage: () => void;
   setActiveQuotesSearch: Dispatch<SetStateAction<string>>;
 
-  handleStoreQuoteFactory: FormHandlerWithIdFactory<FormData>;
+  handleStoreQuoteFactory: (
+    id: number | null,
+    options?: { onSuccess?: () => void },
+  ) => FormHandler<FormData>;
   handleDeleteQuoteFactory: (movieId: number) => SimpleMutation;
   handleUpdateQuoteFactory: (
     movieId: number,

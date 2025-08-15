@@ -33,7 +33,7 @@ const Sidebar = () => {
 
       <Link href='/movies' className='flex items-center gap-11 pl-2'>
         <CameraIcon
-          className={cn({ 'text-red-500': pathName === '/movies' })}
+          className={cn('size-8', { 'text-red-500': pathName === '/movies' })}
         />
         <span className='text-2xl'>List of movies</span>
       </Link>

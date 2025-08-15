@@ -81,4 +81,5 @@ export type QuoteInputsType = {
     ka: string;
   };
   poster: FileList;
+  movieId?: number;
 };

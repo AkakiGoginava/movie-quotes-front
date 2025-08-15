@@ -29,7 +29,7 @@ const ViewQuote: React.FC<PropsType> = ({
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <section className='flex flex-col gap-9 md:w-[45vw] pb-6'>
+    <section className='flex flex-col gap-9 pb-6'>
       {!readonly && (
         <>
           <div className='absolute flex gap-4 md:gap-6 top-6 md:top-13'>

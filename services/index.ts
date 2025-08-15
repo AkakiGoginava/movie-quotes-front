@@ -201,7 +201,7 @@ export const getQuotes = async (
 ): Promise<AxiosResponse<QuotesResponse>> => {
   const params = new URLSearchParams();
   if (cursor) params.append('cursor', cursor);
-  if (search) params.append('filter[title]', search);
+  if (search) params.append('filter[search]', search);
 
   const response = await axios.get(`/api/quotes?${params.toString()}`);
 

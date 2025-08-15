@@ -101,7 +101,7 @@ const QuoteCard = ({
       <Modal
         setOpen={setOpenQuoteView}
         open={openQuoteView}
-        modalClassName='px-9 md:px-8'
+        modalClassName='px-9 md:px-8 md:w-[45vw]'
       >
         <ViewQuote
           setModalOpen={setOpenQuoteView}

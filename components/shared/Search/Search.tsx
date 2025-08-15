@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { ReturnArrowIcon, SearchIcon } from '@/components';
 import { cn } from '@/helpers';
@@ -10,9 +11,12 @@ const Search: React.FC<PropsType> = ({
   placeholder = 'Search',
   className = '',
 }) => {
+  const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showMobileModal, setShowMobileModal] = useState(false);
+
+  const isNewsPage = router.pathname === '/news';
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -32,7 +36,7 @@ const Search: React.FC<PropsType> = ({
     <div
       className={cn(
         'ml-auto',
-        { 'border-b border-gray-500 flex-1': showSearchBar },
+        { 'border-b border-gray-500 flex-[999]': showSearchBar },
         className,
       )}
     >
@@ -53,7 +57,7 @@ const Search: React.FC<PropsType> = ({
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleSearch}
-            className='px-3 py-1.5 border border-transparent bg-transparent text-white rounded-lg focus:outline-none focus:ring-0'
+            className='px-3 py-1.5 border border-transparent bg-transparent text-white rounded-lg focus:outline-none focus:ring-0 w-full'
             autoFocus
           />
         ) : (
@@ -96,6 +100,17 @@ const Search: React.FC<PropsType> = ({
               />
             </div>
           </div>
+
+          {isNewsPage && (
+            <div className='text-gray-500'>
+              <p className='px-16 pt-8'>
+                Enter <span className='text-white'>@</span> to search movies
+              </p>
+              <p className='px-16 pt-8'>
+                Enter <span className='text-white'>#</span> to search quotes
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>
