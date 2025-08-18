@@ -30,9 +30,7 @@ const useViewQuote = (quote: Quote) => {
     try {
       await handlePostComment(quote.id, data.content);
       reset();
-    } catch (error) {
-      console.error('Error posting comment:', error);
-    }
+    } catch (error) {}
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);

@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { AxiosResponse } from 'axios';
 
-const useSimpleMutation = <TData extends any>(
+const useSimpleMutation = <TData,>(
   mutationFn: (...args: any[]) => Promise<AxiosResponse<TData>>,
   options?: {
     onSuccess?: (data?: AxiosResponse<TData>, variables?: any[]) => void;
