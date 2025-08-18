@@ -12,6 +12,8 @@ import {
   ResetPasswordInput,
   User,
   QuotesResponse,
+  NotificationResponse,
+  UnreadCountResponse,
 } from '@/types';
 
 import axios from './axios';
@@ -258,6 +260,30 @@ export const postComment = async (
   await getCsrfCookie();
 
   const response = await axios.post(`/api/quotes/${id}/comments`, { content });
+
+  return response;
+};
+
+export const getNotifications = async (
+  page: number = 1,
+): Promise<NotificationResponse> => {
+  const response = await axios.get(`/api/notifications?page=${page}`);
+
+  return response.data;
+};
+
+export const markNotificationAsRead = async (id: number) => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/notifications/${id}/mark-as-read`);
+
+  return response;
+};
+
+export const markAllNotificationsAsRead = async () => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/notifications/mark-all-as-read');
 
   return response;
 };

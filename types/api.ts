@@ -28,6 +28,11 @@ export type Comment = {
 
 export type Quote = {
   id: number;
+  user: {
+    id: number;
+    name: string;
+    avatar_url: string;
+  };
   text: {
     en: string;
     ka: string;
