@@ -48,6 +48,8 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
     queryKey: ['categories'],
     queryFn: getCategories,
     select: (data) => data.data.categories,
+    staleTime: Infinity,
+    retry: false,
   });
 
   const {
@@ -62,6 +64,8 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
       getUserMovies(pageParam, activeMoviesSearch || undefined),
     getNextPageParam: (lastPage) => lastPage.data.next_cursor,
     initialPageParam: undefined,
+    staleTime: Infinity,
+    retry: false,
   });
 
   const allMovies = moviesData?.pages.flatMap((page) => page.data.data) ?? [];
@@ -79,6 +83,8 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
       getQuotes(pageParam, activeQuotesSearch || undefined),
     getNextPageParam: (lastPage) => lastPage.data.next_cursor,
     initialPageParam: undefined,
+    staleTime: Infinity,
+    retry: false,
   });
 
   const allQuotes = quotesData?.pages.flatMap((page) => page.data.data) ?? [];

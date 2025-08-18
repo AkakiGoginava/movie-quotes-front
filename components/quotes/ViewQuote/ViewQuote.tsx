@@ -57,12 +57,12 @@ const ViewQuote: React.FC<PropsType> = ({
 
       <div className='flex gap-4 md:gap-9'>
         <img
-          src={user?.avatar_url}
+          src={quote.user.avatar_url}
           alt='avatar'
           className='size-10 md:size-15 object-contain bg-gray-300 rounded-full'
         />
 
-        <p className='flex text-xl items-center '>{user?.name}</p>
+        <p className='flex text-xl items-center '>{quote.user.name}</p>
       </div>
 
       <div className='flex flex-col gap-4'>
