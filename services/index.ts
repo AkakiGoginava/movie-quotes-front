@@ -264,10 +264,8 @@ export const postComment = async (
   return response;
 };
 
-export const getNotifications = async (
-  page: number = 1,
-): Promise<NotificationResponse> => {
-  const response = await axios.get(`/api/notifications?page=${page}`);
+export const getNotifications = async (): Promise<NotificationResponse> => {
+  const response = await axios.get(`/api/notifications`);
 
   return response.data;
 };
@@ -275,7 +273,7 @@ export const getNotifications = async (
 export const markNotificationAsRead = async (id: number) => {
   await getCsrfCookie();
 
-  const response = await axios.post(`/api/notifications/${id}/mark-as-read`);
+  const response = await axios.post(`/api/notifications/${id}/read`);
 
   return response;
 };
@@ -283,7 +281,7 @@ export const markNotificationAsRead = async (id: number) => {
 export const markAllNotificationsAsRead = async () => {
   await getCsrfCookie();
 
-  const response = await axios.post('/api/notifications/mark-all-as-read');
+  const response = await axios.post('/api/notifications/mark-all-read');
 
   return response;
 };

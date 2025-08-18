@@ -1,3 +1,5 @@
+import { Quote } from './api';
+
 export type AppNotification = {
   id: number;
   user_id: number;
@@ -13,6 +15,7 @@ export type AppNotification = {
     name: string;
     avatar_url: string;
   };
+  quote: Quote;
 };
 
 export type NotificationResponse = {
