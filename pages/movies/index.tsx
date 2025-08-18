@@ -6,11 +6,11 @@ export default function Movies() {
   const {
     allMovies,
     totalMovies,
-    isLoading,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-    setActiveSearch,
+    isLoadingMovies: isLoading,
+    isFetchingMoviesNextPage: isFetchingNextPage,
+    hasMoviesNextPage: hasNextPage,
+    fetchMoviesNextPage: fetchNextPage,
+    setActiveMoviesSearch: setActiveSearch,
   } = useMovie();
 
   if (isLoading) return <div>Loading...</div>;

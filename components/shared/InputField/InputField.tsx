@@ -4,7 +4,7 @@ import { cn } from '@/helpers';
 import { CrossedEyeIcon, EyeIcon, InvalidIcon, ValidIcon } from '@/components';
 
 import { PropsType } from './types';
-import { ImageInput, MultiselectInput } from './components';
+import { ImageInput, MultiselectInput, SelectInput } from './components';
 import useInputField from './useInputField';
 
 const InputField = <FormValues extends FieldValues>({
@@ -82,6 +82,17 @@ const InputField = <FormValues extends FieldValues>({
   if (input.type === 'multiselect' && control && input.options)
     return (
       <MultiselectInput
+        input={input}
+        control={control}
+        hasEnteredInput={hasEnteredInput}
+        isInvalid={isInvalid}
+        isValid={isValid}
+      />
+    );
+
+  if (input.type === 'select' && control && input.options)
+    return (
+      <SelectInput
         input={input}
         control={control}
         hasEnteredInput={hasEnteredInput}

@@ -10,7 +10,7 @@ const Dropdown: React.FC<PropsType> = ({ options, selected }) => {
         className='btn bg-transparent border-none h-8 shadow-none'
       >
         <span>{selected != null ? (options[selected] ?? '') : ''}</span>
-        <CaretIcon />
+        <CaretIcon className='size-4' />
       </div>
       <ul
         tabIndex={0}

@@ -1,18 +1,13 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import { InputFieldType, QuoteInputsType, Quote } from '@/types';
+import { InputFieldType, QuoteInputsType } from '@/types';
 import { useMovie } from '@/hooks';
 
-const useEditQuote = ({
-  quote,
-  setModalOpen,
-}: {
-  quote: Quote;
-  setModalOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
-  const { handleUpdateQuoteFactory } = useMovie();
+const useAddQuoteWithMovie = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const { handleStoreQuoteFactory, allMovies, isLoadingMovies } = useMovie();
 
   const {
     register,
@@ -23,24 +18,9 @@ const useEditQuote = ({
     control,
   } = useForm<QuoteInputsType>({
     mode: 'onChange',
-    defaultValues: {
-      text: {
-        en: quote?.text.en || '',
-        ka: quote?.text.ka || '',
-      },
-    },
   });
 
-  useEffect(() => {
-    reset({
-      text: {
-        en: quote?.text.en || '',
-        ka: quote?.text.ka || '',
-      },
-    });
-  }, [quote]);
-
-  const handleUpdateQuote = handleUpdateQuoteFactory(quote.movie_id, quote.id, {
+  const handleStoreQuote = handleStoreQuoteFactory(null, {
     onSuccess: () => {
       setModalOpen(false);
       reset();
@@ -50,19 +30,24 @@ const useEditQuote = ({
   const onSubmitHandler = (data: QuoteInputsType) => {
     const formData = new FormData();
 
-    formData.append('movie_id', quote.movie_id.toString());
+    if (!data.movieId) return;
+
+    formData.append('movie_id', data.movieId.toString());
 
     formData.append('text[en]', data.text.en);
     formData.append('text[ka]', data.text.ka);
 
-    if (data?.poster?.[0]) {
-      formData.append('poster', data.poster[0]);
-    }
+    formData.append('poster', data.poster[0]);
 
-    handleUpdateQuote(formData);
+    handleStoreQuote(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);
+
+  const movieOptions = allMovies.map((movie) => ({
+    id: movie.id,
+    name: `${movie.title.en} (${movie.year})`,
+  }));
 
   const quoteInputs: InputFieldType<QuoteInputsType>[] = [
     {
@@ -97,8 +82,20 @@ const useEditQuote = ({
       label: 'Upload image',
       name: 'poster',
       type: 'file',
+      rules: {
+        required: { value: true, message: 'Please upload an image' },
+      },
       className: 'p-0 md:p-0',
       variant: 'secondary',
+    },
+    {
+      label: 'Choose movie',
+      name: 'movieId',
+      type: 'select',
+      options: movieOptions,
+      rules: {
+        required: { value: true, message: 'Please choose a movie' },
+      },
     },
   ];
 
@@ -112,7 +109,10 @@ const useEditQuote = ({
     touchedFields,
     isSubmitting,
     control,
+    modalOpen,
+    setModalOpen,
+    isLoadingMovies,
   };
 };
 
-export default useEditQuote;
+export default useAddQuoteWithMovie;

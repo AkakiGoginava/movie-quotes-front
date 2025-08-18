@@ -3,12 +3,15 @@ import { AxiosResponse } from 'axios';
 import {
   Category,
   ForgotPasswordInput,
+  LikeQuoteResponse,
   LoginInput,
   MoviesResponse,
   Movie,
+  PostCommentResponse,
   RegisterInput,
   ResetPasswordInput,
   User,
+  QuotesResponse,
 } from '@/types';
 
 import axios from './axios';
@@ -164,7 +167,6 @@ export const updateMovie = async (
 };
 
 export const getUserMovies = async (
-  language: string,
   cursor?: string,
   search?: string,
 ): Promise<AxiosResponse<MoviesResponse>> => {
@@ -172,11 +174,7 @@ export const getUserMovies = async (
   if (cursor) params.append('cursor', cursor);
   if (search) params.append('filter[title]', search);
 
-  const response = await axios.get(`/api/movies?${params.toString()}`, {
-    headers: {
-      Language: language,
-    },
-  });
+  const response = await axios.get(`/api/movies?${params.toString()}`);
 
   return response;
 };
@@ -193,6 +191,19 @@ export const deleteMovie = async (id: string): Promise<AxiosResponse> => {
   await getCsrfCookie();
 
   const response = await axios.delete(`/api/movies/${id}`);
+
+  return response;
+};
+
+export const getQuotes = async (
+  cursor?: string,
+  search?: string,
+): Promise<AxiosResponse<QuotesResponse>> => {
+  const params = new URLSearchParams();
+  if (cursor) params.append('cursor', cursor);
+  if (search) params.append('filter[search]', search);
+
+  const response = await axios.get(`/api/quotes?${params.toString()}`);
 
   return response;
 };
@@ -226,6 +237,27 @@ export const updateQuote = async (
   const response = await axios.post(`/api/quotes/${id}`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
+
+  return response;
+};
+
+export const likeQuote = async (
+  id: number,
+): Promise<AxiosResponse<LikeQuoteResponse>> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/quotes/${id}/like`);
+
+  return response;
+};
+
+export const postComment = async (
+  id: number,
+  content: string,
+): Promise<AxiosResponse<PostCommentResponse>> => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/quotes/${id}/comments`, { content });
 
   return response;
 };

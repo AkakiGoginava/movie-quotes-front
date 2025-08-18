@@ -7,24 +7,23 @@ import {
   EditQuote,
   EyeIcon,
   HeartIcon,
+  Modal,
   ViewQuote,
 } from '@/components';
-import { SimpleQuote } from '@/types';
+import { Quote } from '@/types';
 
 const QuoteCard = ({
   quote,
-  movieId,
   handleDeleteQuote,
 }: {
-  quote: SimpleQuote;
-  movieId: number;
+  quote: Quote;
   handleDeleteQuote: (...args: any[]) => Promise<any>;
 }) => {
   const [openQuoteEdit, setOpenQuoteEdit] = useState(false);
   const [openQuoteView, setOpenQuoteView] = useState(false);
 
   return (
-    <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-zinc-900'>
+    <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-slate-950'>
       <div className='w-full flex flex-col md:flex-row gap-6'>
         <img
           src={quote.poster_url}
@@ -40,12 +39,12 @@ const QuoteCard = ({
       <div className='flex gap-6 text-xl'>
         <div className='flex items-center gap-3'>
           <CommentIcon />
-          <span>3</span>
+          <span>{quote.comments_count}</span>
         </div>
 
         <div className='flex items-center gap-3'>
           <HeartIcon />
-          <span>10</span>
+          <span>{quote.likes_count}</span>
         </div>
 
         <div className='dropdown dropdown-top dropdown-end absolute bottom-5 right-5 md:top-3'>
@@ -97,16 +96,20 @@ const QuoteCard = ({
         setModalOpen={setOpenQuoteEdit}
         modalOpen={openQuoteEdit}
         quote={quote}
-        movieId={movieId}
       />
 
-      <ViewQuote
-        setModalOpen={setOpenQuoteView}
-        modalOpen={openQuoteView}
-        quote={quote}
-        setOpenQuoteEdit={setOpenQuoteEdit}
-        handleDeleteQuote={handleDeleteQuote}
-      />
+      <Modal
+        setOpen={setOpenQuoteView}
+        open={openQuoteView}
+        modalClassName='px-9 md:px-8 md:w-[45vw]'
+      >
+        <ViewQuote
+          setModalOpen={setOpenQuoteView}
+          quote={quote}
+          setOpenQuoteEdit={setOpenQuoteEdit}
+          handleDeleteQuote={handleDeleteQuote}
+        />
+      </Modal>
     </section>
   );
 };
