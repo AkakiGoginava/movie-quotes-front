@@ -12,6 +12,7 @@ import {
   ResetPasswordInput,
   User,
   QuotesResponse,
+  NotificationResponse,
 } from '@/types';
 
 import axios from './axios';
@@ -20,7 +21,6 @@ const getCsrfCookie = async () => {
   try {
     await axios.get('/sanctum/csrf-cookie');
   } catch (error) {
-    console.error('Failed to fetch CSRF cookie', error);
     throw error;
   }
 };
@@ -258,6 +258,28 @@ export const postComment = async (
   await getCsrfCookie();
 
   const response = await axios.post(`/api/quotes/${id}/comments`, { content });
+
+  return response;
+};
+
+export const getNotifications = async (): Promise<NotificationResponse> => {
+  const response = await axios.get(`/api/notifications`);
+
+  return response.data;
+};
+
+export const markNotificationAsRead = async (id: number) => {
+  await getCsrfCookie();
+
+  const response = await axios.post(`/api/notifications/${id}/read`);
+
+  return response;
+};
+
+export const markAllNotificationsAsRead = async () => {
+  await getCsrfCookie();
+
+  const response = await axios.post('/api/notifications/mark-all-read');
 
   return response;
 };

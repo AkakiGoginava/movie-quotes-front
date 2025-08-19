@@ -17,7 +17,9 @@ const Sidebar = () => {
         <img
           src={user?.avatar_url}
           alt='avatar'
-          className='size-15 object-contain bg-gray-300 rounded-full'
+          className={cn('size-15 object-contain bg-gray-300 rounded-full', {
+            'outline-1 outline-red-500': pathName === '/profile',
+          })}
         />
 
         <Link href='/profile'>

@@ -57,12 +57,12 @@ const ViewQuote: React.FC<PropsType> = ({
 
       <div className='flex gap-4 md:gap-9'>
         <img
-          src={user?.avatar_url}
+          src={quote.user.avatar_url}
           alt='avatar'
           className='size-10 md:size-15 object-contain bg-gray-300 rounded-full'
         />
 
-        <p className='flex text-xl items-center '>{user?.name}</p>
+        <p className='flex text-xl items-center '>{quote.user.name}</p>
       </div>
 
       <div className='flex flex-col gap-4'>
@@ -115,7 +115,7 @@ const ViewQuote: React.FC<PropsType> = ({
 
         <div className='pt-2 flex flex-col gap-6'>
           {quote.comments.map((comment) => (
-            <div className='flex flex-col gap-3 md:text-xl'>
+            <div className='flex flex-col gap-3 md:text-xl' key={comment.id}>
               <div className='flex gap-4 items-center'>
                 <img
                   src={comment.user.avatar_url}
@@ -126,7 +126,7 @@ const ViewQuote: React.FC<PropsType> = ({
                 <span className='font-medium'>{comment.user.name}</span>
               </div>
 
-              <p className='md:ml-15 border-b border-gray-600 pb-6'>
+              <p className='md:ml-15 md:pl-2 border-b border-gray-600 pb-6'>
                 {comment.content}
               </p>
             </div>

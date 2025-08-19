@@ -12,6 +12,7 @@ import {
   Category,
   Movie,
   Quote,
+  AppNotification,
 } from '@/types';
 
 type FormHandler<T extends FieldValues> = (
@@ -95,4 +96,13 @@ export type MovieContextType = {
 
   handleQuoteLikeFactory: (movieId: number) => SimpleMutation;
   handlePostCommentFactory: (movieId: number) => SimpleMutation;
+};
+
+export type NotificationContextType = {
+  notifications: AppNotification[];
+  unreadCount: number;
+  loading: boolean;
+  markAsRead: (id: number) => Promise<void>;
+  markAllAsRead: () => Promise<void>;
+  refreshNotifications: () => Promise<void>;
 };

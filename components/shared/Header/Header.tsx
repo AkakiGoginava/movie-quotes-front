@@ -9,8 +9,8 @@ import {
   ForgotPassword,
   ResetPassword,
   MenuIcon,
-  BellIcon,
   Search,
+  NotificationBell,
 } from '@/components';
 import { cn } from '@/helpers';
 
@@ -77,7 +77,7 @@ const Header: React.FC<PropsType> = ({
               className='md:hidden mr-2'
             />
           )}
-          <BellIcon />
+          <NotificationBell />
         </>
       )}
 

@@ -24,3 +24,4 @@ export { default as EditIcon } from './edit-icon.svg';
 export { default as CommentIcon } from './comment-icon.svg';
 export { default as HeartIcon } from './heart-icon.svg';
 export { default as LikedHeartIcon } from './liked-heart-icon.svg';
+export { default as TriangleIcon } from './triangle-icon.svg';
