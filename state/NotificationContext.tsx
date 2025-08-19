@@ -49,7 +49,6 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   useEchoPublic('quotes', ['QuoteLiked', 'QuoteCommented'], () => {
-    console.log('broadcast');
     queryClient.invalidateQueries({ queryKey: ['notifications'] });
   });
 

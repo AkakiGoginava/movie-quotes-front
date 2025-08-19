@@ -21,7 +21,6 @@ const getCsrfCookie = async () => {
   try {
     await axios.get('/sanctum/csrf-cookie');
   } catch (error) {
-    console.error('Failed to fetch CSRF cookie', error);
     throw error;
   }
 };
