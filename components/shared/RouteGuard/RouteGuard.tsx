@@ -19,6 +19,8 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   useEffect(() => {
     if (isLoading) return;
 
+    setAuthorized(false);
+
     const protectedRoutes = ['/profile', '/news', '/movies'];
     const publicRoutes = ['/'];
 
@@ -43,11 +45,11 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     }
   }, [user, isLoading, isVerified, pathName, router]);
 
-  if (isLoading) {
+  if (isLoading || !authorized) {
     return <div>Loading...</div>;
   }
 
-  return authorized ? <>{children}</> : null;
+  return <>{children}</>;
 };
 
 export default RouteGuard;

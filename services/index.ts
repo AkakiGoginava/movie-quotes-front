@@ -13,7 +13,6 @@ import {
   User,
   QuotesResponse,
   NotificationResponse,
-  UnreadCountResponse,
 } from '@/types';
 
 import axios from './axios';

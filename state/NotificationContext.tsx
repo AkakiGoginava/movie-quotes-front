@@ -1,8 +1,7 @@
-import { createContext, useState, useEffect } from 'react';
+import React, { createContext } from 'react';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
+import { configureEcho, useEchoPublic } from '@laravel/echo-react';
 
 import { useAuth, useSimpleMutation } from '@/hooks';
 import {
@@ -13,24 +12,15 @@ import {
 
 import { NotificationContextType } from './types';
 
-declare global {
-  interface Window {
-    Pusher: typeof Pusher;
-  }
-}
-
 export const NotificationContext = createContext<
   NotificationContextType | undefined
 >(undefined);
 
-export const NotificationProvider = ({
+export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
-}: {
-  children: React.ReactNode;
 }) => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const [echo, setEcho] = useState<Echo<any> | null>(null);
 
   const {
     data: notificationData,
@@ -45,6 +35,24 @@ export const NotificationProvider = ({
   const notifications = notificationData?.data || [];
   const unreadCount = notificationData?.total_unread || 0;
 
+  configureEcho({
+    broadcaster: 'pusher',
+    key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
+    cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
+    forceTLS: true,
+    authEndpoint: `${process.env.NEXT_PUBLIC_API_URL}/broadcasting/auth`,
+    auth: {
+      headers: {
+        Accept: 'application/json',
+      },
+    },
+  });
+
+  useEchoPublic('quotes', ['QuoteLiked', 'QuoteCommented'], () => {
+    console.log('broadcast');
+    queryClient.invalidateQueries({ queryKey: ['notifications'] });
+  });
+
   const markAsReadMutation = useSimpleMutation(markNotificationAsRead, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
@@ -56,40 +64,6 @@ export const NotificationProvider = ({
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
     },
   });
-
-  useEffect(() => {
-    if (user && process.env.NEXT_PUBLIC_PUSHER_APP_KEY) {
-      window.Pusher = Pusher;
-
-      const echoInstance = new Echo({
-        broadcaster: 'pusher',
-        key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
-        cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
-        forceTLS: true,
-        authEndpoint: `${process.env.NEXT_PUBLIC_API_URL}/broadcasting/auth`,
-        auth: {
-          headers: {
-            Accept: 'application/json',
-          },
-        },
-      });
-
-      setEcho(echoInstance);
-
-      echoInstance
-        .private(`user.${user.id}`)
-        .listen('QuoteLiked', () => {
-          queryClient.invalidateQueries({ queryKey: ['notifications'] });
-        })
-        .listen('QuoteCommented', () => {
-          queryClient.invalidateQueries({ queryKey: ['notifications'] });
-        });
-
-      return () => {
-        echoInstance.disconnect();
-      };
-    }
-  }, [user, queryClient]);
 
   const refreshNotifications = async () => {
     await refetchNotifications();

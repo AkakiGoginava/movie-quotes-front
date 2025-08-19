@@ -23,7 +23,7 @@ import {
   updateMovie,
   updateQuote,
 } from '@/services';
-import { useFormMutation, useSimpleMutation } from '@/hooks';
+import { useAuth, useFormMutation, useSimpleMutation } from '@/hooks';
 import {
   Quote,
   QuotesResponse,
@@ -44,12 +44,13 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
   const [activeMoviesSearch, setActiveMoviesSearch] = useState('');
   const [activeQuotesSearch, setActiveQuotesSearch] = useState('');
 
+  const { user } = useAuth();
+
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
     select: (data) => data.data.categories,
-    staleTime: Infinity,
-    retry: false,
+    enabled: !!user,
   });
 
   const {
@@ -64,8 +65,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
       getUserMovies(pageParam, activeMoviesSearch || undefined),
     getNextPageParam: (lastPage) => lastPage.data.next_cursor,
     initialPageParam: undefined,
-    staleTime: Infinity,
-    retry: false,
+    enabled: !!user,
   });
 
   const allMovies = moviesData?.pages.flatMap((page) => page.data.data) ?? [];
@@ -83,8 +83,7 @@ export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
       getQuotes(pageParam, activeQuotesSearch || undefined),
     getNextPageParam: (lastPage) => lastPage.data.next_cursor,
     initialPageParam: undefined,
-    staleTime: Infinity,
-    retry: false,
+    enabled: !!user,
   });
 
   const allQuotes = quotesData?.pages.flatMap((page) => page.data.data) ?? [];
