@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { useForm, useWatch } from 'react-hook-form';
 
@@ -7,6 +8,8 @@ import { InputFieldType, ProfileEditInput } from '@/types';
 
 const useProfileForm = () => {
   const { isLoading, user, isGoogleUser, handleEditUserFactory } = useAuth();
+
+  const router = useRouter();
 
   const [editingAvatar, setEditingAvatar] = useState(false);
   const [editingUsername, setEditingUsername] = useState(false);
@@ -165,6 +168,7 @@ const useProfileForm = () => {
     isSubmitting,
     successModalOpen,
     setSuccessModalOpen,
+    router,
   };
 };
 

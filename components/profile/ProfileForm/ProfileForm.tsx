@@ -5,7 +5,7 @@ import {
   InfoField,
   ReturnArrowIcon,
 } from '@/components';
-import { InputFieldType, ProfileEditInput } from '@/types';
+import { ProfileEditInput } from '@/types';
 
 import useProfileForm from './useProfileForm';
 
@@ -33,6 +33,7 @@ const ProfileForm = () => {
     isSubmitting,
     successModalOpen,
     setSuccessModalOpen,
+    router,
   } = useProfileForm();
 
   if (isLoading) return <div>Loading...</div>;
@@ -44,7 +45,13 @@ const ProfileForm = () => {
           My profile
         </h1>
 
-        <ReturnArrowIcon className='my-4 ml-6 md:hidden' />
+        <button
+          type='button'
+          className='my-4 ml-6 md:hidden cursor-pointer'
+          onClick={() => router.back()}
+        >
+          <ReturnArrowIcon />
+        </button>
 
         <div className='md:w-fit'>
           <div className='relative md:ml-30 px-8 md:px-48 pt-6 md:pt-66 pb-16 md:pb-30 bg-obsidian md:bg-slate-950 rounded-xl inline-flex flex-col gap-15 md:gap-0 w-full md:w-auto h-full max-w-249'>
