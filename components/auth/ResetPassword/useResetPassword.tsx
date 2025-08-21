@@ -1,7 +1,7 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 import { InputFieldType, ResetPasswordInput } from '@/types';
 import { useAuth } from '@/hooks';
@@ -37,31 +37,36 @@ export const useResetPassword = (
     }
   }, [searchParams, setValue]);
 
+  const { t } = require('react-i18next').useTranslation();
   const inputs: InputFieldType<ResetPasswordInput>[] = [
     {
-      label: 'Password',
+      label: t('resetPassword.passwordLabel'),
       name: 'password',
       type: 'password',
-      placeholder: 'At least 8 & max.15 lower case characters',
+      placeholder: t('resetPassword.passwordPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please enter your password' },
-        minLength: { value: 8, message: 'Minimum length is 8' },
-        maxLength: { value: 15, message: 'Maximum length is 15' },
+        required: { value: true, message: t('resetPassword.passwordRequired') },
+        minLength: { value: 8, message: t('resetPassword.passwordMinLength') },
+        maxLength: { value: 15, message: t('resetPassword.passwordMaxLength') },
         pattern: {
           value: /^[a-z0-9]+$/,
-          message: 'Only lowercase letters and numbers allowed',
+          message: t('resetPassword.passwordPattern'),
         },
       },
     },
     {
-      label: 'Password',
+      label: t('resetPassword.confirmPasswordLabel'),
       name: 'password_confirmation',
       type: 'password',
-      placeholder: 'Confirm password',
+      placeholder: t('resetPassword.confirmPasswordPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please confirm your password' },
-        validate: (value) =>
-          value === getValues('password') || 'Passwords do not match',
+        required: {
+          value: true,
+          message: t('resetPassword.confirmPasswordRequired'),
+        },
+        validate: (value: string) =>
+          value === getValues('password') ||
+          t('resetPassword.confirmPasswordMatch'),
       },
     },
   ];

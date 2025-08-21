@@ -1,4 +1,5 @@
 import { FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Button, ReturnArrowIcon, ValidationList } from '@/components';
 
@@ -18,6 +19,8 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
   touchedFields,
 }: PropsType<FormValues>) => {
   const { promptOpen, setPromptOpen, isMobile } = useInfoField();
+
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -40,7 +43,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
                 setEditing((prev) => !prev);
               }}
             >
-              Edit
+              {t('infoField.edit')}
             </button>
           )}
         </div>
@@ -86,7 +89,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
                       setEditing(false);
                     }}
                   >
-                    Cancel
+                    {t('infoField.cancel')}
                   </Button>
 
                   <Button
@@ -97,7 +100,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
                       setPromptOpen(true);
                     }}
                   >
-                    Edit
+                    {t('infoField.edit')}
                   </Button>
                 </div>
               </div>
@@ -107,7 +110,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
           <dialog className='modal' open={promptOpen}>
             <div className='modal-box bg-obsidian p-0'>
               <p className='text-center border-b border-gray-600 pb-10 pt-16'>
-                Are you sure you want to make changes?
+                {t('infoField.prompt')}
               </p>
 
               <div className='flex justify-between py-6 px-4'>
@@ -118,7 +121,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
                     setPromptOpen(false);
                   }}
                 >
-                  Cancel
+                  {t('infoField.cancel')}
                 </Button>
 
                 <Button
@@ -129,7 +132,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
                     setPromptOpen(false);
                   }}
                 >
-                  Confirm
+                  {t('infoField.confirm')}
                 </Button>
               </div>
             </div>
@@ -140,7 +143,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
                   setPromptOpen(false);
                 }}
               >
-                close
+                {t('infoField.close')}
               </button>
             </div>
           </dialog>

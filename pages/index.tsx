@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-import { Button, Header } from '@/components';
+import { useTranslation } from 'react-i18next';
+
 import { useAuth } from '@/hooks';
+import { Button, Header } from '@/components';
 
 type Quote = {
   quote: string;
@@ -11,6 +13,7 @@ type Quote = {
 };
 
 export default function Home() {
+  const { t } = useTranslation();
   const { isLoading } = useAuth();
   const [registerOpen, setRegisterOpen] = useState(false);
 
@@ -33,7 +36,7 @@ export default function Home() {
     },
   ];
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <div className='relative flex flex-col w-screen h-screen bg-black'>
@@ -42,7 +45,7 @@ export default function Home() {
       <main className='flex-1 h-full'>
         <section className='h-full flex flex-col gap-8 items-center justify-center '>
           <p className='w-70 md:w-175 font-bold text-2xl md:text-6xl text-light-yellow text-center'>
-            Find any quote in millions of movie lines
+            {t('home.find_quote')}
           </p>
 
           <Button
@@ -50,7 +53,7 @@ export default function Home() {
             variant='primary'
             handleClick={() => setRegisterOpen(true)}
           >
-            Get started
+            {t('home.get_started')}
           </Button>
         </section>
 

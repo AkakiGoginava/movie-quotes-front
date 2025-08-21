@@ -1,11 +1,12 @@
 import '@/styles/globals.css';
+import '@/src/i18n';
+
 import type { AppProps } from 'next/app';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { AuthProvider, MovieProvider, NotificationProvider } from '@/state';
 import { RouteGuard } from '@/components';
-import { useAuth } from '@/hooks';
 
 const queryClient = new QueryClient();
 

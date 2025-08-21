@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { InputFieldType, QuoteInputsType } from '@/types';
 import { useMovie } from '@/hooks';
@@ -44,9 +45,11 @@ const useAddQuoteWithMovie = () => {
 
   const onSubmit = handleSubmit(onSubmitHandler);
 
+  const { t, i18n } = useTranslation();
+
   const movieOptions = allMovies.map((movie) => ({
     id: movie.id,
-    name: `${movie.title.en} (${movie.year})`,
+    name: `${i18n.language === 'ka' ? movie.title.ka : movie.title.en} (${movie.year})`,
   }));
 
   const quoteInputs: InputFieldType<QuoteInputsType>[] = [
@@ -89,12 +92,15 @@ const useAddQuoteWithMovie = () => {
       variant: 'secondary',
     },
     {
-      label: 'Choose movie',
+      label: t('addQuoteWithMovie.chooseMovieLabel'),
       name: 'movieId',
       type: 'select',
       options: movieOptions,
       rules: {
-        required: { value: true, message: 'Please choose a movie' },
+        required: {
+          value: true,
+          message: t('addQuoteWithMovie.chooseMovieRequired'),
+        },
       },
     },
   ];

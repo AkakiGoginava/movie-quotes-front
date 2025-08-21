@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { AddQuoteWithMovie, Layout, Search, ViewQuote } from '@/components';
 import { useMovie } from '@/hooks';
 
@@ -10,8 +12,9 @@ export default function News() {
     fetchQuotesNextPage,
     isFetchingQuotesNextPage,
   } = useMovie();
+  const { t } = useTranslation();
 
-  if (isLoadingQuotes) return <div>Loading...</div>;
+  if (isLoadingQuotes) return <div>{t('news.loading')}</div>;
 
   return (
     <Layout setActiveSearch={setActiveQuotesSearch}>
@@ -24,7 +27,7 @@ export default function News() {
               onSearch={(searchTerm: string) => {
                 setActiveQuotesSearch(searchTerm);
               }}
-              placeholder='Enter @ to search movies, Enter # to search quotes'
+              placeholder={t('news.searchPlaceholder')}
               className='md:block hidden'
             />
           </header>
@@ -45,8 +48,8 @@ export default function News() {
                     className='px-6 py-3 text-lg text-red-500 hover:text-red-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer'
                   >
                     {isFetchingQuotesNextPage
-                      ? 'Loading...'
-                      : 'Load More Quotes'}
+                      ? t('news.loading')
+                      : t('news.loadMore')}
                   </button>
                 </div>
               )}

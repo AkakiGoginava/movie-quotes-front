@@ -1,8 +1,10 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { InputFieldType, ForgotPasswordInput } from '@/types';
 import { useAuth } from '@/hooks';
-import { Dispatch, SetStateAction } from 'react';
 
 export const useForgotPassword = (
   setOpen: Dispatch<SetStateAction<boolean>>,
@@ -17,17 +19,18 @@ export const useForgotPassword = (
     reset,
   } = useForm<ForgotPasswordInput>({ mode: 'onChange' });
 
+  const { t } = useTranslation();
   const inputs: InputFieldType<ForgotPasswordInput>[] = [
     {
-      label: 'Email',
+      label: t('forgotPassword.emailLabel'),
       name: 'email',
       type: 'email',
-      placeholder: 'Enter your email',
+      placeholder: t('forgotPassword.emailPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please enter your email' },
+        required: { value: true, message: t('forgotPassword.emailRequired') },
         pattern: {
           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-          message: 'Enter a valid email address',
+          message: t('forgotPassword.emailInvalid'),
         },
       },
     },

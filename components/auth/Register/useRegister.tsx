@@ -15,59 +15,64 @@ export const useRegister = () => {
     mode: 'onChange',
   });
 
+  const { t } = require('react-i18next').useTranslation();
+
   const inputs: InputFieldType<RegisterInput>[] = [
     {
-      label: 'Name',
+      label: t('register.nameLabel'),
       name: 'name',
       type: 'text',
-      placeholder: 'At least 3 & max.15 lower case characters',
+      placeholder: t('register.namePlaceholder'),
       rules: {
-        required: { value: true, message: 'Please enter your name' },
-        minLength: { value: 3, message: 'Minimum length is 3' },
-        maxLength: { value: 15, message: 'Maximum length is 15' },
+        required: { value: true, message: t('register.nameRequired') },
+        minLength: { value: 3, message: t('register.nameMinLength') },
+        maxLength: { value: 15, message: t('register.nameMaxLength') },
         pattern: {
           value: /^[a-z0-9]+$/,
-          message: 'Only lowercase letters and numbers allowed',
+          message: t('register.namePattern'),
         },
       },
     },
     {
-      label: 'Email',
+      label: t('register.emailLabel'),
       name: 'email',
       type: 'email',
-      placeholder: 'Enter your email',
+      placeholder: t('register.emailPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please enter your email' },
+        required: { value: true, message: t('register.emailRequired') },
         pattern: {
           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-          message: 'Enter a valid email address',
+          message: t('register.emailInvalid'),
         },
       },
     },
     {
-      label: 'Password',
+      label: t('register.passwordLabel'),
       name: 'password',
       type: 'password',
-      placeholder: 'At least 8 & max.15 lower case characters',
+      placeholder: t('register.passwordPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please enter your password' },
-        minLength: { value: 8, message: 'Minimum length is 8' },
-        maxLength: { value: 15, message: 'Maximum length is 15' },
+        required: { value: true, message: t('register.passwordRequired') },
+        minLength: { value: 8, message: t('register.passwordMinLength') },
+        maxLength: { value: 15, message: t('register.passwordMaxLength') },
         pattern: {
           value: /^[a-z0-9]+$/,
-          message: 'Only lowercase letters and numbers allowed',
+          message: t('register.passwordPattern'),
         },
       },
     },
     {
-      label: 'Password',
+      label: t('register.confirmPasswordLabel'),
       name: 'password_confirmation',
       type: 'password',
-      placeholder: 'Confirm password',
+      placeholder: t('register.confirmPasswordPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please confirm your password' },
-        validate: (value) =>
-          value === getValues('password') || 'Passwords do not match',
+        required: {
+          value: true,
+          message: t('register.confirmPasswordRequired'),
+        },
+        validate: (value: string) =>
+          value === getValues('password') || t('register.confirmPasswordMatch'),
       },
     },
   ];

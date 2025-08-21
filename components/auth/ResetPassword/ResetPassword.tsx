@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { AuthForm, Modal, ReturnArrowIcon } from '@/components';
 
 import { PropsType } from './types';
@@ -28,13 +30,15 @@ const ResetPassword: React.FC<PropsType> = ({
     setInvalidTokenNotificationOpen,
   );
 
+  const { t } = useTranslation();
+
   return (
     <Modal open={open} setOpen={setOpen} reset={reset}>
       <AuthForm
-        title='Create new password'
-        subTitle='Your new password must be different from previous used passwords'
+        title={t('resetPassword.title')}
+        subTitle={t('resetPassword.subTitle')}
         inputs={inputs}
-        submitText='Reset password'
+        submitText={t('resetPassword.submitText')}
         register={register}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
@@ -52,7 +56,7 @@ const ResetPassword: React.FC<PropsType> = ({
           }}
         >
           <ReturnArrowIcon />
-          <p>Back to log in</p>
+          <p>{t('resetPassword.backToLogin')}</p>
         </button>
       </AuthForm>
     </Modal>

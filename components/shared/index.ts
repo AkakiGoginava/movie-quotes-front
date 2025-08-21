@@ -1,6 +1,5 @@
 export * from './Modal';
 export * from './Button';
-export * from './Dropdown';
 export * from './Header';
 export * from './RouteGuard';
 export * from './InputField';
@@ -11,3 +10,4 @@ export * from './Search';
 export * from './NotificationList';
 export * from './NotificationBell';
 export * from './NotificationItem';
+export * from './LanguageDropdown';

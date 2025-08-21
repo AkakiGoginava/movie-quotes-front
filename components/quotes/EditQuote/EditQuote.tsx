@@ -1,8 +1,11 @@
+import { Dispatch, SetStateAction } from 'react';
+
+import { useTranslation } from 'react-i18next';
+
 import { Modal, QuoteForm } from '@/components';
 import { Quote } from '@/types';
 
 import useEditQuote from './useEditQuote';
-import { Dispatch, SetStateAction } from 'react';
 
 const EditQuote = ({
   quote,
@@ -24,6 +27,7 @@ const EditQuote = ({
     isSubmitting,
     control,
   } = useEditQuote({ quote, setModalOpen });
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -33,8 +37,8 @@ const EditQuote = ({
       modalClassName='p-0'
     >
       <QuoteForm
-        title='Edit quote'
-        submitText='Edit quote'
+        title={t('editQuote.title')}
+        submitText={t('editQuote.submitText')}
         inputs={quoteInputs}
         register={register}
         onSubmit={onSubmit}

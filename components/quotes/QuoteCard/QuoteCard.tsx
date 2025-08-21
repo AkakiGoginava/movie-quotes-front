@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   CommentIcon,
   DeleteIcon,
@@ -22,6 +24,8 @@ const QuoteCard = ({
   const [openQuoteEdit, setOpenQuoteEdit] = useState(false);
   const [openQuoteView, setOpenQuoteView] = useState(false);
 
+  const { t, i18n } = useTranslation();
+
   return (
     <section className='relative w-full flex flex-col gap-6 rounded py-5 px-7.5 bg-slate-950'>
       <div className='w-full flex flex-col md:flex-row gap-6'>
@@ -31,7 +35,9 @@ const QuoteCard = ({
           className='w-full max-h-32.5 md:max-w-60 object-cover rounded'
         />
 
-        <p className='text-2xl italic'>"{quote.text.en}"</p>
+        <p className='text-2xl italic'>
+          "{i18n.language === 'ka' ? quote.text.ka : quote.text.en}"
+        </p>
       </div>
 
       <div className='border-b border-gray-700'></div>
@@ -65,7 +71,7 @@ const QuoteCard = ({
                 onClick={() => setOpenQuoteView(true)}
               >
                 <EyeIcon className='size-5' />
-                <span>View quote</span>
+                <span>{t('quoteCard.view')}</span>
               </div>
             </li>
 
@@ -75,7 +81,7 @@ const QuoteCard = ({
                 onClick={() => setOpenQuoteEdit(true)}
               >
                 <EditIcon />
-                <span>Edit</span>
+                <span>{t('quoteCard.edit')}</span>
               </div>
             </li>
 
@@ -85,7 +91,7 @@ const QuoteCard = ({
                 onClick={() => handleDeleteQuote(quote.id)}
               >
                 <DeleteIcon />
-                <span>Delete</span>
+                <span>{t('quoteCard.delete')}</span>
               </div>
             </li>
           </ul>

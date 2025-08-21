@@ -1,0 +1,223 @@
+{
+  "imageInput": {
+    "replacePhoto": "ფოტოს შეცვლა",
+    "dragDrop": "გადმოიტანეთ ფოტო ან",
+    "chooseFile": "აირჩიეთ ფაილი",
+    "changePhoto": "ფოტოს შეცვლა",
+    "uploadImage": "ფოტოს ატვირთვა"
+  },
+  "logout": "გასვლა",
+  "loading": "იტვირთება...",
+  "home": {
+    "find_quote": "იპოვე ნებისმიერი ციტატა მილიონობით ფილმის ფრაზაში",
+    "get_started": "დაწყება"
+  },
+  "notifications": {
+    "emailSentTitle": "გმადლობთ!",
+    "emailSentText": "გთხოვთ, შეამოწმოთ თქვენი ელფოსტა და მიჰყევით ინსტრუქციებს ანგარიშის გასააქტიურებლად.",
+    "passwordResetTitle": "შეამოწმეთ ელფოსტა",
+    "passwordResetText": "პაროლის აღდგენის ინსტრუქცია გამოგზავნილია თქვენს ელფოსტაზე",
+    "goToEmail": "გადადით ელფოსტაზე",
+    "skipConfirmLater": "გამოტოვება, დავადასტურებ მოგვიანებით",
+    "invalidTokenTitle": "ბმული ვადაგასულია!",
+    "invalidTokenText": "ბმული ვადაგასულია, რადგან არ გამოიყენეთ იგი.",
+    "requestAnotherLink": "მოითხოვეთ ახალი ბმული",
+    "successTitle": "წარმატება!",
+    "successText": "ელფოსტა წარმატებით დადასტურდა.",
+    "successBtnText": "შესვლა"
+  },
+  "forgotPassword": {
+    "title": "დაგავიწყდა პაროლი?",
+    "button": "დაგავიწყდა პაროლი?",
+    "subTitle": "შეიყვანეთ ელფოსტა და გამოგიგზავნით ინსტრუქციებს პაროლის აღსადგენად",
+    "submitText": "გაგზავნა",
+    "backToLogin": "დაბრუნება ავტორიზაციაზე",
+    "emailLabel": "ელფოსტა",
+    "emailPlaceholder": "შეიყვანეთ ელფოსტა",
+    "emailRequired": "გთხოვთ, შეიყვანეთ ელფოსტა",
+    "emailInvalid": "შეიყვანეთ ვალიდური ელფოსტა"
+  },
+  "login": {
+    "buttonText": "შესვლა",
+    "title": "შედით თქვენს ანგარიშზე",
+    "subTitle": "მოგესალმებით! გთხოვთ, შეიყვანეთ თქვენი მონაცემები.",
+    "submitText": "ავტორიზაცია",
+    "noAccount": "არ გაქვთ ანგარიში?",
+    "signUp": "რეგისტრაცია",
+    "emailLabel": "ელფოსტა",
+    "emailPlaceholder": "შეიყვანეთ ელფოსტა",
+    "emailRequired": "გთხოვთ, შეიყვანეთ ელფოსტა",
+    "emailInvalid": "შეიყვანეთ ვალიდური ელფოსტა",
+    "passwordLabel": "პაროლი",
+    "passwordPlaceholder": "შეიყვანეთ პაროლი",
+    "passwordRequired": "გთხოვთ, შეიყვანეთ პაროლი",
+    "rememberMe": "დამიმახსოვრე"
+  },
+  "register": {
+    "buttonText": "რეგისტრაცია",
+    "title": "შექმენით ანგარიში",
+    "subTitle": "დაიწყეთ თქვენი მოგზაურობა!",
+    "submitText": "დაწყება",
+    "alreadyAccount": "უკვე გაქვთ ანგარიში?",
+    "login": "შესვლა",
+    "nameLabel": "სახელი",
+    "namePlaceholder": "მინიმუმ 3 და მაქსიმუმ 15 პატარა ასო",
+    "nameRequired": "გთხოვთ, შეიყვანეთ სახელი",
+    "nameMinLength": "მინიმალური სიგრძე 3",
+    "nameMaxLength": "მაქსიმალური სიგრძე 15",
+    "namePattern": "მხოლოდ პატარა ასოები და ციფრები",
+    "emailLabel": "ელფოსტა",
+    "emailPlaceholder": "შეიყვანეთ ელფოსტა",
+    "emailRequired": "გთხოვთ, შეიყვანეთ ელფოსტა",
+    "emailInvalid": "შეიყვანეთ ვალიდური ელფოსტა",
+    "passwordLabel": "პაროლი",
+    "passwordPlaceholder": "მინიმუმ 8 და მაქსიმუმ 15 პატარა ასო",
+    "passwordRequired": "გთხოვთ, შეიყვანეთ პაროლი",
+    "passwordMinLength": "მინიმალური სიგრძე 8",
+    "passwordMaxLength": "მაქსიმალური სიგრძე 15",
+    "passwordPattern": "მხოლოდ პატარა ასოები და ციფრები",
+    "confirmPasswordLabel": "პაროლის დადასტურება",
+    "confirmPasswordPlaceholder": "დაადასტურეთ პაროლი",
+    "confirmPasswordRequired": "გთხოვთ, დაადასტურეთ პაროლი",
+    "confirmPasswordMatch": "პაროლები არ ემთხვევა"
+  },
+  "resetPassword": {
+    "title": "შექმენით ახალი პაროლი",
+    "subTitle": "თქვენი ახალი პაროლი უნდა განსხვავდებოდეს წინა გამოყენებული პაროლებისგან",
+    "submitText": "პაროლის აღდგენა",
+    "backToLogin": "დაბრუნება ავტორიზაციაზე",
+    "passwordLabel": "პაროლი",
+    "passwordPlaceholder": "მინიმუმ 8 და მაქსიმუმ 15 პატარა ასო",
+    "passwordRequired": "გთხოვთ, შეიყვანეთ პაროლი",
+    "passwordMinLength": "მინიმალური სიგრძე 8",
+    "passwordMaxLength": "მაქსიმალური სიგრძე 15",
+    "passwordPattern": "მხოლოდ პატარა ასოები და ციფრები",
+    "confirmPasswordLabel": "პაროლის დადასტურება",
+    "confirmPasswordPlaceholder": "დაადასტურეთ პაროლი",
+    "confirmPasswordRequired": "გთხოვთ, დაადასტურეთ პაროლი",
+    "confirmPasswordMatch": "პაროლები არ ემთხვევა"
+  },
+  "authForm": {
+    "googleSignIn": "შესვლა Google-ით",
+    "googleSignUp": "რეგისტრაცია Google-ით"
+  },
+  "quoteForm": {
+    "director": "რეჟისორი"
+  },
+  "addMovie": {
+    "buttonText": "ფილმის დამატება",
+    "title": "ფილმის დამატება",
+    "submitText": "ფილმის დამატება"
+  },
+  "editMovie": {
+    "title": "ფილმის რედაქტირება",
+    "submitText": "ფილმის რედაქტირება"
+  },
+  "infoField": {
+    "edit": "რედაქტირება",
+    "cancel": "გაუქმება",
+    "confirm": "დადასტურება",
+    "prompt": "დარწმუნებული ხართ, რომ გსურთ ცვლილებების შეტანა?",
+    "close": "დახურვა"
+  },
+  "profileForm": {
+    "title": "ჩემი პროფილი",
+    "uploadPhoto": "ახალი ფოტოს ატვირთვა",
+    "cancel": "გაუქმება",
+    "saveChanges": "ცვლილებების შენახვა",
+    "success": "ცვლილებები წარმატებით განხორციელდა",
+    "usernameLabel": "მომხმარებლის სახელი",
+    "emailLabel": "ელფოსტა",
+    "nameLabel": "ახალი სახელი",
+    "namePlaceholder": "შეიყვანეთ ახალი სახელი",
+    "nameRequired": "საჭირო",
+    "nameMinLength": "3 ან მეტი სიმბოლო",
+    "nameMaxLength": "15 ან ნაკლები სიმბოლო",
+    "namePattern": "მხოლოდ ასოები",
+    "passwordLabel": "პაროლი",
+    "passwordPlaceholder": "შეიყვანეთ ახალი პაროლი",
+    "passwordRequired": "საჭირო",
+    "passwordMinLength": "8 ან მეტი სიმბოლო",
+    "passwordMaxLength": "15 ან ნაკლები სიმბოლო",
+    "passwordPattern": "მხოლოდ ასოები და ციფრები",
+    "confirmPasswordLabel": "პაროლის დადასტურება",
+    "confirmPasswordPlaceholder": "დაადასტურეთ ახალი პაროლი",
+    "confirmPasswordRequired": "გთხოვთ, დაადასტურეთ პაროლი",
+    "confirmPasswordMatch": "პაროლები არ ემთხვევა"
+  },
+  "addQuote": {
+    "buttonText": "ციტატის დამატება",
+    "title": "ციტატის დამატება",
+    "submitText": "ციტატის დამატება"
+  },
+  "addQuoteWithMovie": {
+    "chooseMovieLabel": "აირჩიეთ ფილმი",
+    "chooseMovieRequired": "გთხოვთ, აირჩიოთ ფილმი",
+    "buttonText": "ახალი ციტატის დაწერა",
+    "title": "ახალი ციტატის დაწერა",
+    "submitText": "გამოქვეყნება"
+  },
+  "editQuote": {
+    "title": "ციტატის რედაქტირება",
+    "submitText": "ციტატის რედაქტირება"
+  },
+  "notificationItem": {
+    "new": "ახალი",
+    "commented": "დააკომენტარა თქვენს ციტატაზე",
+    "reacted": "მოიწონა თქვენი ციტატა"
+  },
+  "notificationList": {
+    "title": "შეტყობინებები",
+    "markAll": "ყველას წაკითხვა",
+    "loading": "შეტყობინებების ჩატვირთვა...",
+    "none": "შეტყობინებები არ არის"
+  },
+  "quoteCard": {
+    "view": "ციტატის ნახვა",
+    "edit": "რედაქტირება",
+    "delete": "წაშლა"
+  },
+  "search": {
+    "search": "ძიება",
+    "enter": "შეიყვანეთ",
+    "enterAt": "ფილმების საძიებლად",
+    "enterHash": "ციტატების საძიებლად"
+  },
+  "viewQuote": {
+    "movie": "ფილმი",
+    "commentRequired": "კომენტარის დამატება აუცილებელია",
+    "commentNotEmpty": "კომენტარი არ უნდა იყოს ცარიელი",
+    "writeComment": "კომენტარის დაწერა"
+  },
+  "sidebar": {
+    "editProfile": "პროფილის რედაქტირება",
+    "newsFeed": "სიახლეები",
+    "listOfMovies": "ფილმების სია"
+  },
+  "validationList": {
+    "shouldContain": "უნდა შეიცავდეს:"
+  },
+  "formatTime": {
+    "justNow": "ახლახანს",
+    "minAgo": "{{count}} წუთის წინ",
+    "hourAgo": "{{count}} საათის წინ",
+    "dayAgo": "{{count}} დღის წინ"
+  },
+  "news": {
+    "loading": "იტვირთება...",
+    "searchPlaceholder": "შეიყვანეთ @ ფილმების საძიებლად, შეიყვანეთ # ციტატების საძიებლად",
+    "loadMore": "მეტის ჩატვირთვა"
+  },
+  "movies": {
+    "loading": "იტვირთება...",
+    "searchPlaceholder": "ფილმების ძიება... (Enter)",
+    "myList": "ჩემი ფილმების სია",
+    "total": "სულ {{count}}",
+    "loadMore": "მეტის ჩატვირთვა",
+    "invalidId": "ფილმის ID არასწორია",
+    "notFound": "ფილმი ვერ მოიძებნა",
+    "description": "ფილმის აღწერა",
+    "director": "რეჟისორი",
+    "quotes": "ციტატები"
+  }
+}

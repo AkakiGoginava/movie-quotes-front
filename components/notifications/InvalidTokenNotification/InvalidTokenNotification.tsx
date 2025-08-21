@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Button, NotificationLayout, WarningIcon } from '@/components';
 
 import { PropsType } from './types';
@@ -11,13 +13,15 @@ const InvalidTokenNotification: React.FC<PropsType> = ({
   const { handleRequestNewLink, isLoading, action } =
     useInvalidTokenNotification(setOpen, setVerifyEmailNotificationOpen);
 
+  const { t } = useTranslation();
+
   return (
     <NotificationLayout
       open={open}
       setOpen={setOpen}
       icon={<WarningIcon />}
-      title='Link expired!'
-      text="Link has expired, because you haven't used it."
+      title={t('notifications.invalidTokenTitle')}
+      text={t('notifications.invalidTokenText')}
       hasExit={action != 'verify'}
       hasBtn={false}
     >
@@ -28,7 +32,7 @@ const InvalidTokenNotification: React.FC<PropsType> = ({
         handleClick={() => handleRequestNewLink()}
         disabled={isLoading}
       >
-        Request another link
+        {t('notifications.requestAnotherLink')}
       </Button>
     </NotificationLayout>
   );
