@@ -28,7 +28,7 @@ const useAddQuoteWithMovie = () => {
     },
   });
 
-  const onSubmitHandler = (data: QuoteInputsType) => {
+  const onSubmitHandler = async (data: QuoteInputsType) => {
     const formData = new FormData();
 
     if (!data.movieId) return;
@@ -40,7 +40,7 @@ const useAddQuoteWithMovie = () => {
 
     formData.append('poster', data.poster[0]);
 
-    handleStoreQuote(formData);
+    await handleStoreQuote(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);

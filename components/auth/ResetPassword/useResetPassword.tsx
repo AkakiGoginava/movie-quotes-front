@@ -86,8 +86,8 @@ export const useResetPassword = (
     },
   });
 
-  const onSubmit: SubmitHandler<ResetPasswordInput> = (data) => {
-    handleResetPassword(data, setError, inputs);
+  const onSubmit: SubmitHandler<ResetPasswordInput> = async (data) => {
+    await handleResetPassword(data, setError, inputs);
   };
 
   return {

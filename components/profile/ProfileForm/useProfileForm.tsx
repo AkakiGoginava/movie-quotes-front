@@ -62,7 +62,7 @@ const useProfileForm = () => {
     },
   });
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     const formData = new FormData();
 
     if (data.name) {
@@ -79,7 +79,7 @@ const useProfileForm = () => {
       formData.append('image', data.image[0]);
     }
 
-    handleEditUser(formData);
+    await handleEditUser(formData);
   });
 
   const userInfo = {

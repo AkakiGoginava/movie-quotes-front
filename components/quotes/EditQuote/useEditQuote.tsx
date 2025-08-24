@@ -47,7 +47,7 @@ const useEditQuote = ({
     },
   });
 
-  const onSubmitHandler = (data: QuoteInputsType) => {
+  const onSubmitHandler = async (data: QuoteInputsType) => {
     const formData = new FormData();
 
     formData.append('movie_id', quote.movie_id.toString());
@@ -59,7 +59,7 @@ const useEditQuote = ({
       formData.append('poster', data.poster[0]);
     }
 
-    handleUpdateQuote(formData);
+    await handleUpdateQuote(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);

@@ -47,8 +47,8 @@ export const useLogin = () => {
 
   const { handleLogin } = useAuth();
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    handleLogin(data, setError, inputs);
+  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
+    await handleLogin(data, setError, inputs);
   };
   return {
     register,

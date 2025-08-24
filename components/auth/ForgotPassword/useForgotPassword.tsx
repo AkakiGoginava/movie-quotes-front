@@ -45,8 +45,8 @@ export const useForgotPassword = (
     },
   });
 
-  const onSubmit: SubmitHandler<ForgotPasswordInput> = (data) => {
-    return handleForgotPassword(data, setError, inputs);
+  const onSubmit: SubmitHandler<ForgotPasswordInput> = async (data) => {
+    await handleForgotPassword(data, setError, inputs);
   };
 
   return {
