@@ -37,6 +37,7 @@
   font-display: swap;
   unicode-range: U+10A0-10FF;
 }
+
 @font-face {
   font-family: 'Helvetica Neue Georgian';
   src: url('/fonts/Helvetica.Georgian/Helvetica Neue LT GEO 65 Medium.ttf')
@@ -72,6 +73,11 @@
       #0d0b14 98.75%
     );
   }
+}
+
+body.lang-ge {
+  font-family:
+    'Helvetica Neue Georgian', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 body {

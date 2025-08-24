@@ -1,6 +1,6 @@
 import i18n from '@/src/i18n';
 
-import { CaretIcon } from '@/components/icons';
+import { CaretIcon } from '@/components';
 
 const languageOptions = [
   { label: 'Eng', value: 'en' },
@@ -19,7 +19,7 @@ const LanguageDropdown: React.FC = () => {
         role='button'
         className='btn bg-transparent border-none h-8 shadow-none'
       >
-        <span>
+        <span className='text-white'>
           {selectedLangIndex >= 0
             ? languageOptions[selectedLangIndex].label
             : ''}
@@ -33,6 +33,7 @@ const LanguageDropdown: React.FC = () => {
         {languageOptions.map((option, idx) => (
           <li key={idx}>
             <a
+              className='text-white'
               onClick={() => {
                 i18n.changeLanguage(option.value);
               }}
