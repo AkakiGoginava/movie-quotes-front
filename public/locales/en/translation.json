@@ -6,6 +6,14 @@
     "changePhoto": "Change Photo",
     "uploadImage": "Upload image"
   },
+  "404": {
+    "description": "We can't see the page you're looking for",
+    "returnHome": "Return home"
+  },
+  "403": {
+    "description": "Sorry, but you don't have the permission to access this page",
+    "returnHome": "Return home"
+  },
   "logout": "Log out",
   "loading": "Loading...",
   "home": {
