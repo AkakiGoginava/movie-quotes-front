@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import i18n from '@/src/i18n';
 
 import {
   Category,
@@ -30,7 +31,11 @@ export const registerUser = async (
 ): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
-  const response = await axios.post('/api/register', data);
+  const response = await axios.post('/api/register', data, {
+    headers: {
+      Language: i18n.language,
+    },
+  });
 
   return response;
 };
@@ -40,7 +45,11 @@ export const loginUser = async (
 ): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
-  const response = await axios.post('/api/login', data);
+  const response = await axios.post('/api/login', data, {
+    headers: {
+      Language: i18n.language,
+    },
+  });
 
   return response;
 };
@@ -110,7 +119,11 @@ export const forgotPassword = async (
 ): Promise<AxiosResponse<{}>> => {
   await getCsrfCookie();
 
-  const response = await axios.post('/api/forgot-password', data);
+  const response = await axios.post('/api/forgot-password', data, {
+    headers: {
+      Language: i18n.language,
+    },
+  });
 
   return response;
 };
@@ -120,7 +133,11 @@ export const resetPassword = async (
 ): Promise<AxiosResponse> => {
   await getCsrfCookie();
 
-  const response = await axios.post('/api/reset-password', data);
+  const response = await axios.post('/api/reset-password', data, {
+    headers: {
+      Language: i18n.language,
+    },
+  });
 
   return response;
 };
