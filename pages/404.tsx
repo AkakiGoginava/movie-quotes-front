@@ -7,13 +7,15 @@ export default function Error404() {
   const { t } = useTranslation();
 
   return (
-    <div className='w-screen h-screen flex items-center justify-center'>
+    <div className='w-screen h-screen flex items-center justify-center px-4'>
       <div className='flex flex-col gap-6 items-center'>
         <img src={`/assets/404-cover.png`} className='w-30.5 h-44.5' />
 
         <h1 className='font-bold text-2xl md:text-5xl'>Whoops!</h1>
 
-        <p className='font-medium md:text-2xl'>{t('404.description')}</p>
+        <p className='font-medium md:text-2xl text-center'>
+          {t('404.description')}
+        </p>
 
         <Button
           variant='primary'

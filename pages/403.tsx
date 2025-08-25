@@ -6,13 +6,15 @@ export default function ForbiddenPage() {
   const router = useRouter();
   const { t } = useTranslation();
   return (
-    <div className='w-screen h-screen flex items-center justify-center'>
+    <div className='w-screen h-screen flex items-center justify-center px-4'>
       <div className='flex flex-col gap-6 items-center'>
         <img src={`/assets/403-cover.png`} className='w-86.5 h-65' />
 
         <h1 className='font-bold text-2xl md:text-5xl'>You shall not pass!</h1>
 
-        <p className='font-medium md:text-2xl'>{t('403.description')}</p>
+        <p className='font-medium md:text-2xl text-center'>
+          {t('403.description')}
+        </p>
 
         <Button
           variant='primary'
