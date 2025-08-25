@@ -45,7 +45,7 @@ const useEditMovie = (
     },
   });
 
-  const onSubmitHandler = (data: MovieInputsType) => {
+  const onSubmitHandler = async (data: MovieInputsType) => {
     const formData = new FormData();
 
     formData.append('title[en]', data.title.en);
@@ -65,7 +65,7 @@ const useEditMovie = (
 
     if (data.poster) formData.append('poster', data.poster[0]);
 
-    handleUpdateMovie(formData);
+    await handleUpdateMovie(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);

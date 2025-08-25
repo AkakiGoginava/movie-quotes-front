@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { AuthForm, Modal, ReturnArrowIcon } from '@/components';
 
@@ -23,13 +24,15 @@ const ForgotPassword: React.FC<PropsType> = ({
     inputs,
   } = useForgotPassword(setOpen, setPasswordResetNotificationOpen);
 
+  const { t } = useTranslation();
+
   return (
     <Modal open={open} setOpen={setOpen} reset={reset}>
       <AuthForm
-        title='Forgot password?'
-        subTitle="Enter the email and we'll send an email with instructions to reset your password"
+        title={t('forgotPassword.title')}
+        subTitle={t('forgotPassword.subTitle')}
         inputs={inputs}
-        submitText='Send Instructions'
+        submitText={t('forgotPassword.submitText')}
         register={register}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
@@ -47,7 +50,7 @@ const ForgotPassword: React.FC<PropsType> = ({
           }}
         >
           <ReturnArrowIcon />
-          <p>Back to log in</p>
+          <p>{t('forgotPassword.backToLogin')}</p>
         </button>
       </AuthForm>
     </Modal>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { LikedHeartIcon, QuoteIcon } from '@/components';
 import { cn, formatTime } from '@/helpers';
 import { useNotifications } from '@/hooks';
@@ -16,6 +18,8 @@ export const NotificationItem = ({ notification }: NotificationItemProps) => {
   const [openQuoteView, setOpenQuoteView] = useState(false);
 
   const { markAsRead } = useNotifications();
+
+  const { t } = useTranslation();
 
   const handleClick = () => {
     setOpenQuoteView(true);
@@ -49,7 +53,9 @@ export const NotificationItem = ({ notification }: NotificationItemProps) => {
             />
 
             {!notification.read_at && (
-              <p className='text-green-700 text-center md:hidden'>New</p>
+              <p className='text-green-700 text-center md:hidden'>
+                {t('notificationItem.new')}
+              </p>
             )}
           </div>
 
@@ -63,14 +69,14 @@ export const NotificationItem = ({ notification }: NotificationItemProps) => {
                 <>
                   <QuoteIcon />
                   <span className='text-nowrap overflow-ellipsis'>
-                    Commented on your quote
+                    {t('notificationItem.commented')}
                   </span>
                 </>
               ) : (
                 <>
                   <LikedHeartIcon />
                   <span className='text-nowrap overflow-ellipsis'>
-                    Reacted to your quote
+                    {t('notificationItem.reacted')}
                   </span>
                 </>
               )}
@@ -85,7 +91,9 @@ export const NotificationItem = ({ notification }: NotificationItemProps) => {
             <p>{formatTime(notification.created_at)}</p>
 
             {!notification.read_at && (
-              <p className='text-green-700 text-end'>New</p>
+              <p className='text-green-700 text-end'>
+                {t('notificationItem.new')}
+              </p>
             )}
           </div>
         </div>

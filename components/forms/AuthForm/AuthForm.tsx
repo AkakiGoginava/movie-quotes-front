@@ -1,4 +1,5 @@
 import { FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Button, GoogleIcon, InputField } from '@/components';
 
@@ -35,6 +36,8 @@ const AuthForm = <FormValues extends FieldValues>({
 
     window.location.href = authUrl;
   };
+
+  const { t } = useTranslation();
 
   return (
     <form
@@ -85,7 +88,11 @@ const AuthForm = <FormValues extends FieldValues>({
             disabled={isSubmitting}
           >
             <GoogleIcon />
-            <span>Sign {hasGoogleSignIn ? 'in' : 'up'} with Google</span>
+            <span>
+              {hasGoogleSignIn
+                ? t('authForm.googleSignIn')
+                : t('authForm.googleSignUp')}
+            </span>
           </Button>
         )}
 

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Modal, PlusIcon, Button, QuoteForm } from '@/components';
 import { Movie } from '@/types';
 
@@ -17,6 +19,7 @@ const AddQuote = ({ movie }: { movie: Movie }) => {
     modalOpen,
     setModalOpen,
   } = useAddQuote({ movieId: movie.id });
+  const { t } = useTranslation();
 
   return (
     <>
@@ -29,7 +32,7 @@ const AddQuote = ({ movie }: { movie: Movie }) => {
         }}
       >
         <PlusIcon />
-        <span>Add quote</span>
+        <span>{t('addQuote.buttonText')}</span>
       </Button>
 
       <Modal
@@ -39,8 +42,8 @@ const AddQuote = ({ movie }: { movie: Movie }) => {
         modalClassName='p-0'
       >
         <QuoteForm
-          title='Add quote'
-          submitText='Add quote'
+          title={t('addQuote.title')}
+          submitText={t('addQuote.submitText')}
           inputs={quoteInputs}
           register={register}
           onSubmit={onSubmit}

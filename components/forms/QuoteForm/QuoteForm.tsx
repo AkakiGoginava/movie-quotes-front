@@ -1,4 +1,5 @@
 import { FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Button, InputField } from '@/components';
 import { useAuth } from '@/hooks';
@@ -20,6 +21,7 @@ const QuoteForm = <FormValues extends FieldValues = FieldValues>({
   movie,
 }: PropsType<FormValues>) => {
   const { user } = useAuth();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className='flex flex-col gap-8 md:min-w-225 pb-6'>
@@ -47,7 +49,8 @@ const QuoteForm = <FormValues extends FieldValues = FieldValues>({
 
           <div className='flex flex-col md:gap-7.5'>
             <h1 className='md:text-2xl font-medium text-light-yellow'>
-              {movie.title.en} ({movie.year})
+              {i18n.language === 'ka' ? movie.title.ka : movie.title.en} (
+              {movie.year})
             </h1>
 
             <div className='flex flex-col-reverse md:flex-col md:gap-7.5'>
@@ -63,7 +66,8 @@ const QuoteForm = <FormValues extends FieldValues = FieldValues>({
               </div>
 
               <h2 className='md:text-lg font-bold mb-2'>
-                Director: {movie.director.en}
+                {t('quoteForm.director')}:{' '}
+                {i18n.language === 'ka' ? movie.director.ka : movie.director.en}
               </h2>
             </div>
           </div>

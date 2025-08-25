@@ -4,6 +4,7 @@ import { NotificationLayout, SendCheckIcon } from '@/components';
 import { useAuth } from '@/hooks';
 
 import { PropsType } from './types';
+import { useTranslation } from 'react-i18next';
 
 const EmailSentNotification: React.FC<PropsType> = ({
   open,
@@ -17,7 +18,9 @@ const EmailSentNotification: React.FC<PropsType> = ({
 
   const email = searchParams.get('email');
 
-  if (isLoading) return <div>Loading...</div>;
+  const { t } = useTranslation();
+
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <NotificationLayout
@@ -26,7 +29,7 @@ const EmailSentNotification: React.FC<PropsType> = ({
       icon={<SendCheckIcon />}
       title={title}
       text={text}
-      btnText='Go to my email'
+      btnText={t('notifications.goToEmail')}
       hasExit={hasExit}
       hasBtn={true}
       handleClick={() => {
@@ -43,7 +46,7 @@ const EmailSentNotification: React.FC<PropsType> = ({
             setOpen(false);
           }}
         >
-          Skip, I'll confirm later
+          {t('notifications.skipConfirmLater')}
         </p>
       )}
     </NotificationLayout>

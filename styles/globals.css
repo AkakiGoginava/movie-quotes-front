@@ -30,16 +30,17 @@
 
 @font-face {
   font-family: 'Helvetica Neue Georgian';
-  src: url('/fonts/Helvetica.Georgian/helvetica-neue-lt-geo-55-roman.ttf')
+  src: url('/fonts/Helvetica-Georgian/helvetica-neue-lt-geo-55-roman.ttf')
     format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
   unicode-range: U+10A0-10FF;
 }
+
 @font-face {
   font-family: 'Helvetica Neue Georgian';
-  src: url('/fonts/Helvetica.Georgian/Helvetica Neue LT GEO 65 Medium.ttf')
+  src: url('/fonts/Helvetica-Georgian/Helvetica Neue LT GEO 65 Medium.ttf')
     format('truetype');
   font-weight: 500;
   font-style: normal;
@@ -48,7 +49,7 @@
 }
 @font-face {
   font-family: 'Helvetica Neue Georgian';
-  src: url('/fonts/Helvetica.Georgian/Helvetica Neue LT GEO 75 Bold.ttf')
+  src: url('/fonts/Helvetica-Georgian/Helvetica Neue LT GEO 75 Bold.ttf')
     format('truetype');
   font-weight: 700;
   font-style: normal;
@@ -72,6 +73,11 @@
       #0d0b14 98.75%
     );
   }
+}
+
+body.lang-ge {
+  font-family:
+    'Helvetica Neue Georgian', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 body {

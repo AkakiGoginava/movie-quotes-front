@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Button, Modal, MovieForm, PlusIcon } from '@/components';
 
 import useAddMovie from './useAddMovie';
@@ -18,7 +20,8 @@ const AddMovie = () => {
     setModalOpen,
   } = useAddMovie();
 
-  if (isLoading) return <div>Loading...</div>;
+  const { t } = useTranslation();
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <>
@@ -30,7 +33,7 @@ const AddMovie = () => {
         }}
       >
         <PlusIcon />
-        <span className='text-base md:text-xl'>Add movie</span>
+        <span className='text-base md:text-xl'>{t('addMovie.buttonText')}</span>
       </Button>
 
       <Modal
@@ -40,8 +43,8 @@ const AddMovie = () => {
         modalClassName='p-0'
       >
         <MovieForm
-          title='Add movie'
-          submitText='Add movie'
+          title={t('addMovie.title')}
+          submitText={t('addMovie.submitText')}
           inputs={movieInputs}
           register={register}
           onSubmit={onSubmit}

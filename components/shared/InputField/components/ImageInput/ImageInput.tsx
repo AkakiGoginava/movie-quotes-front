@@ -1,5 +1,6 @@
 import { useDropzone } from 'react-dropzone';
 import { FieldValues, Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { ImageIcon } from '@/components';
 import { cn } from '@/helpers';
@@ -13,6 +14,8 @@ const ImageInput = <FormValues extends FieldValues = FieldValues>({
   isInvalid,
   isValid,
 }: PropsType<FormValues>) => {
+  const { t } = useTranslation();
+
   return (
     <Controller
       name={input.name}
@@ -62,18 +65,18 @@ const ImageInput = <FormValues extends FieldValues = FieldValues>({
 
                     <div className='flex flex-col gap-5 items-center justify-center w-full md:ml-auto'>
                       <p className='text-xs md:text-base font-bold text-light-yellow'>
-                        REPLACE PHOTO
+                        {t('imageInput.replacePhoto')}
                       </p>
 
                       <div className='hidden md:flex gap-2'>
                         <ImageIcon />
                         <p className='hidden md:inline-block text-xl'>
-                          Drag & drop your image here or
+                          {t('imageInput.dragDrop')}
                         </p>
                       </div>
 
                       <div className='text-sm md:text-lg bg-purple-900 p-2'>
-                        Choose file
+                        {t('imageInput.chooseFile')}
                       </div>
                     </div>
                   </div>
@@ -87,7 +90,7 @@ const ImageInput = <FormValues extends FieldValues = FieldValues>({
 
                     <div className='absolute top-1/2 left-1/2 -translate-1/2 flex flex-col gap-2 items-center bg-black/40 p-5 rounded-xl'>
                       <ImageIcon />
-                      <p>Change Photo</p>
+                      <p>{t('imageInput.changePhoto')}</p>
                     </div>
                   </div>
                 )
@@ -95,13 +98,13 @@ const ImageInput = <FormValues extends FieldValues = FieldValues>({
                 <div className='p-4 md:p-5 flex items-center gap-4'>
                   <ImageIcon />
                   <p className='hidden md:inline-block'>
-                    Drag & drop your image here or
+                    {t('imageInput.dragDrop')}
                   </p>
 
-                  <p className='md:hidden'>Upload image</p>
+                  <p className='md:hidden'>{t('imageInput.uploadImage')}</p>
 
                   <div className='bg-purple-900 p-2 ml-auto md:ml-0'>
-                    Choose file
+                    {t('imageInput.chooseFile')}
                   </div>
                 </div>
               )}

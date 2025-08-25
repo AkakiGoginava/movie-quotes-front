@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import {
   Button,
   CheckIcon,
@@ -36,13 +38,14 @@ const ProfileForm = () => {
     router,
   } = useProfileForm();
 
-  if (isLoading) return <div>Loading...</div>;
+  const { t } = useTranslation();
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <div className='md:py-8'>
       <form onSubmit={onSubmit}>
         <h1 className='text-2xl font-medium ml-40 mb-30 hidden md:block'>
-          My profile
+          {t('profileForm.title')}
         </h1>
 
         <button
@@ -85,13 +88,13 @@ const ProfileForm = () => {
                 htmlFor='image'
                 className='text-xl text-center hover:text-gray-300 cursor-pointer transition'
               >
-                Upload new photo
+                {t('profileForm.uploadPhoto')}
               </label>
             </div>
 
             <div className='flex flex-col gap-10 w-full md:w-auto'>
               <InfoField<ProfileEditInput>
-                name='Username'
+                name={t('profileForm.usernameLabel')}
                 info={userInfo.username}
                 editable
                 editing={editingUsername}
@@ -107,7 +110,7 @@ const ProfileForm = () => {
 
               {!isGoogleUser && (
                 <InfoField<ProfileEditInput>
-                  name='Password'
+                  name={t('profileForm.passwordLabel')}
                   info={userInfo.password}
                   editable
                   editing={editingPassword}
@@ -134,7 +137,7 @@ const ProfileForm = () => {
                   handleImageClear();
                 }}
               >
-                Cancel
+                {t('profileForm.cancel')}
               </Button>
 
               <Button
@@ -143,7 +146,7 @@ const ProfileForm = () => {
                 disabled={isSubmitting}
                 className='text-xl h-12'
               >
-                Save changes
+                {t('profileForm.saveChanges')}
               </Button>
             </div>
           )}
@@ -154,7 +157,7 @@ const ProfileForm = () => {
         <div className='modal-box flex justify-between w-100 bg-green-100 text-green-900 p-4 mt-10 ml-4 rounded-md'>
           <div className='flex gap-2 items-center'>
             <CheckIcon />
-            <p>Changes updated successfully</p>
+            <p>{t('profileForm.success')}</p>
           </div>
 
           <button
@@ -166,8 +169,6 @@ const ProfileForm = () => {
           </button>
         </div>
       </dialog>
-
-      <div></div>
     </div>
   );
 };

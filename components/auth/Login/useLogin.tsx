@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { InputFieldType, LoginInput } from '@/types';
 import { useAuth } from '@/hooks';
@@ -13,31 +14,32 @@ export const useLogin = () => {
     reset,
   } = useForm<LoginInput>({ mode: 'onChange' });
 
+  const { t } = useTranslation();
   const inputs: InputFieldType<LoginInput>[] = [
     {
-      label: 'Email',
+      label: t('login.emailLabel'),
       name: 'email',
       type: 'email',
-      placeholder: 'Enter your email',
+      placeholder: t('login.emailPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please enter your email' },
+        required: { value: true, message: t('login.emailRequired') },
         pattern: {
           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-          message: 'Enter a valid email address',
+          message: t('login.emailInvalid'),
         },
       },
     },
     {
-      label: 'Password',
+      label: t('login.passwordLabel'),
       name: 'password',
       type: 'password',
-      placeholder: 'Password',
+      placeholder: t('login.passwordPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please enter your password' },
+        required: { value: true, message: t('login.passwordRequired') },
       },
     },
     {
-      label: 'Remember me',
+      label: t('login.rememberMe'),
       name: 'remember',
       type: 'checkbox',
     },
@@ -45,8 +47,8 @@ export const useLogin = () => {
 
   const { handleLogin } = useAuth();
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    handleLogin(data, setError, inputs);
+  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
+    await handleLogin(data, setError, inputs);
   };
   return {
     register,

@@ -27,7 +27,7 @@ const useAddQuote = ({ movieId }: { movieId: number }) => {
     },
   });
 
-  const onSubmitHandler = (data: QuoteInputsType) => {
+  const onSubmitHandler = async (data: QuoteInputsType) => {
     const formData = new FormData();
 
     formData.append('movie_id', movieId.toString());
@@ -37,7 +37,7 @@ const useAddQuote = ({ movieId }: { movieId: number }) => {
 
     formData.append('poster', data.poster[0]);
 
-    handleStoreQuote(formData);
+    await handleStoreQuote(formData);
   };
 
   const onSubmit = handleSubmit(onSubmitHandler);

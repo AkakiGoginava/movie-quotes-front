@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Modal, QuoteForm, PencilIcon } from '@/components';
 
 import useAddQuoteWithMovie from './useAddQuoteWithMovie';
@@ -18,7 +20,8 @@ const AddQuoteWithMovie = () => {
     isLoadingMovies,
   } = useAddQuoteWithMovie();
 
-  if (isLoadingMovies) return <div>Loading...</div>;
+  const { t } = useTranslation();
+  if (isLoadingMovies) return <div>{t('loading')}</div>;
 
   return (
     <>
@@ -30,7 +33,7 @@ const AddQuoteWithMovie = () => {
           }}
         >
           <PencilIcon />
-          <span>Write new quote</span>
+          <span>{t('addQuoteWithMovie.buttonText')}</span>
         </div>
       </div>
 
@@ -41,8 +44,8 @@ const AddQuoteWithMovie = () => {
         modalClassName='p-0'
       >
         <QuoteForm
-          title='Write new quote'
-          submitText='Post'
+          title={t('addQuoteWithMovie.title')}
+          submitText={t('addQuoteWithMovie.submitText')}
           inputs={quoteInputs}
           register={register}
           onSubmit={onSubmit}

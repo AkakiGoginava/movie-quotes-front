@@ -1,9 +1,13 @@
 import Link from 'next/link';
 
+import { useTranslation } from 'react-i18next';
+
 import { QuoteIcon } from '@/components';
 import { Movie } from '@/types';
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
+  const { i18n } = useTranslation();
+
   return (
     <Link
       href={`/movies/${movie.id}`}
@@ -16,7 +20,8 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
       />
 
       <span className='font-medium text-2xl'>
-        {movie.title.en} ({movie.year})
+        {i18n.language === 'ka' ? movie.title.ka : movie.title.en} ({movie.year}
+        )
       </span>
 
       <div className='flex gap-3 items-center'>

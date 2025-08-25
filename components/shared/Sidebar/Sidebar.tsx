@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useTranslation } from 'react-i18next';
+
 import { Button, CameraIcon, HouseIcon } from '@/components';
 import { cn } from '@/helpers';
 import { useAuth } from '@/hooks';
@@ -8,8 +10,9 @@ import { useAuth } from '@/hooks';
 const Sidebar = () => {
   const { isLoading, user, handleLogout } = useAuth();
   const pathName = usePathname();
+  const { t } = useTranslation();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <div className='fixed top-22 h-full flex flex-col gap-10 md:px-17.5 md:pt-8'>
@@ -24,20 +27,20 @@ const Sidebar = () => {
 
         <Link href='/profile'>
           <p className='text-2xl'>{user?.name}</p>
-          <p>Edit your profile</p>
+          <p>{t('sidebar.editProfile')}</p>
         </Link>
       </div>
 
       <Link href='/news' className='flex items-center gap-11 pl-2'>
         <HouseIcon className={cn({ 'text-red-500': pathName === '/news' })} />
-        <span className='text-2xl'>News feed</span>
+        <span className='text-2xl'>{t('sidebar.newsFeed')}</span>
       </Link>
 
       <Link href='/movies' className='flex items-center gap-11 pl-2'>
         <CameraIcon
           className={cn('size-8', { 'text-red-500': pathName === '/movies' })}
         />
-        <span className='text-2xl'>List of movies</span>
+        <span className='text-2xl'>{t('sidebar.listOfMovies')}</span>
       </Link>
 
       <Button
@@ -48,7 +51,7 @@ const Sidebar = () => {
         }}
         className='w-fit border-none text-2xl md:hidden pl-0'
       >
-        Log out
+        {t('logout')}
       </Button>
     </div>
   );

@@ -1,0 +1,232 @@
+{
+  "imageInput": {
+    "replacePhoto": "REPLACE PHOTO",
+    "dragDrop": "Drag & drop your image here or",
+    "chooseFile": "Choose file",
+    "changePhoto": "Change Photo",
+    "uploadImage": "Upload image"
+  },
+  "404": {
+    "description": "We can't see the page you're looking for",
+    "returnHome": "Return home"
+  },
+  "403": {
+    "description": "Sorry, but you don't have the permission to access this page",
+    "returnHome": "Return home"
+  },
+  "logout": "Log out",
+  "loading": "Loading...",
+  "home": {
+    "find_quote": "Find any quote in millions of movie lines",
+    "get_started": "Get started"
+  },
+  "notifications": {
+    "emailSentTitle": "Thank you!",
+    "emailSentText": "Please check your email and follow the instructions to activate your account.",
+    "passwordResetTitle": "Check your email",
+    "passwordResetText": "We have sent password recovery instructions to your email",
+  "success": "Success",
+  "goToEmail": "Go to my email",
+  "skipConfirmLater": "Skip, I'll confirm later",
+  "invalidTokenTitle": "Link expired!",
+  "invalidTokenText": "Link has expired, because you haven't used it.",
+  "requestAnotherLink": "Request another link",
+  "successTitle": "Success!",
+  "successText": "Email verified successfully.",
+  "successBtnText": "Log in"
+  },
+  "forgotPassword": {
+    "title": "Forgot password?",
+    "button": "Forgot password?",
+    "subTitle": "Enter the email and we'll send an email with instructions to reset your password",
+    "submitText": "Send Instructions",
+    "backToLogin": "Back to log in",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Enter a valid email address"
+  },
+  "login": {
+    "buttonText": "Log in",
+    "title": "Log in to your account",
+    "subTitle": "Welcome back! Please enter your details.",
+    "submitText": "Sign in",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Enter a valid email address",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "passwordRequired": "Please enter your password",
+    "rememberMe": "Remember me"
+  },
+  "register": {
+    "buttonText": "Sign up",
+    "title": "Create an account",
+    "subTitle": "Start your journey!",
+    "submitText": "Get started",
+    "alreadyAccount": "Already have an account?",
+    "login": "Log in",
+    "nameLabel": "Name",
+    "namePlaceholder": "At least 3 & max.15 lower case characters",
+    "nameRequired": "Please enter your name",
+    "nameMinLength": "Minimum length is 3",
+    "nameMaxLength": "Maximum length is 15",
+    "namePattern": "Only lowercase letters and numbers allowed",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Enter a valid email address",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "At least 8 & max.15 lower case characters",
+    "passwordRequired": "Please enter your password",
+    "passwordMinLength": "Minimum length is 8",
+    "passwordMaxLength": "Maximum length is 15",
+    "passwordPattern": "Only lowercase letters and numbers allowed",
+    "confirmPasswordLabel": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "confirmPasswordMatch": "Passwords do not match"
+  },
+  "resetPassword": {
+    "title": "Create new password",
+    "subTitle": "Your new password must be different from previous used passwords",
+    "submitText": "Reset password",
+    "backToLogin": "Back to log in",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "At least 8 & max.15 lower case characters",
+    "passwordRequired": "Please enter your password",
+    "passwordMinLength": "Minimum length is 8",
+    "passwordMaxLength": "Maximum length is 15",
+    "passwordPattern": "Only lowercase letters and numbers allowed",
+    "confirmPasswordLabel": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "confirmPasswordMatch": "Passwords do not match"
+  },
+  "authForm": {
+    "googleSignIn": "Sign in with Google",
+    "googleSignUp": "Sign up with Google"
+  },
+  "quoteForm": {
+    "director": "Director"
+  },
+  "addMovie": {
+    "buttonText": "Add movie",
+    "title": "Add movie",
+    "submitText": "Add movie"
+  },
+  "editMovie": {
+    "title": "Edit movie",
+    "submitText": "Edit movie"
+  },
+  "infoField": {
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "prompt": "Are you sure you want to make changes?",
+    "close": "Close"
+  },
+  "profileForm": {
+    "title": "My profile",
+    "uploadPhoto": "Upload new photo",
+    "cancel": "Cancel",
+    "saveChanges": "Save changes",
+    "success": "Changes updated successfully",
+    "usernameLabel": "Username",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "nameLabel": "New username",
+    "namePlaceholder": "Enter new username",
+    "nameRequired": "Required",
+    "nameMinLength": "3 or more characters",
+    "nameMaxLength": "15 or fewer characters",
+    "namePattern": "Lowercase characters",
+    "passwordPlaceholder": "Enter new password",
+    "passwordRequired": "Required",
+    "passwordMinLength": "3 or more characters",
+    "passwordMaxLength": "15 or fewer characters",
+    "passwordPattern": "Lowercase letters and numbers",
+    "confirmPasswordLabel": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm new password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "confirmPasswordMatch": "Passwords do not match"
+  },
+  "addQuote": {
+    "buttonText": "Add quote",
+    "title": "Add quote",
+    "submitText": "Add quote"
+  },
+  "addQuoteWithMovie": {
+    "chooseMovieLabel": "Choose movie",
+    "chooseMovieRequired": "Please choose a movie",
+    "buttonText": "Write new quote",
+    "title": "Write new quote",
+    "submitText": "Post"
+  },
+  "editQuote": {
+    "title": "Edit quote",
+    "submitText": "Edit quote"
+  },
+  "notificationItem": {
+    "new": "New",
+    "commented": "Commented on your quote",
+    "reacted": "Reacted to your quote"
+  },
+  "notificationList": {
+    "title": "Notifications",
+    "markAll": "Mark all as read",
+    "loading": "Loading notifications...",
+    "none": "No notifications"
+  },
+  "quoteCard": {
+    "view": "View quote",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "search": {
+    "search": "Search",
+    "enter": "Enter",
+    "enterAt": "to search movies",
+    "enterHash": "to search quotes"
+  },
+  "viewQuote": {
+    "movie": "movie",
+    "commentRequired": "Comment is required",
+    "commentNotEmpty": "Comment must not be empty",
+    "writeComment": "Write a comment"
+  },
+  "sidebar": {
+    "editProfile": "Edit your profile",
+    "newsFeed": "News feed",
+    "listOfMovies": "List of movies"
+  },
+  "validationList": {
+    "shouldContain": "should contain:"
+  },
+  "formatTime": {
+    "justNow": "Just now",
+    "minAgo": "{{count}} min ago",
+    "hourAgo": "{{count}} hour ago",
+    "dayAgo": "{{count}} day ago"
+  },
+  "news": {
+    "loading": "Loading...",
+    "searchPlaceholder": "Enter @ to search movies, Enter # to search quotes",
+    "loadMore": "Load More Quotes"
+  },
+  "movies": {
+    "loading": "Loading...",
+    "searchPlaceholder": "Search movies... (Press Enter)",
+    "myList": "My list of movies",
+    "total": "Total {{count}}",
+    "loadMore": "Load More Movies",
+    "invalidId": "Invalid movie ID",
+    "notFound": "Movie not found",
+    "description": "Movie description",
+    "director": "Director",
+    "quotes": "Quotes"
+  }
+}

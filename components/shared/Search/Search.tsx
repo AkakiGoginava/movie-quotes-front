@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { useTranslation } from 'react-i18next';
+
 import { ReturnArrowIcon, SearchIcon } from '@/components';
 import { cn } from '@/helpers';
 
@@ -31,6 +33,8 @@ const Search: React.FC<PropsType> = ({
     setShowSearchBar(false);
     setShowMobileModal(false);
   };
+
+  const { t } = useTranslation();
 
   return (
     <div
@@ -65,7 +69,7 @@ const Search: React.FC<PropsType> = ({
             onClick={() => setShowSearchBar(true)}
             className='cursor-pointer hover:text-gray-600 transition-colors'
           >
-            Search
+            {t('search.search')}
           </span>
         )}
       </div>
@@ -104,10 +108,12 @@ const Search: React.FC<PropsType> = ({
           {isNewsPage && (
             <div className='text-gray-500'>
               <p className='px-16 pt-8'>
-                Enter <span className='text-white'>@</span> to search movies
+                {t('search.enter')} <span className='text-white'>@</span>{' '}
+                {t('search.enterAt')}
               </p>
               <p className='px-16 pt-8'>
-                Enter <span className='text-white'>#</span> to search quotes
+                {t('search.enter')} <span className='text-white'>#</span>{' '}
+                {t('search.enterHash')}
               </p>
             </div>
           )}

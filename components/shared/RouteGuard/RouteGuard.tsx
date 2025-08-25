@@ -32,7 +32,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       if (user && isVerified) {
         setAuthorized(true);
       } else {
-        router.push('/');
+        router.push('/403');
       }
     } else if (publicRoutes.includes(pathName)) {
       if (user && isVerified) {

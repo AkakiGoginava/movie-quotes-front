@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { NotificationLayout, SuccessIcon } from '@/components';
 
 import { PropsType } from './types';
@@ -7,15 +9,17 @@ const SuccessNotification: React.FC<PropsType> = ({
   setOpen,
   setLoginOpen,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <NotificationLayout
       open={open}
       setOpen={setOpen}
       icon={<SuccessIcon />}
-      title='Success!'
-      text='Email verified successfully.'
+      title={t('notifications.successTitle')}
+      text={t('notifications.successText')}
       hasBtn={true}
-      btnText='Log in'
+      btnText={t('notifications.successBtnText')}
       handleClick={() => {
         setOpen(false);
         setLoginOpen(true);

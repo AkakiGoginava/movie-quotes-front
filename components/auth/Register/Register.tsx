@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { Modal, AuthForm } from '@/components';
 
 import { useRegister } from './useRegister';
@@ -22,21 +24,23 @@ const Register: React.FC<PropsType> = ({
     inputs,
   } = useRegister();
 
+  const { t } = useTranslation();
+
   return (
     <Modal
       hasButton
       buttonClassName='text-sm h-8'
       buttonVariant='primary'
-      buttonText='Sign up'
+      buttonText={t('register.buttonText')}
       open={registerOpen}
       setOpen={setRegisterOpen}
       reset={reset}
     >
       <AuthForm
-        title='Create an account'
-        subTitle='Start your journey!'
+        title={t('register.title')}
+        subTitle={t('register.subTitle')}
         inputs={inputs}
-        submitText='Get started'
+        submitText={t('register.submitText')}
         hasGoogleSignUp
         register={register}
         handleSubmit={handleSubmit}
@@ -47,7 +51,7 @@ const Register: React.FC<PropsType> = ({
         getValues={getValues}
       >
         <p className='text-gray-500 text-center mt-8'>
-          Already have an account?{' '}
+          {t('register.alreadyAccount')}{' '}
           <button
             type='button'
             className='link text-blue-500 underline hover:opacity-80 hover:cursor-pointer'
@@ -56,7 +60,7 @@ const Register: React.FC<PropsType> = ({
               setLoginOpen(true);
             }}
           >
-            Log in
+            {t('register.login')}
           </button>
         </p>
       </AuthForm>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -7,6 +8,7 @@ import { useAuth } from '@/hooks';
 import { InputFieldType, ProfileEditInput } from '@/types';
 
 const useProfileForm = () => {
+  const { t } = useTranslation();
   const { isLoading, user, isGoogleUser, handleEditUserFactory } = useAuth();
 
   const router = useRouter();
@@ -60,7 +62,7 @@ const useProfileForm = () => {
     },
   });
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     const formData = new FormData();
 
     if (data.name) {
@@ -77,22 +79,22 @@ const useProfileForm = () => {
       formData.append('image', data.image[0]);
     }
 
-    handleEditUser(formData);
+    await handleEditUser(formData);
   });
 
   const userInfo = {
     username: {
-      label: 'Username',
+      label: t('profileForm.usernameLabel'),
       value: user?.name,
       type: 'text',
     },
     email: {
-      label: 'Email',
+      label: t('profileForm.emailLabel'),
       value: user?.email,
       type: 'text',
     },
     password: {
-      label: 'Password',
+      label: t('profileForm.passwordLabel'),
       value: 'placeholderpassword',
       type: 'password',
     },
@@ -100,17 +102,17 @@ const useProfileForm = () => {
 
   const editUsernameInput: InputFieldType<ProfileEditInput>[] = [
     {
-      label: 'New username',
+      label: t('profileForm.nameLabel'),
       name: 'name',
       type: 'text',
-      placeholder: 'Enter new username',
+      placeholder: t('profileForm.namePlaceholder'),
       rules: {
-        required: { value: true, message: 'Required' },
-        minLength: { value: 3, message: '3 or more characters' },
-        maxLength: { value: 15, message: '15 or fewer characters' },
+        required: { value: true, message: t('profileForm.nameRequired') },
+        minLength: { value: 3, message: t('profileForm.nameMinLength') },
+        maxLength: { value: 15, message: t('profileForm.nameMaxLength') },
         pattern: {
           value: /^[a-z0-9]+$/,
-          message: 'Lowercase characters',
+          message: t('profileForm.namePattern'),
         },
       },
     },
@@ -118,27 +120,30 @@ const useProfileForm = () => {
 
   const editPasswordInput: InputFieldType<ProfileEditInput>[] = [
     {
-      label: 'New password',
+      label: t('profileForm.passwordLabel'),
       name: 'password',
       type: 'password',
-      placeholder: 'New password',
+      placeholder: t('profileForm.passwordPlaceholder'),
       rules: {
-        required: { value: true, message: 'Required' },
-        minLength: { value: 8, message: '8  or more characters' },
-        maxLength: { value: 15, message: '15 or fewer characters' },
+        required: { value: true, message: t('profileForm.passwordRequired') },
+        minLength: { value: 8, message: t('profileForm.passwordMinLength') },
+        maxLength: { value: 15, message: t('profileForm.passwordMaxLength') },
         pattern: {
           value: /^[a-z0-9]+$/,
-          message: 'Lowercase characters',
+          message: t('profileForm.passwordPattern'),
         },
       },
     },
     {
-      label: 'Confirm new password',
+      label: t('profileForm.confirmPasswordLabel'),
       name: 'password_confirmation',
       type: 'password',
-      placeholder: 'Confirm new password',
+      placeholder: t('profileForm.confirmPasswordPlaceholder'),
       rules: {
-        required: { value: true, message: 'Please confirm your password' },
+        required: {
+          value: true,
+          message: t('profileForm.confirmPasswordRequired'),
+        },
         validate: (value) =>
           value === getValues('password') || 'Passwords do not match',
       },

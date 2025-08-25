@@ -1,4 +1,5 @@
 import { FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/helpers';
 import { InputField } from '@/components';
@@ -13,10 +14,13 @@ const ValidationList = <FormValues extends FieldValues = FieldValues>({
   register,
   touchedFields,
 }: PropsType<FormValues>) => {
+  const { t } = useTranslation();
   return (
     <div className='w-full md:w-132 flex flex-col gap-6 md:mt-8 bg-obsidian md:bg-transparent px-8 md:px-0 py-18 md:py-0 rounded-xl'>
       <div className='p-6 border border-gray-600 rounded-sm'>
-        <p className='mb-4'>{name} should contain:</p>
+        <p className='mb-4'>
+          {name} {t('validationList.shouldContain')}
+        </p>
 
         <ul className='text-sm'>
           {editInputs[0].rules &&

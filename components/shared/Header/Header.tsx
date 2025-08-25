@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 import {
   Login,
   Register,
-  Dropdown,
+  LanguageDropdown,
   Button,
   EmailSentNotification,
   InvalidTokenNotification,
@@ -45,6 +47,8 @@ const Header: React.FC<PropsType> = ({
     currentPath,
   } = useHeader(setRegisterOpen);
 
+  const { t } = useTranslation();
+
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -82,7 +86,7 @@ const Header: React.FC<PropsType> = ({
       )}
 
       <div className={cn('ml-auto', { 'ml-0': user })}>
-        <Dropdown options={['Eng', 'Geo']} selected={0} />
+        <LanguageDropdown />
       </div>
 
       {user ? (
@@ -97,7 +101,7 @@ const Header: React.FC<PropsType> = ({
             }}
             className='text-sm h-8 hidden md:block'
           >
-            Log out
+            {t('logout')}
           </Button>
         </>
       ) : (
@@ -139,15 +143,15 @@ const Header: React.FC<PropsType> = ({
       <EmailSentNotification
         open={verifyEmailNotificationOpen}
         setOpen={setVerifyEmailNotificationOpen}
-        title='Thank you!'
-        text='Please check your email and follow the instructions to activate your account.'
+        title={t('notifications.emailSentTitle')}
+        text={t('notifications.emailSentText')}
       />
 
       <EmailSentNotification
         open={passwordResetNotificationOpen}
         setOpen={setPasswordResetNotificationOpen}
-        title='Check you email'
-        text='We have sent a password recover instructions to your email'
+        title={t('notifications.passwordResetTitle')}
+        text={t('notifications.passwordResetText')}
         hasExit
       />
 

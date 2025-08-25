@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { Modal, MovieForm } from '@/components';
 import { Movie } from '@/types';
 
@@ -27,7 +29,8 @@ const EditMovie = ({
     control,
   } = useEditMovie(setModalOpen, movie);
 
-  if (isLoading) return <div>Loading...</div>;
+  const { t } = useTranslation();
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <>
@@ -38,8 +41,8 @@ const EditMovie = ({
         modalClassName='p-0'
       >
         <MovieForm
-          title='Edit movie'
-          submitText='Edit movie'
+          title={t('editMovie.title')}
+          submitText={t('editMovie.submitText')}
           inputs={movieInputs}
           register={register}
           onSubmit={onSubmit}

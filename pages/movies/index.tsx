@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { AddMovie, Layout, MovieCard, Search } from '@/components';
 import { useMovie } from '@/hooks';
 import { Movie } from '@/types';
@@ -13,7 +15,9 @@ export default function Movies() {
     setActiveMoviesSearch: setActiveSearch,
   } = useMovie();
 
-  if (isLoading) return <div>Loading...</div>;
+  const { t } = useTranslation();
+
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <Layout setActiveSearch={setActiveSearch}>
@@ -21,9 +25,9 @@ export default function Movies() {
         <section className='w-full px-7.5 md:pl-20 md:pr-17 flex flex-col gap-10'>
           <header className='flex gap-6 md:items-center justify-between py-4 md:py-0'>
             <div className='text-2xl font-medium text-wrap max-w-50 md:max-w-full'>
-              My list of movies{' '}
+              {t('movies.myList')}{' '}
               <span className='text-base md:text-2xl'>
-                (Total {totalMovies})
+                ({t('movies.total', { count: totalMovies })})
               </span>
             </div>
 
@@ -32,7 +36,7 @@ export default function Movies() {
                 onSearch={(searchTerm: string) => {
                   setActiveSearch(searchTerm);
                 }}
-                placeholder='Search movies... (Press Enter)'
+                placeholder={t('movies.searchPlaceholder')}
                 className='hidden md:block'
               />
 
@@ -53,7 +57,9 @@ export default function Movies() {
                 disabled={isFetchingNextPage}
                 className='px-6 py-3 text-lg text-red-500 hover:text-red-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer'
               >
-                {isFetchingNextPage ? 'Loading...' : 'Load More Movies'}
+                {isFetchingNextPage
+                  ? t('movies.loading')
+                  : t('movies.loadMore')}
               </button>
             </div>
           )}

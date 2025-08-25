@@ -1,4 +1,5 @@
 import { FieldValues, get } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/helpers';
 import { CrossedEyeIcon, EyeIcon, InvalidIcon, ValidIcon } from '@/components';
@@ -19,6 +20,8 @@ const InputField = <FormValues extends FieldValues>({
   type,
   control,
 }: PropsType<FormValues>) => {
+  const { t } = useTranslation();
+
   const { show, setShow, hasEnteredInput, isInvalid, isValid, inputLanguage } =
     useInputField<FormValues>({
       input,
@@ -119,7 +122,7 @@ const InputField = <FormValues extends FieldValues>({
             handleForgotPasswordClick?.();
           }}
         >
-          Forgot password?
+          {t('forgotPassword.title')}
         </button>
       )}
 

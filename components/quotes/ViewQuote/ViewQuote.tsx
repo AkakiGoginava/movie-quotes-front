@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import {
   CommentIcon,
   DeleteIcon,
@@ -25,8 +27,8 @@ const ViewQuote: React.FC<PropsType> = ({
     handleKeyDown,
     isSubmitting,
   } = useViewQuote(quote);
-
-  if (isLoading) return <div>Loading...</div>;
+  const { t, i18n } = useTranslation();
+  if (isLoading) return <div>{t('loading')}</div>;
 
   return (
     <section className='flex flex-col gap-9 pb-6'>
@@ -48,7 +50,7 @@ const ViewQuote: React.FC<PropsType> = ({
           </div>
 
           <h1 className='hidden md:block text-xl md:text-2xl font-medium text-center'>
-            View quote
+            {t('quoteCard.view')}
           </h1>
 
           <div className='border-b border-gray-700 mt-5 md:mt-0' />
@@ -68,9 +70,14 @@ const ViewQuote: React.FC<PropsType> = ({
       <div className='flex flex-col gap-4'>
         {readonly ? (
           <p className='md:text-xl'>
-            "{quote.text.en}" movie -{' '}
-            <span className='text-light-yellow'>{quote.movie_title.en}</span> (
-            {quote.movie_year})
+            "{i18n.language === 'ka' ? quote.text.ka : quote.text.en}"{' '}
+            {t('viewQuote.movie')} -{' '}
+            <span className='text-light-yellow'>
+              {i18n.language === 'ka'
+                ? quote.movie_title.ka
+                : quote.movie_title.en}
+            </span>{' '}
+            ({quote.movie_year})
           </p>
         ) : (
           <>
@@ -141,15 +148,15 @@ const ViewQuote: React.FC<PropsType> = ({
 
             <textarea
               {...register('content', {
-                required: 'Comment is required',
+                required: t('viewQuote.commentRequired'),
                 minLength: {
                   value: 1,
-                  message: 'Comment must not be empty',
+                  message: t('viewQuote.commentNotEmpty'),
                 },
               })}
               onKeyDown={handleKeyDown}
               className='bg-obsidian rounded-lg border-0 h-10 md:h-13 w-full placeholder:text-white focus:ring-0'
-              placeholder='Write a comment'
+              placeholder={t('viewQuote.writeComment')}
               disabled={isSubmitting}
             />
           </form>
