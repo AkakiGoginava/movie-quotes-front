@@ -55,7 +55,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const handleGoogleAuthFactory = (options?: { onSuccess?: () => void }) => {
-    return useSimpleMutation(googleCallback, options);
+    return useSimpleMutation(googleCallback, {
+      onSuccess: () => {
+        router.replace(window.location.pathname);
+
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+
+        options?.onSuccess?.();
+      },
+    });
   };
 
   const handleLogout = useSimpleMutation(logoutUser, {

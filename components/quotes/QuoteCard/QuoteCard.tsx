@@ -63,7 +63,7 @@ const QuoteCard = ({
           </div>
           <ul
             tabIndex={0}
-            className='dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm'
+            className='dropdown-content bg-neutral menu rounded-box z-1 w-52 p-2 shadow-sm'
           >
             <li className='mb-2'>
               <div
