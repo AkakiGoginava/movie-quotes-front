@@ -30,6 +30,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
     queryKey: ['notifications'],
     queryFn: () => getNotifications(),
     enabled: !!user,
+    retry: false,
   });
 
   const notifications = notificationData?.data || [];

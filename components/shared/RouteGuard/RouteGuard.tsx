@@ -9,7 +9,8 @@ type RouteGuardProps = {
 };
 
 const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
-  const { user, isLoading, isVerified } = useAuth();
+  const { user, isLoading, isVerified, justLoggedOut, setJustLoggedOut } =
+    useAuth();
 
   const [authorized, setAuthorized] = useState(false);
 
@@ -31,6 +32,10 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     if (isProtectedRoute) {
       if (user && isVerified) {
         setAuthorized(true);
+      } else if (justLoggedOut) {
+        setAuthorized(true);
+        router.push('/');
+        setJustLoggedOut(false);
       } else {
         router.push('/403');
       }

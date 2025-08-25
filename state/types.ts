@@ -40,6 +40,8 @@ export type AuthContextType = {
   isLoading: boolean;
   isVerified: boolean;
   isGoogleUser: boolean;
+  justLoggedOut: boolean;
+  setJustLoggedOut: Dispatch<SetStateAction<boolean>>;
 
   handleRegister: FormHandler<RegisterInput>;
   handleLogin: FormHandler<LoginInput>;
