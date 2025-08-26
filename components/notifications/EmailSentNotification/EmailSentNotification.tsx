@@ -34,7 +34,7 @@ const EmailSentNotification: React.FC<PropsType> = ({
       hasBtn={true}
       handleClick={() => {
         window.open(
-          `https://mail.google.com/mail/u/${email ?? user?.email}/#search/from:movie@quotes.com`,
+          `https://mail.google.com/mail/u/${email ?? user?.email}/#search/from:MovieQuotes`,
           '_blank',
         );
       }}

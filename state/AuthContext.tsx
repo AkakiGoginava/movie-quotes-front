@@ -1,4 +1,5 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -29,6 +30,8 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const [justLoggedOut, setJustLoggedOut] = useState(false);
 
   const { data, isLoading, error } = useQuery<AxiosResponse<{ user: User }>>({
     queryKey: ['user'],
@@ -52,12 +55,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const handleGoogleAuthFactory = (options?: { onSuccess?: () => void }) => {
-    return useSimpleMutation(googleCallback, options);
+    return useSimpleMutation(googleCallback, {
+      onSuccess: () => {
+        router.replace(window.location.pathname);
+
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+
+        options?.onSuccess?.();
+      },
+    });
   };
 
   const handleLogout = useSimpleMutation(logoutUser, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
+      setJustLoggedOut(true);
+      router.push('/');
     },
   });
 
@@ -98,6 +111,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         isVerified: !!currentUser?.email_verified_at,
         isGoogleUser: !!currentUser?.google_id,
         isLoading,
+        justLoggedOut,
+        setJustLoggedOut,
         handleRegister,
         handleLogin,
         handleLogout,
