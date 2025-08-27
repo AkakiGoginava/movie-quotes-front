@@ -212,7 +212,7 @@ const InputField = <FormValues extends FieldValues>({
 
             {input.type === 'password' && (
               <div
-                className='hover:cursor-pointe'
+                className='hover:cursor-pointe text-gray-500'
                 onClick={() => setShow((prev) => !prev)}
               >
                 {show ? (
