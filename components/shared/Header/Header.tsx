@@ -108,17 +108,17 @@ const Header: React.FC<PropsType> = ({
         <>
           {registerOpen !== undefined && setRegisterOpen && (
             <>
+              <Register
+                registerOpen={registerOpen}
+                setRegisterOpen={setRegisterOpen}
+                setLoginOpen={setLoginOpen}
+              />
+
               <Login
                 loginOpen={loginOpen}
                 setLoginOpen={setLoginOpen}
                 setRegisterOpen={setRegisterOpen}
                 handleForgotPasswordClick={handleForgotPasswordClick}
-              />
-
-              <Register
-                registerOpen={registerOpen}
-                setRegisterOpen={setRegisterOpen}
-                setLoginOpen={setLoginOpen}
               />
             </>
           )}
