@@ -35,7 +35,7 @@ const QuoteCard = ({
           className='w-full max-h-32.5 md:max-w-60 object-cover rounded'
         />
 
-        <p className='text-2xl italic'>
+        <p className='text-2xl italic flex items-center'>
           "{i18n.language === 'ka' ? quote.text.ka : quote.text.en}"
         </p>
       </div>

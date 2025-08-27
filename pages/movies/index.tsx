@@ -44,7 +44,7 @@ export default function Movies() {
             </div>
           </header>
 
-          <main className='grid grid-cols-[repeat(auto-fit,22.5rem)] md:grid-cols-[repeat(auto-fit,27.5rem)] gap-y-8 pb-5 justify-between'>
+          <main className='grid grid-cols-[repeat(auto-fit,22.5rem)] md:grid-cols-[repeat(auto-fit,27.5rem)] gap-8 pb-5 justify-start'>
             {allMovies.map((movie: Movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
