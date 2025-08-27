@@ -4,7 +4,7 @@ import { CaretIcon } from '@/components';
 
 const languageOptions = [
   { label: 'Eng', value: 'en' },
-  { label: 'Geo', value: 'ka' },
+  { label: 'ქარ', value: 'ka' },
 ];
 
 const LanguageDropdown: React.FC = () => {
