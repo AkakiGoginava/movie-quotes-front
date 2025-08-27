@@ -24,7 +24,7 @@ export const useLogin = () => {
       rules: {
         required: { value: true, message: t('login.emailRequired') },
         pattern: {
-          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          value: /^(?:[a-z0-9]{3,}|[^\s@]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
           message: t('login.emailInvalid'),
         },
       },
