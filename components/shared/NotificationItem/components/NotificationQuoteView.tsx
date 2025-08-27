@@ -21,6 +21,7 @@ const NotificationQuoteView: React.FC<PropsType> = ({
         setModalOpen={setOpenQuoteEdit}
         modalOpen={openQuoteEdit}
         quote={notification.quote}
+        handleDeleteQuote={handleDeleteQuote}
       />
 
       <Modal

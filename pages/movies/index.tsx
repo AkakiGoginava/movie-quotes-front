@@ -23,7 +23,7 @@ export default function Movies() {
     <Layout setActiveSearch={setActiveSearch}>
       <div>
         <section className='w-full px-7.5 md:pl-20 md:pr-17 flex flex-col gap-10'>
-          <header className='flex gap-6 md:items-center justify-between py-4 md:py-0'>
+          <header className='flex md:gap-6 md:items-center py-4 md:py-0'>
             <div className='text-2xl font-medium text-wrap max-w-50 md:max-w-full'>
               {t('movies.myList')}{' '}
               <span className='text-base md:text-2xl'>
@@ -31,7 +31,7 @@ export default function Movies() {
               </span>
             </div>
 
-            <div className='flex gap-8 items-center flex-1'>
+            <div className='flex ml-auto gap-8 items-center flex-1'>
               <Search
                 onSearch={(searchTerm: string) => {
                   setActiveSearch(searchTerm);

@@ -102,6 +102,7 @@ const QuoteCard = ({
         setModalOpen={setOpenQuoteEdit}
         modalOpen={openQuoteEdit}
         quote={quote}
+        handleDeleteQuote={handleDeleteQuote}
       />
 
       <Modal

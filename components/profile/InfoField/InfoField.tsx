@@ -27,10 +27,10 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
       <div className='flex flex-col gap-2'>
         <label>{info.label}</label>
 
-        <div className='flex gap-4 items-center justify-between md:justify-normal w-full md:w-auto border-b border-gray-500 pb-2 md:border-none md:pb-0'>
+        <div className='flex gap-4 items-center md:justify-normal w-full md:w-auto border-b border-gray-500 pb-2 md:border-none md:pb-0'>
           <input
             type={info.type}
-            className='md:w-132 rounded-md md:text-black text-lg md:text-xl pl-0 md:pl-2 bg-transparent md:bg-white border-none md-border'
+            className='w-50 text-nowrap overflow-ellipsis md:w-132 rounded-md md:text-black text-lg md:text-xl pl-0 md:pl-2 bg-transparent md:bg-white border-none md-border'
             value={info.value}
             disabled
           />
@@ -38,7 +38,7 @@ const InfoField = <FormValues extends FieldValues = FieldValues>({
           {editable && (
             <button
               type='button'
-              className='btn btn-ghost font-normal text-lg md:text-xl'
+              className='btn btn-ghost ml-auto font-normal text-lg md:text-xl'
               onClick={() => {
                 setEditing((prev) => !prev);
               }}

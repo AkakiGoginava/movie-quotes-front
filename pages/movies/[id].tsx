@@ -110,7 +110,7 @@ export default function MovieDetail() {
         </section>
 
         <section className='flex flex-col gap-9'>
-          <div className='px-7.5 flex flex-col-reverse md:flex-row gap-8 md:gap-4 md:items-center'>
+          <div className='px-7.5 md:px-0 flex flex-col-reverse md:flex-row gap-8 md:gap-4 md:items-center'>
             <div className='flex flex-col md:flex-row'>
               <span className='text-2xl'>{t('movies.quotes')}</span>
               <span className='md:ml-2 md:text-2xl'>

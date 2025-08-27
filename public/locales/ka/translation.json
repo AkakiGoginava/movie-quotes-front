@@ -167,7 +167,8 @@
   },
   "editQuote": {
     "title": "ციტატის რედაქტირება",
-    "submitText": "ციტატის რედაქტირება"
+    "submitText": "ციტატის რედაქტირება",
+    "delete": "წაშლა"
   },
   "notificationItem": {
     "new": "ახალი",

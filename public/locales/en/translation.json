@@ -168,7 +168,8 @@
   },
   "editQuote": {
     "title": "Edit quote",
-    "submitText": "Edit quote"
+    "submitText": "Edit quote",
+    "delete": "Delete"
   },
   "notificationItem": {
     "new": "New",
