@@ -146,7 +146,7 @@
     "namePattern": "Lowercase characters",
     "passwordPlaceholder": "Enter new password",
     "passwordRequired": "Required",
-    "passwordMinLength": "3 or more characters",
+    "passwordMinLength": "8 or more characters",
     "passwordMaxLength": "15 or fewer characters",
     "passwordPattern": "Lowercase English letters and numbers",
     "confirmPasswordLabel": "Confirm password",
