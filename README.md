@@ -1,40 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Movie Quotes Front-end
+
+A modern Next.js application for sharing movie quotes.
+
+## Table of Contents
+
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Environment Variables](#environment-variables)
+  - [Production Build](#production-build)
+- [Deployment](#deployment)
+- [Backend](#backend)
+
+## Features
+
+- Next.js 15
+- Tailwind CSS & DaisyUI for styling
+- React Hook Form for forms and validation
+- i18next for localization (English & Georgian)
+- Google authentication (OAuth)
+- Axios for API requests
+- PM2 for process management
+- Custom error pages (404, 403)
+- Responsive design
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v20 recommended)
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- The app will run at http://localhost:3000
+- API requests use the URL in `.env` (`NEXT_PUBLIC_API_URL`)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- `.env` — for development
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Example:
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+NEXT_PUBLIC_API_URL=http://api.local.test:8000
+```
 
-## Learn More
+### Production Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Output is in the `.next/` folder
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Build the app: `npm run build`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Start with PM2: `pm2 start npm --name movie-quotes -- run start`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## Backend
+
+- **Backend repository:** [movie-quotes-back-end](https://github.com/RedberryInternship/back-movie-quotes-akaki-goginava.git)
+- **API URL:** https://api.movie-quotes.akaki-goginava.redberryinternship.ge
