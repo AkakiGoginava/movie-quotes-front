@@ -28,13 +28,12 @@ const AddMovie = () => {
       <Button
         variant='primary'
         type='button'
-        className='ml-auto'
         handleClick={() => {
           setModalOpen(true);
         }}
       >
         <PlusIcon />
-        <span className='text-base md:text-xl max-w-26'>
+        <span className='text-base md:text-xl max-w-26 md:max-w-full'>
           {t('addMovie.buttonText')}
         </span>
       </Button>
