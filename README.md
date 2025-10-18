@@ -74,5 +74,4 @@ Start with PM2: `pm2 start npm --name movie-quotes -- run start`
 
 ## Backend
 
-- **Backend repository:** [movie-quotes-back-end](https://github.com/RedberryInternship/back-movie-quotes-akaki-goginava.git)
-- **API URL:** https://api.movie-quotes.akaki-goginava.redberryinternship.ge
+- **Backend repository:** [movie-quotes-back-end](https://github.com/AkakiGoginava/movie-quotes-back.git)
