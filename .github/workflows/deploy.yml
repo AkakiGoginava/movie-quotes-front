@@ -20,7 +20,8 @@ jobs:
             cd movie-quotes/movie-quotes-front
             git pull
 
-            npm ci
+            rm -rf node_modules
+            npm install
             npm run build
             
             pm2 restart nextjs
