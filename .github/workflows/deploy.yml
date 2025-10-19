@@ -23,5 +23,5 @@ jobs:
             npm ci
             npm run build
             
-            pm2 restart movie-quotes
+            pm2 restart nextjs
           EOF
