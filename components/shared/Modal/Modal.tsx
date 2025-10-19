@@ -53,7 +53,7 @@ const Modal = <FormValues extends FieldValues>({
           {children}
         </div>
 
-        <div className='modal-backdrop backdrop-blur-xs'>
+        <div className='modal-backdrop'>
           {hasExit && (
             <button
               onClick={() => {
